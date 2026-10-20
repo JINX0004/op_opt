@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug local_search",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/local_search/build/debug/bin/local_search",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/local_search",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "build local_search (debug)",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}
