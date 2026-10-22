@@ -1,0 +1,63 @@
+[
+  {
+    "implementation": "catlass",
+    "shape": [
+      64,
+      128,
+      512
+    ],
+    "dtype": "bfloat16",
+    "cores": 2,
+    "tiling": {
+      "preset": "default"
+    }
+  },
+  {
+    "implementation": "base",
+    "shape": [
+      64,
+      128,
+      512
+    ],
+    "dtype": "bfloat16",
+    "cores": 1,
+    "tiling": {
+      "base_m": 128,
+      "base_n": 128,
+      "base_k": 128,
+      "step_k": 4
+    }
+  },
+  {
+    "implementation": "scsk",
+    "shape": [
+      64,
+      128,
+      512
+    ],
+    "dtype": "bfloat16",
+    "cores": 1,
+    "tiling": {
+      "base_m": 128,
+      "base_n": 128,
+      "base_k": 128,
+      "step_k": 4
+    }
+  },
+  {
+    "implementation": "deterministic",
+    "shape": [
+      64,
+      128,
+      512
+    ],
+    "dtype": "bfloat16",
+    "cores": 2,
+    "tiling": {
+      "base_m": 128,
+      "base_n": 128,
+      "base_k": 128,
+      "step_k": 2
+    }
+  }
+]

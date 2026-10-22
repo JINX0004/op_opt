@@ -1,0 +1,16 @@
+{
+  "implementation": "deterministic",
+  "shape": [
+    16,
+    16,
+    102400
+  ],
+  "dtype": "float16",
+  "cores": 24,
+  "tiling": {
+    "base_m": 128,
+    "base_n": 128,
+    "base_k": 128,
+    "step_k": 2
+  }
+}

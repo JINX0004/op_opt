@@ -1,0 +1,193 @@
+{
+  "release": "1.0.0",
+  "release_date": "2026-10-21",
+  "model_version": "NN_component_service_v3490_BASE64",
+  "fixed_model_sha256": "63e3be969dfa453044e9f0b92b9d4166ee8ffb08b485b9724fd6244a5e5b590e",
+  "current_interface_unit_tests_passed": 17,
+  "frozen_parity": {
+    "cases": 1198,
+    "max_prediction_difference_us": 0.0,
+    "all_inference_modules_inside_isolated_copy": true,
+    "reads_from_original_project_forbidden": true,
+    "network_and_process_execution_disabled": true,
+    "no_third_party_site_packages": true,
+    "independent_scores": {
+      "bfloat16": {
+        "conditions": 599,
+        "mape": 0.0453790330406714,
+        "max_ape": 0.18795867716078207,
+        "within5": 0.6477462437395659,
+        "strict": {
+          "pairs": 5823,
+          "inversions": 234,
+          "prediction_ties": 0
+        },
+        "stable5": {
+          "pairs": 4984,
+          "inversions": 27,
+          "prediction_ties": 0
+        },
+        "practical_top1": {
+          "groups": 32,
+          "selected_not_practically_dominated": 32,
+          "max_raw_regret": 0.015329780089486045
+        }
+      },
+      "float16": {
+        "conditions": 599,
+        "mape": 0.04002777674607512,
+        "max_ape": 0.16566425798240503,
+        "within5": 0.667779632721202,
+        "strict": {
+          "pairs": 5823,
+          "inversions": 213,
+          "prediction_ties": 0
+        },
+        "stable5": {
+          "pairs": 5028,
+          "inversions": 30,
+          "prediction_ties": 0
+        },
+        "practical_top1": {
+          "groups": 32,
+          "selected_not_practically_dominated": 32,
+          "max_raw_regret": 0.01182729804164806
+        }
+      }
+    }
+  },
+  "final_valid_input_mapping": {
+    "configs": 1198,
+    "sha256": "675950ed156970249cffea0d8b1c132a01013e7004317f3c440f797634aab0f0",
+    "identical_to_full_parity_copy": true
+  },
+  "CLI_and_usage_checks": [
+    {
+      "name": "info",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "name": "single_json",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "name": "cat_dimensions",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "name": "full_plan",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "name": "flags_base",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "name": "flags_scsk",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "name": "flags_deterministic",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "name": "flags_catlass",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "name": "flags_bf16",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "name": "four_fp16",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "name": "four_bf16",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "name": "semantic",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "name": "explain",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "name": "compare_input",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "name": "search_det",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "name": "search_bf16",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "name": "candidates",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "name": "compare_generated",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "name": "evaluate",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "name": "evaluate_cached",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "name": "invalid_override",
+      "passed": true,
+      "returncode": 2
+    },
+    {
+      "name": "invalid_fp32",
+      "passed": true,
+      "returncode": 2
+    },
+    {
+      "name": "example_API",
+      "passed": true
+    },
+    {
+      "name": "CPU_benchmark",
+      "passed": true
+    }
+  ],
+  "installation": {
+    "offline_wheel_build_and_target_install_passed": true,
+    "all_eight_examples_and_semantic_values_passed": true,
+    "source_project_reads_forbidden": true,
+    "all_runtime_modules_inside_install": true,
+    "third_party_site_packages_disabled": true
+  },
+  "calibration_or_NPU_experiments_performed": false,
+  "note": "Frozen runtime and all 1198 normalized inputs match the full replay. Final interface also rejects contradictory JSON/CLI overrides. Independent fixtures are evaluation data and are never consumed by prediction."
+}

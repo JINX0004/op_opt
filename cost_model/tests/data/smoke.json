@@ -1,0 +1,156 @@
+[
+  {
+    "config": {
+      "implementation": "catlass",
+      "shape": [
+        16,
+        16,
+        102400
+      ],
+      "dtype": "float16",
+      "cores": 16,
+      "tiling": {
+        "preset": "deepk"
+      }
+    },
+    "expected_us": 98.69376852311525,
+    "expected_semantic_us": 110.88278709880356
+  },
+  {
+    "config": {
+      "implementation": "base",
+      "shape": [
+        16,
+        16,
+        102400
+      ],
+      "dtype": "float16",
+      "cores": 8,
+      "tiling": {
+        "base_m": 32,
+        "base_n": 64,
+        "base_k": 128,
+        "step_k": 4
+      }
+    },
+    "expected_us": 851.5355882285189,
+    "expected_semantic_us": 859.690364563797
+  },
+  {
+    "config": {
+      "implementation": "scsk",
+      "shape": [
+        16,
+        16,
+        102400
+      ],
+      "dtype": "float16",
+      "cores": 16,
+      "tiling": {
+        "base_m": 128,
+        "base_n": 128,
+        "base_k": 128,
+        "step_k": 4
+      }
+    },
+    "expected_us": 845.3301731074091,
+    "expected_semantic_us": 865.7437727437061
+  },
+  {
+    "config": {
+      "implementation": "deterministic",
+      "shape": [
+        16,
+        16,
+        102400
+      ],
+      "dtype": "float16",
+      "cores": 24,
+      "tiling": {
+        "base_m": 128,
+        "base_n": 128,
+        "base_k": 128,
+        "step_k": 2
+      }
+    },
+    "expected_us": 91.98508811412263,
+    "expected_semantic_us": 93.20267861374995
+  },
+  {
+    "config": {
+      "implementation": "catlass",
+      "shape": [
+        64,
+        128,
+        512
+      ],
+      "dtype": "bfloat16",
+      "cores": 2,
+      "tiling": {
+        "preset": "default"
+      }
+    },
+    "expected_us": 7.44335946212427,
+    "expected_semantic_us": 6.8950518743130065
+  },
+  {
+    "config": {
+      "implementation": "base",
+      "shape": [
+        64,
+        128,
+        512
+      ],
+      "dtype": "bfloat16",
+      "cores": 1,
+      "tiling": {
+        "base_m": 128,
+        "base_n": 128,
+        "base_k": 128,
+        "step_k": 4
+      }
+    },
+    "expected_us": 4.704614490244824,
+    "expected_semantic_us": 4.747897353529593
+  },
+  {
+    "config": {
+      "implementation": "scsk",
+      "shape": [
+        64,
+        128,
+        512
+      ],
+      "dtype": "bfloat16",
+      "cores": 1,
+      "tiling": {
+        "base_m": 128,
+        "base_n": 128,
+        "base_k": 128,
+        "step_k": 4
+      }
+    },
+    "expected_us": 8.00625851138711,
+    "expected_semantic_us": 7.851861545381889
+  },
+  {
+    "config": {
+      "implementation": "deterministic",
+      "shape": [
+        64,
+        128,
+        512
+      ],
+      "dtype": "bfloat16",
+      "cores": 2,
+      "tiling": {
+        "base_m": 128,
+        "base_n": 128,
+        "base_k": 128,
+        "step_k": 2
+      }
+    },
+    "expected_us": 9.309296229097464,
+    "expected_semantic_us": 9.469836992162138
+  }
+]

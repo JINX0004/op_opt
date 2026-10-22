@@ -10,7 +10,7 @@ struct GAConfig {
     size_t population_size = 50;
     size_t max_generations = 100;
     double crossover_rate = 0.8;
-    double mutation_rate = 0.15;
+    double mutation_rate = 0.15; // Probability per gene, not per chromosome
     size_t tournament_size = 3;
     size_t elitism_count = 2; // Keep top N best solutions directly
 };
@@ -79,6 +79,12 @@ public:
             evaluate_population(population);
         }
 
+        // Include offspring evaluated in the final generation.
+        for (const auto& individual : population) {
+            if (individual.cost < best_ever.cost) {
+                best_ever = individual;
+            }
+        }
         return best_ever;
     }
 
@@ -123,28 +129,46 @@ private:
     }
 
     Chromosome crossover(const Chromosome& p1, const Chromosome& p2) {
-        std::uniform_real_distribution<double> dist(0.0, 1.0);
+        std::bernoulli_distribution should_cross(config_.crossover_rate);
+        std::bernoulli_distribution inherit_second(0.5);
         Chromosome child = p1;
 
-        if (dist(rng_) < config_.crossover_rate) {
+        if (should_cross(rng_)) {
             // Uniform crossover across vector dimensions
             for (size_t i = 0; i < p1.tile_sizes.size(); ++i) {
-                if (dist(rng_) < 0.5) {
+                if (inherit_second(rng_)) {
                     child.tile_sizes[i] = p2.tile_sizes[i];
                 }
             }
+        }
+        // A clone can reuse its parent's evaluated fitness.
+        if (child.tile_sizes != p1.tile_sizes) {
+            child.cost = std::numeric_limits<double>::infinity();
         }
         return child;
     }
 
     void mutate(Chromosome& indiv) {
-        std::uniform_real_distribution<double> prob_dist(0.0, 1.0);
+        std::bernoulli_distribution should_mutate(config_.mutation_rate);
 
         for (size_t d = 0; d < indiv.tile_sizes.size(); ++d) {
-            if (prob_dist(rng_) < config_.mutation_rate) {
-                std::uniform_int_distribution<size_t> choice_dist(0, valid_choices_[d].size() - 1);
-                indiv.tile_sizes[d] = valid_choices_[d][choice_dist(rng_)];
+            if (!should_mutate(rng_)) {
+                continue;
             }
+
+            std::vector<int> alternatives;
+            for (int value : valid_choices_[d]) {
+                if (value != indiv.tile_sizes[d]) {
+                    alternatives.push_back(value);
+                }
+            }
+            if (alternatives.empty()) {
+                continue;
+            }
+
+            std::uniform_int_distribution<size_t> choice_dist(0, alternatives.size() - 1);
+            indiv.tile_sizes[d] = alternatives[choice_dist(rng_)];
+            indiv.cost = std::numeric_limits<double>::infinity();
         }
     }
 };

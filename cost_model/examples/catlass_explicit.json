@@ -1,0 +1,22 @@
+{
+  "implementation": "catlass",
+  "shape": [
+    16,
+    16,
+    102400
+  ],
+  "dtype": "float16",
+  "cores": 16,
+  "tiling": {
+    "l1_tile": [
+      16,
+      16,
+      4096
+    ],
+    "l0_tile": [
+      16,
+      16,
+      1024
+    ]
+  }
+}

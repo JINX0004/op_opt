@@ -1,0 +1,206 @@
+[
+  {
+    "case_id": "serviceTEST3480_float16_80_24_91760_base_m16n16s4c3",
+    "implementation": "base",
+    "shape": [
+      80,
+      24,
+      91760
+    ],
+    "dtype": "float16",
+    "cores": 3,
+    "tiling": {
+      "base_m": 16,
+      "base_n": 16,
+      "base_k": 128,
+      "step_k": 4
+    }
+  },
+  {
+    "case_id": "serviceTEST3480_float16_80_24_91760_base_m32n64s1c3",
+    "implementation": "base",
+    "shape": [
+      80,
+      24,
+      91760
+    ],
+    "dtype": "float16",
+    "cores": 3,
+    "tiling": {
+      "base_m": 32,
+      "base_n": 64,
+      "base_k": 128,
+      "step_k": 1
+    }
+  },
+  {
+    "case_id": "serviceTEST3480_float16_80_24_91760_base_m32n64s4c3",
+    "implementation": "base",
+    "shape": [
+      80,
+      24,
+      91760
+    ],
+    "dtype": "float16",
+    "cores": 3,
+    "tiling": {
+      "base_m": 32,
+      "base_n": 64,
+      "base_k": 128,
+      "step_k": 4
+    }
+  },
+  {
+    "case_id": "serviceTEST3480_float16_80_24_91760_base_m32n64s8c3",
+    "implementation": "base",
+    "shape": [
+      80,
+      24,
+      91760
+    ],
+    "dtype": "float16",
+    "cores": 3,
+    "tiling": {
+      "base_m": 32,
+      "base_n": 64,
+      "base_k": 128,
+      "step_k": 8
+    }
+  },
+  {
+    "case_id": "serviceTEST3480_float16_80_24_91760_base_m64n32s4c3",
+    "implementation": "base",
+    "shape": [
+      80,
+      24,
+      91760
+    ],
+    "dtype": "float16",
+    "cores": 3,
+    "tiling": {
+      "base_m": 64,
+      "base_n": 32,
+      "base_k": 128,
+      "step_k": 4
+    }
+  },
+  {
+    "case_id": "serviceTEST3480_float16_80_24_91760_base_m128n128s4c3",
+    "implementation": "base",
+    "shape": [
+      80,
+      24,
+      91760
+    ],
+    "dtype": "float16",
+    "cores": 3,
+    "tiling": {
+      "base_m": 128,
+      "base_n": 128,
+      "base_k": 128,
+      "step_k": 4
+    }
+  },
+  {
+    "case_id": "serviceTEST3480_float16_80_24_91760_base_m16n16s4c5",
+    "implementation": "base",
+    "shape": [
+      80,
+      24,
+      91760
+    ],
+    "dtype": "float16",
+    "cores": 5,
+    "tiling": {
+      "base_m": 16,
+      "base_n": 16,
+      "base_k": 128,
+      "step_k": 4
+    }
+  },
+  {
+    "case_id": "serviceTEST3480_float16_80_24_91760_base_m32n64s1c5",
+    "implementation": "base",
+    "shape": [
+      80,
+      24,
+      91760
+    ],
+    "dtype": "float16",
+    "cores": 5,
+    "tiling": {
+      "base_m": 32,
+      "base_n": 64,
+      "base_k": 128,
+      "step_k": 1
+    }
+  },
+  {
+    "case_id": "serviceTEST3480_float16_80_24_91760_deterministic_m128n128s1c3",
+    "implementation": "deterministic",
+    "shape": [
+      80,
+      24,
+      91760
+    ],
+    "dtype": "float16",
+    "cores": 3,
+    "tiling": {
+      "base_m": 128,
+      "base_n": 128,
+      "base_k": 128,
+      "step_k": 1
+    }
+  },
+  {
+    "case_id": "serviceTEST3480_float16_80_24_91760_deterministic_m128n128s2c3",
+    "implementation": "deterministic",
+    "shape": [
+      80,
+      24,
+      91760
+    ],
+    "dtype": "float16",
+    "cores": 3,
+    "tiling": {
+      "base_m": 128,
+      "base_n": 128,
+      "base_k": 128,
+      "step_k": 2
+    }
+  },
+  {
+    "case_id": "serviceTEST3480_float16_80_24_91760_deterministic_m128n128s3c3",
+    "implementation": "deterministic",
+    "shape": [
+      80,
+      24,
+      91760
+    ],
+    "dtype": "float16",
+    "cores": 3,
+    "tiling": {
+      "base_m": 128,
+      "base_n": 128,
+      "base_k": 128,
+      "step_k": 3
+    }
+  },
+  {
+    "case_id": "serviceTEST3480_float16_80_24_91760_deterministic_m128n128s1c5",
+    "implementation": "deterministic",
+    "shape": [
+      80,
+      24,
+      91760
+    ],
+    "dtype": "float16",
+    "cores": 5,
+    "tiling": {
+      "base_m": 128,
+      "base_n": 128,
+      "base_k": 128,
+      "step_k": 1
+    }
+  }
+]

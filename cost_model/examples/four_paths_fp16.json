@@ -1,0 +1,63 @@
+[
+  {
+    "implementation": "catlass",
+    "shape": [
+      16,
+      16,
+      102400
+    ],
+    "dtype": "float16",
+    "cores": 16,
+    "tiling": {
+      "preset": "deepk"
+    }
+  },
+  {
+    "implementation": "base",
+    "shape": [
+      16,
+      16,
+      102400
+    ],
+    "dtype": "float16",
+    "cores": 8,
+    "tiling": {
+      "base_m": 32,
+      "base_n": 64,
+      "base_k": 128,
+      "step_k": 4
+    }
+  },
+  {
+    "implementation": "scsk",
+    "shape": [
+      16,
+      16,
+      102400
+    ],
+    "dtype": "float16",
+    "cores": 16,
+    "tiling": {
+      "base_m": 128,
+      "base_n": 128,
+      "base_k": 128,
+      "step_k": 4
+    }
+  },
+  {
+    "implementation": "deterministic",
+    "shape": [
+      16,
+      16,
+      102400
+    ],
+    "dtype": "float16",
+    "cores": 24,
+    "tiling": {
+      "base_m": 128,
+      "base_n": 128,
+      "base_k": 128,
+      "step_k": 2
+    }
+  }
+]

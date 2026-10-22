@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cost-model-matmul-corecode"
+version = "1.0.0"
+description = "Standalone fixed Ascend 910B2 matmul prediction and tiling comparison"
+requires-python = ">=3.10"
+dependencies = []
+readme = "README.md"
+
+[project.scripts]
+matmul-cost-model = "matmul_cost_model.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["matmul_cost_model*"]
+
+[tool.setuptools.package-data]
+matmul_cost_model = ["data/*.json"]

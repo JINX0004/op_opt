@@ -2,25 +2,42 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug local_search",
-            "type": "cppdbg",
+            "name": "Debug cli.py",
+            "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/local_search/build/debug/bin/local_search",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/local_search",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "miDebuggerPath": "/usr/bin/gdb",
-            "preLaunchTask": "build local_search (debug)",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ]
-        }
+            "module": "matmul_cost_model.cli",
+            "python": "/home/xianfei/miniconda3/bin/python3",
+            "cwd": "${workspaceFolder}/cost_model",
+            "args": [
+                "evaluate",
+                "--input",
+                "examples/candidate_comparison.json",
+                "--measurements",
+                "examples/measured_times.csv"
+            ],
+            "justMyCode": false,
+            "console": "integratedTerminal"
+         }
+        // {
+        //     "name": "Debug local_search",
+        //     "type": "cppdbg",
+        //     "request": "launch",
+        //     "program": "${workspaceFolder}/local_search/build/debug/bin/local_search",
+        //     "args": [],
+        //     "stopAtEntry": false,
+        //     "cwd": "${workspaceFolder}/local_search",
+        //     "environment": [],
+        //     "externalConsole": false,
+        //     "MIMode": "gdb",
+        //     "miDebuggerPath": "/usr/bin/gdb",
+        //     "preLaunchTask": "build local_search (debug)",
+        //     "setupCommands": [
+        //         {
+        //             "description": "Enable pretty-printing for gdb",
+        //             "text": "-enable-pretty-printing",
+        //             "ignoreFailures": true
+        //         }
+        //     ]
+        // }
     ]
 }

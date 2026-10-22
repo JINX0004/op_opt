@@ -1,0 +1,174 @@
+{
+  "model_version": "NN_component_service_v3490_BASE64",
+  "model_sha256": "63e3be969dfa453044e9f0b92b9d4166ee8ffb08b485b9724fd6244a5e5b590e",
+  "forecast_seal_sha256": "4cc3f383c3b28ca054fc5b922974c0a7d77b3a7e4f3990246272fcd10e0a2793",
+  "formal_processes": 3,
+  "scope": "Reviewed NN FP16/BF16 batch1 templates and warm400 protocol only. New shape/core combinations do not establish arbitrary-template support.",
+  "unsupported": [
+    "FP32",
+    "BF16 NT",
+    "batch>1",
+    "arbitrary tiling",
+    "arbitrary strides/offsets",
+    "cold/cache-policy changes",
+    "cross-hardware/SDK",
+    "full fused Attention"
+  ],
+  "no_target_measurements_required": true,
+  "accuracy_targets_passed": true,
+  "all_unseen_candidate_orders_certified": false,
+  "hardware": "Ascend 910B2",
+  "calibration_frozen": true,
+  "release_date": "2026-10-21",
+  "runtime_dependencies": [],
+  "accuracy_scores": {
+    "float16": {
+      "conditions": 599,
+      "mape": 0.04002777674607512,
+      "max_ape": 0.16566425798240503,
+      "within5": 0.667779632721202,
+      "orders": {
+        "strict": {
+          "pairs": 5823,
+          "inversions": 213,
+          "prediction_ties": 0
+        },
+        "stable2": {
+          "pairs": 5186,
+          "inversions": 63,
+          "prediction_ties": 0
+        },
+        "stable5": {
+          "pairs": 5028,
+          "inversions": 30,
+          "prediction_ties": 0
+        }
+      },
+      "per_implementation": {
+        "catlass": {
+          "n": 128,
+          "mape": 0.03857274334193486,
+          "max_ape": 0.1237792144241675,
+          "within5": 0.734375,
+          "stable5": {
+            "pairs": 924,
+            "inversions": 3,
+            "prediction_ties": 0
+          }
+        },
+        "base": {
+          "n": 192,
+          "mape": 0.03965212040968007,
+          "max_ape": 0.16566425798240503,
+          "within5": 0.6770833333333334,
+          "stable5": {
+            "pairs": 1858,
+            "inversions": 9,
+            "prediction_ties": 0
+          }
+        },
+        "scsk": {
+          "n": 192,
+          "mape": 0.03757696449068995,
+          "max_ape": 0.13407112017986755,
+          "within5": 0.6822916666666666,
+          "stable5": {
+            "pairs": 1833,
+            "inversions": 17,
+            "prediction_ties": 0
+          }
+        },
+        "deterministic": {
+          "n": 87,
+          "mape": 0.04840623933632518,
+          "max_ape": 0.10970171981407528,
+          "within5": 0.5172413793103449,
+          "stable5": {
+            "pairs": 413,
+            "inversions": 1,
+            "prediction_ties": 0
+          }
+        }
+      },
+      "practical_top1": {
+        "groups": 32,
+        "selected_not_practically_dominated": 32,
+        "max_raw_regret": 0.01182729804164806
+      }
+    },
+    "bfloat16": {
+      "conditions": 599,
+      "mape": 0.0453790330406714,
+      "max_ape": 0.18795867716078207,
+      "within5": 0.6477462437395659,
+      "orders": {
+        "strict": {
+          "pairs": 5823,
+          "inversions": 234,
+          "prediction_ties": 0
+        },
+        "stable2": {
+          "pairs": 5168,
+          "inversions": 51,
+          "prediction_ties": 0
+        },
+        "stable5": {
+          "pairs": 4984,
+          "inversions": 27,
+          "prediction_ties": 0
+        }
+      },
+      "per_implementation": {
+        "catlass": {
+          "n": 128,
+          "mape": 0.03846296348264939,
+          "max_ape": 0.12318247476608768,
+          "within5": 0.71875,
+          "stable5": {
+            "pairs": 923,
+            "inversions": 3,
+            "prediction_ties": 0
+          }
+        },
+        "base": {
+          "n": 192,
+          "mape": 0.04469781737261705,
+          "max_ape": 0.18795867716078207,
+          "within5": 0.6875,
+          "stable5": {
+            "pairs": 1851,
+            "inversions": 12,
+            "prediction_ties": 0
+          }
+        },
+        "scsk": {
+          "n": 192,
+          "mape": 0.049223497028541216,
+          "max_ape": 0.17773388245246458,
+          "within5": 0.5885416666666666,
+          "stable5": {
+            "pairs": 1796,
+            "inversions": 9,
+            "prediction_ties": 0
+          }
+        },
+        "deterministic": {
+          "n": 87,
+          "mape": 0.048573437937478876,
+          "max_ape": 0.12826924692938058,
+          "within5": 0.5862068965517241,
+          "stable5": {
+            "pairs": 414,
+            "inversions": 3,
+            "prediction_ties": 0
+          }
+        }
+      },
+      "practical_top1": {
+        "groups": 32,
+        "selected_not_practically_dominated": 32,
+        "max_raw_regret": 0.015329780089486045
+      }
+    }
+  }
+}
