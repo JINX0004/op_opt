@@ -1,0 +1,16 @@
+# Dataset A: K stays on the same cube (BASE or single-core split-K).
+# Assumes 24 AIC, no bias, ND, contiguous unless trans_* says otherwise.
+# BASE: M/N large enough to fill cores; K below 27392 so split-K templates are not selected.
+# SINGLE_CORE_SPLIT_K: K >= 27392 and M/N large (N>=2048, not in the 896-2048 multi-K reject band).
+group,expected,dtype,trans_a,trans_b,m,n,k,note
+base,BASE,float16,0,0,1024,1024,1024,M/N fill cores; K too small for split-K
+base,BASE,float16,0,0,2048,2048,2048,classic square BASE
+base,BASE,float16,0,0,1536,2048,4096,K < 24*384 so multi-core K-split stays off
+base,BASE,float16,0,0,4096,4096,8192,plenty of M/N tiles; K < 27392
+base,BASE,float16,0,0,3072,3072,10240,mCnt*nCnt >> aicNum/2; still BASE
+base,BASE,float32,0,0,2048,2048,2048,fp32 BASE
+scsk,SINGLE_CORE_SPLIT_K,float16,0,0,2048,3072,32768,K>=27392; N>2048 so single-core split-K is not rejected
+scsk,SINGLE_CORE_SPLIT_K,float16,0,0,3072,3072,32768,square large-K same-cube split-K
+scsk,SINGLE_CORE_SPLIT_K,float16,0,0,4096,3072,40960,larger M; K still on each cube
+scsk,SINGLE_CORE_SPLIT_K,float16,0,0,2048,4096,49152,very long K; M/N still fill 24 cores
+scsk,SINGLE_CORE_SPLIT_K,float32,0,0,2048,3072,32768,fp32 single-core split-K

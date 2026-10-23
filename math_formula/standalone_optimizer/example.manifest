@@ -1,0 +1,33 @@
+# Illustrative hardware rates. Plan keys and workspace are derived by the
+# standalone source-backed preflight, not finalized by CANN.
+workload 16 16 102400 fp16
+hardware 20 33554432
+primitive launch count 0.2 1.0
+primitive gm_read bytes 0.0 1600000.0
+primitive gm_write bytes 0.0 1600000.0
+primitive cube flop 0.0 14745600.0
+primitive vector_add ops 0.0 1000000.0
+primitive nd2nz elements 0.0 1000000.0
+primitive sync count 0.1 1.0
+
+candidate base_example BASE preflight
+tile usedCoreNum 1
+tile singleCoreM 16
+tile singleCoreN 16
+tile singleCoreK 102400
+tile baseM 16
+tile baseN 16
+tile baseK 128
+generate_events
+end
+
+candidate splitk_example DETERMINISTIC_SPLIT_K preflight
+tile usedCoreNum 20
+tile singleCoreM 16
+tile singleCoreN 16
+tile singleCoreK 256
+tile baseM 16
+tile baseN 16
+tile baseK 128
+generate_events
+end

@@ -1,23 +1,44 @@
 {
     "version": "0.2.0",
     "configurations": [
+        // {
+        //     "name": "Debug cli.py",
+        //     "type": "debugpy",
+        //     "request": "launch",
+        //     "module": "matmul_cost_model.cli",
+        //     "python": "/home/xianfei/miniconda3/bin/python3",
+        //     "cwd": "${workspaceFolder}/cost_model",
+        //     "args": [
+        //         "evaluate",
+        //         "--input",
+        //         "examples/candidate_comparison.json",
+        //         "--measurements",
+        //         "examples/measured_times.csv"
+        //     ],
+        //     "justMyCode": false,
+        //     "console": "integratedTerminal"
+        //  },
         {
-            "name": "Debug cli.py",
-            "type": "debugpy",
+            "name": "Debug nested_example",
+            "type": "cppdbg",
             "request": "launch",
-            "module": "matmul_cost_model.cli",
-            "python": "/home/xianfei/miniconda3/bin/python3",
-            "cwd": "${workspaceFolder}/cost_model",
-            "args": [
-                "evaluate",
-                "--input",
-                "examples/candidate_comparison.json",
-                "--measurements",
-                "examples/measured_times.csv"
-            ],
-            "justMyCode": false,
-            "console": "integratedTerminal"
-         }
+            "program": "${workspaceFolder}/math_formula/standalone_optimizer/build/debug/mmopt_nested_example",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/math_formula/standalone_optimizer",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "build nested_example (debug)",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
         // {
         //     "name": "Debug local_search",
         //     "type": "cppdbg",
