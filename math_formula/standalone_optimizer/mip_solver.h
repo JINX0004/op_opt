@@ -8,9 +8,11 @@
 
 namespace mmopt {
 
-// Discrete block domains. Empty vectors use the documented default grid;
-// nonempty vectors specify exact admissible aligned tile extents for one
-// dimension. The solver selects all four dimensions independently subject
+// Discrete block domains. Empty base vectors use a small L0 tile grid; empty
+// single-core vectors additionally include full-axis and core-partition
+// extents derived from the shape and allocated AIC count. Nonempty vectors
+// override that dimension's default domain. All values must be 16-aligned.
+// The solver selects all four dimensions independently subject
 // to baseM<=singleCoreM and baseN<=singleCoreN.
 struct MipTileDomain {
     std::vector<std::uint64_t> single_core_m;
@@ -19,7 +21,8 @@ struct MipTileDomain {
     std::vector<std::uint64_t> base_n;
 };
 
-// A reduced MILP with block geometry, K tile/step, and AIC count decisions.
+// A reduced geometry-selection MILP. K tiling is eliminated analytically;
+// Split-K core counts are checked locally before building the master.
 // It minimizes a service-demand surrogate, not the full event-graph makespan.
 struct MipPlan {
     PlanDecision decision;

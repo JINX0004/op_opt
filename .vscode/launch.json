@@ -18,11 +18,32 @@
         //     "justMyCode": false,
         //     "console": "integratedTerminal"
         //  },
+        // {
+        //     "name": "Debug nested_example",
+        //     "type": "cppdbg",
+        //     "request": "launch",
+        //     "program": "${workspaceFolder}/math_formula/standalone_optimizer/build/debug/mip_example",
+        //     "args": [],
+        //     "stopAtEntry": false,
+        //     "cwd": "${workspaceFolder}/math_formula/standalone_optimizer",
+        //     "environment": [],
+        //     "externalConsole": false,
+        //     "MIMode": "gdb",
+        //     "miDebuggerPath": "/usr/bin/gdb",
+        //     "preLaunchTask": "build mip_example (debug)",
+        //     "setupCommands": [
+        //         {
+        //             "description": "Enable pretty-printing for gdb",
+        //             "text": "-enable-pretty-printing",
+        //             "ignoreFailures": true
+        //         }
+        //     ]
+        // },
         {
-            "name": "Debug nested_example",
+            "name": "Debug mip_tests",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/math_formula/standalone_optimizer/build/debug/mmopt_nested_example",
+            "program": "${workspaceFolder}/math_formula/standalone_optimizer/build/debug/mmopt_mip_tests",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/math_formula/standalone_optimizer",
@@ -30,7 +51,7 @@
             "externalConsole": false,
             "MIMode": "gdb",
             "miDebuggerPath": "/usr/bin/gdb",
-            "preLaunchTask": "build nested_example (debug)",
+            "preLaunchTask": "build mip_tests (debug)",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",

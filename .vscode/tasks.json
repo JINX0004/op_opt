@@ -16,6 +16,16 @@
             "problemMatcher": ["$gcc"]
         },
         {
+            "label": "build mip_tests (debug)",
+            "type": "shell",
+            "command": "cmake -S \"${workspaceFolder}/math_formula/standalone_optimizer\" -B \"${workspaceFolder}/math_formula/standalone_optimizer/build/debug\" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && cmake --build \"${workspaceFolder}/math_formula/standalone_optimizer/build/debug\" --target mmopt_mip_tests",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "problemMatcher": ["$gcc"]
+        },
+        {
             "label": "build nested_example (debug)",
             "type": "shell",
             "command": "cmake -S \"${workspaceFolder}/math_formula/standalone_optimizer\" -B \"${workspaceFolder}/math_formula/standalone_optimizer/build/debug\" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && cmake --build \"${workspaceFolder}/math_formula/standalone_optimizer/build/debug\" --target mmopt_nested_example",

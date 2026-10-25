@@ -163,12 +163,18 @@ int main() {
     split_plan.workspace_bytes = 2048;
     const auto generated_split = mmopt::BuildMatmulEvents({16, 16, 32, "fp16"}, split_plan);
     double split_read = 0.0, split_write = 0.0, split_add = 0.0;
+    std::size_t vector_shards = 0;
     for (const auto& event : generated_split.events) {
         if (event.primitive == "gm_read") split_read += event.work_units;
         if (event.primitive == "gm_write") split_write += event.work_units;
-        if (event.primitive == "vector_add") split_add += event.work_units;
+        if (event.primitive == "vector_add") {
+            split_add += event.work_units;
+            assert(event.work_units == 64.0);
+            assert(event.resource == "aiv_" + std::to_string(vector_shards));
+            ++vector_shards;
+        }
     }
-    assert(generated_split.events.size() == 13);
+    assert(generated_split.events.size() == 16 && vector_shards == 4);
     assert(split_read == 4096.0 && split_write == 2560.0 && split_add == 256.0);
     auto transposed = mmopt::Workload{16, 16, 32, "fp16"};
     transposed.trans_a = true;

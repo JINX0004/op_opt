@@ -38,9 +38,9 @@ int main() {
     assert(result.winner->event_graph_score &&
            std::isfinite(result.winner->event_graph_score->runtime_us));
 
-    // Test-only exhaustive oracle: checks the integer tangent epigraphs
+    // Test-only exhaustive oracle: checks local closed-form decisions
     // against the independently evaluated reduced objective. Production
-    // SolveReducedMip never evaluates complete candidates to select tiles.
+    // evaluates one cost per geometry (and Split-K core count).
     double best_base = std::numeric_limits<double>::infinity();
     for (std::uint64_t base_k = 16; base_k <= 1024; base_k += 16) {
         mmopt::PlanDecision d;
@@ -127,12 +127,59 @@ int main() {
             }
     assert(Equal(block_base_min, block_result.base->surrogate_us));
     assert(Equal(block_split_min, block_result.deterministic_split_k->surrogate_us));
+
+    // The deterministic kernel supplies two AIVs per occupied AIC. With
+    // parallel reduction shards, this GM-bound case prefers all 20 cores;
+    // a serial vector term would instead favor four.
+    auto parallel_hardware = TestHardware();
+    parallel_hardware.workspace_limit_bytes = 128ULL * 1024 * 1024;
+    const mmopt::Workload parallel_shape{512, 512, 32768, "fp16"};
+    const mmopt::MipTileDomain parallel_grid{{384}, {512}, {128}, {128}};
+    const auto parallel_result = mmopt::SolveReducedMip(
+        parallel_shape, parallel_hardware, {}, parallel_grid);
+    assert(parallel_result.deterministic_split_k);
+    assert(parallel_result.deterministic_split_k->decision.used_cores == 20);
+    assert(parallel_result.deterministic_split_k->decision.step_k == 4);
+    assert(Equal(parallel_result.deterministic_split_k->surrogate_us, 294.570465));
+    auto four_cores = parallel_result.deterministic_split_k->decision;
+    four_cores.used_cores = 4;
+    assert(mmopt::ReducedObjectiveUs(parallel_shape, parallel_hardware, four_cores) >
+           parallel_result.deterministic_split_k->surrogate_us);
+
+    // If Cube service is negligible and extra cores save no read-call
+    // latency, even parallel AIV reduction can favor the minimum two AICs.
+    auto reduction_heavy = parallel_hardware;
+    reduction_heavy.primitives["cube"].rate_per_us = 1.0e12;
+    reduction_heavy.primitives["gm_read"].fixed_latency_us = 0.0;
+    const auto reduction_result = mmopt::SolveReducedMip(
+        parallel_shape, reduction_heavy, {}, parallel_grid);
+    assert(reduction_result.deterministic_split_k);
+    assert(reduction_result.deterministic_split_k->decision.used_cores == 2);
+
     const mmopt::MipTileDomain distinct_blocks{{32}, {32}, {16}, {16}};
     const auto distinct_result = mmopt::SolveReducedMip(blocked, hardware, {},
                                                        distinct_blocks);
     assert(distinct_result.base && distinct_result.base->event_graph_score);
     assert(distinct_result.base->decision.base_m == 16);
     assert(distinct_result.base->decision.single_core_m == 32);
+
+    // A large spatial and K workload exercises BASE's independent core and
+    // base tiles, multiple Cube cores, and the full default geometry grid.
+    const mmopt::Workload multicore_shape{4096, 3072, 8192, "fp16"};
+    auto compute_heavy_hardware = hardware;
+    compute_heavy_hardware.primitives["cube"].rate_per_us = 1000000.0;
+    const auto multicore_result = mmopt::SolveReducedMip(
+        multicore_shape, compute_heavy_hardware);
+    assert(multicore_result.base);
+    const auto& multicore_base = multicore_result.base->decision;
+    assert(multicore_base.used_cores == 20);
+    assert(multicore_base.single_core_m > multicore_base.base_m);
+    assert(multicore_base.single_core_n > multicore_base.base_n);
+    auto one_core = multicore_base;
+    one_core.used_cores = 1;
+    assert(multicore_result.base->surrogate_us <
+           mmopt::ReducedObjectiveUs(multicore_shape, compute_heavy_hardware,
+                                     one_core));
 
     // The selected plan remains available if explicit events exceed the cap.
     const mmopt::Workload large{102400, 30720, 4096, "fp16"};

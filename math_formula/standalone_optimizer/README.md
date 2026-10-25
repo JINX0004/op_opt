@@ -89,7 +89,8 @@ It counts each packet read independently, without assuming L1/L2 reuse.
 `BASE` assigns output tiles round-robin to AICs, runs their full K locally,
 and writes one FP16/BF16 output tile. Deterministic Split-K assigns each AIC
 contiguous `singleCoreK` slices, models FP32 partial updates, reads all
-partials for vector reduction, and writes the final output. It requires at
+partials for vector reduction on up to two AIVs per occupied AIC, and writes
+the final output. It requires at
 least $4CMN$ workspace bytes for $C$ AICs; actual kernel padding/layout may
 require more.
 
@@ -135,12 +136,17 @@ builders and legality checks are connected.
 
 ## Reduced MILP with M/N block tiling
 
-[`SolveReducedMip`](mip_solver.h) solves two integer programs, one for BASE
-and one for deterministic Split-K, using the HiGHS C API. The C++ optimizer
-does not construct and score every complete tiling in these programs. It
-constructs a finite set of **spatial geometries** inside each MILP, then
-optimizes K tiling and AIC count jointly with the geometry choice. HiGHS
-may use branch-and-bound internally. The result reports each family's
+For each branch's objective, decision variables, constraints, and numerical
+example, see [`SOLVE_BASE_FORMULATION.md`](SOLVE_BASE_FORMULATION.md) and
+[`SOLVE_SPLIT_FORMULATION.md`](SOLVE_SPLIT_FORMULATION.md). The Split-K document
+also compares the standalone domain with the current `mat_mul_v3` host tiler.
+
+[`SolveReducedMip`](mip_solver.h) solves two small integer programs, one for
+BASE and one for deterministic Split-K, using the HiGHS C API. It constructs
+a finite set of **spatial geometries**. For each geometry, it eliminates the
+K-tiling decision analytically and determines the best occupied AIC count
+(directly for BASE, or by checking at most $A-1$ counts for Split-K). A
+one-hot master program then selects the geometry. The result reports each family's
 optimal **reduced-model** objective, the selected tiling, and its separate
 event-graph score when explicit expansion fits its 200,000-event cap. The
 winner is chosen by the reduced objective. A solver
@@ -154,19 +160,45 @@ chooses `baseK=16b` and an AIC count no larger than its output-tile count.
 Deterministic Split-K fixes `baseK=128` and chooses `stepK=s`,
 `singleCoreK=128s`, and occupied AIC count `c`. All choices must satisfy
 the typed preflight's alignment, local-memory, workspace, and compiled-key
-subset. The default M/N grid is the aligned values 16, 32, 64, 128, and 256
-that fit the shape, plus the full extent when it is at most 256. A caller can
-pass `MipTileDomain` to specify other aligned values; the optimizer proves
-the optimum only over that declared grid, capped at 4096 spatial geometries.
+subset. The default **base** M/N grid is the aligned values 16, 32, 64,
+128, and 256 that fit the shape, plus the full extent when it is at most
+256. The default **single-core** grid also
+includes 512, 1024, and 2048 when they fit, the full axis, and aligned
+$\lceil\text{shape}/p\rceil$ for
+$p\in\{1,2,4,5,10,A\}$ when $p\le A$, where $A$ is the allocated AIC
+count. This follows the full-axis and core-partition patterns in
+[`matmul_v3_base_tiling.cpp`](../../mat_mul_v3/op_host/op_tiling/matmul_v3_base_tiling.cpp),
+so a single-core tile can span many base tiles. A caller can pass
+`MipTileDomain` to specify other aligned values; the optimizer proves the
+optimum only over that declared grid, capped at 4096 spatial geometries.
 The model still excludes alternative buffer policies and other `mat_mul_v3`
 families.
+
+BASE can use multiple Cube cores: its occupied count is bounded by the
+number of spatial output tiles and the allocated AICs, rather than by one.
+For ND input with $K>65535$, the host tiler's
+[`CalcNd2nzWorkspace`](../../mat_mul_v3/op_host/op_tiling/matmul_v3_base_tiling.cpp)
+reserves a converted copy of the full A matrix before BASE runs. This
+$2MK$-byte allocation is independent of `singleCoreM/N` and the number of
+Cube cores. For example, FP16 $(M,N,K)=(64000,48000,256000)$ needs
+32,768,000,000 bytes for A conversion plus the 20 MiB RPC reservation.
+A 32 MiB workspace budget rejects that workload before either family is
+solved; with sufficient workspace, BASE can occupy multiple AICs.
 
 Let $C_M,C_N$ be the single-core output extents and $B_M,B_N$ the base
 extents. Define $N_o=\lceil M/C_M\rceil\lceil N/C_N\rceil$ output tiles.
 Let $N_M$ be the sum of base-M packet counts over all output-M tiles,
-including the tail, and define $N_N$ analogously. Then $S=N_MN_N$ is the
+including the tail:
+
+$$
+N_M=\left\lfloor\frac{M}{C_M}\right\rfloor
+    \left\lceil\frac{C_M}{B_M}\right\rceil
+  +\left\lceil\frac{M\bmod C_M}{B_M}\right\rceil,
+$$
+
+and define $N_N$ analogously. Then $S=N_MN_N$ is the
 number of spatial base packets per K packet, and the no-cache operand
-traffic is $D=2K(MN_N+NN_M)$ bytes. These counts match the current event
+traffic is $D=2K\left(M\,N_N+N\,N_M\right)$ bytes. These counts match the current event
 builder's output and base tile loops. Let $O=MN$, $F=2MNK$, $R_C$ be per-AIC Cube
 FLOP/µs, $R_R,R_W$ GM byte/µs, and $\lambda_R,\lambda_W$ fixed
 GM read/write costs. $L$ contains launch and, when required, A ND→NZ
@@ -180,8 +212,11 @@ T_B=L+\max\left(\frac{F}{cR_C},
 $$
 
 For deterministic Split-K, let $P=\lceil K/(128s)\rceil$ be the K-slice
-count and $G=\lceil K/128\rceil$ the base-packet count. With vector rate
-$R_V$ and fixed vector/sync costs $\lambda_V,\lambda_S$, the objective is
+count and $G=\lceil K/128\rceil$ the base-packet count. For each output
+tile $t$ with $O_t$ elements, the two-AIV-per-AIC approximation places at
+most $\lceil O_t/(2c)\rceil$ elements on one AIV. Let
+$Q_g(c)=\sum_t\lceil O_t/(2c)\rceil$. With per-AIV vector rate $R_V$ and
+fixed vector/sync costs $\lambda_V,\lambda_S$, the objective is
 
 $$
 \begin{aligned}
@@ -189,20 +224,95 @@ T_D=L+\max\Bigg(&\frac{F}{cR_C},
  \frac{D+4PO}{R_R}+\frac{(4P+2)O}{R_W}\\
  &+\bigl(2SG+N_o(P-c+1)\bigr)\lambda_R
  +N_o(P+1)\lambda_W\Bigg)\\
- &+N_o(\lambda_S+\lambda_V)+\frac{(c-1)O}{R_V}.
+ &+N_o(\lambda_S+\lambda_V)+\frac{(c-1)Q_g(c)}{R_V}.
 \end{aligned}
 $$
 
-The programs use one-hot geometry variables, integer variables for $b$,
-$s$, $c$, and packet counts, plus a continuous variable for the `max` stage.
-Geometry-dependent traffic and workspace coefficients are part of the MILP,
-not chosen after solving. Tangent inequalities
-for $1/x$ at every feasible integer value make the reciprocal epigraph
-exact **at integer points**; integer packet counts implement the ceilings.
-One-hot core-count constraints enforce $c\le\lceil K/(128s)\rceil$
-against the **true** slice count, rather than allowing the packet-count
-variable to grow artificially. The solver therefore proves the
-minimum of these two stated formulas over this restricted feasible domain.
+### Feasibility constraints and reduced master
+
+For every allowed spatial geometry $g=(C_M,C_N,B_M,B_N)$, a binary $y_g$
+selects that geometry. Exactly one is active: $\sum_g y_g=1$. The API
+rejects misaligned tile values and filters out geometries with $B_M>C_M$,
+$B_N>C_N$, or fixed L0 storage violations before adding variables. Other
+constraints are enforced while computing each geometry's cost, rather than
+as rows of the master. Here $A$ is the
+allocated AIC count, $C_{0A},C_{0B},C_{0C},C_1$ are the modeled local-memory
+capacities, and
+$W_0=20\,\mathrm{MiB}+W_{A\to NZ}$ is the fixed workspace. The relevant
+limits are:
+
+| Family | Local feasibility constraints |
+| --- | --- |
+| BASE | $1\le c\le\min(A,N_o)$; $1\le b$ and $\text{baseK}=16b\le K$; $4B_M(16b)\le C_{0A}$; $4B_N(16b)\le C_{0B}$; $4(B_M+B_N)(16b)\le C_1$; $8B_MB_N\le C_{0C}$; $W_0\le W_{\max}$ |
+| Deterministic Split-K | $2\le c\le\min(A,\lceil K/(128s)\rceil)$; $1\le s\le K/128$; $\text{baseK}=128$; $\text{singleCoreK}=128s$; $4B_M(128)\le C_{0A}$; $4B_N(128)\le C_{0B}$; $4(B_M+B_N)(128s)\le C_1$; $8B_MB_N\le C_{0C}$; $W_0+8cC_MC_N\le W_{\max}$ |
+
+For a fixed BASE geometry $g$, the objective is nonincreasing in both
+$b=\text{baseK}/16$ and $c$. Its exact local minimizer is therefore
+
+$$
+\begin{aligned}
+b_g^*&=\min\!\left(\frac K{16},
+ \left\lfloor\frac{C_{0A}}{64B_M}\right\rfloor,
+ \left\lfloor\frac{C_{0B}}{64B_N}\right\rfloor,
+ \left\lfloor\frac{C_1}{64(B_M+B_N)}\right\rfloor\right),\\
+c_g^*&=\min(A,N_o),\qquad P_{B,g}^*=\left\lceil\frac K{16b_g^*}\right\rceil.
+\end{aligned}
+$$
+
+Geometries with $b_g^*<1$ or invalid fixed storage/workspace are discarded.
+Substituting $b_g^*,c_g^*$ into $T_B-L$ gives the local cost $V_{B,g}$.
+This remains exact when a latency is zero: the largest feasible $b$ is still
+one of the minimizers.
+
+For Split-K, write $q=K/128$. For a fixed geometry and core count $c$, the
+objective is nonincreasing in $s=\text{stepK}$. The upper bound from L1 is
+
+$$
+s_{\max,g}=\min\!\left(q,
+ \left\lfloor\frac{C_1}{512(B_M+B_N)}\right\rfloor\right).
+$$
+
+The true slice-count constraint $c\le\lceil q/s\rceil$ is equivalent, for
+integer $c\ge2$, to $s\le\lfloor(q-1)/(c-1)\rfloor$. Thus the best step for
+that $c$ is
+
+$$
+s_g^*(c)=\min\!\left(s_{\max,g},
+ \left\lfloor\frac{q-1}{c-1}\right\rfloor\right),\qquad
+P_g^*(c)=\left\lceil\frac q{s_g^*(c)}\right\rceil.
+$$
+
+The solver evaluates $T_D-L$ at these values for each feasible integer
+$c\in[2,\min(A,q,\lfloor(W_{\max}-W_0)/(8C_MC_N)\rfloor)]$ and retains the
+smallest value $V_{D,g}$. This at most 19-count check is needed because more
+cores reduce Cube time but also change the per-AIV reduction critical path.
+Fixed L0 checks
+and $s_g^*(c)\ge1$ can remove a geometry or count.
+
+For either family $X$, the remaining master is
+
+$$
+\min_{y}\ \sum_{g\in\mathcal G_X}V_{X,g}y_g,
+\qquad\sum_{g\in\mathcal G_X}y_g=1,\qquad y_g\in\{0,1\}.
+$$
+
+It has one binary column per feasible geometry and one equality row, rather
+than K-packet and core-count rows for every geometry. Constant
+launch/conversion cost $L$ is added to the selected objective after solving.
+`FinalizePlan` checks the selected plan again, and the event-graph scorer
+runs separately when its explicit graph fits the event limit.
+
+The workload's dtype, layout, transpose/bias mode, global alignment, 910B3
+feature profile, and standalone family/key-tuple rules are **not MILP rows**.
+The current `FinalizePlan` checks that narrow contract on the chosen plan; an
+unsupported workload can therefore raise an error after the MILP solve.
+Passing this standalone preflight still does not prove that CANN can emit the
+plan.
+
+HiGHS proves the minimum of these formulas over the declared spatial grid
+and the encoded feasibility constraints. The local eliminations preserve
+the optimum of the former per-geometry integer formulation; they do not
+remove the finite geometry grid or make the surrogate a full timeline.
 The `max` stage is a service-demand approximation: it omits the detailed
 precedence, buffering, shared-resource contention, and issue timing of the
 event graph. The current formulation requires zero fixed Cube latency.
@@ -221,10 +331,10 @@ ctest --test-dir /tmp/mmopt-mip-build --output-on-failure
 ```
 
 Without HiGHS, the existing event scorer and two-level search API still
-build. The new test compares each MILP optimum with a small exhaustive
+build. The test compares each master optimum with a small exhaustive
 oracle; that enumeration is confined to the test. The example's primitive
 rates are hypothetical. Before using the result for device selection, the
-next steps are to measure the primitive profile, expand the MILP's legal
+next steps are to measure the primitive profile, expand the model's legal
 domains and event/schedule encoding, finalize selected plans with CANN, and
 compare predicted rankings with device measurements.
 

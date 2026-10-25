@@ -1044,13 +1044,38 @@ The first [HiGHS-backed reduced MILP](standalone_optimizer/README.md#reduced-mil
 is a concrete solver step toward this formulation. It optimizes BASE and
 deterministic Split-K separately over a declared grid of output/base M/N
 blocks, K tiles or steps, and AIC counts, with an analytical compute/GM
-service objective.
-It avoids enumerating complete tilings in the C++ optimizer; HiGHS proves
-optimality for that **restricted surrogate only**. The chosen plans are then
+service objective. The original per-geometry MILP introduced packet-ceiling
+and throughput constraints for every geometry and possible K/core count.
+Consequently its **row count as well as its column count** grew with both
+the geometry grid and the shape-dependent K range.
+
+The current model uses partial minimization. For family $a$ and spatial
+geometry $g$, define
+
+$$
+V_{a,g}=\min_{(k,c)\in\mathcal D_{a,g}}
+T_{a}^{\mathrm{reduced}}(g,k,c).
+$$
+
+Monotonicity fixes BASE's K tile and core count at their feasible maxima.
+For Split-K, monotonicity fixes the best K step for each core count; at most
+19 feasible core counts remain to be checked per geometry on the modeled
+910B3. Its vector-reduction term divides each output tile among up to
+two AIVs per occupied AIC, so the preferred core count reflects both Cube
+parallelism and the per-AIV reduction critical path. The master then
+minimizes $\sum_g V_{a,g}y_g$ subject only to
+$\sum_g y_g=1$ and binary $y_g$. This removes the shape-dependent rows
+without changing the optimum of the **restricted surrogate**. With no
+cross-geometry coupling, this one-hot master is also equivalent to taking
+the smallest $V_{a,g}$ directly; keeping HiGHS leaves a place for future
+coupled decisions. The chosen plans are then
 scored with the event graph for comparison. Section 10's complete
 tiling-dependent event set, resource schedule, and backend legality remain
 outside the MILP, so the current solver does not certify the global optimum
 of the full problem above.
+The two branches are derived with worked numerical examples in
+[`SOLVE_BASE_FORMULATION.md`](standalone_optimizer/SOLVE_BASE_FORMULATION.md)
+and [`SOLVE_SPLIT_FORMULATION.md`](standalone_optimizer/SOLVE_SPLIT_FORMULATION.md).
 
 ### 10.1 Make the feasible set explicit
 

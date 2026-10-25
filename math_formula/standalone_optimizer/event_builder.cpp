@@ -1,4 +1,5 @@
 #include "event_builder.h"
+#include "split_vector_model.h"
 
 #include <algorithm>
 #include <cmath>
@@ -174,12 +175,26 @@ void BuildDeterministic(const Workload& workload, const Tile& tile, Candidate& p
             const auto read = Add(plan, "reduce_read_", "hbm", "gm_read",
                                   Work(static_cast<long double>(tile.cores) * m_use * n_use *
                                        kPartialBytes), "bytes", {sync});
-            const auto reduce = Add(plan, "reduce_", "aiv", "vector_add",
-                                    Work(static_cast<long double>(tile.cores - 1) * m_use * n_use),
-                                    "ops", {read});
+            // The mixed kernel dispatches two AIVs per occupied AIC. Model
+            // concurrent balanced shards of this output tile rather than
+            // serializing all (cores-1)*elements additions on one AIV.
+            const auto elements = m_use * n_use;
+            const auto shards = SplitVectorShardCount(tile.cores, elements);
+            if (plan.events.size() >= kMaxEvents ||
+                shards > kMaxEvents - plan.events.size() - 1)
+                throw std::length_error("event graph exceeds 200000 events; add recurrence/compression");
+            std::vector<std::string> reductions;
+            reductions.reserve(shards);
+            for (std::uint64_t lane = 0; lane < shards; ++lane) {
+                const auto lane_elements = elements / shards + (lane < elements % shards);
+                reductions.push_back(Add(
+                    plan, "reduce_", "aiv_" + std::to_string(lane), "vector_add",
+                    Work(static_cast<long double>(tile.cores - 1) * lane_elements),
+                    "ops", {read}));
+            }
             Add(plan, "output_", "hbm", "gm_write",
-                Work(static_cast<long double>(m_use) * n_use * kOutputBytes),
-                "bytes", {reduce});
+                Work(static_cast<long double>(elements) * kOutputBytes),
+                "bytes", reductions);
             n += n_use;
         }
         m += m_use;
