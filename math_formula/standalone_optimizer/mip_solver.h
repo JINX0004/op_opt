@@ -19,16 +19,22 @@ struct MipTileDomain {
     std::vector<std::uint64_t> single_core_n;
     std::vector<std::uint64_t> base_m;
     std::vector<std::uint64_t> base_n;
+    // For the tested plain BASE key 0x10000, the source kernel's single
+    // Iterate call writes only one base tile. Enable this in device studies
+    // to exclude outer tiles larger than baseM/N; other families are free.
+    bool base_core_equals_base = false;
 };
 
-// A reduced geometry-selection MILP. K tiling is eliminated analytically;
-// Split-K core counts are checked locally before building the master.
+// A reduced geometry-selection MILP. BASE K tiling is eliminated analytically;
+// deterministic Split-K checks bounded K-step and occupied-core choices for
+// each spatial geometry before the one-hot geometry master is solved.
 // It minimizes a service-demand surrogate, not the full event-graph makespan.
 struct MipPlan {
     PlanDecision decision;
     Candidate candidate;
     double surrogate_us = 0.0;
-    // Absent when the selected plan exceeds the explicit event-graph cap.
+    // Absent when the selected plan exceeds the explicit event-graph cap or
+    // its whole-output Split-K partial representation exceeds workspace.
     std::optional<Score> event_graph_score;
 };
 

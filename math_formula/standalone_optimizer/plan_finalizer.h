@@ -24,13 +24,17 @@ struct PlanDecision {
     std::uint64_t step_k = 1;
 };
 
-// Reference capacities for a full Ascend 910B3. Pass queried capacities
-// instead when the target exposes a smaller partition or different revision.
+// Usable capacities queried on an Ascend 910B3 with CANN 9.0.0. Pass fresh
+// queried capacities for another installation or partition. L1/UB are 256 B
+// below their nominal 512/192 KiB sizes on this installed platform API.
 struct CoreMemory {
-    std::uint64_t l1_bytes = 524288;
+    std::uint64_t l1_bytes = 524032;
     std::uint64_t l0a_bytes = 65536;
     std::uint64_t l0b_bytes = 65536;
     std::uint64_t l0c_bytes = 131072;
+    // Plain BASE may emit dbL0C=1; keep the conservative two-buffer
+    // preflight by default and set this to 1 only for that source path.
+    std::uint64_t base_l0c_buffers = 2;
     bool support_l0c2out = true;
     bool support_l12bt_bf16 = false;
 };

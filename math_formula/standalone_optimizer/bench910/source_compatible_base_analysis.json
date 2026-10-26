@@ -1,0 +1,302 @@
+{
+  "across_declared_shapes": {
+    "count": 7,
+    "geometric_mean_optimizer_over_default": 1.1970127036998062,
+    "one_sided_exact_sign_p_default_faster": 0.0078125,
+    "optimizer_faster_shapes": 0,
+    "two_sided_95pct_t_ci_optimizer_over_default": [
+      1.1647157547444082,
+      1.230205229887313
+    ]
+  },
+  "raw_runs": 56,
+  "shapes": [
+    {
+      "default_median_us": 139.792,
+      "geometric_mean_optimizer_over_default": 1.1526429723791205,
+      "optimizer_faster_rounds": 0,
+      "optimizer_median_us": 161.178,
+      "rounds": [
+        {
+          "default_us": 140.30200000000002,
+          "optimizer_over_default": 1.1496628700945104,
+          "optimizer_us": 161.3,
+          "round": 0
+        },
+        {
+          "default_us": 139.45,
+          "optimizer_over_default": 1.1553531731803515,
+          "optimizer_us": 161.114,
+          "round": 1
+        },
+        {
+          "default_us": 140.13400000000001,
+          "optimizer_over_default": 1.1490716028943724,
+          "optimizer_us": 161.024,
+          "round": 2
+        },
+        {
+          "default_us": 139.422,
+          "optimizer_over_default": 1.1565032778184219,
+          "optimizer_us": 161.24200000000002,
+          "round": 3
+        }
+      ],
+      "shape": [
+        2048,
+        2048,
+        4096
+      ],
+      "two_sided_95pct_t_ci_optimizer_over_default": [
+        1.1465735078632369,
+        1.1587445660164752
+      ]
+    },
+    {
+      "default_median_us": 500.419,
+      "geometric_mean_optimizer_over_default": 1.2253877157279072,
+      "optimizer_faster_rounds": 0,
+      "optimizer_median_us": 613.983,
+      "rounds": [
+        {
+          "default_us": 500.202,
+          "optimizer_over_default": 1.2266084501861245,
+          "optimizer_us": 613.5519999999999,
+          "round": 0
+        },
+        {
+          "default_us": 500.478,
+          "optimizer_over_default": 1.2196819840232738,
+          "optimizer_us": 610.424,
+          "round": 1
+        },
+        {
+          "default_us": 500.36,
+          "optimizer_over_default": 1.2308178111759531,
+          "optimizer_us": 615.852,
+          "round": 2
+        },
+        {
+          "default_us": 501.78,
+          "optimizer_over_default": 1.2244688907489338,
+          "optimizer_us": 614.414,
+          "round": 3
+        }
+      ],
+      "shape": [
+        2048,
+        4096,
+        8192
+      ],
+      "two_sided_95pct_t_ci_optimizer_over_default": [
+        1.218037543797399,
+        1.2327822418145602
+      ]
+    },
+    {
+      "default_median_us": 501.609,
+      "geometric_mean_optimizer_over_default": 1.2488044792719057,
+      "optimizer_faster_rounds": 0,
+      "optimizer_median_us": 625.7370000000001,
+      "rounds": [
+        {
+          "default_us": 501.62,
+          "optimizer_over_default": 1.2448506837845381,
+          "optimizer_us": 624.442,
+          "round": 0
+        },
+        {
+          "default_us": 502.142,
+          "optimizer_over_default": 1.2534183557639074,
+          "optimizer_us": 629.394,
+          "round": 1
+        },
+        {
+          "default_us": 501.59799999999996,
+          "optimizer_over_default": 1.2457824791964882,
+          "optimizer_us": 624.8820000000001,
+          "round": 2
+        },
+        {
+          "default_us": 500.798,
+          "optimizer_over_default": 1.2511871053798138,
+          "optimizer_us": 626.592,
+          "round": 3
+        }
+      ],
+      "shape": [
+        4096,
+        2048,
+        8192
+      ],
+      "two_sided_95pct_t_ci_optimizer_over_default": [
+        1.2422154825732157,
+        1.255428425524924
+      ]
+    },
+    {
+      "default_median_us": 499.276,
+      "geometric_mean_optimizer_over_default": 1.181293493871592,
+      "optimizer_faster_rounds": 0,
+      "optimizer_median_us": 589.771,
+      "rounds": [
+        {
+          "default_us": 499.322,
+          "optimizer_over_default": 1.182046855536107,
+          "optimizer_us": 590.222,
+          "round": 0
+        },
+        {
+          "default_us": 499.23,
+          "optimizer_over_default": 1.1813993550067101,
+          "optimizer_us": 589.79,
+          "round": 1
+        },
+        {
+          "default_us": 499.198,
+          "optimizer_over_default": 1.1810624241283019,
+          "optimizer_us": 589.5840000000001,
+          "round": 2
+        },
+        {
+          "default_us": 499.50800000000004,
+          "optimizer_over_default": 1.1806657751227205,
+          "optimizer_us": 589.752,
+          "round": 3
+        }
+      ],
+      "shape": [
+        4096,
+        4096,
+        4096
+      ],
+      "two_sided_95pct_t_ci_optimizer_over_default": [
+        1.1803632819515808,
+        1.1822244388660974
+      ]
+    },
+    {
+      "default_median_us": 999.265,
+      "geometric_mean_optimizer_over_default": 1.2245668246759254,
+      "optimizer_faster_rounds": 0,
+      "optimizer_median_us": 1224.728,
+      "rounds": [
+        {
+          "default_us": 997.76,
+          "optimizer_over_default": 1.224526940346376,
+          "optimizer_us": 1221.784,
+          "round": 0
+        },
+        {
+          "default_us": 994.64,
+          "optimizer_over_default": 1.2342877825142766,
+          "optimizer_us": 1227.672,
+          "round": 1
+        },
+        {
+          "default_us": 1001.552,
+          "optimizer_over_default": 1.2277105931594166,
+          "optimizer_us": 1229.616,
+          "round": 2
+        },
+        {
+          "default_us": 1000.77,
+          "optimizer_over_default": 1.2118508748263839,
+          "optimizer_us": 1212.784,
+          "round": 3
+        }
+      ],
+      "shape": [
+        4096,
+        4096,
+        8192
+      ],
+      "two_sided_95pct_t_ci_optimizer_over_default": [
+        1.2096468244097716,
+        1.239670850893663
+      ]
+    },
+    {
+      "default_median_us": 998.312,
+      "geometric_mean_optimizer_over_default": 1.1673214053574061,
+      "optimizer_faster_rounds": 0,
+      "optimizer_median_us": 1163.548,
+      "rounds": [
+        {
+          "default_us": 999.932,
+          "optimizer_over_default": 1.1635211194361217,
+          "optimizer_us": 1163.442,
+          "round": 0
+        },
+        {
+          "default_us": 992.572,
+          "optimizer_over_default": 1.1706395102823774,
+          "optimizer_us": 1161.944,
+          "round": 1
+        },
+        {
+          "default_us": 1000.55,
+          "optimizer_over_default": 1.1630143421118386,
+          "optimizer_us": 1163.654,
+          "round": 2
+        },
+        {
+          "default_us": 996.692,
+          "optimizer_over_default": 1.1721394372584508,
+          "optimizer_us": 1168.262,
+          "round": 3
+        }
+      ],
+      "shape": [
+        8192,
+        4096,
+        4096
+      ],
+      "two_sided_95pct_t_ci_optimizer_over_default": [
+        1.1598143040351436,
+        1.1748770977084795
+      ]
+    },
+    {
+      "default_median_us": 1985.4540000000002,
+      "geometric_mean_optimizer_over_default": 1.1822186027855468,
+      "optimizer_faster_rounds": 0,
+      "optimizer_median_us": 2345.8770000000004,
+      "rounds": [
+        {
+          "default_us": 1985.0880000000002,
+          "optimizer_over_default": 1.1868531772898732,
+          "optimizer_us": 2356.008,
+          "round": 0
+        },
+        {
+          "default_us": 1985.8200000000002,
+          "optimizer_over_default": 1.1771187720941474,
+          "optimizer_us": 2337.546,
+          "round": 1
+        },
+        {
+          "default_us": 1978.6799999999998,
+          "optimizer_over_default": 1.1859916712151537,
+          "optimizer_us": 2346.6980000000003,
+          "round": 2
+        },
+        {
+          "default_us": 1989.12,
+          "optimizer_over_default": 1.1789414414414414,
+          "optimizer_us": 2345.056,
+          "round": 3
+        }
+      ],
+      "shape": [
+        8192,
+        8192,
+        4096
+      ],
+      "two_sided_95pct_t_ci_optimizer_over_default": [
+        1.1744232855260226,
+        1.1900656620123204
+      ]
+    }
+  ]
+}

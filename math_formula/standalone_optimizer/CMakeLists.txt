@@ -49,6 +49,15 @@ if(MMOPT_HIGHS_INCLUDE_DIR AND MMOPT_HIGHS_LIBRARY)
   add_executable(mmopt_mip_core_domain_tests mip_core_domain_tests.cpp)
   target_link_libraries(mmopt_mip_core_domain_tests PRIVATE mmopt_mip)
   add_test(NAME mmopt_mip_core_domain_tests COMMAND mmopt_mip_core_domain_tests)
+
+  add_executable(mmopt_directional_read_check bench910/directional_read/model_check.cpp)
+  target_link_libraries(mmopt_directional_read_check PRIVATE mmopt_mip)
+
+  add_executable(mmopt_l1_step_read_check bench910/l1_step_read/model_check.cpp)
+  target_link_libraries(mmopt_l1_step_read_check PRIVATE mmopt_mip)
+
+  add_executable(mmopt_full_solver_audit bench910/full_solver_audit.cpp)
+  target_link_libraries(mmopt_full_solver_audit PRIVATE mmopt_mip)
 else()
   message(STATUS "HiGHS not found: reduced MILP target is disabled")
 endif()

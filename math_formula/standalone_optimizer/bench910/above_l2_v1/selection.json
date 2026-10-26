@@ -1,0 +1,368 @@
+{
+  "declared_shapes": [
+    [
+      8192,
+      384,
+      12288
+    ],
+    [
+      8192,
+      384,
+      24576
+    ],
+    [
+      8192,
+      640,
+      12288
+    ],
+    [
+      8192,
+      1024,
+      12288
+    ],
+    [
+      6144,
+      640,
+      16384
+    ],
+    [
+      6144,
+      1024,
+      16384
+    ],
+    [
+      4096,
+      1024,
+      24576
+    ],
+    [
+      4096,
+      2048,
+      24576
+    ],
+    [
+      12288,
+      384,
+      8192
+    ],
+    [
+      12288,
+      640,
+      8192
+    ],
+    [
+      12288,
+      1024,
+      8192
+    ],
+    [
+      16384,
+      384,
+      8192
+    ]
+  ],
+  "default_audit_sha256": "3ae07382727ebe6174e43d9097dd679365da281c0eefca537b62d30c344da59c",
+  "rows": [
+    {
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "optimizer_objective_us": 344.882,
+      "optimizer_tile": [
+        256,
+        128,
+        256,
+        128,
+        64,
+        20
+      ],
+      "shape": [
+        8192,
+        384,
+        12288
+      ],
+      "status": "selected"
+    },
+    {
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "optimizer_objective_us": 685.067,
+      "optimizer_tile": [
+        256,
+        128,
+        256,
+        128,
+        64,
+        20
+      ],
+      "shape": [
+        8192,
+        384,
+        24576
+      ],
+      "status": "selected"
+    },
+    {
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "optimizer_objective_us": 536.07,
+      "optimizer_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "shape": [
+        8192,
+        640,
+        12288
+      ],
+      "status": "same_tile"
+    },
+    {
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "optimizer_objective_us": 732.839,
+      "optimizer_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "shape": [
+        8192,
+        1024,
+        12288
+      ],
+      "status": "same_tile"
+    },
+    {
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "optimizer_objective_us": 549.456,
+      "optimizer_tile": [
+        256,
+        128,
+        256,
+        128,
+        64,
+        20
+      ],
+      "shape": [
+        6144,
+        640,
+        16384
+      ],
+      "status": "selected"
+    },
+    {
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "optimizer_objective_us": 750.135,
+      "optimizer_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "shape": [
+        6144,
+        1024,
+        16384
+      ],
+      "status": "same_tile"
+    },
+    {
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "optimizer_objective_us": 786.016,
+      "optimizer_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "shape": [
+        4096,
+        1024,
+        24576
+      ],
+      "status": "same_tile"
+    },
+    {
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "optimizer_objective_us": 1457.68,
+      "optimizer_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "shape": [
+        4096,
+        2048,
+        24576
+      ],
+      "status": "same_tile"
+    },
+    {
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "optimizer_objective_us": 346.924,
+      "optimizer_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "shape": [
+        12288,
+        384,
+        8192
+      ],
+      "status": "same_tile"
+    },
+    {
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "optimizer_objective_us": 534.796,
+      "optimizer_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "shape": [
+        12288,
+        640,
+        8192
+      ],
+      "status": "same_tile"
+    },
+    {
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "optimizer_objective_us": 754.167,
+      "optimizer_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "shape": [
+        12288,
+        1024,
+        8192
+      ],
+      "status": "same_tile"
+    },
+    {
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "optimizer_objective_us": 453.348,
+      "optimizer_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "shape": [
+        16384,
+        384,
+        8192
+      ],
+      "status": "same_tile"
+    }
+  ],
+  "solver_audit_sha256": "2b1e3c2a15829c19739c85ddd846d6a917afc319563f1366d072a1898b6195e5"
+}

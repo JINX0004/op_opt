@@ -1,0 +1,180 @@
+{
+  "across_timed_shapes_95pct_t_ci": null,
+  "across_timed_shapes_geometric_mean_optimizer_over_default": 1.066888001952688,
+  "raw_runs": 24,
+  "results": [
+    {
+      "default_median_us": 412.419,
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "geometric_mean_optimizer_over_default": 1.0384695689752619,
+      "optimizer_faster_pairs": 0,
+      "optimizer_median_us": 422.154,
+      "optimizer_tile": [
+        256,
+        128,
+        256,
+        128,
+        64,
+        20
+      ],
+      "pairs": [
+        {
+          "default": 414.828,
+          "optimizer": 427.73,
+          "optimizer_over_default": 1.0311020471135026,
+          "round": 0
+        },
+        {
+          "default": 411.278,
+          "optimizer": 448.398,
+          "optimizer_over_default": 1.0902552531377803,
+          "round": 1
+        },
+        {
+          "default": 392.89599999999996,
+          "optimizer": 403.52,
+          "optimizer_over_default": 1.0270402345658902,
+          "round": 2
+        },
+        {
+          "default": 413.56,
+          "optimizer": 416.578,
+          "optimizer_over_default": 1.007297610987523,
+          "round": 3
+        }
+      ],
+      "shape": [
+        8192,
+        384,
+        12288
+      ],
+      "two_sided_95pct_paired_t_ci": [
+        0.9837627521235512,
+        1.0962186191333123
+      ]
+    },
+    {
+      "default_median_us": 1021.551,
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "geometric_mean_optimizer_over_default": 1.041012089873773,
+      "optimizer_faster_pairs": 0,
+      "optimizer_median_us": 1069.685,
+      "optimizer_tile": [
+        256,
+        128,
+        256,
+        128,
+        64,
+        20
+      ],
+      "pairs": [
+        {
+          "default": 1027.88,
+          "optimizer": 1064.94,
+          "optimizer_over_default": 1.0360547923882164,
+          "round": 0
+        },
+        {
+          "default": 1007.928,
+          "optimizer": 1077.18,
+          "optimizer_over_default": 1.0687072886158535,
+          "round": 1
+        },
+        {
+          "default": 1033.6019999999999,
+          "optimizer": 1074.4299999999998,
+          "optimizer_over_default": 1.0395006975605696,
+          "round": 2
+        },
+        {
+          "default": 1015.222,
+          "optimizer": 1035.9,
+          "optimizer_over_default": 1.02036795892918,
+          "round": 3
+        }
+      ],
+      "shape": [
+        8192,
+        384,
+        24576
+      ],
+      "two_sided_95pct_paired_t_ci": [
+        1.0095552695887267,
+        1.073449075952861
+      ]
+    },
+    {
+      "default_median_us": 686.0440000000001,
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "geometric_mean_optimizer_over_default": 1.1233289347221023,
+      "optimizer_faster_pairs": 0,
+      "optimizer_median_us": 773.231,
+      "optimizer_tile": [
+        256,
+        128,
+        256,
+        128,
+        64,
+        20
+      ],
+      "pairs": [
+        {
+          "default": 722.892,
+          "optimizer": 797.5740000000001,
+          "optimizer_over_default": 1.1033100380139773,
+          "round": 0
+        },
+        {
+          "default": 661.182,
+          "optimizer": 750.644,
+          "optimizer_over_default": 1.135306163809662,
+          "round": 1
+        },
+        {
+          "default": 667.3620000000001,
+          "optimizer": 768.046,
+          "optimizer_over_default": 1.1508686440043034,
+          "round": 2
+        },
+        {
+          "default": 704.726,
+          "optimizer": 778.4159999999999,
+          "optimizer_over_default": 1.1045654623215262,
+          "round": 3
+        }
+      ],
+      "shape": [
+        6144,
+        640,
+        16384
+      ],
+      "two_sided_95pct_paired_t_ci": [
+        1.0866436752526492,
+        1.1612526942564718
+      ]
+    }
+  ],
+  "rounds_per_shape": 4,
+  "timed_shapes": 3
+}

@@ -1,0 +1,92 @@
+#include "kernel_operator.h"
+#include "@MATMUL_KERNEL_DIR@/mat_mul_nd2nz.h"
+
+using namespace AscendC;
+
+// An AIV-only launch uses 40 workers, matching the source's AIV count. Mode 1
+// calls the source deterministic Split-K MatrixtoNZ helper for aligned
+// FP16 NN A. Mode 2 measures AIV FP32 partial-read/add/cast/write work.
+// Mode 3 repeats Add on resident UB vectors to isolate vector throughput.
+// Mode 0 measures the launch/token floor.
+extern "C" __global__ __aicore__ void splitk_probe_kernel(
+    GM_ADDR input, GM_ADDR output, GM_ADDR tokens, uint32_t mode,
+    uint32_t m, uint32_t k, uint32_t elements_per_aiv,
+    uint32_t partials, uint32_t base_n, uint32_t base_d) {
+    if ASCEND_IS_AIC { return; }
+    const uint32_t core = GetBlockIdx();
+    if (core >= 40) return;
+    if (mode == 1) {
+        TPipe pipe;
+        TBuf<TPosition::VECCALC> ub;
+        pipe.InitBuffer(ub, TOTAL_UB_SIZE);
+        GlobalTensor<half> src, dst;
+        src.SetGlobalBuffer(reinterpret_cast<__gm__ half*>(input));
+        dst.SetGlobalBuffer(reinterpret_cast<__gm__ half*>(output));
+        MatrixtoNZ<half>(m, k, m, k, base_n, base_d, 40, src, dst, ub);
+        PipeBarrier<PIPE_ALL>();
+    } else if (mode == 2 || mode == 3) {
+        TPipe pipe;
+        TBuf<TPosition::VECCALC> ub;
+        pipe.InitBuffer(ub, 98304);
+        auto raw = ub.Get<half>();
+        auto sum = raw.ReinterpretCast<float>();
+        auto next = sum[8192];
+        auto casted = raw[32768];
+        GlobalTensor<float> src;
+        GlobalTensor<half> dst;
+        GlobalTensor<float> dst_float;
+        src.SetGlobalBuffer(reinterpret_cast<__gm__ float*>(input));
+        if (mode == 2)
+            dst.SetGlobalBuffer(reinterpret_cast<__gm__ half*>(output));
+        else
+            dst_float.SetGlobalBuffer(reinterpret_cast<__gm__ float*>(output));
+        const uint32_t stride = 40 * elements_per_aiv;
+        const uint32_t offset = core * elements_per_aiv;
+        DataCopy(sum, src[offset], elements_per_aiv);
+        SetFlag<HardEvent::MTE2_V>(EVENT_ID0);
+        WaitFlag<HardEvent::MTE2_V>(EVENT_ID0);
+        if (mode == 3) {
+            DataCopy(next, src[stride + offset], elements_per_aiv);
+            SetFlag<HardEvent::MTE2_V>(EVENT_ID0);
+            WaitFlag<HardEvent::MTE2_V>(EVENT_ID0);
+        }
+        for (uint32_t p = mode == 2 ? 1 : 0; p < partials; ++p) {
+            if (mode == 3) {
+                Add(sum, sum, next, elements_per_aiv);
+                PipeBarrier<PIPE_V>();
+                continue;
+            }
+            DataCopy(next, src[p * stride + offset], elements_per_aiv);
+            SetFlag<HardEvent::MTE2_V>(EVENT_ID0);
+            WaitFlag<HardEvent::MTE2_V>(EVENT_ID0);
+            Add(sum, sum, next, elements_per_aiv);
+            SetFlag<HardEvent::V_MTE2>(EVENT_ID0);
+            WaitFlag<HardEvent::V_MTE2>(EVENT_ID0);
+        }
+        if (mode == 2) {
+            Cast(casted, sum, RoundMode::CAST_RINT, elements_per_aiv);
+            SetFlag<HardEvent::V_MTE3>(EVENT_ID0);
+            WaitFlag<HardEvent::V_MTE3>(EVENT_ID0);
+            DataCopy(dst[offset], casted, elements_per_aiv);
+        } else {
+            SetFlag<HardEvent::V_MTE3>(EVENT_ID0);
+            WaitFlag<HardEvent::V_MTE3>(EVENT_ID0);
+            DataCopy(dst_float[offset], sum, elements_per_aiv);
+        }
+        SetFlag<HardEvent::MTE3_S>(EVENT_ID0);
+        WaitFlag<HardEvent::MTE3_S>(EVENT_ID0);
+    }
+    GlobalTensor<uint32_t> result;
+    result.SetGlobalBuffer(reinterpret_cast<__gm__ uint32_t*>(tokens));
+    result.SetValue(core * 8, mode + core + 1);
+    PipeBarrier<PIPE_ALL>();
+}
+
+extern "C" void splitk_probe_do(void* stream, uint8_t* input,
+    uint8_t* output, uint8_t* tokens, uint32_t mode, uint32_t m,
+    uint32_t k, uint32_t elements_per_aiv, uint32_t partials,
+    uint32_t base_n, uint32_t base_d) {
+    splitk_probe_kernel<<<40, nullptr, stream>>>(
+        input, output, tokens, mode, m, k, elements_per_aiv,
+        partials, base_n, base_d);
+}

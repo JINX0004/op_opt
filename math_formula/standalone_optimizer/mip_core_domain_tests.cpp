@@ -13,14 +13,15 @@ int main() {
          {"vector_add", {"ops", 0.0, 1000000.0}},
          {"nd2nz", {"elements", 0.0, 1000000.0}},
          {"sync", {"count", 0.1, 1.0}}}};
-    const mmopt::Workload workload{2048, 16, 128, "fp16"};
+    const mmopt::Workload workload{64000, 16, 128, "fp16"};
 
-    // The full M axis is in the default single-core domain even though
-    // baseM remains a small L0 tile. The high fixed output-write cost makes
-    // this larger single-core tile preferable in the reduced model.
+    // The default single-core grid includes AIC-partition extents beyond
+    // 256 even though baseM remains a small L0 tile. For this tall shape,
+    // twenty large output tiles save per-core output-write startup.
     const auto expanded = mmopt::SolveReducedMip(workload, hardware);
     assert(expanded.base);
-    assert(expanded.base->decision.single_core_m == workload.m);
+    assert(expanded.base->decision.single_core_m == 3200);
+    assert(expanded.base->decision.used_cores == 20);
     assert(expanded.base->decision.base_m < expanded.base->decision.single_core_m);
 
     mmopt::MipTileDomain old_core_grid;
@@ -32,10 +33,11 @@ int main() {
     assert(expanded.base->surrogate_us < restricted.base->surrogate_us);
 
     // The same freedom applies to N; its L0 base tile remains independent.
-    const mmopt::Workload wide{16, 2048, 128, "fp16"};
+    const mmopt::Workload wide{16, 64000, 128, "fp16"};
     const auto expanded_n = mmopt::SolveReducedMip(wide, hardware);
     assert(expanded_n.base);
-    assert(expanded_n.base->decision.single_core_n == wide.n);
+    assert(expanded_n.base->decision.single_core_n == 3200);
+    assert(expanded_n.base->decision.used_cores == 20);
     assert(expanded_n.base->decision.base_n < expanded_n.base->decision.single_core_n);
 
     mmopt::MipTileDomain old_n_grid;

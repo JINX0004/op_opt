@@ -1,0 +1,97 @@
+{
+  "2048_square_read_component": {
+    "default_128x256_us": 200.88550901960838,
+    "read_only_preference": "128x256",
+    "swapped_256x128_us": 280.6077239215691,
+    "swapped_minus_default_us": 79.72221490196074
+  },
+  "fits": {
+    "A": {
+      "by_round": [
+        {
+          "aggregate_rate_bytes_per_us": 1090118.4919912717,
+          "intercept_us": 2.6085217391304347,
+          "max_abs_residual_us": 0.8309728900255777,
+          "median_abs_residual_us": 0.29632787723784615,
+          "nonphysical_slope": true,
+          "packet_us_per_aic": -0.009029156010230188,
+          "us_per_core_mib": 19.23783529411765
+        },
+        {
+          "aggregate_rate_bytes_per_us": 1086450.9585941914,
+          "intercept_us": 2.2575217391304427,
+          "max_abs_residual_us": 0.6044409207161063,
+          "median_abs_residual_us": 0.3869033248081801,
+          "nonphysical_slope": true,
+          "packet_us_per_aic": -0.0031012148337599688,
+          "us_per_core_mib": 19.302776470588245
+        },
+        {
+          "aggregate_rate_bytes_per_us": 1180766.2551004211,
+          "intercept_us": 2.5899999999999963,
+          "max_abs_residual_us": 0.4641176470588171,
+          "median_abs_residual_us": 0.06582352941177527,
+          "nonphysical_slope": false,
+          "packet_us_per_aic": 0.014602941176471651,
+          "us_per_core_mib": 17.76094117647055
+        }
+      ],
+      "pooled": {
+        "aggregate_rate_bytes_per_us": 1117456.9210503427,
+        "intercept_us": 2.48534782608694,
+        "max_abs_residual_us": 0.9975353793691184,
+        "median_abs_residual_us": 0.2995334185848324,
+        "nonphysical_slope": false,
+        "packet_us_per_aic": 0.0008241901108267946,
+        "us_per_core_mib": 18.76718431372551
+      }
+    },
+    "B": {
+      "by_round": [
+        {
+          "aggregate_rate_bytes_per_us": 3070955.6492736945,
+          "intercept_us": 3.4560434782608667,
+          "max_abs_residual_us": 1.324622506393867,
+          "median_abs_residual_us": 0.3514790281329887,
+          "nonphysical_slope": false,
+          "packet_us_per_aic": 0.06376080562659911,
+          "us_per_core_mib": 6.828988235294095
+        },
+        {
+          "aggregate_rate_bytes_per_us": 3479534.0266716755,
+          "intercept_us": 2.8332608695652155,
+          "max_abs_residual_us": 0.11269002557545171,
+          "median_abs_residual_us": 0.019124040920718066,
+          "nonphysical_slope": false,
+          "packet_us_per_aic": 0.08703101023017956,
+          "us_per_core_mib": 6.027105882352921
+        },
+        {
+          "aggregate_rate_bytes_per_us": 3451721.0397496377,
+          "intercept_us": 2.7301304347826143,
+          "max_abs_residual_us": 0.1272803069053614,
+          "median_abs_residual_us": 0.06998056265984864,
+          "nonphysical_slope": false,
+          "packet_us_per_aic": 0.08904712276214696,
+          "us_per_core_mib": 6.0756705882353454
+        }
+      ],
+      "pooled": {
+        "aggregate_rate_bytes_per_us": 3323227.4422072917,
+        "intercept_us": 3.006478260869562,
+        "max_abs_residual_us": 1.7746514919011016,
+        "median_abs_residual_us": 0.16166035805625745,
+        "nonphysical_slope": false,
+        "packet_us_per_aic": 0.0799463128729746,
+        "us_per_core_mib": 6.310588235294149
+      }
+    }
+  },
+  "points": 48,
+  "rounds": [
+    0,
+    1,
+    2
+  ],
+  "scope": "20-AIC, 2048x2048x4096 FP16 ND operand-shaped MTE2; L2-hot input allocation; no whole-MatMul fit"
+}

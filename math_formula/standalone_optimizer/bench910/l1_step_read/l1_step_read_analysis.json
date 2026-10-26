@@ -1,0 +1,196 @@
+{
+  "cases": {
+    "default_A": {
+      "axis": 128,
+      "by_round": [
+        {
+          "effective_rate_bytes_per_us": 159041.24052651922,
+          "intercept_us": 2.5090833333333347,
+          "max_abs_residual_us": 0.2721908602150549,
+          "median_abs_residual_us": 0.10263978494623505,
+          "us_per_128kib_packet": 0.824138440860215
+        },
+        {
+          "effective_rate_bytes_per_us": 174323.73325229486,
+          "intercept_us": 3.484583333333333,
+          "max_abs_residual_us": 1.587862903225807,
+          "median_abs_residual_us": 0.5696908602150534,
+          "us_per_128kib_packet": 0.751888440860215
+        },
+        {
+          "effective_rate_bytes_per_us": 155335.6844529824,
+          "intercept_us": 2.7025000000000006,
+          "max_abs_residual_us": 0.7139032258064513,
+          "median_abs_residual_us": 0.4428870967741938,
+          "us_per_128kib_packet": 0.8437983870967741
+        }
+      ],
+      "k_span": 512,
+      "operand": "A",
+      "pooled": {
+        "effective_rate_bytes_per_us": 162497.68322826122,
+        "intercept_us": 2.898722222222224,
+        "max_abs_residual_us": 1.9548440860215046,
+        "median_abs_residual_us": 0.5051559139784954,
+        "us_per_128kib_packet": 0.8066084229390679
+      },
+      "round_medians": {
+        "effective_rate_bytes_per_us": 159184.02765875135,
+        "intercept_us": 2.5382499999999997,
+        "max_abs_residual_us": 0.19544354838709666,
+        "median_abs_residual_us": 0.09263709677419207,
+        "us_per_128kib_packet": 0.8233991935483871
+      }
+    },
+    "default_B": {
+      "axis": 256,
+      "by_round": [
+        {
+          "effective_rate_bytes_per_us": 172116.75709258037,
+          "intercept_us": 2.821833333333334,
+          "max_abs_residual_us": 0.104048387096773,
+          "median_abs_residual_us": 0.03922043010752674,
+          "us_per_128kib_packet": 0.7615295698924731
+        },
+        {
+          "effective_rate_bytes_per_us": 167812.29059508425,
+          "intercept_us": 2.758416666666667,
+          "max_abs_residual_us": 0.2989220430107524,
+          "median_abs_residual_us": 0.10745698924731228,
+          "us_per_128kib_packet": 0.7810631720430107
+        },
+        {
+          "effective_rate_bytes_per_us": 154098.5484161523,
+          "intercept_us": 3.1084999999999994,
+          "max_abs_residual_us": 1.8412096774193558,
+          "median_abs_residual_us": 0.7271774193548382,
+          "us_per_128kib_packet": 0.8505725806451613
+        }
+      ],
+      "k_span": 256,
+      "operand": "B",
+      "pooled": {
+        "effective_rate_bytes_per_us": 164307.91315995654,
+        "intercept_us": 2.896250000000002,
+        "max_abs_residual_us": 2.6306532258064514,
+        "median_abs_residual_us": 0.3980241935483875,
+        "us_per_128kib_packet": 0.7977217741935483
+      },
+      "round_medians": {
+        "effective_rate_bytes_per_us": 168193.76570603647,
+        "intercept_us": 2.7355833333333326,
+        "max_abs_residual_us": 0.12224999999999753,
+        "median_abs_residual_us": 0.08991666666666465,
+        "us_per_128kib_packet": 0.7792916666666666
+      }
+    },
+    "swapped_A": {
+      "axis": 256,
+      "by_round": [
+        {
+          "effective_rate_bytes_per_us": 191457.18414274047,
+          "intercept_us": 5.861333333333334,
+          "max_abs_residual_us": 3.1118494623655897,
+          "median_abs_residual_us": 1.4769677419354839,
+          "us_per_128kib_packet": 0.6846021505376344
+        },
+        {
+          "effective_rate_bytes_per_us": 163322.48285841572,
+          "intercept_us": 2.612166666666667,
+          "max_abs_residual_us": 0.28272580645161227,
+          "median_abs_residual_us": 0.25244623655913845,
+          "us_per_128kib_packet": 0.8025349462365591
+        },
+        {
+          "effective_rate_bytes_per_us": 169195.8796513978,
+          "intercept_us": 3.0644166666666663,
+          "max_abs_residual_us": 1.3527661290322577,
+          "median_abs_residual_us": 0.43182526881720484,
+          "us_per_128kib_packet": 0.7746760752688173
+        }
+      ],
+      "k_span": 256,
+      "operand": "A",
+      "pooled": {
+        "effective_rate_bytes_per_us": 173849.9027507311,
+        "intercept_us": 3.8459722222222226,
+        "max_abs_residual_us": 4.5725259856630815,
+        "median_abs_residual_us": 0.8917231182795704,
+        "us_per_128kib_packet": 0.7539377240143369
+      },
+      "round_medians": {
+        "effective_rate_bytes_per_us": 168201.5985759772,
+        "intercept_us": 2.8168333333333333,
+        "max_abs_residual_us": 0.22087634408602153,
+        "median_abs_residual_us": 0.05308064516129107,
+        "us_per_128kib_packet": 0.779255376344086
+      }
+    },
+    "swapped_B": {
+      "axis": 128,
+      "by_round": [
+        {
+          "effective_rate_bytes_per_us": 122531.0582263212,
+          "intercept_us": 2.6116666666666664,
+          "max_abs_residual_us": 0.10048387096774203,
+          "median_abs_residual_us": 0.023064516129032597,
+          "us_per_128kib_packet": 1.069704301075269
+        },
+        {
+          "effective_rate_bytes_per_us": 118002.29427737523,
+          "intercept_us": 2.263,
+          "max_abs_residual_us": 0.6951290322580661,
+          "median_abs_residual_us": 0.35074193548387456,
+          "us_per_128kib_packet": 1.110758064516129
+        },
+        {
+          "effective_rate_bytes_per_us": 113803.40415103364,
+          "intercept_us": 2.126416666666664,
+          "max_abs_residual_us": 0.4742661290322623,
+          "median_abs_residual_us": 0.34234139784946116,
+          "us_per_128kib_packet": 1.1517405913978498
+        }
+      ],
+      "k_span": 512,
+      "operand": "B",
+      "pooled": {
+        "effective_rate_bytes_per_us": 118004.8169560726,
+        "intercept_us": 2.3336944444444434,
+        "max_abs_residual_us": 1.3828073476702514,
+        "median_abs_residual_us": 0.2475689964157688,
+        "us_per_128kib_packet": 1.1107343189964158
+      },
+      "round_medians": {
+        "effective_rate_bytes_per_us": 117704.33170467932,
+        "intercept_us": 2.3093333333333312,
+        "max_abs_residual_us": 0.3764516129032245,
+        "median_abs_residual_us": 0.21989247311827675,
+        "us_per_128kib_packet": 1.1135698924731183
+      }
+    }
+  },
+  "orientation_service": {
+    "default": {
+      "a_requested_steps_per_aic": 51.2,
+      "a_service_us": 42.15803870967742,
+      "b_requested_steps_per_aic": 102.4,
+      "b_service_us": 79.79946666666666,
+      "serial_read_service_us": 121.95750537634407
+    },
+    "swapped": {
+      "a_requested_steps_per_aic": 102.4,
+      "a_service_us": 79.79575053763442,
+      "b_requested_steps_per_aic": 51.2,
+      "b_service_us": 57.01477849462366,
+      "serial_read_service_us": 136.81052903225807
+    }
+  },
+  "points": 60,
+  "rounds": [
+    0,
+    1,
+    2
+  ],
+  "scope": "20-AIC, L2-hot, 2048x2048x4096 source-emitted 128KiB A/B L1-step ND->NZ transfers",
+  "swapped_minus_default_serial_service_us": 14.853023655914
+}

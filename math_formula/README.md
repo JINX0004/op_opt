@@ -156,10 +156,16 @@ Here KiB means 1,024 bytes; TB/s and TFLOP/s use decimal powers of ten.
 | $C_{0C}$ | 128 KiB = 131,072 bytes | L0C, per AIC |
 | $C_{\mathrm{UB}}$ | 192 KiB = 196,608 bytes | UB, per AIV |
 
-The local capacities are the Atlas A2/A3 entries in Huawei's
+The local capacities above are nominal Atlas A2/A3 entries in Huawei's
 [PTO memory-capacity table](https://www.hiascend.com/document/detail/en/CANNCommunityEdition/910/compiler/ptoisa/docs/isa/TASSIGN.md).
 Use the A2/A3 column, not the different Ascend 950 column. Validate available
 capacities against the installed CANN platform information.
+On the measured Ascend910B3 with CANN 9.0.0, `GetCoreMemSize` returned
+524,032 bytes for L1 and 196,352 bytes for UB, 256 bytes below the nominal
+values; L0A/L0B/L0C returned 65,536/65,536/131,072 bytes. The queried
+[record](standalone_optimizer/bench910/hardware_910b3.json) also reports
+20 AICs, 40 AIVs, and 201,326,592 bytes of L2. Use the queried capacities
+for feasibility on that installation.
 
 **Cube and Vector topology.** The 20/40 profile combines the B3 core count
 above with Huawei's documented separated execution model: a mixed group has
@@ -193,7 +199,7 @@ For FP16/BF16 operands and FP32 accumulation, a fixed-slot layout must satisfy
 $$
 2q_{1A}\bar M_1\bar K_{1A}
 +2q_{1B}\bar K_{1B}\bar N_1
-+W_{1,\mathrm{extra}}\le 524288,
++W_{1,\mathrm{extra}}\le C_1^{\mathrm{usable}},
 $$
 
 $$
@@ -205,11 +211,14 @@ $$
 $$
 4q_C\bar M_0\bar N_0+W_{0C,\mathrm{extra}}\le 131072,
 \qquad
-W_{\mathrm{UB},v}^{\mathrm{live}}(t)\le196608
+W_{\mathrm{UB},v}^{\mathrm{live}}(t)\le C_{\mathrm{UB}}^{\mathrm{usable}}
 \quad\text{for each AIV }v.
 $$
 
-All terms are bytes. Extra storage includes alignment gaps and any other
+For the measured CANN 9.0.0 installation,
+$C_1^{\mathrm{usable}}=524032$ and
+$C_{\mathrm{UB}}^{\mathrm{usable}}=196352$ bytes; use fresh platform-query
+results on another machine. All terms are bytes. Extra storage includes alignment gaps and any other
 simultaneously live allocations in that memory. Section 5 gives the more
 general lifetime formulation when fixed-size slots are insufficient.
 
@@ -1057,10 +1066,18 @@ V_{a,g}=\min_{(k,c)\in\mathcal D_{a,g}}
 T_{a}^{\mathrm{reduced}}(g,k,c).
 $$
 
-Monotonicity fixes BASE's K tile and core count at their feasible maxima.
-For Split-K, monotonicity fixes the best K step for each core count; at most
-19 feasible core counts remain to be checked per geometry on the modeled
-910B3. Its vector-reduction term divides each output tile among up to
+Monotonicity fixes BASE's K tile at its feasible maximum; the solver checks
+every legal occupied core count because output-tile assignment and tails can
+make the busiest AIC's cost nonmonotone. BASE now keeps its modeled A and B
+read volumes separate. Optional paired `gm_read_a`/`gm_read_b` primitives
+give them independently measured service costs; without that pair both
+inherit the generic read primitive, so the existing symmetric profile is
+unchanged. This is still a requested-byte approximation, not Section 10's
+full cache and pipeline model. For Split-K, the solver checks bounded
+K-step and occupied-core pairs for each geometry. Whole K slices are
+assigned to AICs, so a larger step can increase the busiest AIC's K work
+even as it reduces partial-result traffic. Its vector-reduction term
+divides each output tile among up to
 two AIVs per occupied AIC, so the preferred core count reflects both Cube
 parallelism and the per-AIV reduction critical path. The master then
 minimizes $\sum_g V_{a,g}y_g$ subject only to

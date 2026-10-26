@@ -1,0 +1,165 @@
+{
+  "coefficients": {
+    "A": {
+      "intercept_us": 0.19097384635481152,
+      "us_per_kib": 0.003532113558081016,
+      "us_per_row": 0.000854946401991721
+    },
+    "B": {
+      "intercept_us": 0.07348386212366087,
+      "us_per_kib": 0.003017312080586143,
+      "us_per_row": 0.001272028070525036
+    }
+  },
+  "heldout": [
+    {
+      "bytes": 65536,
+      "dataset": "held-out",
+      "error_us": 0.08160414541882882,
+      "k_span": 256,
+      "measured_us": 0.44485810810810805,
+      "operand": "A",
+      "predicted_us": 0.5264622535269369,
+      "relative_error": 0.18343859296141596,
+      "rows": 128,
+      "tile_axis": 128
+    },
+    {
+      "bytes": 65536,
+      "dataset": "held-out",
+      "error_us": 0.0407940416305258,
+      "k_span": 128,
+      "measured_us": 0.5951013513513513,
+      "operand": "A",
+      "predicted_us": 0.6358953929818771,
+      "relative_error": 0.06854973785203322,
+      "rows": 256,
+      "tile_axis": 256
+    },
+    {
+      "bytes": 65536,
+      "dataset": "held-out",
+      "error_us": 0.024318859173421026,
+      "k_span": 256,
+      "measured_us": 0.5679121621621622,
+      "operand": "B",
+      "predicted_us": 0.5922310213355833,
+      "relative_error": 0.0428215150047746,
+      "rows": 256,
+      "tile_axis": 128
+    },
+    {
+      "bytes": 65536,
+      "dataset": "held-out",
+      "error_us": -0.013331814934864572,
+      "k_span": 128,
+      "measured_us": 0.4427432432432432,
+      "operand": "B",
+      "predicted_us": 0.42941142830837864,
+      "relative_error": -0.03011184278545853,
+      "rows": 128,
+      "tile_axis": 256
+    }
+  ],
+  "heldout_max_abs_relative_error": 0.18343859296141596,
+  "model": "per-AIC packet_us = intercept_us + us_per_kib * packet_kib + us_per_row * ND_rows",
+  "scope": "20-AIC, L2-hot, 2048x2048x4096 FP16 ND->L1 NZ",
+  "training": [
+    {
+      "bytes": 16384,
+      "dataset": "baseK64",
+      "error_us": 0.07088167230426545,
+      "k_span": 64,
+      "measured_us": 0.28603913043478263,
+      "operand": "A",
+      "predicted_us": 0.3569208027390481,
+      "relative_error": 0.24780411056530816,
+      "rows": 128,
+      "tile_axis": 128
+    },
+    {
+      "bytes": 32768,
+      "dataset": "baseK64",
+      "error_us": -0.0826952843549763,
+      "k_span": 64,
+      "measured_us": 0.605563043478261,
+      "operand": "A",
+      "predicted_us": 0.5228677591232846,
+      "relative_error": -0.13655933142813226,
+      "rows": 256,
+      "tile_axis": 256
+    },
+    {
+      "bytes": 131072,
+      "dataset": "L1-step",
+      "error_us": -0.07088167230426523,
+      "k_span": 512,
+      "measured_us": 0.8233991935483871,
+      "operand": "A",
+      "predicted_us": 0.7525175212441219,
+      "relative_error": -0.0860842139021355,
+      "rows": 128,
+      "tile_axis": 128
+    },
+    {
+      "bytes": 131072,
+      "dataset": "L1-step",
+      "error_us": 0.08269528435497608,
+      "k_span": 256,
+      "measured_us": 0.779255376344086,
+      "operand": "A",
+      "predicted_us": 0.8619506606990621,
+      "relative_error": 0.10612090319215373,
+      "rows": 256,
+      "tile_axis": 256
+    },
+    {
+      "bytes": 16384,
+      "dataset": "baseK64",
+      "error_us": 0.020733695404902358,
+      "k_span": 64,
+      "measured_us": 0.1824369565217391,
+      "operand": "B",
+      "predicted_us": 0.20317065192664147,
+      "relative_error": 0.11364854906704025,
+      "rows": 64,
+      "tile_axis": 128
+    },
+    {
+      "bytes": 32768,
+      "dataset": "baseK64",
+      "error_us": -0.02418931130571944,
+      "k_span": 64,
+      "measured_us": 0.2756369565217392,
+      "operand": "B",
+      "predicted_us": 0.25144764521601976,
+      "relative_error": -0.08775786676418207,
+      "rows": 64,
+      "tile_axis": 256
+    },
+    {
+      "bytes": 131072,
+      "dataset": "L1-step",
+      "error_us": -0.002591711925612694,
+      "k_span": 512,
+      "measured_us": 1.1135698924731183,
+      "operand": "B",
+      "predicted_us": 1.1109781805475056,
+      "relative_error": -0.002327390443231936,
+      "rows": 512,
+      "tile_axis": 128
+    },
+    {
+      "bytes": 131072,
+      "dataset": "L1-step",
+      "error_us": 0.006047327826429805,
+      "k_span": 256,
+      "measured_us": 0.7792916666666666,
+      "operand": "B",
+      "predicted_us": 0.7853389944930964,
+      "relative_error": 0.007760031429947967,
+      "rows": 256,
+      "tile_axis": 256
+    }
+  ]
+}

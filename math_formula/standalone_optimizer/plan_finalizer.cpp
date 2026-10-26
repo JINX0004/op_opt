@@ -84,8 +84,14 @@ FinalizedPlan FinalizePlan(const Workload& workload, const Hardware& hardware,
         throw std::invalid_argument("usedCoreNum exceeds the 910B3 AIC allocation");
     if (!memory.l1_bytes || !memory.l0a_bytes || !memory.l0b_bytes || !memory.l0c_bytes)
         throw std::invalid_argument("local memory capacities must be positive");
-    if (d.single_core_m > workload.m || d.single_core_n > workload.n)
-        throw std::invalid_argument("single-core output tile exceeds the shape");
+    if (memory.base_l0c_buffers < 1 || memory.base_l0c_buffers > 2)
+        throw std::invalid_argument("BASE L0C buffer count must be 1 or 2");
+    // Source deterministic Split-K can use the 3x128 outer M/N tile even
+    // when the corresponding output axis is only 128 or 256. BASE still
+    // requires a tile within the shape for its spatial AIC assignment.
+    if (d.family == KernelFamily::Base &&
+        (d.single_core_m > workload.m || d.single_core_n > workload.n))
+        throw std::invalid_argument("BASE single-core output tile exceeds the shape");
     if (!d.step_k) throw std::invalid_argument("stepK must be positive");
 
     FinalizedPlan plan;
@@ -130,11 +136,15 @@ FinalizedPlan FinalizePlan(const Workload& workload, const Hardware& hardware,
     }
 
     // Modeled local-memory preflight. L0A/L0B reserve two base tiles,
-    // L0C reserves two FP32 accumulator tiles. L1 reserves two K-step windows
-    // for both operands. Exact TCubeTiling occupancy remains CANN's decision.
+    // BASE L0C uses the selected one/two-buffer policy; Split-K reserves
+    // two FP32 accumulator tiles. L1 reserves two K-step windows for both
+    // operands. Exact TCubeTiling occupancy remains CANN's decision.
     const auto a_l0 = Bytes(d.base_m, d.base_k, kInputBytes, 2, "L0A footprint");
     const auto b_l0 = Bytes(d.base_n, d.base_k, kInputBytes, 2, "L0B footprint");
-    const auto c_l0 = Bytes(d.base_m, d.base_n, kAccumulatorBytes, 2, "L0C footprint");
+    const auto c_l0 = Bytes(d.base_m, d.base_n, kAccumulatorBytes,
+                            d.family == KernelFamily::Base
+                                ? memory.base_l0c_buffers : 2,
+                            "L0C footprint");
     if (a_l0 > memory.l0a_bytes || b_l0 > memory.l0b_bytes || c_l0 > memory.l0c_bytes)
         throw std::invalid_argument("base tile exceeds L0 capacity");
     const auto a_l1 = Bytes(d.base_m, d.base_k, kInputBytes,

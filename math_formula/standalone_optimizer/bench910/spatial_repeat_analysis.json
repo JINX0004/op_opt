@@ -1,0 +1,205 @@
+{
+  "independent_kernel_runs": 40,
+  "per_case": {
+    "spatial_1024_auto": {
+      "max_us": 45.272000000000006,
+      "median_us": 45.16,
+      "min_us": 45.09,
+      "runs": 5
+    },
+    "spatial_1024_bm64": {
+      "max_us": 59.53,
+      "median_us": 59.202,
+      "min_us": 58.91,
+      "runs": 5
+    },
+    "spatial_256_auto": {
+      "max_us": 8.89,
+      "median_us": 8.79,
+      "min_us": 8.18,
+      "runs": 5
+    },
+    "spatial_256_bm16": {
+      "max_us": 11.09,
+      "median_us": 10.850000000000001,
+      "min_us": 10.219999999999999,
+      "runs": 5
+    },
+    "spatial_512_auto": {
+      "max_us": 10.73,
+      "median_us": 10.57,
+      "min_us": 9.71,
+      "runs": 5
+    },
+    "spatial_512_bm32": {
+      "max_us": 14.17,
+      "median_us": 14.04,
+      "min_us": 13.870000000000001,
+      "runs": 5
+    },
+    "spatial_512_bm64": {
+      "max_us": 11.992,
+      "median_us": 11.562000000000001,
+      "min_us": 11.52,
+      "runs": 5
+    },
+    "spatial_512_bm96b": {
+      "max_us": 11.212,
+      "median_us": 10.78,
+      "min_us": 10.692,
+      "runs": 5
+    }
+  },
+  "per_shape_round_winners": [
+    {
+      "observed_us": 8.89,
+      "round": 0,
+      "shape": [
+        256,
+        256,
+        1024
+      ],
+      "winner": "spatial_256_auto"
+    },
+    {
+      "observed_us": 8.68,
+      "round": 1,
+      "shape": [
+        256,
+        256,
+        1024
+      ],
+      "winner": "spatial_256_auto"
+    },
+    {
+      "observed_us": 8.89,
+      "round": 2,
+      "shape": [
+        256,
+        256,
+        1024
+      ],
+      "winner": "spatial_256_auto"
+    },
+    {
+      "observed_us": 8.79,
+      "round": 3,
+      "shape": [
+        256,
+        256,
+        1024
+      ],
+      "winner": "spatial_256_auto"
+    },
+    {
+      "observed_us": 8.18,
+      "round": 4,
+      "shape": [
+        256,
+        256,
+        1024
+      ],
+      "winner": "spatial_256_auto"
+    },
+    {
+      "observed_us": 9.71,
+      "round": 0,
+      "shape": [
+        512,
+        512,
+        1024
+      ],
+      "winner": "spatial_512_auto"
+    },
+    {
+      "observed_us": 10.65,
+      "round": 1,
+      "shape": [
+        512,
+        512,
+        1024
+      ],
+      "winner": "spatial_512_auto"
+    },
+    {
+      "observed_us": 10.692,
+      "round": 2,
+      "shape": [
+        512,
+        512,
+        1024
+      ],
+      "winner": "spatial_512_bm96b"
+    },
+    {
+      "observed_us": 10.2,
+      "round": 3,
+      "shape": [
+        512,
+        512,
+        1024
+      ],
+      "winner": "spatial_512_auto"
+    },
+    {
+      "observed_us": 10.57,
+      "round": 4,
+      "shape": [
+        512,
+        512,
+        1024
+      ],
+      "winner": "spatial_512_auto"
+    },
+    {
+      "observed_us": 45.09,
+      "round": 0,
+      "shape": [
+        1024,
+        1024,
+        4096
+      ],
+      "winner": "spatial_1024_auto"
+    },
+    {
+      "observed_us": 45.272000000000006,
+      "round": 1,
+      "shape": [
+        1024,
+        1024,
+        4096
+      ],
+      "winner": "spatial_1024_auto"
+    },
+    {
+      "observed_us": 45.132,
+      "round": 2,
+      "shape": [
+        1024,
+        1024,
+        4096
+      ],
+      "winner": "spatial_1024_auto"
+    },
+    {
+      "observed_us": 45.16,
+      "round": 3,
+      "shape": [
+        1024,
+        1024,
+        4096
+      ],
+      "winner": "spatial_1024_auto"
+    },
+    {
+      "observed_us": 45.18,
+      "round": 4,
+      "shape": [
+        1024,
+        1024,
+        4096
+      ],
+      "winner": "spatial_1024_auto"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "across_timed_shapes_95pct_t_ci": null,
+  "across_timed_shapes_geometric_mean_optimizer_over_default": 1.1594142466922555,
+  "raw_runs": 12,
+  "results": [
+    {
+      "default_median_us": 169.89499999999998,
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "geometric_mean_optimizer_over_default": 1.1594142466922555,
+      "optimizer_faster_pairs": 0,
+      "optimizer_median_us": 196.96999999999997,
+      "optimizer_tile": [
+        256,
+        128,
+        256,
+        128,
+        64,
+        20
+      ],
+      "pairs": [
+        {
+          "default": 169.24200000000002,
+          "optimizer": 197.524,
+          "optimizer_over_default": 1.167109819075643,
+          "round": 0
+        },
+        {
+          "default": 169.874,
+          "optimizer": 197.904,
+          "optimizer_over_default": 1.1650046505056688,
+          "round": 1
+        },
+        {
+          "default": 170.034,
+          "optimizer": 196.434,
+          "optimizer_over_default": 1.155263065034052,
+          "round": 2
+        },
+        {
+          "default": 169.916,
+          "optimizer": 196.706,
+          "optimizer_over_default": 1.1576661409166882,
+          "round": 3
+        },
+        {
+          "default": 170.68200000000002,
+          "optimizer": 196.144,
+          "optimizer_over_default": 1.1491780035387444,
+          "round": 4
+        },
+        {
+          "default": 169.68400000000003,
+          "optimizer": 197.23399999999998,
+          "optimizer_over_default": 1.1623606232762071,
+          "round": 5
+        }
+      ],
+      "shape": [
+        6144,
+        384,
+        8192
+      ],
+      "two_sided_95pct_paired_t_ci": [
+        1.1524010233202873,
+        1.166470150781326
+      ]
+    }
+  ],
+  "rounds_per_shape": 6,
+  "timed_shapes": 1
+}

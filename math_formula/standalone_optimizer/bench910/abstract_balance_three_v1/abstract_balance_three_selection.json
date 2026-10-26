@@ -1,0 +1,98 @@
+{
+  "declared_shapes": [
+    [
+      4096,
+      384,
+      4096
+    ],
+    [
+      6144,
+      640,
+      8192
+    ],
+    [
+      8192,
+      384,
+      16384
+    ]
+  ],
+  "default_audit_sha256": "c263cacd17a03ac515c928405374c906598f27757202d26ab3fcb64b528bac07",
+  "rows": [
+    {
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "optimizer_objective_us": 71.8064,
+      "optimizer_tile": [
+        256,
+        128,
+        256,
+        128,
+        64,
+        20
+      ],
+      "shape": [
+        4096,
+        384,
+        4096
+      ],
+      "status": "selected"
+    },
+    {
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "optimizer_objective_us": 277.308,
+      "optimizer_tile": [
+        256,
+        128,
+        256,
+        128,
+        64,
+        20
+      ],
+      "shape": [
+        6144,
+        640,
+        8192
+      ],
+      "status": "selected"
+    },
+    {
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "optimizer_objective_us": 458.277,
+      "optimizer_tile": [
+        256,
+        128,
+        256,
+        128,
+        64,
+        20
+      ],
+      "shape": [
+        8192,
+        384,
+        16384
+      ],
+      "status": "selected"
+    }
+  ],
+  "solver_audit_sha256": "16f13594d6063b3ffc7f48488829b453669e42cfa8ed42598c1c9bff56cc5d44"
+}

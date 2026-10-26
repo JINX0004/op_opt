@@ -1,0 +1,170 @@
+{
+  "raw_runs": 36,
+  "shapes": [
+    {
+      "base_m_64_median_us": 188.184,
+      "default_faster_rounds": 6,
+      "default_median_us": 139.98399999999998,
+      "geometric_mean_alternative_over_default": 1.3433462571718227,
+      "holm_adjusted_sign_p": 0.046875,
+      "one_sided_sign_p_default_faster": 0.015625,
+      "rounds": [
+        {
+          "alternative_over_default": 1.3440016016703134,
+          "base_m_64_us": 187.964,
+          "default_us": 139.85399999999998,
+          "round": 0
+        },
+        {
+          "alternative_over_default": 1.3416991448598798,
+          "base_m_64_us": 187.964,
+          "default_us": 140.094,
+          "round": 1
+        },
+        {
+          "alternative_over_default": 1.348176863547284,
+          "base_m_64_us": 188.494,
+          "default_us": 139.81400000000002,
+          "round": 2
+        },
+        {
+          "alternative_over_default": 1.3470981025780344,
+          "base_m_64_us": 188.42399999999998,
+          "default_us": 139.874,
+          "round": 3
+        },
+        {
+          "alternative_over_default": 1.3418706019771516,
+          "base_m_64_us": 188.404,
+          "default_us": 140.404,
+          "round": 4
+        },
+        {
+          "alternative_over_default": 1.337260928961749,
+          "base_m_64_us": 187.94400000000002,
+          "default_us": 140.54399999999998,
+          "round": 5
+        }
+      ],
+      "shape": [
+        2048,
+        2048,
+        4096
+      ],
+      "two_sided_95pct_t_ci_alternative_over_default": [
+        1.3391599482689014,
+        1.347545652773053
+      ]
+    },
+    {
+      "base_m_64_median_us": 1469.414,
+      "default_faster_rounds": 6,
+      "default_median_us": 998.863,
+      "geometric_mean_alternative_over_default": 1.4700101612377512,
+      "holm_adjusted_sign_p": 0.046875,
+      "one_sided_sign_p_default_faster": 0.015625,
+      "rounds": [
+        {
+          "alternative_over_default": 1.4728005305253005,
+          "base_m_64_us": 1465.79,
+          "default_us": 995.24,
+          "round": 0
+        },
+        {
+          "alternative_over_default": 1.467346532683315,
+          "base_m_64_us": 1474.83,
+          "default_us": 1005.0999999999999,
+          "round": 1
+        },
+        {
+          "alternative_over_default": 1.4704143677513792,
+          "base_m_64_us": 1462.58,
+          "default_us": 994.672,
+          "round": 2
+        },
+        {
+          "alternative_over_default": 1.4584688376621562,
+          "base_m_64_us": 1462.01,
+          "default_us": 1002.428,
+          "round": 3
+        },
+        {
+          "alternative_over_default": 1.4993378867434677,
+          "base_m_64_us": 1492.288,
+          "default_us": 995.298,
+          "round": 4
+        },
+        {
+          "alternative_over_default": 1.4521416812074253,
+          "base_m_64_us": 1473.038,
+          "default_us": 1014.39,
+          "round": 5
+        }
+      ],
+      "shape": [
+        4096,
+        4096,
+        8192
+      ],
+      "two_sided_95pct_t_ci_alternative_over_default": [
+        1.4530843949918222,
+        1.487133081595306
+      ]
+    },
+    {
+      "base_m_64_median_us": 3177.328,
+      "default_faster_rounds": 6,
+      "default_median_us": 1989.0100000000002,
+      "geometric_mean_alternative_over_default": 1.600133810280433,
+      "holm_adjusted_sign_p": 0.046875,
+      "one_sided_sign_p_default_faster": 0.015625,
+      "rounds": [
+        {
+          "alternative_over_default": 1.5987636125851963,
+          "base_m_64_us": 3178.4219999999996,
+          "default_us": 1988.0500000000002,
+          "round": 0
+        },
+        {
+          "alternative_over_default": 1.5911242247848436,
+          "base_m_64_us": 3176.2340000000004,
+          "default_us": 1996.22,
+          "round": 1
+        },
+        {
+          "alternative_over_default": 1.5992578570396185,
+          "base_m_64_us": 3186.694,
+          "default_us": 1992.608,
+          "round": 2
+        },
+        {
+          "alternative_over_default": 1.5999743515693,
+          "base_m_64_us": 3168.9539999999997,
+          "default_us": 1980.6280000000002,
+          "round": 3
+        },
+        {
+          "alternative_over_default": 1.5917687201314592,
+          "base_m_64_us": 3167.572,
+          "default_us": 1989.97,
+          "round": 4
+        },
+        {
+          "alternative_over_default": 1.620085696549427,
+          "base_m_64_us": 3210.054,
+          "default_us": 1981.4099999999999,
+          "round": 5
+        }
+      ],
+      "shape": [
+        8192,
+        8192,
+        4096
+      ],
+      "two_sided_95pct_t_ci_alternative_over_default": [
+        1.5891867211339812,
+        1.6111563082880256
+      ]
+    }
+  ]
+}

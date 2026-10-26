@@ -10,6 +10,7 @@
 #include <initializer_list>
 #include <limits>
 #include <memory>
+#include <numeric>
 #include <stdexcept>
 #include <string>
 #include <utility>
@@ -26,6 +27,13 @@ std::uint64_t CeilDiv(std::uint64_t x, std::uint64_t y) {
 
 struct Rates {
     PrimitiveTiming launch, read, write, cube, vector, sync, nd2nz;
+    // Optional operand-specific BASE GM->L1 services. Without both measured
+    // profiles the legacy generic read service applies to both operands.
+    PrimitiveTiming read_a, read_b;
+    struct BasePacketRead {
+        PrimitiveTiming a_bytes, b_bytes, a_rows, b_rows;
+    };
+    std::optional<BasePacketRead> base_packet_read;
 };
 
 PrimitiveTiming Get(const Hardware& hardware, const char* name, const char* unit) {
@@ -49,7 +57,30 @@ Rates ReadRates(const Hardware& hardware) {
             Get(hardware, "cube", "flop"),
             Get(hardware, "vector_add", "ops"),
             Get(hardware, "sync", "count"),
-            Get(hardware, "nd2nz", "elements")};
+            Get(hardware, "nd2nz", "elements"), {}, {}, {}};
+    const bool has_a = hardware.primitives.count("gm_read_a") != 0;
+    const bool has_b = hardware.primitives.count("gm_read_b") != 0;
+    if (has_a != has_b)
+        throw std::invalid_argument("gm_read_a and gm_read_b must be supplied together");
+    r.read_a = has_a ? Get(hardware, "gm_read_a", "bytes") : r.read;
+    r.read_b = has_b ? Get(hardware, "gm_read_b", "bytes") : r.read;
+    constexpr const char* packet_names[] = {"base_mte2_a", "base_mte2_b",
+                                            "base_mte2_a_rows", "base_mte2_b_rows"};
+    int packet_count = 0;
+    for (const auto* name : packet_names)
+        packet_count += hardware.primitives.count(name) != 0;
+    if (packet_count && packet_count != 4)
+        throw std::invalid_argument("all four BASE MTE2 packet primitives are required");
+    if (packet_count == 4) {
+        r.base_packet_read = Rates::BasePacketRead{
+            Get(hardware, packet_names[0], "bytes"),
+            Get(hardware, packet_names[1], "bytes"),
+            Get(hardware, packet_names[2], "rows"),
+            Get(hardware, packet_names[3], "rows")};
+        if (r.base_packet_read->a_rows.fixed_latency_us != 0 ||
+            r.base_packet_read->b_rows.fixed_latency_us != 0)
+            throw std::invalid_argument("BASE MTE2 row primitives must have zero fixed latency");
+    }
     if (r.cube.fixed_latency_us != 0.0)
         throw std::invalid_argument("reduced MILP currently requires zero fixed Cube latency");
     return r;
@@ -67,11 +98,6 @@ double ConversionUs(const Workload& w, const Rates& r) {
 
 double CommonUs(const Workload& w, const Rates& r) {
     return r.launch.fixed_latency_us + ConversionUs(w, r);
-}
-
-double Flops(const Workload& w) {
-    return 2.0 * static_cast<double>(w.m) * static_cast<double>(w.n) *
-           static_cast<double>(w.k);
 }
 
 double OutputElements(const Workload& w) {
@@ -177,12 +203,186 @@ struct Geometry {
     // introduced in the linear rows.
     std::uint64_t core_m, core_n, base_m, base_n;
     std::uint64_t output_tiles, spatial_packets;
-    double operand_bytes;
+    double operand_bytes, a_bytes, b_bytes;
 };
+
+struct BaseCoreLoad {
+    double elements = 0.0;
+    double spatial_packets = 0.0;
+    double output_tiles = 0.0;
+    // Sum of actual A-M and B-N extents across spatial base packets.
+    // These keep tail transfer volumes exact without expanding each tile.
+    double a_axis_sum = 0.0;
+    double b_axis_sum = 0.0;
+};
+
+std::vector<BaseCoreLoad> BaseCoreLoads(const Workload& w,
+                                        std::uint64_t core_m,
+                                        std::uint64_t core_n,
+                                        std::uint64_t base_m,
+                                        std::uint64_t base_n,
+                                        std::uint64_t cores) {
+    // Abstract the source's rotation of surplus tile work without replaying
+    // its L2 regions or per-tile block indices. Each of the at most four
+    // full/tail tile classes gives every core floor(count/cores) tiles and
+    // gives one extra tile to count%cores consecutive cores. The extra-tile
+    // window rotates between classes. This is a balanced-work assumption,
+    // NOT an exact MatMulV3 assignment or a fitted hardware correction.
+    // Work is O(cores), independent of the number of output tiles.
+    const auto full_m = w.m / core_m, tail_m = w.m % core_m;
+    const auto full_n = w.n / core_n, tail_n = w.n % core_n;
+    std::vector<BaseCoreLoad> loads(cores);
+    std::uint64_t phase = 0;
+    const auto add_class = [&](std::uint64_t count, std::uint64_t m_extent,
+                               std::uint64_t n_extent) {
+        if (!count) return;
+        const auto each = count / cores;
+        const auto extra = count % cores;
+        const auto m_packets = CeilDiv(m_extent, base_m);
+        const auto n_packets = CeilDiv(n_extent, base_n);
+        const double spatial = static_cast<double>(m_packets) * n_packets;
+        for (std::uint64_t core = 0; core < cores; ++core) {
+            const auto relative = (core + cores - phase) % cores;
+            const double assigned = static_cast<double>(each + (relative < extra));
+            auto& load = loads[core];
+            load.output_tiles += assigned;
+            load.spatial_packets += assigned * spatial;
+            load.a_axis_sum += assigned * spatial * m_extent;
+            load.b_axis_sum += assigned * spatial * n_extent;
+            load.elements += assigned * m_extent * n_extent;
+        }
+        phase = (phase + extra) % cores;
+    };
+    add_class(full_m * full_n, core_m, core_n);
+    if (tail_n) add_class(full_m, core_m, tail_n);
+    if (tail_m) add_class(full_n, tail_m, core_n);
+    if (tail_m && tail_n) add_class(1, tail_m, tail_n);
+    return loads;
+}
+
+struct BaseL1Steps { std::uint64_t a, b; };
+
+BaseL1Steps SourceBaseL1Steps(const Workload& w, const Geometry& g,
+                             std::uint64_t base_k, const CoreMemory& mem) {
+    // Plain BASE supportL0c2out branch of CalL1Tiling() in
+    // matmul_v3_base_tiling.cpp. The source adds back its 256-byte RPC
+    // reservation before splitting L1 between A and B double buffers.
+    const auto l1 = mem.l1_bytes + 256;
+    const auto packet_a = 2 * g.base_m * base_k;
+    const auto packet_b = 2 * g.base_n * base_k;
+    auto depth_a = l1 / 2 / packet_a;
+    auto depth_b = l1 / 2 / packet_b;
+    if (depth_a * packet_a + depth_b * packet_b > l1) {
+        if (g.base_m <= g.base_n) depth_a /= 2;
+        else depth_b /= 2;
+    }
+    auto step_a = depth_a / 2;
+    auto step_b = depth_b / 2;
+    if (!step_a || !step_b)
+        throw std::invalid_argument("no source BASE L1 step fits");
+    const auto align = [&](std::uint64_t& step) {
+        if (step * base_k >= w.k) return;
+        const auto span_bytes = step * base_k * 2;
+        const auto quantum = span_bytes > 512 ? 512ULL :
+                             span_bytes > 256 ? 256ULL : 0ULL;
+        if (quantum && quantum % (base_k * 2) == 0)
+            while (step > 1 && (step * base_k * 2) % quantum) --step;
+    };
+    align(step_a);
+    align(step_b);
+    if (step_a >= step_b) step_a = step_a / step_b * step_b;
+    else step_b = step_b / step_a * step_a;
+    return {step_a, step_b};
+}
+
+double BaseStageUs(const Workload& w, const Rates& r,
+                   const Geometry& g, std::uint64_t base_k,
+                   std::uint64_t cores, const CoreMemory& mem,
+                   const std::vector<BaseCoreLoad>* cached_loads = nullptr) {
+    const auto computed_loads = cached_loads ? std::vector<BaseCoreLoad>{} :
+        BaseCoreLoads(w, g.core_m, g.core_n, g.base_m, g.base_n, cores);
+    const auto& loads = cached_loads ? *cached_loads : computed_loads;
+    if (r.base_packet_read) {
+        // One packet is the source's entire L1 K step, not a baseK slice.
+        // Fit: fixed packet service + requested bytes + ND source rows.
+        // The probes saturate 20 AICs, so this is an exploratory per-core
+        // service objective; Cube/MTE2 overlap is approximated by max.
+        const auto steps = SourceBaseL1Steps(w, g, base_k, mem);
+        const auto& p = *r.base_packet_read;
+        const double count_a = static_cast<double>(CeilDiv(w.k, steps.a * base_k));
+        const double count_b = static_cast<double>(CeilDiv(w.k, steps.b * base_k));
+        const double shared_write = 2.0 * OutputElements(w) /
+                                    r.write.rate_per_us;
+        double critical = 0.0;
+        for (const auto& load : loads) {
+            const double cube = 2.0 * load.elements * w.k / r.cube.rate_per_us;
+            const double read =
+                load.spatial_packets * (count_a * p.a_bytes.fixed_latency_us +
+                                        count_b * p.b_bytes.fixed_latency_us) +
+                2.0 * w.k * load.a_axis_sum / p.a_bytes.rate_per_us +
+                2.0 * w.k * load.b_axis_sum / p.b_bytes.rate_per_us +
+                count_a * load.a_axis_sum / p.a_rows.rate_per_us +
+                w.k * load.spatial_packets / p.b_rows.rate_per_us;
+            critical = std::max(critical, std::max(
+                cube, read + shared_write +
+                      load.output_tiles * r.write.fixed_latency_us));
+        }
+        return critical;
+    }
+    const double k_packets = static_cast<double>(CeilDiv(w.k, base_k));
+    double cube_critical = 0.0, packet_critical = 0.0;
+    for (const auto& load : loads) {
+        cube_critical = std::max(cube_critical,
+            2.0 * load.elements * static_cast<double>(w.k) /
+                r.cube.rate_per_us);
+        packet_critical = std::max(packet_critical,
+            load.spatial_packets * k_packets *
+                (r.read_a.fixed_latency_us + r.read_b.fixed_latency_us) +
+                load.output_tiles * r.write.fixed_latency_us);
+    }
+    const double shared_bytes = g.a_bytes / r.read_a.rate_per_us +
+        g.b_bytes / r.read_b.rate_per_us +
+        2.0 * OutputElements(w) / r.write.rate_per_us;
+    return std::max(cube_critical, shared_bytes + packet_critical);
+}
+
+double SplitStageUs(const Workload& w, const Rates& r,
+                    const Geometry& g, std::uint64_t step,
+                    std::uint64_t cores) {
+    // mat_mul_deterministic_splitk_kernel.h assigns contiguous K slices to
+    // AICs: the first P % c cores get ceil(P/c) slices, and the rest get
+    // floor(P/c). Count fixed packet service and Cube work on the busiest
+    // core. Total operand/partial bytes still contend for shared GM service.
+    const auto q = CeilDiv(w.k, 128);
+    const auto p = CeilDiv(q, step);
+    const auto rounds = CeilDiv(p, cores);
+    const auto critical_packets = std::min(q, rounds * step);
+    const double outputs = static_cast<double>(g.output_tiles);
+    const double mn = OutputElements(w);
+    const double cube = 2.0 * mn * std::min(w.k, critical_packets * 128) /
+                        r.cube.rate_per_us;
+    const double shared_gm = g.operand_bytes / r.read.rate_per_us +
+        4.0 * p * mn / r.read.rate_per_us +
+        (4.0 * p * mn + 2.0 * mn) / r.write.rate_per_us;
+    // Each K base packet reads two operands. A core performs at most
+    // `rounds` partial updates per spatial output tile; the last read and
+    // write account for the vector reduction/final output stage.
+    const double core_calls =
+        (2.0 * g.spatial_packets * critical_packets +
+         outputs * rounds) * r.read.fixed_latency_us +
+        outputs * (rounds + 1.0) * r.write.fixed_latency_us;
+    const double vector = outputs *
+        (r.sync.fixed_latency_us + r.vector.fixed_latency_us) +
+        (static_cast<double>(cores) - 1.0) *
+        SplitVectorCriticalElements(w, g.core_m, g.core_n, cores) /
+        r.vector.rate_per_us;
+    return std::max(cube, shared_gm + core_calls) + vector;
+}
 
 std::vector<std::uint64_t> TileValues(const std::vector<std::uint64_t>& supplied,
                                       std::uint64_t shape, bool core_tile,
-                                      std::uint64_t aic_count) {
+                                      std::uint64_t aic_count,
+                                      bool include_split_384) {
     std::vector<std::uint64_t> values = supplied;
     if (values.empty()) {
         // L0 base tiles remain small. singleCoreM/N are outer work extents:
@@ -193,6 +393,11 @@ std::vector<std::uint64_t> TileValues(const std::vector<std::uint64_t>& supplied
         for (const std::uint64_t v : {16ULL, 32ULL, 64ULL, 128ULL, 256ULL})
             if (v <= shape) values.push_back(v);
         if (core_tile) {
+            // The source 3x3 deterministic Split-K pattern can emit a
+            // 384-row/column core tile even when that output axis is 128
+            // or 256. Only Split-K may use this oversized geometry.
+            if (include_split_384 && shape >= 128 && shape < 384)
+                values.push_back(384);
             for (const std::uint64_t v : {512ULL, 1024ULL, 2048ULL})
                 if (v <= shape) values.push_back(v);
             values.push_back(shape);
@@ -208,8 +413,9 @@ std::vector<std::uint64_t> TileValues(const std::vector<std::uint64_t>& supplied
         }
     }
     for (const auto v : values)
-        if (!v || v % 16 || v > shape)
-            throw std::invalid_argument("MILP tile domain requires aligned values within shape");
+        if (!v || v % 16 || (v > shape && (!core_tile || v != 384 ||
+                                         shape < 128)))
+            throw std::invalid_argument("MILP tile domain requires aligned values within shape, except source Split-K 384");
     std::sort(values.begin(), values.end());
     values.erase(std::unique(values.begin(), values.end()), values.end());
     return values;
@@ -225,6 +431,9 @@ std::uint64_t AxisPackets(std::uint64_t shape, std::uint64_t core,
 }
 
 bool CanExpandEvents(const Workload& w, const PlanDecision& d) {
+    // The event builder has not been validated for source Split-K core
+    // extents larger than an output axis. Preserve the reduced plan only.
+    if (d.single_core_m > w.m || d.single_core_n > w.n) return false;
     const long double pm = AxisPackets(w.m, d.single_core_m, d.base_m);
     const long double pn = AxisPackets(w.n, d.single_core_n, d.base_n);
     const long double outputs = static_cast<long double>(CeilDiv(w.m, d.single_core_m)) *
@@ -238,14 +447,16 @@ bool CanExpandEvents(const Workload& w, const PlanDecision& d) {
 
 std::vector<Geometry> Geometries(const Workload& w, const Hardware& h,
                                  const MipTileDomain& domain) {
-    const auto cm = TileValues(domain.single_core_m, w.m, true, h.aic_count);
-    const auto cn = TileValues(domain.single_core_n, w.n, true, h.aic_count);
-    const auto bm = TileValues(domain.base_m, w.m, false, h.aic_count);
-    const auto bn = TileValues(domain.base_n, w.n, false, h.aic_count);
+    const auto cm = TileValues(domain.single_core_m, w.m, true, h.aic_count,
+                               w.k > 65535);
+    const auto cn = TileValues(domain.single_core_n, w.n, true, h.aic_count,
+                               w.k > 65535);
+    const auto bm = TileValues(domain.base_m, w.m, false, h.aic_count, false);
+    const auto bn = TileValues(domain.base_n, w.n, false, h.aic_count, false);
     std::vector<Geometry> result;
-    // Spatial feasibility: positive 16-aligned extents within the shape,
-    // baseM <= singleCoreM and baseN <= singleCoreN. Other capacity tests
-    // below discard infeasible geometries before creating MILP variables.
+    // Source deterministic Split-K may use an outer 384 tile above a small
+    // output axis; BASE filters that geometry before its master. Other
+    // capacity tests discard infeasible geometries in each family.
     for (const auto m : cm) for (const auto n : cn)
         for (const auto a : bm) for (const auto b : bn) {
             if (a > m || b > n) continue;
@@ -253,9 +464,10 @@ std::vector<Geometry> Geometries(const Workload& w, const Hardware& h,
             const auto pn = AxisPackets(w.n, n, b);
             const auto outputs = CeilDiv(w.m, m) * CeilDiv(w.n, n);
             const auto packets = pm * pn;
-            const double bytes = 2.0 * static_cast<double>(w.k) *
-                (static_cast<double>(w.m) * pn + static_cast<double>(w.n) * pm);
-            result.push_back({m, n, a, b, outputs, packets, bytes});
+            const double a_bytes = 2.0 * static_cast<double>(w.k) * w.m * pn;
+            const double b_bytes = 2.0 * static_cast<double>(w.k) * w.n * pm;
+            result.push_back({m, n, a, b, outputs, packets,
+                              a_bytes + b_bytes, a_bytes, b_bytes});
             if (result.size() > 4096)
                 throw std::invalid_argument("MILP tile domain exceeds 4096 spatial geometries");
         }
@@ -305,7 +517,16 @@ MipPlan Finish(const Workload& w, const Hardware& h, const CoreMemory& mem,
         throw std::runtime_error("MILP solution does not match the reduced objective");
     auto candidate = finalized.candidate;
     std::optional<Score> event_score;
-    if (CanExpandEvents(w, decision)) {
+    // The explicit deterministic event builder represents one FP32 partial
+    // for every output element and occupied AIC, whereas the reduced model
+    // and source workspace reuse storage by output tile. Do not let that
+    // graph-only representation limit reject an otherwise finalized large
+    // plan. Its detailed score is unavailable, as with the event cap.
+    const bool graph_workspace_fits =
+        decision.family != KernelFamily::DeterministicSplitK ||
+        static_cast<long double>(decision.used_cores) * w.m * w.n * 4.0L <=
+            static_cast<long double>(finalized.candidate.workspace_bytes);
+    if (CanExpandEvents(w, decision) && graph_workspace_fits) {
         try {
             candidate = BuildMatmulEvents(w, std::move(candidate));
             const auto scored = Optimize(w, h, {candidate});
@@ -324,19 +545,21 @@ MipPlan Finish(const Workload& w, const Hardware& h, const CoreMemory& mem,
 
 std::optional<MipPlan> SolveBase(const Workload& w, const Hardware& h,
                                  const CoreMemory& mem, const Rates& r,
-                                 const std::vector<Geometry>& geometries) {
+                                 const std::vector<Geometry>& geometries,
+                                 bool core_equals_base) {
     const double conversion_bytes = w.k > 65535 ? 2.0 * w.m * w.k : 0.0;
     // mat_mul_v3 reserves the entire converted A matrix, independently of
     // spatial tiling or occupied Cube cores.
     if (kRpcBytes + conversion_bytes > h.workspace_limit_bytes)
         return std::nullopt;
 
-    // For a fixed geometry, the BASE objective is nonincreasing in both
-    // baseK=16*b and occupied cores c. Larger b reduces the K-packet count;
-    // larger c reduces Cube time. Neither has a penalty elsewhere in the
-    // reduced BASE objective. Set each to its largest feasible value, then
-    // solve only the one-hot geometry master. This is an exact elimination,
-    // not a relaxation of the previous per-geometry integer program.
+    // For the generic read surrogate, larger baseK cannot increase the
+    // K-packet count, so eliminate it at its capacity bound. The optional
+    // source-step packet model changes K-span discontinuously with baseK;
+    // evaluate every legal aligned baseK there. Core count is checked: the
+    // balanced full/tail class assignment can still be imbalanced, and the
+    // busiest core determines Cube and packet service. At most 20 counts
+    // are evaluated per geometry before the one-hot geometry master.
     Model master;
     struct Choice {
         Geometry geometry;
@@ -346,24 +569,37 @@ std::optional<MipPlan> SolveBase(const Workload& w, const Hardware& h,
     };
     std::vector<Choice> choices;
     std::vector<std::pair<int, double>> select_one;
-    const double mn = OutputElements(w);
-    const double compute_alpha = Flops(w) / r.cube.rate_per_us;
     for (const auto& g : geometries) {
-        if (8.0 * g.base_m * g.base_n > mem.l0c_bytes) continue;
+        if (g.core_m > w.m || g.core_n > w.n) continue;
+        if (core_equals_base &&
+            (g.core_m != g.base_m || g.core_n != g.base_n)) continue;
+        if (4.0 * mem.base_l0c_buffers * g.base_m * g.base_n >
+            mem.l0c_bytes) continue;
         const auto bmax = BaseKUnitsUpper(w, g, mem);
         const auto cmax = std::min(h.aic_count, g.output_tiles);
         if (!bmax || !cmax) continue;
-        const auto base_k = 16 * bmax;
-        const double packets = static_cast<double>(CeilDiv(w.k, base_k));
-        const double cube = compute_alpha / static_cast<double>(cmax);
-        const double hbm = g.operand_bytes / r.read.rate_per_us +
-            2.0 * mn / r.write.rate_per_us +
-            static_cast<double>(g.output_tiles) * r.write.fixed_latency_us +
-            2.0 * static_cast<double>(g.spatial_packets) * packets *
-                r.read.fixed_latency_us;
-        const double stage = std::max(cube, hbm);
+        double stage = std::numeric_limits<double>::infinity();
+        std::uint64_t best_cores = 0;
+        std::uint64_t best_base_k = 0;
+        const auto first_b = r.base_packet_read ? 1ULL : bmax;
+        for (std::uint64_t c = 1; c <= cmax; ++c) {
+            // Spatial assignment is independent of baseK. Reuse it across
+            // the optional source-step packet candidates.
+            const auto loads = BaseCoreLoads(w, g.core_m, g.core_n,
+                                             g.base_m, g.base_n, c);
+            for (auto b = first_b; b <= bmax; ++b) {
+                const auto base_k = 16 * b;
+                const double candidate = BaseStageUs(w, r, g, base_k, c,
+                                                     mem, &loads);
+                if (candidate <= stage) {
+                    stage = candidate;
+                    best_cores = c;
+                    best_base_k = base_k;
+                }
+            }
+        }
         const int y = master.Column(stage, 0.0, 1.0, true);
-        choices.push_back({g, y, base_k, cmax, stage});
+        choices.push_back({g, y, best_base_k, best_cores, stage});
         select_one.emplace_back(y, 1.0);
     }
     if (choices.empty()) return std::nullopt;
@@ -398,12 +634,10 @@ std::optional<MipPlan> SolveSplit(const Workload& w, const Hardware& h,
     // tiler starts from MK/NK 3x3 patterns with branch-specific L1 depths;
     // arbitrary geometry/step choices here still need source-aware legality
     // and CANN finalization before they can be considered emittable.
-    // For a fixed geometry and occupied core count c, the Split-K objective
-    // is nonincreasing in stepK s: larger s produces fewer K slices P,
-    // reducing GM service without changing Cube or vector service. The exact
-    // largest legal step is min(L1 bound, floor((K/128-1)/(c-1))). We still
-    // check c=2..cmax because Cube throughput and vector overhead trade off.
-    // The master has one binary column per feasible geometry and one row.
+    // A larger step reduces the number of partial writes, but can increase
+    // the busiest AIC's K packets because the source assigns whole slices.
+    // Enumerate the bounded legal step values for each core count. The
+    // master has one binary column per feasible geometry and one row.
     Model master;
     struct Choice {
         Geometry geometry;
@@ -413,8 +647,6 @@ std::optional<MipPlan> SolveSplit(const Workload& w, const Hardware& h,
     };
     std::vector<Choice> choices;
     std::vector<std::pair<int, double>> select_one;
-    const double mn = OutputElements(w);
-    const double compute_alpha = Flops(w) / r.cube.rate_per_us;
     const auto k_packets = CeilDiv(w.k, kBaseK);
     for (const auto& g : geometries) {
         if (!FixedTileFits(g, kBaseK, mem)) continue;
@@ -429,28 +661,14 @@ std::optional<MipPlan> SolveSplit(const Workload& w, const Hardware& h,
         double best_us = std::numeric_limits<double>::infinity();
         std::uint64_t best_step = 0, best_cores = 0;
         for (std::uint64_t c = 2; c <= cmax; ++c) {
-            const auto step = std::min(smax, (k_packets - 1) / (c - 1));
-            if (!step) continue;
-            const double p = static_cast<double>(CeilDiv(k_packets, step));
-            const double cores = static_cast<double>(c);
-            const double outputs = static_cast<double>(g.output_tiles);
-            const double cube = compute_alpha / cores;
-            const double hbm = g.operand_bytes / r.read.rate_per_us +
-                4.0 * p * mn / r.read.rate_per_us +
-                (4.0 * p * mn + 2.0 * mn) / r.write.rate_per_us +
-                (2.0 * static_cast<double>(g.spatial_packets) *
-                     static_cast<double>(k_packets) +
-                 outputs * (p - cores + 1.0)) * r.read.fixed_latency_us +
-                outputs * (p + 1.0) * r.write.fixed_latency_us;
-            const double local = std::max(cube, hbm) +
-                outputs * (r.sync.fixed_latency_us + r.vector.fixed_latency_us) +
-                (cores - 1.0) *
-                    SplitVectorCriticalElements(w, g.core_m, g.core_n, c) /
-                    r.vector.rate_per_us;
-            if (local < best_us) {
-                best_us = local;
-                best_step = step;
-                best_cores = c;
+            for (std::uint64_t step = 1; step <= smax; ++step) {
+                if (CeilDiv(k_packets, step) < c) continue;
+                const double local = SplitStageUs(w, r, g, step, c);
+                if (local < best_us) {
+                    best_us = local;
+                    best_step = step;
+                    best_cores = c;
+                }
             }
         }
         if (!best_step) continue;
@@ -484,47 +702,39 @@ std::optional<MipPlan> SolveSplit(const Workload& w, const Hardware& h,
 
 double ReducedObjectiveUs(const Workload& w, const Hardware& h,
                           const PlanDecision& d, const CoreMemory& mem) {
-    // Independent evaluation of the two service-time formulas used for
-    // master coefficients. It is also the consistency check in Finish().
+    // Recompute the service-time objective for a complete plan. Finish()
+    // checks that the selected master coefficient matches this value.
     const auto r = ReadRates(h);
     (void)FinalizePlan(w, h, d, "reduced_objective", mem);
     if (d.base_m > d.single_core_m || d.base_n > d.single_core_n)
         throw std::invalid_argument("base M/N tile exceeds single-core output tile");
+    if (r.base_packet_read && d.family == KernelFamily::Base &&
+        (d.single_core_m != d.base_m || d.single_core_n != d.base_n))
+        throw std::invalid_argument("BASE packet profile requires source plain BASE core=base geometry");
     const auto pm = AxisPackets(w.m, d.single_core_m, d.base_m);
     const auto pn = AxisPackets(w.n, d.single_core_n, d.base_n);
     const double outputs = static_cast<double>(CeilDiv(w.m, d.single_core_m)) *
                            static_cast<double>(CeilDiv(w.n, d.single_core_n));
     const double spatial_packets = static_cast<double>(pm) * pn;
-    const double operand_bytes = 2.0 * static_cast<double>(w.k) *
-        (static_cast<double>(w.m) * pn + static_cast<double>(w.n) * pm);
-    const double mn = OutputElements(w);
+    const double a_bytes = 2.0 * static_cast<double>(w.k) * w.m * pn;
+    const double b_bytes = 2.0 * static_cast<double>(w.k) * w.n * pm;
+    const double operand_bytes = a_bytes + b_bytes;
     const double common = CommonUs(w, r);
     if (d.family == KernelFamily::Base) {
-        const double p = static_cast<double>(CeilDiv(w.k, d.base_k));
-        const double cube = Flops(w) /
-            (static_cast<double>(d.used_cores) * r.cube.rate_per_us);
-        const double hbm = operand_bytes / r.read.rate_per_us +
-            2.0 * mn / r.write.rate_per_us +
-            outputs * r.write.fixed_latency_us +
-            2.0 * spatial_packets * p * r.read.fixed_latency_us;
-        return common + std::max(cube, hbm);
+        const Geometry g{d.single_core_m, d.single_core_n,
+                         d.base_m, d.base_n,
+                         static_cast<std::uint64_t>(outputs),
+                         static_cast<std::uint64_t>(spatial_packets),
+                         operand_bytes, a_bytes, b_bytes};
+        return common + BaseStageUs(w, r, g, d.base_k, d.used_cores, mem);
     }
     if (d.base_k != 128)
         throw std::invalid_argument("reduced Split-K fixes baseK=128");
-    const double p = static_cast<double>(CeilDiv(w.k, d.single_core_k));
-    const double c = static_cast<double>(d.used_cores);
-    const double cube = Flops(w) / (c * r.cube.rate_per_us);
-    const double hbm = operand_bytes / r.read.rate_per_us +
-        4.0 * p * mn / r.read.rate_per_us +
-        (4.0 * p * mn + 2.0 * mn) / r.write.rate_per_us +
-        (2.0 * spatial_packets * static_cast<double>(CeilDiv(w.k, d.base_k)) +
-         outputs * (p - c + 1.0)) * r.read.fixed_latency_us +
-        outputs * (p + 1.0) * r.write.fixed_latency_us;
-    return common + std::max(cube, hbm) +
-        outputs * (r.sync.fixed_latency_us + r.vector.fixed_latency_us) +
-        (c - 1.0) * SplitVectorCriticalElements(
-            w, d.single_core_m, d.single_core_n, d.used_cores) /
-            r.vector.rate_per_us;
+    const Geometry g{d.single_core_m, d.single_core_n, d.base_m, d.base_n,
+                     static_cast<std::uint64_t>(outputs),
+                     static_cast<std::uint64_t>(spatial_packets),
+                     operand_bytes, a_bytes, b_bytes};
+    return common + SplitStageUs(w, r, g, d.step_k, d.used_cores);
 }
 
 MipResult SolveReducedMip(const Workload& w, const Hardware& h,
@@ -536,9 +746,12 @@ MipResult SolveReducedMip(const Workload& w, const Hardware& h,
         w.k > 1000000000 || !h.aic_count || h.aic_count > 20)
         throw std::invalid_argument("unsupported reduced-MILP dimensions or AIC count");
     const auto rates = ReadRates(h);
+    if (rates.base_packet_read && !domain.base_core_equals_base)
+        throw std::invalid_argument("BASE packet profile requires base_core_equals_base domain");
     const auto geometries = Geometries(w, h, domain);
     MipResult result;
-    result.base = SolveBase(w, h, mem, rates, geometries);
+    result.base = SolveBase(w, h, mem, rates, geometries,
+                            domain.base_core_equals_base);
     result.deterministic_split_k = SolveSplit(w, h, mem, rates, geometries);
     // The outer implementation choice compares certified reduced objectives,
     // not the separately reported event-graph scores.

@@ -1,0 +1,158 @@
+{
+  "declared_shapes": [
+    [
+      4096,
+      384,
+      4096
+    ],
+    [
+      6144,
+      640,
+      8192
+    ],
+    [
+      4096,
+      896,
+      8192
+    ],
+    [
+      8192,
+      384,
+      16384
+    ],
+    [
+      6144,
+      768,
+      8192
+    ]
+  ],
+  "default_audit_sha256": "e965384dd33279fb786fc3e235bce64c4f0ce340b44eabca3d50d1bc10cc92cd",
+  "rows": [
+    {
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "optimizer_objective_us": 71.8064,
+      "optimizer_tile": [
+        256,
+        128,
+        256,
+        128,
+        64,
+        20
+      ],
+      "shape": [
+        4096,
+        384,
+        4096
+      ],
+      "status": "selected"
+    },
+    {
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "optimizer_objective_us": 277.308,
+      "optimizer_tile": [
+        256,
+        128,
+        256,
+        128,
+        64,
+        20
+      ],
+      "shape": [
+        6144,
+        640,
+        8192
+      ],
+      "status": "selected"
+    },
+    {
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "optimizer_objective_us": 259.24,
+      "optimizer_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        19
+      ],
+      "shape": [
+        4096,
+        896,
+        8192
+      ],
+      "status": "selected"
+    },
+    {
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "optimizer_objective_us": 458.277,
+      "optimizer_tile": [
+        256,
+        128,
+        256,
+        128,
+        64,
+        20
+      ],
+      "shape": [
+        8192,
+        384,
+        16384
+      ],
+      "status": "selected"
+    },
+    {
+      "default_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "optimizer_objective_us": 303.154,
+      "optimizer_tile": [
+        128,
+        256,
+        128,
+        256,
+        64,
+        20
+      ],
+      "shape": [
+        6144,
+        768,
+        8192
+      ],
+      "status": "same_tile"
+    }
+  ],
+  "solver_audit_sha256": "ed81b4133035044d4332411fec3fb4fc89c4d90a031e34f55c1167db1ea6416e"
+}
