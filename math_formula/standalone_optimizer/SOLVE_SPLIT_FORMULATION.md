@@ -3,8 +3,8 @@
 The [SolveSplit implementation](mip_solver.cpp) minimizes a reduced
 service-time objective for deterministic multi-core Split-K. It computes
 the best K step and occupied AIC count for each spatial geometry, then
-solves a one-hot geometry master. The result is optimal within this
-surrogate and its finite geometry grid. It is not an exact MatMulV3 schedule
+solves a one-hot geometry master. The result is optimal within $T_D$
+below and its finite geometry grid. It is not an exact MatMulV3 schedule
 or a device-time guarantee.
 
 ## Variables, counts, and source assignment
@@ -45,45 +45,74 @@ exceed an output axis: $C_M=384>M=256$ still covers only 256 actual rows.
 The default long-K grid includes this source 384 extent for axes 128–383;
 an explicit grid can also request it. BASE excludes oversized core tiles.
 
-For output tile $t$, let $O_t$ be its actual element count. The vector
-reduction approximation balances elements across up to two AIVs per
-occupied AIC, with sequential outer tiles:
+## Panel schedule
 
-$$Q_g(c)=\sum_{t=1}^{N_o(g)}
-\left\lceil\frac{O_t}{2c}\right\rceil.$$
+`MatMulMultiCoreSplitKDivide` loops over outer panels, `OutCnt`. That
+count is $\lceil N/C_N\rceil$ or $\lceil M/C_M\rceil$, whichever axis the
+source iterates outside. Call it $N_{\rm panel}$. It is not the output-tile
+product $N_o$. A geometry whose single-core extents cover both axes has
+$N_{\rm panel}=1$ for either order. One panel's actual element count is
+$O_{\rm panel}$; its operand-read bytes are $D_{\rm panel}$. The busiest
+AIC's $k_{\rm crit}$ is unchanged, because the K loop sits inside the
+panel loop and every panel repeats the same K split.
+
+Each AIC accumulates its own K slices with `IterateAll` and only then
+signals the vector cores. The vector loop therefore adds $c$ workspace
+partials, not $P(s)$ K slices, and the sequential chain has length $c-1$.
+Those counts coincide only when each AIC owns one slice. Two workspace
+buffers let Cube fill panel $i+1$ while the vector cores reduce panel $i$.
+Cube waits for a buffer only from the third panel onward. Inside one
+panel the reduction does not start until that panel's Cube loop has
+finished, so those two stages do not overlap.
+
+One AIV's shard of a panel is
+$Q=\lceil O_{\rm panel}/(2c)\rceil$, using two AIVs per occupied AIC.
+Tail panels keep their own $O_{\rm panel}$. The closed form below uses
+one representative panel; an implementation sums the real tail extents.
 
 ## Reduced timing objective
 
-Let $R_C$ be Cube FLOP/µs per AIC, $R_R,R_W$ shared GM read/write
-bytes/µs, and $R_V$ vector-add ops/µs per AIV. Fixed read, write,
-vector, and sync costs are $\lambda_R,\lambda_W,\lambda_V,\lambda_S$.
-$L$ is common launch and A ND→NZ conversion time, as defined in the
-[SolveBase objective](SOLVE_BASE_FORMULATION.md#objective).
-The exact reduced function implemented in SplitStageUs is
+Let $R_C$ be Cube FLOP/µs per AIC, $R_R$ shared GM read bytes/µs, and
+$R_V$ vector-add ops/µs per AIV. $\lambda_R$ is the fixed operand-read
+cost, $\lambda_{\rm sync}$ the per-panel Cube/vector signal, and
+$\lambda_{\rm store}$ the final cast and FP16 store. $\lambda_{\rm partial}$
+is the fixed `MTE2→V`, add, `V→MTE2` cost of each extra partial. The
+audit profile sets it to 1.28 µs. The reduction probe has not measured
+this value. $L$ is common launch and A ND→NZ conversion time, as defined
+in the [SolveBase objective](SOLVE_BASE_FORMULATION.md#objective).
+
+Operand reads overlap Cube work of the same panel, so they form the memory
+branch of $T_{\rm cube}$. Partial loads do not: `SplitKVectorProcess`
+issues them only after `AIC_SYNC_AIV`, and $T_V$ carries that chain.
 
 $$
 \begin{aligned}
-T_C(g,s,c)&=\frac{2O\,k_{\rm crit}(s,c)}{R_C},\\
-T_{\rm GM}(g,s,c)&=
-\frac{D(g)+4P(s)O}{R_R}
-+\frac{(4P(s)+2)O}{R_W}\\
-&\quad+\{2S(g)q_{\rm crit}(s,c)+N_o(g)r(s,c)\}\lambda_R\\
-&\quad+N_o(g)\{r(s,c)+1\}\lambda_W,\\
-T_V(g,c)&=N_o(g)(\lambda_S+\lambda_V)
-+\frac{(c-1)Q_g(c)}{R_V},\\
-T_D(g,s,c)&=L+\max\{T_C,T_{\rm GM}\}+T_V.
+T_{\rm cube}&=
+\max\!\left(
+\frac{2\,O_{\rm panel}\,k_{\rm crit}}{R_C},\;
+\frac{D_{\rm panel}}{R_R}+2S_{\rm panel}\,q_{\rm crit}\,\lambda_R
+\right),\\[4pt]
+T_V&=
+\lambda_{\rm sync}
++(c-1)\!\left(\lambda_{\rm partial}+\frac{Q}{R_V}\right)
++\lambda_{\rm store},\\[4pt]
+T_D&=
+L+T_{\rm cube}+(N_{\rm panel}-1)\max(T_{\rm cube},T_V)+T_V.
 \end{aligned}
 $$
 
-The $4PO$ read and write terms represent FP32 partial-result traffic;
-$2O$ is the final 2-byte output. Shared bytes are totaled across
-occupied AICs, while fixed packet service and Cube work follow a
-busiest AIC. The maximum approximates Cube/GM overlap. The vector term
-charges the largest balanced AIV shard per outer tile. This omits exact
-MK/NK ordering, cache reuse, pipeline stalls, and source AIV sharding.
-The common A-conversion primitive above $K=65535$ is provisional.
-Fixed Cube latency must be zero because this formula does not count
-Cube calls.
+$S_{\rm panel}$ is the base-packet count of that panel. For one panel
+the pipeline collapses to $L+T_{\rm cube}+T_V$. With many panels it is
+the two-buffer schedule, not $N_{\rm panel}$ copies of the whole chain
+stacked with no overlap. Cache reuse, the source's NZ row sharding, and
+the choice of MK versus NK order are still outside this expression.
+Fixed Cube latency must remain zero because the Cube term does not count
+Cube calls. The common A-conversion primitive above $K=65535$ stays inside
+$L$. For $(128,256,4096)$ both the solver tuple and the emitted kernel have
+$N_{\rm panel}=1$, so $T_D=L+T_{\rm cube}+T_V$ and the new latency appears
+as $(c-1)\lambda_{\rm partial}$: fifteen extra partials at $c=16$, ten at
+$c=11$. Measured kernel medians for that shape are 15.70 µs for source
+BASE and 19.12 µs for deterministic Split-K.
 
 ## Feasible set and solution
 
@@ -124,10 +153,12 @@ objective and retains
 
 $$V_g=\min_{(s,c)\in\mathcal L(g)}\{T_D(g,s,c)-L\}.$$
 
-It does not always choose the largest legal step. A larger $s$ reduces
-partial-result traffic but can increase $q_{\rm crit}$ because whole
-K slices are assigned to AICs. This is a bounded local scan, not an
-event-by-event search. On 910B3, $c\le20$ and L1 usually keeps $s$ small.
+It does not always choose the largest legal step. A larger $s$ changes
+$q_{\rm crit}$ and therefore $T_{\rm cube}$. $T_V$ depends on $c$ and $Q$
+rather than on $P(s)$. Whole K slices are still assigned to AICs, so
+increasing $s$ can raise the busiest AIC's $k_{\rm crit}$. This is a
+bounded local scan, not an event-by-event search. On 910B3, $c\le20$ and
+L1 usually keeps $s$ small.
 
 The master chooses one locally feasible geometry:
 
@@ -138,7 +169,8 @@ It has one binary column per feasible geometry and one equality row.
 SolveSplit adds $L$ after the master and checks the selected coefficient
 against ReducedObjectiveUs. The separate event-graph score is reported
 only when its event and workspace representations fit; it does not choose
-the winner.
+the winner. That graph reduces every partial once, after all Cube slices,
+so its reported score is not $T_D$.
 
 ## Worked long-K example and model boundary
 
@@ -154,16 +186,17 @@ $O=65{,}536$, and $D=134{,}217{,}728$ bytes. The workspace formula gives
 20 MiB RPC + 32 MiB converted A + $8(20)(384)(256)=15$ MiB partial
 buffers, or 67 MiB total.
 
-Substituting these counts into the equations gives the reduced objective
-for the source tuple: 118.565 µs with the audit primitive profile.
-The optimizer then compares other legal tuples.
-The [revised local audit](bench910/k_gt_65535_v1/revised_solver_audit.csv)
-selects $384\times384$, $s=3,c=19$, for this shape, with a Split-K
-estimate of 118.565 µs. This tuple has not been emitted or timed through
-the MatMulV3 kernel. The measured source default is 101.578 µs.
-For the larger 512² and 1024² long-K cases, the reduced model still
-selects BASE while the source chooses Split-K. This is a remaining
-family-selection error, not evidence that BASE is faster on device.
+This geometry is one panel: $C_M$ covers $M$ and $C_N$ covers $N$, so
+$N_{\rm panel}=1$ and $T_D=L+T_{\rm cube}+T_V$. The
+[recorded audit](bench910/k_gt_65535_v1/revised_solver_audit.csv) reports
+118.565 µs for $384\times384$, $s=3,c=19$, and the same figure for the
+source tuple above. That file predates $\lambda_{\rm partial}$ and is not
+a substitution of the equations in this document. The tuple has not been
+emitted or timed through the MatMulV3 kernel. The measured source default
+is 101.578 µs. For the larger 512² and 1024² long-K cases, that same
+audit selects BASE while the source chooses Split-K. Recompute those
+rankings with this $T_D$ and the audit profile's 1.28 µs
+$\lambda_{\rm partial}$.
 
 Source MK/NK 3×3 step/depth patterns, possible L2 splitting, and key
 rules still constrain emittable tuples. A source-emittable optimizer

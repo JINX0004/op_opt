@@ -1,6 +1,7 @@
 #include "mip_solver.h"
 
 #include <cassert>
+#include <cmath>
 #include <iostream>
 
 int main() {
@@ -47,21 +48,23 @@ int main() {
     assert(restricted_n.base);
     assert(expanded_n.base->surrogate_us < restricted_n.base->surrogate_us);
 
-    // An intermediate core extent matters when Split-K workspace excludes
-    // the much larger shape/AIC partition tiles.
+    // N is the one outer panel, so an M core tile changes T_D only through
+    // the M packet count. coreM=512 with baseM=256 matches coreM=256.
+    // Workspace still rejects the larger M partitions (coreM>=1024).
     auto tight_workspace = hardware;
     tight_workspace.workspace_limit_bytes = 20ULL * 1024 * 1024 + 131072;
     const mmopt::Workload tall{102400, 16, 256, "fp16"};
     const auto intermediate = mmopt::SolveReducedMip(tall, tight_workspace);
     assert(intermediate.deterministic_split_k);
-    assert(intermediate.deterministic_split_k->decision.single_core_m == 512);
+    assert(intermediate.deterministic_split_k->decision.single_core_m <= 512);
     assert(intermediate.deterministic_split_k->decision.base_m < 512);
 
     const auto small_grid = mmopt::SolveReducedMip(tall, tight_workspace, {},
                                                   old_core_grid);
     assert(small_grid.deterministic_split_k);
-    assert(intermediate.deterministic_split_k->surrogate_us <
-           small_grid.deterministic_split_k->surrogate_us);
+    assert(small_grid.deterministic_split_k->decision.single_core_m <= 256);
+    assert(std::abs(intermediate.deterministic_split_k->surrogate_us -
+                    small_grid.deterministic_split_k->surrogate_us) < 1e-6);
 
     // mat_mul_v3 BASE assigns spatial output tiles to multiple Cube cores.
     // Long-K ND input needs a full A ND->NZ workspace before that kernel;

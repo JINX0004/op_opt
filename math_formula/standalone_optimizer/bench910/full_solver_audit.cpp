@@ -18,7 +18,8 @@ int main(int argc, char** argv) {
          {"cube", {"flop", 0.0, 14719432.0}},
          {"vector_add", {"ops", 0.0, 1000000.0}},
          {"nd2nz", {"elements", 0.0, 1000000.0}},
-         {"sync", {"count", 0.1, 1.0}}}};
+         {"sync", {"count", 0.1, 1.0}},
+         {"split_partial", {"count", 1.28, 1.0}}}};
     const std::vector<std::tuple<int, int, int>> small_shapes = {
         {128, 256, 1024}, {128, 256, 4096},
         {256, 256, 1024}, {256, 256, 4096},

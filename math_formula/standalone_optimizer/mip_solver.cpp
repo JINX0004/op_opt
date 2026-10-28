@@ -34,6 +34,9 @@ struct Rates {
         PrimitiveTiming a_bytes, b_bytes, a_rows, b_rows;
     };
     std::optional<BasePacketRead> base_packet_read;
+    // Fixed MTE2→V / add / V→MTE2 cost of one extra Split-K partial.
+    // Absent from a profile means zero; the reduction probe supplies it.
+    double split_partial_us = 0.0;
 };
 
 PrimitiveTiming Get(const Hardware& hardware, const char* name, const char* unit) {
@@ -83,6 +86,14 @@ Rates ReadRates(const Hardware& hardware) {
     }
     if (r.cube.fixed_latency_us != 0.0)
         throw std::invalid_argument("reduced MILP currently requires zero fixed Cube latency");
+    const auto partial = hardware.primitives.find("split_partial");
+    if (partial != hardware.primitives.end()) {
+        if (partial->second.unit != "count" ||
+            !std::isfinite(partial->second.fixed_latency_us) ||
+            partial->second.fixed_latency_us < 0)
+            throw std::invalid_argument("invalid primitive split_partial");
+        r.split_partial_us = partial->second.fixed_latency_us;
+    }
     return r;
 }
 
@@ -102,24 +113,6 @@ double CommonUs(const Workload& w, const Rates& r) {
 
 double OutputElements(const Workload& w) {
     return static_cast<double>(w.m) * static_cast<double>(w.n);
-}
-
-double SplitVectorCriticalElements(const Workload& w, std::uint64_t core_m,
-                                   std::uint64_t core_n, std::uint64_t cores) {
-    // Each output tile is reduced by up to two AIVs per occupied AIC. The
-    // outer tiles are processed in sequence, while AIV work within a tile
-    // overlaps. Count the largest balanced shard for each full/tail tile.
-    const auto full_m = w.m / core_m, full_n = w.n / core_n;
-    const auto tail_m = w.m % core_m, tail_n = w.n % core_n;
-    double critical = static_cast<double>(full_m) * full_n *
-        SplitVectorMaxElements(core_m * core_n, cores);
-    if (tail_m) critical += static_cast<double>(full_n) *
-        SplitVectorMaxElements(tail_m * core_n, cores);
-    if (tail_n) critical += static_cast<double>(full_m) *
-        SplitVectorMaxElements(core_m * tail_n, cores);
-    if (tail_m && tail_n)
-        critical += SplitVectorMaxElements(tail_m * tail_n, cores);
-    return critical;
 }
 
 // This class only wraps the official HiGHS C API; all rows below are the
@@ -346,37 +339,64 @@ double BaseStageUs(const Workload& w, const Rates& r,
     return std::max(cube_critical, shared_bytes + packet_critical);
 }
 
+std::uint64_t AxisPackets(std::uint64_t shape, std::uint64_t core,
+                          std::uint64_t base);
+
 double SplitStageUs(const Workload& w, const Rates& r,
                     const Geometry& g, std::uint64_t step,
                     std::uint64_t cores) {
-    // mat_mul_deterministic_splitk_kernel.h assigns contiguous K slices to
-    // AICs: the first P % c cores get ceil(P/c) slices, and the rest get
-    // floor(P/c). Count fixed packet service and Cube work on the busiest
-    // core. Total operand/partial bytes still contend for shared GM service.
+    // Panel pipeline from SOLVE_SPLIT_FORMULATION.md. The source NK path
+    // (M > N) ping-pongs N panels; otherwise it ping-pongs M panels. Each
+    // panel repeats the same K split. Operand reads overlap that panel's
+    // Cube work. The vector chain then adds one accumulated partial per AIC.
     const auto q = CeilDiv(w.k, 128);
     const auto p = CeilDiv(q, step);
     const auto rounds = CeilDiv(p, cores);
-    const auto critical_packets = std::min(q, rounds * step);
-    const double outputs = static_cast<double>(g.output_tiles);
-    const double mn = OutputElements(w);
-    const double cube = 2.0 * mn * std::min(w.k, critical_packets * 128) /
-                        r.cube.rate_per_us;
-    const double shared_gm = g.operand_bytes / r.read.rate_per_us +
-        4.0 * p * mn / r.read.rate_per_us +
-        (4.0 * p * mn + 2.0 * mn) / r.write.rate_per_us;
-    // Each K base packet reads two operands. A core performs at most
-    // `rounds` partial updates per spatial output tile; the last read and
-    // write account for the vector reduction/final output stage.
-    const double core_calls =
-        (2.0 * g.spatial_packets * critical_packets +
-         outputs * rounds) * r.read.fixed_latency_us +
-        outputs * (rounds + 1.0) * r.write.fixed_latency_us;
-    const double vector = outputs *
-        (r.sync.fixed_latency_us + r.vector.fixed_latency_us) +
-        (static_cast<double>(cores) - 1.0) *
-        SplitVectorCriticalElements(w, g.core_m, g.core_n, cores) /
-        r.vector.rate_per_us;
-    return std::max(cube, shared_gm + core_calls) + vector;
+    const auto q_crit = std::min(q, rounds * step);
+    const auto k_crit = std::min(w.k, q_crit * 128);
+    const bool n_outer = w.m > w.n;
+    const auto outer_shape = n_outer ? w.n : w.m;
+    const auto outer_core = n_outer ? g.core_n : g.core_m;
+    std::vector<std::uint64_t> extents;
+    if (outer_core >= outer_shape) {
+        extents.push_back(outer_shape);
+    } else {
+        extents.assign(outer_shape / outer_core, outer_core);
+        if (const auto tail = outer_shape % outer_core) extents.push_back(tail);
+    }
+
+    std::vector<double> cube_stages;
+    std::vector<double> vector_stages;
+    cube_stages.reserve(extents.size());
+    vector_stages.reserve(extents.size());
+    for (const auto extent : extents) {
+        const auto m_ext = n_outer ? w.m : extent;
+        const auto n_ext = n_outer ? extent : w.n;
+        const auto m_packets = n_outer ? AxisPackets(w.m, g.core_m, g.base_m)
+                                       : CeilDiv(m_ext, g.base_m);
+        const auto n_packets = n_outer ? CeilDiv(n_ext, g.base_n)
+                                       : AxisPackets(w.n, g.core_n, g.base_n);
+        const double spatial = static_cast<double>(m_packets) * n_packets;
+        const double elements = static_cast<double>(m_ext) * n_ext;
+        const double operand_bytes = 2.0 * static_cast<double>(w.k) *
+            (static_cast<double>(m_ext) * n_packets +
+             static_cast<double>(n_ext) * m_packets);
+        const double cube = 2.0 * elements * k_crit / r.cube.rate_per_us;
+        const double operand_gm = operand_bytes / r.read.rate_per_us +
+            2.0 * spatial * q_crit * r.read.fixed_latency_us;
+        const double shard = static_cast<double>(
+            SplitVectorMaxElements(m_ext * n_ext, cores));
+        cube_stages.push_back(std::max(cube, operand_gm));
+        vector_stages.push_back(
+            r.sync.fixed_latency_us +
+            static_cast<double>(cores - 1) *
+                (r.split_partial_us + shard / r.vector.rate_per_us) +
+            r.write.fixed_latency_us);
+    }
+    double stage = cube_stages.front();
+    for (std::size_t i = 1; i < cube_stages.size(); ++i)
+        stage += std::max(cube_stages[i], vector_stages[i - 1]);
+    return stage + vector_stages.back();
 }
 
 std::vector<std::uint64_t> TileValues(const std::vector<std::uint64_t>& supplied,
@@ -634,9 +654,9 @@ std::optional<MipPlan> SolveSplit(const Workload& w, const Hardware& h,
     // tiler starts from MK/NK 3x3 patterns with branch-specific L1 depths;
     // arbitrary geometry/step choices here still need source-aware legality
     // and CANN finalization before they can be considered emittable.
-    // A larger step reduces the number of partial writes, but can increase
-    // the busiest AIC's K packets because the source assigns whole slices.
-    // Enumerate the bounded legal step values for each core count. The
+    // A larger step changes the busiest AIC's K packets because the source
+    // assigns whole slices. The vector chain length depends on the core
+    // count, not on the step. Enumerate the bounded legal pairs. The
     // master has one binary column per feasible geometry and one row.
     Model master;
     struct Choice {
