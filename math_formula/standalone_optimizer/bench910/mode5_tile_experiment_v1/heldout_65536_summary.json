@@ -1,0 +1,62 @@
+[
+  {
+    "round": 0,
+    "arm": "large",
+    "kernel_median_us": 315.05600000000004,
+    "counters_us": {
+      "Task Duration(us)": 315.05600000000004,
+      "aicore_time(us)": 288.869,
+      "aic_mac_time(us)": 264.5345,
+      "aic_mte1_time(us)": 231.15499999999997,
+      "aic_mte2_time(us)": 162.024,
+      "aic_fixpipe_time(us)": 185.1575,
+      "aic_scalar_time(us)": 161.8395
+    },
+    "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/mode5_tile_heldout_v1/65536/timing/r0/65536x384x1536/large/profile/PROF_000001_20261102204705593_00740243OLKDIGHO/mindstudio_profiler_output/task_time_20261102204723.csv"
+  },
+  {
+    "round": 0,
+    "arm": "small",
+    "kernel_median_us": 885.696,
+    "counters_us": {
+      "Task Duration(us)": 885.696,
+      "aicore_time(us)": 869.0765,
+      "aic_mac_time(us)": 274.0745,
+      "aic_mte1_time(us)": 229.77550000000002,
+      "aic_mte2_time(us)": 666.7215,
+      "aic_fixpipe_time(us)": 189.5885,
+      "aic_scalar_time(us)": 713.7885
+    },
+    "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/mode5_tile_heldout_v1/65536/timing/r0/65536x384x1536/small/profile/PROF_000001_20261102204746040_00742221JHNDDPBI/mindstudio_profiler_output/task_time_20261102204803.csv"
+  },
+  {
+    "round": 1,
+    "arm": "small",
+    "kernel_median_us": 888.288,
+    "counters_us": {
+      "Task Duration(us)": 888.288,
+      "aicore_time(us)": 871.244,
+      "aic_mac_time(us)": 274.062,
+      "aic_mte1_time(us)": 229.839,
+      "aic_mte2_time(us)": 667.545,
+      "aic_fixpipe_time(us)": 189.507,
+      "aic_scalar_time(us)": 715.3399999999999
+    },
+    "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/mode5_tile_heldout_v1/65536/timing/r1/65536x384x1536/small/profile/PROF_000001_20261102204826090_00744032IMIDRLDN/mindstudio_profiler_output/task_time_20261102204845.csv"
+  },
+  {
+    "round": 1,
+    "arm": "large",
+    "kernel_median_us": 315.92600000000004,
+    "counters_us": {
+      "Task Duration(us)": 315.92600000000004,
+      "aicore_time(us)": 290.16549999999995,
+      "aic_mac_time(us)": 264.52,
+      "aic_mte1_time(us)": 231.176,
+      "aic_mte2_time(us)": 162.722,
+      "aic_fixpipe_time(us)": 185.24349999999998,
+      "aic_scalar_time(us)": 162.77800000000002
+    },
+    "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/mode5_tile_heldout_v1/65536/timing/r1/65536x384x1536/large/profile/PROF_000001_20261102204908667_00746010KDKDIHFK/mindstudio_profiler_output/task_time_20261102204928.csv"
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "suite": "single_mode_selector_device4_v1",
+  "device": 4,
+  "dtype": "fp16",
+  "layout": "ND_ND_ND_NN",
+  "rounds": 2,
+  "repetitions_per_round": 8,
+  "warmups_per_run": 10,
+  "seed": 20261102,
+  "question": "Compare source-backed single-core Split-K mode 2 and mode 6 at their emitted geometry after freezing MIP mode scores.",
+  "shapes": [
+    [1792, 1792, 36864],
+    [2048, 2048, 40960],
+    [2304, 2048, 32768],
+    [2560, 2560, 36864],
+    [3072, 2048, 32768],
+    [2304, 3072, 40960],
+    [2560, 1024, 36864],
+    [2304, 2048, 65408]
+  ]
+}

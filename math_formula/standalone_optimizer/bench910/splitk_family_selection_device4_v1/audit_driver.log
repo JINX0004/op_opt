@@ -1,0 +1,25 @@
+audit 1792x768x27392 single mode 6 rc 0
+audit 1792x768x27392 deterministic mode 3 rc 0
+audit 1792x768x27392 default mode 3 rc 0
+audit 2048x768x27392 single mode 6 rc 0
+audit 2048x768x27392 deterministic mode 3 rc 0
+audit 2048x768x27392 default mode 3 rc 0
+audit 1792x768x32768 single mode 6 rc 0
+audit 1792x768x32768 deterministic mode 3 rc 0
+audit 1792x768x32768 default mode 3 rc 0
+audit 2048x768x32768 single mode 6 rc 0
+audit 2048x768x32768 deterministic mode 3 rc 0
+audit 2048x768x32768 default mode 3 rc 0
+audit 2048x2048x27392 single mode 6 rc 0
+audit 2048x2048x27392 deterministic mode 3 rc 0
+audit 2048x2048x27392 default mode 6 rc 0
+audit 2048x3072x27392 single mode 6 rc 0
+audit 2048x3072x27392 deterministic mode 3 rc 0
+audit 2048x3072x27392 default mode 6 rc 0
+audit 2048x2048x32768 single mode 6 rc 0
+audit 2048x2048x32768 deterministic mode 3 rc 0
+audit 2048x2048x32768 default mode 6 rc 0
+audit 2048x3072x32768 single mode 6 rc 0
+audit 2048x3072x32768 deterministic mode 3 rc 0
+audit 2048x3072x32768 default mode 6 rc 0
+eligible 8 / 8

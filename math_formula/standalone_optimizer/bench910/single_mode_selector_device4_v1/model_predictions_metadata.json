@@ -1,0 +1,9 @@
+{
+  "finalizer_cpp_sha256": "beb2bdfd0c14c6e72f4208546c1b8fdfd9ea9bf76f7012c34da6aeed200a3a68",
+  "frozen_at_utc": "2026-11-02T01:50:08.139792+00:00",
+  "manifest_sha256": "4cacd82917c5386d8f73a852517d11fdce8de65a98527bcdb70b57987798e602",
+  "model_cpp_sha256": "46a926d8392aeb909a817d3d23c0eb23a8d9dfb97ce3c587be99ecefb703eef9",
+  "predictions_sha256": "5ab0e8b906b70ea5db01386ffdff73af65b539cbb4bafd043d24470a4ba8e388",
+  "solver_cpp_sha256": "d452746efb0e7fd11140fa474192e7e7babcb98e9b27c032b5148ac1cf17adbf",
+  "source_timing_started": false
+}

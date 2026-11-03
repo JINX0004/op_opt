@@ -42,7 +42,7 @@ extern "C" __global__ __aicore__ void solvebase_probe_kernel(
         }
         SetFlag<HardEvent::MTE2_S>(EVENT_ID0);
         WaitFlag<HardEvent::MTE2_S>(EVENT_ID0);
-    } else if (mode == 2 || mode == 3) {
+    } else if (mode == 2 || mode == 3 || mode == 5 || mode == 6) {
         // Fixed source tiles in NZ layout. Read and L1->L0 setup stay constant
         // while mode 2 changes only the number of Cube accumulations. Mode 3
         // changes only the Fixpipe packet count and output dimensions.
@@ -65,9 +65,11 @@ extern "C" __global__ __aicore__ void solvebase_probe_kernel(
         GlobalTensor<half> a_gm;
         GlobalTensor<half> b_gm;
         GlobalTensor<half> c_gm;
+        GlobalTensor<float> c_fp32_gm;
         a_gm.SetGlobalBuffer(reinterpret_cast<__gm__ half*>(input));
         b_gm.SetGlobalBuffer(reinterpret_cast<__gm__ half*>(input));
         c_gm.SetGlobalBuffer(reinterpret_cast<__gm__ half*>(output));
+        c_fp32_gm.SetGlobalBuffer(reinterpret_cast<__gm__ float*>(output));
         const uint32_t src = core * 65536 / 2;
         DataCopy(a_l1, a_gm[src], 16384);
         DataCopy(b_l1, b_gm[src + 16384], 16384);
@@ -92,15 +94,23 @@ extern "C" __global__ __aicore__ void solvebase_probe_kernel(
         WaitFlag<HardEvent::M_FIX>(EVENT_ID0);
         FixpipeParamsV220 fp;
         fp.nSize = 128;
-        fp.mSize = mode == 2 ? 128 : packet_bytes / 256;
+        fp.mSize = mode == 2 ? 128 :
+            (mode == 3 ? packet_bytes / 256 : packet_bytes / 512);
         fp.srcStride = 128;
         fp.dstStride = 128;
         fp.ndNum = 1;
-        fp.quantPre = QuantMode_t::F322F16;
+        if (mode == 2 || mode == 3)
+            fp.quantPre = QuantMode_t::F322F16;
+        if (mode == 6) SetAtomicAdd<float>();
         const uint32_t out_stride = mode == 2 ? 32768 : packets * packet_bytes;
         for (uint32_t i = 0; i < (mode == 2 ? 1U : packets); ++i) {
-            const uint32_t dst = (32 * GetBlockNum() + core * out_stride + i * packet_bytes) / 2;
-            Fixpipe(c_gm[dst], c_l0, fp);
+            if (mode == 2 || mode == 3) {
+                const uint32_t dst = (32 * GetBlockNum() + core * out_stride + i * packet_bytes) / 2;
+                Fixpipe(c_gm[dst], c_l0, fp);
+            } else {
+                const uint32_t dst = (32 * GetBlockNum() + core * out_stride + i * packet_bytes) / 4;
+                Fixpipe(c_fp32_gm[dst], c_l0, fp);
+            }
             PipeBarrier<PIPE_FIX>();
         }
     }

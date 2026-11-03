@@ -161,6 +161,37 @@ int main() {
     assert(source_finalized.nd2nz_a);
     assert(std::isfinite(mmopt::ReducedObjectiveUs(
         long_k, long_hardware, source_split)));
+
+    // For K=516*128 and two AICs, both step=1 and step=3 assign 258
+    // baseK slices to the critical AIC. Converted-A L1 grouping changes
+    // two-operand startup count from 516 to 172, while the unconverted
+    // path retains the previous per-baseK startup surrogate.
+    auto read_startup_hardware = TestHardware();
+    read_startup_hardware.workspace_limit_bytes = 512ULL * 1024 * 1024;
+    read_startup_hardware.primitives["gm_read"] = {"bytes", 1.0, 1e12};
+    read_startup_hardware.primitives["cube"].rate_per_us = 1e12;
+    read_startup_hardware.primitives["vector_add"].rate_per_us = 1e12;
+    const mmopt::Workload grouped_k{128, 128, 516 * 128, "fp16"};
+    mmopt::PlanDecision grouped_step = source_split;
+    grouped_step.used_cores = 2;
+    grouped_step.single_core_m = grouped_step.single_core_n = 128;
+    grouped_step.step_k = 1;
+    grouped_step.single_core_k = 128;
+    const double per_slice = mmopt::ReducedObjectiveUs(
+        grouped_k, read_startup_hardware, grouped_step);
+    grouped_step.step_k = 3;
+    grouped_step.single_core_k = 384;
+    const double grouped = mmopt::ReducedObjectiveUs(
+        grouped_k, read_startup_hardware, grouped_step);
+    assert(Equal(per_slice - grouped, 344.0));
+    const mmopt::Workload unconverted_k{128, 128, 18 * 128, "fp16"};
+    const double unconverted_grouped = mmopt::ReducedObjectiveUs(
+        unconverted_k, read_startup_hardware, grouped_step);
+    grouped_step.step_k = 1;
+    grouped_step.single_core_k = 128;
+    const double unconverted_per_slice = mmopt::ReducedObjectiveUs(
+        unconverted_k, read_startup_hardware, grouped_step);
+    assert(Equal(unconverted_grouped, unconverted_per_slice));
     const mmopt::MipTileDomain long_grid{{384}, {256}, {128}, {128}};
     const auto source_geometry = mmopt::SolveReducedMip(
         long_k, long_hardware, {}, long_grid);
@@ -531,6 +562,254 @@ int main() {
     assert(compute_bound.winner &&
            compute_bound.winner->decision.family ==
                mmopt::KernelFamily::DeterministicSplitK);
+
+    // FP16/BF16 single-core Split-K uses spatial AIC assignment. The K=1536
+    // MKN/NKM host channels select distinct source block orders.
+    auto bf16_hardware = TestHardware();
+    bf16_hardware.workspace_limit_bytes = 256ULL * 1024 * 1024;
+    const mmopt::Workload mkn_small_k{384, 49152, 1536, "bf16"};
+    const mmopt::MipTileDomain mkn_grid{{384}, {3072}, {128}, {128}};
+    const auto mode2 = mmopt::SolveReducedMip(mkn_small_k, bf16_hardware,
+                                               {}, mkn_grid);
+    assert(mode2.single_core_split_k_mode2);
+    assert(!mode2.single_core_split_k_mode5);
+    assert(!mode2.single_core_split_k_mode6);
+    assert(mode2.single_core_split_k_mode2->candidate.tiling_key ==
+           "(0,2,0,1,0,0)");
+    assert(mode2.single_core_split_k_mode2->decision.step_m == 3);
+    assert(Equal(mode2.single_core_split_k_mode2->surrogate_us,
+                 mmopt::ReducedObjectiveUs(mkn_small_k, bf16_hardware,
+                     mode2.single_core_split_k_mode2->decision)));
+    assert(!mode2.single_core_split_k_mode2->event_graph_score);
+    auto fp16_mkn_small_k = mkn_small_k;
+    fp16_mkn_small_k.dtype = "fp16";
+    const auto fp16_mode2 = mmopt::SolveReducedMip(fp16_mkn_small_k,
+                                                   bf16_hardware, {}, mkn_grid);
+    assert(fp16_mode2.single_core_split_k_mode2);
+    assert(Equal(fp16_mode2.single_core_split_k_mode2->surrogate_us,
+                 mode2.single_core_split_k_mode2->surrogate_us));
+
+    const mmopt::Workload nkm_small_k{49152, 384, 1536, "bf16"};
+    const mmopt::MipTileDomain nkm_grid{{384}, {384}, {128}, {128}};
+    const auto mode5 = mmopt::SolveReducedMip(nkm_small_k, bf16_hardware,
+                                               {}, nkm_grid);
+    assert(mode5.single_core_split_k_mode5);
+    assert(mode5.single_core_split_k_mode5->candidate.tiling_key ==
+           "(0,5,0,1,0,0)");
+    assert(mode5.single_core_split_k_mode5->decision.step_n == 3);
+    assert(Equal(mode5.single_core_split_k_mode5->surrogate_us,
+                 mmopt::ReducedObjectiveUs(nkm_small_k, bf16_hardware,
+                     mode5.single_core_split_k_mode5->decision)));
+    auto fp16_nkm_small_k = nkm_small_k;
+    fp16_nkm_small_k.dtype = "fp16";
+    const auto fp16_mode5 = mmopt::SolveReducedMip(fp16_nkm_small_k,
+                                                   bf16_hardware, {}, nkm_grid);
+    assert(fp16_mode5.single_core_split_k_mode5);
+    assert(Equal(fp16_mode5.single_core_split_k_mode5->surrogate_us,
+                 mode5.single_core_split_k_mode5->surrogate_us));
+    // The 910B3 source-in-context mode-5 profile exposes the many
+    // IterateAll calls of a small spatial tile. The paired device run
+    // measured 2464x384 faster than 128x128 at this shape.
+    auto contextual_mode5 = measured_profile;
+    contextual_mode5.workspace_limit_bytes = 512ULL * 1024 * 1024;
+    contextual_mode5.primitives["sc_mode5_fixpipe"] =
+        {"bytes", 0.0, 108000.0};
+    contextual_mode5.primitives["sc_mode5_iterate"] =
+        {"count", 1.8, 1.0};
+    mmopt::PlanDecision large_mode5 = fp16_mode5.single_core_split_k_mode5->decision;
+    large_mode5.used_cores = 20;
+    large_mode5.single_core_m = 2464;
+    large_mode5.single_core_n = 384;
+    auto small_mode5 = large_mode5;
+    small_mode5.single_core_m = small_mode5.single_core_n = 128;
+    assert(mmopt::ReducedObjectiveUs(fp16_nkm_small_k, contextual_mode5,
+               large_mode5) <
+           mmopt::ReducedObjectiveUs(fp16_nkm_small_k, contextual_mode5,
+               small_mode5));
+    const mmopt::MipTileDomain contextual_grid{{128, 2464}, {128, 384}, {128}, {128}};
+    const auto contextual_choice = mmopt::SolveReducedMip(
+        fp16_nkm_small_k, contextual_mode5, {}, contextual_grid);
+    assert(contextual_choice.single_core_split_k_mode5);
+    assert(contextual_choice.single_core_split_k_mode5->decision.single_core_m == 2464);
+    assert(contextual_choice.single_core_split_k_mode5->decision.single_core_n == 384);
+    auto without_fp16_mode5 = contextual_mode5;
+    without_fp16_mode5.primitives.erase("sc_mode5_fixpipe");
+    without_fp16_mode5.primitives.erase("sc_mode5_iterate");
+    assert(Equal(mmopt::ReducedObjectiveUs(nkm_small_k, contextual_mode5,
+                     large_mode5),
+                 mmopt::ReducedObjectiveUs(nkm_small_k, without_fp16_mode5,
+                     large_mode5)));
+    // For 128 identical NK33 tiles on one AIC the source assignment and
+    // two-stage recurrence have this closed form. This checks the compressed
+    // tile repetition independently of the solver's selected core count.
+    auto one_aic_nkm = mode5.single_core_split_k_mode5->decision;
+    one_aic_nkm.used_cores = 1;
+    const double m = 384.0, n = 384.0, k = 384.0;
+    const double input_bytes = 2.0 * k * (m * 3.0 + n * 3.0);
+    const auto& read = bf16_hardware.primitives.at("gm_read");
+    const auto& write = bf16_hardware.primitives.at("gm_write");
+    const auto& cube = bf16_hardware.primitives.at("cube");
+    const double slice = std::max(2.0 * m * n * k / cube.rate_per_us,
+        input_bytes / read.rate_per_us + 2.0 * 3.0 * 3.0 * 3.0 *
+        read.fixed_latency_us + 4.0 * m * n / write.rate_per_us +
+        9.0 * write.fixed_latency_us);
+    const double cube_tile = 4.0 * slice;
+    const double cast_tile = bf16_hardware.primitives.at("sync").fixed_latency_us +
+        4.0 * 192.0 * n / read.rate_per_us +
+        2.0 * 192.0 * n / write.rate_per_us + write.fixed_latency_us;
+    const double repeated_tiles =
+        bf16_hardware.primitives.at("launch").fixed_latency_us +
+        cube_tile + cast_tile + 127.0 * std::max(cube_tile, cast_tile);
+    assert(Equal(repeated_tiles, mmopt::ReducedObjectiveUs(
+        nkm_small_k, bf16_hardware, one_aic_nkm)));
+
+    const mmopt::Workload long_bf16{2048, 3072, 32768, "bf16"};
+    const mmopt::MipTileDomain long_bf16_grid{{384, 512}, {512, 768}, {128}, {128}};
+    const auto mode6 = mmopt::SolveReducedMip(long_bf16, bf16_hardware,
+                                               {}, long_bf16_grid);
+    assert(mode6.single_core_split_k_mode6);
+    assert(mode6.single_core_split_k_mode2);
+    assert(mode6.single_core_split_k_mode6->candidate.tiling_key ==
+           "(0,6,0,1,0,0)");
+    assert(Equal(mode6.single_core_split_k_mode6->surrogate_us,
+                 mmopt::ReducedObjectiveUs(long_bf16, bf16_hardware,
+                     mode6.single_core_split_k_mode6->decision)));
+    assert(mode6.winner && mode6.winner->surrogate_us <=
+           mode6.single_core_split_k_mode6->surrogate_us);
+    auto long_fp16 = long_bf16;
+    long_fp16.dtype = "fp16";
+    const auto fp16_mode6 = mmopt::SolveReducedMip(long_fp16, bf16_hardware,
+                                                    {}, long_bf16_grid);
+    assert(fp16_mode6.single_core_split_k_mode6);
+    assert(Equal(fp16_mode6.single_core_split_k_mode6->surrogate_us,
+                 mode6.single_core_split_k_mode6->surrogate_us));
+    auto measured_paths = bf16_hardware;
+    measured_paths.primitives["sc_fp32_store"] = {"bytes", 0.2, 100000.0};
+    measured_paths.primitives["sc_atomic_extra"] = {"bytes", 0.05, 100000.0};
+    measured_paths.primitives["sc_cast"] = {"elements", 0.01, 100000.0};
+    measured_paths.primitives["sc_gm_to_l1_a"] = {"bytes", 0.25, 250000.0};
+    measured_paths.primitives["sc_gm_to_l1_b"] = {"bytes", 0.05, 125000.0};
+    assert(mmopt::ReducedObjectiveUs(long_fp16, measured_paths,
+               fp16_mode6.single_core_split_k_mode6->decision) >
+           fp16_mode6.single_core_split_k_mode6->surrogate_us);
+    assert(mmopt::ReducedObjectiveUs(fp16_mkn_small_k, measured_paths,
+               fp16_mode2.single_core_split_k_mode2->decision) >
+           fp16_mode2.single_core_split_k_mode2->surrogate_us);
+    // The serialized FP32 probe is still used for the first mode-6 packet.
+    // The steady primitive is total atomic-output demand, so changing the
+    // separate incremental atomic field cannot affect it or modes 2/5.
+    auto slow_mode6_output = measured_paths;
+    slow_mode6_output.primitives["sc_fp32_store_steady"] = {"bytes", 0.0, 10000.0};
+    assert(mmopt::ReducedObjectiveUs(long_fp16, slow_mode6_output,
+               fp16_mode6.single_core_split_k_mode6->decision) >
+           mmopt::ReducedObjectiveUs(long_fp16, measured_paths,
+               fp16_mode6.single_core_split_k_mode6->decision));
+    assert(Equal(mmopt::ReducedObjectiveUs(fp16_mkn_small_k, slow_mode6_output,
+                     fp16_mode2.single_core_split_k_mode2->decision),
+                 mmopt::ReducedObjectiveUs(fp16_mkn_small_k, measured_paths,
+                     fp16_mode2.single_core_split_k_mode2->decision)));
+    assert(Equal(mmopt::ReducedObjectiveUs(fp16_nkm_small_k, slow_mode6_output,
+                     fp16_mode5.single_core_split_k_mode5->decision),
+                 mmopt::ReducedObjectiveUs(fp16_nkm_small_k, measured_paths,
+                     fp16_mode5.single_core_split_k_mode5->decision)));
+    auto altered_atomic = slow_mode6_output;
+    altered_atomic.primitives["sc_atomic_extra"] = {"bytes", 9.0, 1.0};
+    assert(Equal(mmopt::ReducedObjectiveUs(long_fp16, altered_atomic,
+                     fp16_mode6.single_core_split_k_mode6->decision),
+                 mmopt::ReducedObjectiveUs(long_fp16, slow_mode6_output,
+                     fp16_mode6.single_core_split_k_mode6->decision)));
+    slow_mode6_output.primitives["sc_fp32_store_steady"] =
+        {"bytes", 0.1, 0.0};
+    try {
+        (void)mmopt::ReducedObjectiveUs(long_fp16, slow_mode6_output,
+                fp16_mode6.single_core_split_k_mode6->decision);
+        assert(false);
+    } catch (const std::invalid_argument&) {}
+    measured_paths.primitives.erase("sc_gm_to_l1_b");
+    try {
+        (void)mmopt::ReducedObjectiveUs(long_fp16, measured_paths,
+                fp16_mode6.single_core_split_k_mode6->decision);
+        assert(false);
+    } catch (const std::invalid_argument&) {}
+
+    // A short M side forces the source's stepM=1 block. Its tiler still
+    // declares 512 KiB of L1 depth, even when the mode-6 kernel uses
+    // fewer active A slots.
+    const mmopt::Workload short_m_bf16{256, 8192, 32768, "bf16"};
+    mmopt::PlanDecision short_block;
+    short_block.family = mmopt::KernelFamily::SingleCoreSplitKMode6;
+    short_block.used_cores = 20;
+    short_block.single_core_m = 128;
+    short_block.single_core_n = 512;
+    short_block.base_m = short_block.base_n = short_block.base_k = 128;
+    short_block.step_m = short_block.step_n = 1;
+    short_block.step_k = 4;
+    short_block.single_core_k = 512;
+    (void)mmopt::FinalizePlan(short_m_bf16, bf16_hardware,
+                              short_block, "short_block");
+    auto too_small_l1 = mmopt::CoreMemory{};
+    too_small_l1.l1_bytes = 400ULL * 1024;
+    try {
+        (void)mmopt::FinalizePlan(short_m_bf16, bf16_hardware,
+                                  short_block, "short_block", too_small_l1);
+        assert(false);
+    } catch (const std::invalid_argument&) {}
+    short_block.step_m = 2;
+    try {
+        (void)mmopt::FinalizePlan(short_m_bf16, bf16_hardware,
+                                  short_block, "short_block");
+        assert(false);
+    } catch (const std::invalid_argument&) {}
+
+    // Compare compressed full/tail tile composition with an independently
+    // expanded source-order pipeline across five contiguous AIC ranges.
+    const mmopt::Workload tail_bf16{2000, 3072, 32768, "bf16"};
+    mmopt::PlanDecision tail_mode2;
+    tail_mode2.family = mmopt::KernelFamily::SingleCoreSplitKMode2;
+    tail_mode2.used_cores = 5;
+    tail_mode2.single_core_m = 256;
+    tail_mode2.single_core_n = 512;
+    tail_mode2.base_m = tail_mode2.base_n = tail_mode2.base_k = 128;
+    tail_mode2.step_m = 2;
+    tail_mode2.step_n = 1;
+    tail_mode2.step_k = 4;
+    tail_mode2.single_core_k = 512;
+    const auto panel_services = [&](double rows) {
+        const double mb = std::ceil(rows / 128.0), nb = 4.0;
+        const double bytes = 2.0 * 512.0 * (rows * nb + 512.0 * mb);
+        const double one_slice = std::max(
+            2.0 * rows * 512.0 * 512.0 / cube.rate_per_us,
+            bytes / read.rate_per_us + 2.0 * mb * nb * 4.0 *
+            read.fixed_latency_us + 4.0 * rows * 512.0 /
+            write.rate_per_us + mb * nb * write.fixed_latency_us);
+        const double shard = std::ceil(rows / 2.0) * 512.0;
+        const double cast = bf16_hardware.primitives.at("sync").fixed_latency_us +
+            4.0 * shard / read.rate_per_us + 2.0 * shard /
+            write.rate_per_us + write.fixed_latency_us;
+        return std::pair<double, double>{64.0 * one_slice, cast};
+    };
+    double expanded_critical = 0.0;
+    for (std::uint64_t q = 0; q < 5; ++q) {
+        const std::uint64_t start = q < 3 ? q * 10 : q * 9 + 3;
+        const std::uint64_t count = q < 3 ? 10 : 9;
+        double cube_done = 0.0, vector_done = 0.0;
+        for (std::uint64_t index = start; index < start + count; ++index) {
+            const auto services = panel_services(index % 8 == 7 ? 208.0 : 256.0);
+            cube_done += services.first;
+            vector_done = std::max(cube_done, vector_done) + services.second;
+        }
+        expanded_critical = std::max(expanded_critical, vector_done);
+    }
+    assert(Equal(bf16_hardware.primitives.at("launch").fixed_latency_us +
+                     expanded_critical,
+                 mmopt::ReducedObjectiveUs(tail_bf16, bf16_hardware,
+                                            tail_mode2)));
+
+    auto insufficient = bf16_hardware;
+    insufficient.workspace_limit_bytes = 21ULL * 1024 * 1024;
+    const auto no_workspace = mmopt::SolveReducedMip(nkm_small_k,
+                                                      insufficient, {}, nkm_grid);
+    assert(!no_workspace.single_core_split_k_mode5);
 
     std::cout << "mmopt_mip_tests passed\n";
 }

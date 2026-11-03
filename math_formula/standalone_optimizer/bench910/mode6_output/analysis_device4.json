@@ -1,0 +1,159 @@
+{
+  "device": 4,
+  "isolated_streams": [
+    {
+      "n_tiles": 8,
+      "serial_barrier": 0,
+      "plain_us_per_k": 24.25979202083333,
+      "atomic_us_per_k": 34.380000083333336,
+      "atomic_increment_us_per_k": 10.120208062500005
+    },
+    {
+      "n_tiles": 8,
+      "serial_barrier": 1,
+      "plain_us_per_k": 24.396667260416667,
+      "atomic_us_per_k": 34.62864519791666,
+      "atomic_increment_us_per_k": 10.231977937499995
+    },
+    {
+      "n_tiles": 12,
+      "serial_barrier": 0,
+      "plain_us_per_k": 35.94348829166667,
+      "atomic_us_per_k": 52.01054798958334,
+      "atomic_increment_us_per_k": 16.06705969791667
+    },
+    {
+      "n_tiles": 12,
+      "serial_barrier": 1,
+      "plain_us_per_k": 35.951977604166665,
+      "atomic_us_per_k": 51.942290729166665,
+      "atomic_increment_us_per_k": 15.990313125
+    }
+  ],
+  "distinct_vs_repeated_atomic_k4_us": [
+    {
+      "n_tiles": 8,
+      "distinct": 141.276248,
+      "repeated": 140.7462435
+    },
+    {
+      "n_tiles": 12,
+      "distinct": 211.227499,
+      "repeated": 210.982494
+    }
+  ],
+  "source_wide_fixpipe_total_rate_bytes_per_us": 90958.67557085735,
+  "source_wide_shape_bootstrap_95pct": [
+    89666.19971597682,
+    92280.43410019287
+  ],
+  "source_wide_metrics": [
+    {
+      "shape": [
+        2048,
+        2048,
+        27392
+      ],
+      "round": 0,
+      "fixpipe_us": 503.4275,
+      "mac_us": 821.282,
+      "mte2_us": 900.942,
+      "kernel_us": 1073.324
+    },
+    {
+      "shape": [
+        2048,
+        2048,
+        27392
+      ],
+      "round": 1,
+      "fixpipe_us": 499.74,
+      "mac_us": 821.2755,
+      "mte2_us": 897.2675,
+      "kernel_us": 1071.81
+    },
+    {
+      "shape": [
+        2048,
+        2048,
+        32768
+      ],
+      "round": 0,
+      "fixpipe_us": 614.0855,
+      "mac_us": 983.3154999999999,
+      "mte2_us": 1235.837,
+      "kernel_us": 1456.63
+    },
+    {
+      "shape": [
+        2048,
+        2048,
+        32768
+      ],
+      "round": 1,
+      "fixpipe_us": 610.3295,
+      "mac_us": 983.2265,
+      "mte2_us": 1215.1415,
+      "kernel_us": 1442.7800000000002
+    },
+    {
+      "shape": [
+        2048,
+        3072,
+        27392
+      ],
+      "round": 0,
+      "fixpipe_us": 745.8875,
+      "mac_us": 1231.762,
+      "mte2_us": 1333.9395,
+      "kernel_us": 1597.3000000000002
+    },
+    {
+      "shape": [
+        2048,
+        3072,
+        27392
+      ],
+      "round": 1,
+      "fixpipe_us": 745.711,
+      "mac_us": 1231.7735,
+      "mte2_us": 1331.49,
+      "kernel_us": 1596.58
+    },
+    {
+      "shape": [
+        2048,
+        3072,
+        32768
+      ],
+      "round": 0,
+      "fixpipe_us": 902.617,
+      "mac_us": 1474.3545,
+      "mte2_us": 1768.425,
+      "kernel_us": 2083.85
+    },
+    {
+      "shape": [
+        2048,
+        3072,
+        32768
+      ],
+      "round": 1,
+      "fixpipe_us": 905.248,
+      "mac_us": 1474.4074999999998,
+      "mte2_us": 1779.8375,
+      "kernel_us": 2098.38
+    }
+  ],
+  "holdout": {
+    "shape": [
+      2048,
+      4096,
+      32768
+    ],
+    "fixpipe_measured_us": 1226.44975,
+    "fixpipe_predicted_us": 1198.9170171574006,
+    "relative_error_pct": -2.2449132418673856,
+    "kernel_measured_us": 2706.2200000000003
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "suite": "splitk_family_heldout_device4_v2",
+  "device": 4,
+  "dtype": "fp16",
+  "layout": "ND_ND_ND_NN",
+  "rounds": 2,
+  "repetitions_per_round": 8,
+  "warmups_per_run": 10,
+  "seed": 20261031,
+  "eligibility": "Both forced source branches execute correctly and default is mode 2, 3, 5, or 6; report all audited exclusions.",
+  "shapes": [
+    [1792, 896, 32768],
+    [2048, 896, 32768],
+    [2304, 768, 32768],
+    [2560, 768, 40960],
+    [1792, 1024, 40960],
+    [2048, 1024, 40960],
+    [2304, 1024, 32768],
+    [2560, 1024, 32768],
+    [1536, 1536, 40960],
+    [1792, 1792, 32768],
+    [2304, 1536, 36864],
+    [2560, 2048, 32768],
+    [3072, 2048, 40960],
+    [2048, 2560, 36864],
+    [2560, 3072, 40960],
+    [3072, 3584, 32768]
+  ]
+}

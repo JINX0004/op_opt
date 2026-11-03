@@ -1,0 +1,180 @@
+{
+  "n_shapes": 8,
+  "mip_family_accuracy": 0.375,
+  "default_family_accuracy": 0.875,
+  "mip_vs_default_geomean_speedup": 0.9257819555447196,
+  "mip_vs_default_cluster_bootstrap_95pct": [
+    0.8570722292122053,
+    1.0
+  ],
+  "median_mip_regret_pct": 14.07015699437486,
+  "median_default_regret_pct": 0.0,
+  "by_regime": {
+    "below_l2": {
+      "n_shapes": 4,
+      "geomean_speedup": 1.0,
+      "family_accuracy": 0.75,
+      "default_family_accuracy": 0.75
+    },
+    "above_l2": {
+      "n_shapes": 4,
+      "geomean_speedup": 0.8570722292122053,
+      "family_accuracy": 0.0,
+      "default_family_accuracy": 1.0
+    }
+  },
+  "records": [
+    {
+      "shape": [
+        1792,
+        768,
+        27392
+      ],
+      "selected": "deterministic",
+      "default_mode": 3,
+      "default_us": 388.5,
+      "single_us": 507.17999999999995,
+      "deterministic_us": 388.5,
+      "mip_chosen_us": 388.5,
+      "oracle_us": 388.5,
+      "mip_vs_default_speedup": 1.0,
+      "mip_regret_pct": 0.0,
+      "mip_correct": true,
+      "default_regret_pct": 0.0,
+      "default_correct": true
+    },
+    {
+      "shape": [
+        2048,
+        768,
+        27392
+      ],
+      "selected": "deterministic",
+      "default_mode": 3,
+      "default_us": 464.76,
+      "single_us": 511.091,
+      "deterministic_us": 464.76,
+      "mip_chosen_us": 464.76,
+      "oracle_us": 464.76,
+      "mip_vs_default_speedup": 1.0,
+      "mip_regret_pct": 0.0,
+      "mip_correct": true,
+      "default_regret_pct": 0.0,
+      "default_correct": true
+    },
+    {
+      "shape": [
+        1792,
+        768,
+        32768
+      ],
+      "selected": "deterministic",
+      "default_mode": 3,
+      "default_us": 574.04,
+      "single_us": 642.655,
+      "deterministic_us": 574.04,
+      "mip_chosen_us": 574.04,
+      "oracle_us": 574.04,
+      "mip_vs_default_speedup": 1.0,
+      "mip_regret_pct": 0.0,
+      "mip_correct": true,
+      "default_regret_pct": 0.0,
+      "default_correct": true
+    },
+    {
+      "shape": [
+        2048,
+        768,
+        32768
+      ],
+      "selected": "deterministic",
+      "default_mode": 3,
+      "default_us": 747.2149999999999,
+      "single_us": 654.1949999999999,
+      "deterministic_us": 747.2149999999999,
+      "mip_chosen_us": 747.2149999999999,
+      "oracle_us": 654.1949999999999,
+      "mip_vs_default_speedup": 1.0,
+      "mip_regret_pct": 14.219001979532099,
+      "mip_correct": false,
+      "default_regret_pct": 14.219001979532099,
+      "default_correct": false
+    },
+    {
+      "shape": [
+        2048,
+        2048,
+        27392
+      ],
+      "selected": "deterministic",
+      "default_mode": 6,
+      "default_us": 1072.567,
+      "single_us": 1072.567,
+      "deterministic_us": 1251.806,
+      "mip_chosen_us": 1251.806,
+      "oracle_us": 1072.567,
+      "mip_vs_default_speedup": 0.8568156727160599,
+      "mip_regret_pct": 16.711217108115385,
+      "mip_correct": false,
+      "default_regret_pct": 0.0,
+      "default_correct": true
+    },
+    {
+      "shape": [
+        2048,
+        3072,
+        27392
+      ],
+      "selected": "deterministic",
+      "default_mode": 6,
+      "default_us": 1596.94,
+      "single_us": 1596.94,
+      "deterministic_us": 1819.2549999999999,
+      "mip_chosen_us": 1819.2549999999999,
+      "oracle_us": 1596.94,
+      "mip_vs_default_speedup": 0.8777988792115454,
+      "mip_regret_pct": 13.921312009217623,
+      "mip_correct": false,
+      "default_regret_pct": 0.0,
+      "default_correct": true
+    },
+    {
+      "shape": [
+        2048,
+        2048,
+        32768
+      ],
+      "selected": "deterministic",
+      "default_mode": 6,
+      "default_us": 1449.7050000000002,
+      "single_us": 1449.7050000000002,
+      "deterministic_us": 1717.46,
+      "mip_chosen_us": 1717.46,
+      "oracle_us": 1449.7050000000002,
+      "mip_vs_default_speedup": 0.8440982613860003,
+      "mip_regret_pct": 18.469619681245476,
+      "mip_correct": false,
+      "default_regret_pct": 0.0,
+      "default_correct": true
+    },
+    {
+      "shape": [
+        2048,
+        3072,
+        32768
+      ],
+      "selected": "deterministic",
+      "default_mode": 6,
+      "default_us": 2091.115,
+      "single_us": 2091.115,
+      "deterministic_us": 2460.275,
+      "mip_chosen_us": 2460.275,
+      "oracle_us": 2091.115,
+      "mip_vs_default_speedup": 0.8499517330379732,
+      "mip_regret_pct": 17.653739751281037,
+      "mip_correct": false,
+      "default_regret_pct": 0.0,
+      "default_correct": true
+    }
+  ]
+}

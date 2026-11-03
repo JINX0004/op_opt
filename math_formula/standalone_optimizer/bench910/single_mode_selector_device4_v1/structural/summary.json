@@ -1,0 +1,22 @@
+[
+  {
+    "shape": [
+      49152,
+      384,
+      1536
+    ],
+    "returncode": 0,
+    "mode": 5,
+    "max_relative_error": 0.0
+  },
+  {
+    "shape": [
+      384,
+      49152,
+      1536
+    ],
+    "returncode": 0,
+    "mode": 2,
+    "max_relative_error": 0.0
+  }
+]

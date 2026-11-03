@@ -1,0 +1,166 @@
+[
+  {
+    "shape": [
+      2048,
+      2048,
+      27392
+    ],
+    "source_tile": [
+      208,
+      1024
+    ],
+    "actual_mode6_us": 1072.567,
+    "actual_deterministic_us": 1251.806,
+    "native_mode6_us": 2502.67264,
+    "native_deterministic_us": 1668.57947,
+    "baseline": {
+      "packets": 54,
+      "copy_full_us": 10.678244692136598,
+      "cube_full_us": 14.817406541230667,
+      "plain_store_us": 28.809831178707224,
+      "atomic_extra_us": 8.85644582340693,
+      "mac_atomic_us": 37.66627700211416,
+      "copy_residual_us": 8.826068874482765,
+      "vector_us": 1.346150242114828,
+      "total_us": 2502.672635226527
+    },
+    "deterministic_baseline": {
+      "panels": 6,
+      "cube_full_panel_us": 164.13127245670893,
+      "read_bytes_full_panel_us": 181.4413278809944,
+      "read_fixed_full_panel_us": 126.28224,
+      "vector_full_panel_us": 24.956145000000003,
+      "total_us": 1668.5794740319702
+    },
+    "deterministic_no_read_fixed_us": 995.0741940319703,
+    "ablations_us": {
+      "no_atomic": 2033.2810065859599,
+      "generic_store": 1274.4934071484213,
+      "copy_fully_hidden": 2039.826907225009,
+      "generic_store_copy_hidden": 811.647679146903
+    }
+  },
+  {
+    "shape": [
+      2048,
+      3072,
+      27392
+    ],
+    "source_tile": [
+      208,
+      1536
+    ],
+    "actual_mode6_us": 1596.94,
+    "actual_deterministic_us": 1819.2549999999999,
+    "native_mode6_us": 3763.70405,
+    "native_deterministic_us": 2489.23792,
+    "baseline": {
+      "packets": 54,
+      "copy_full_us": 15.311717158215236,
+      "cube_full_us": 22.226109811846,
+      "plain_store_us": 43.214746768060834,
+      "atomic_extra_us": 13.284668735110394,
+      "mac_atomic_us": 56.49941550317123,
+      "copy_residual_us": 13.459541340561403,
+      "vector_us": 1.8801323631722417,
+      "total_us": 3763.7040504281704
+    },
+    "deterministic_baseline": {
+      "panels": 6,
+      "cube_full_panel_us": 246.1969086850634,
+      "read_bytes_full_panel_us": 272.1619918214916,
+      "read_fixed_full_panel_us": 189.42336,
+      "vector_full_panel_us": 25.142934000000004,
+      "total_us": 2489.237918047955
+    },
+    "deterministic_no_read_fixed_us": 1478.9799980479552,
+    "ablations_us": {
+      "no_atomic": 3059.6166074673188,
+      "generic_store": 1921.4352083110111,
+      "copy_fully_hidden": 3057.5556179575233,
+      "generic_store_copy_hidden": 1215.2867758403647
+    }
+  },
+  {
+    "shape": [
+      2048,
+      2048,
+      32768
+    ],
+    "source_tile": [
+      208,
+      1024
+    ],
+    "actual_mode6_us": 1449.7050000000002,
+    "actual_deterministic_us": 1717.46,
+    "native_mode6_us": 2972.53202,
+    "native_deterministic_us": 2026.87569,
+    "baseline": {
+      "packets": 64,
+      "copy_full_us": 10.678244692136598,
+      "cube_full_us": 14.817406541230667,
+      "plain_store_us": 28.809831178707224,
+      "atomic_extra_us": 8.85644582340693,
+      "mac_atomic_us": 37.66627700211416,
+      "copy_residual_us": 8.826068874482765,
+      "vector_us": 1.346150242114828,
+      "total_us": 2972.532016338564
+    },
+    "deterministic_baseline": {
+      "panels": 6,
+      "cube_full_panel_us": 205.16409057088615,
+      "read_bytes_full_panel_us": 217.0513081193204,
+      "read_fixed_full_panel_us": 157.8528,
+      "vector_full_panel_us": 24.956145000000003,
+      "total_us": 2026.8756886363758
+    },
+    "deterministic_no_read_fixed_us": 1184.9940886363756,
+    "ablations_us": {
+      "no_atomic": 2414.575929463927,
+      "generic_store": 1519.0607526654285,
+      "copy_fully_hidden": 2416.4896772461498,
+      "generic_store_copy_hidden": 963.0184135730142
+    }
+  },
+  {
+    "shape": [
+      2048,
+      3072,
+      32768
+    ],
+    "source_tile": [
+      208,
+      1536
+    ],
+    "actual_mode6_us": 2091.115,
+    "actual_deterministic_us": 2460.275,
+    "native_mode6_us": 4470.50088,
+    "native_deterministic_us": 3026.68224,
+    "baseline": {
+      "packets": 64,
+      "copy_full_us": 15.311717158215236,
+      "cube_full_us": 22.226109811846,
+      "plain_store_us": 43.214746768060834,
+      "atomic_extra_us": 13.284668735110394,
+      "mac_atomic_us": 56.49941550317123,
+      "copy_residual_us": 13.459541340561403,
+      "vector_us": 1.8801323631722417,
+      "total_us": 4470.500877444604
+    },
+    "deterministic_baseline": {
+      "panels": 6,
+      "cube_full_panel_us": 307.74613585632926,
+      "read_bytes_full_panel_us": 325.57696217898064,
+      "read_fixed_full_panel_us": 236.7792,
+      "vector_full_panel_us": 25.142934000000004,
+      "total_us": 3026.682239954563
+    },
+    "deterministic_no_read_fixed_us": 1763.8598399545635,
+    "ablations_us": {
+      "no_atomic": 3633.5667471326487,
+      "generic_store": 2290.2939819349,
+      "copy_fully_hidden": 3622.549772989236,
+      "generic_store_copy_hidden": 1442.3428774795316
+    }
+  }
+]

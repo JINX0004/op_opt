@@ -1,0 +1,105 @@
+[
+  {
+    "shape_index": 39,
+    "shape": [
+      65536,
+      256,
+      1536
+    ],
+    "arms": {
+      "default": {
+        "mode": 0,
+        "tiling": {
+          "baseK": 64,
+          "baseM": 128,
+          "baseN": 256,
+          "block_dim": 20,
+          "depthA1": 16,
+          "depthB1": 8,
+          "estimated_nonidle_aics": 20,
+          "family": "BASE",
+          "kValue": 1536,
+          "kind": "matmul_v3_tiling",
+          "mValue": 65536,
+          "nValue": 256,
+          "nd2nzA": 0,
+          "nd2nzB": 0,
+          "output_tiles": 512,
+          "plog": "/home/xianfei/ascend/log/debug/plog/plog-2799796_20261103120421437.log",
+          "singleCoreK": 1536,
+          "singleCoreM": 128,
+          "singleCoreN": 256,
+          "stepKa": 8,
+          "stepKb": 4,
+          "stepM": 1,
+          "stepN": 1,
+          "tilingEnableFixOpti": 0,
+          "tilingEnableFullLoad": 0,
+          "tilingEnableSplitCore": 0,
+          "tiling_key": 65536,
+          "tiling_source": "/home/xianfei/dev/ops-nn-sribd-master-bf16/matmul/mat_mul_v3/op_host/op_tiling/matmul_v3_l2_cache.cpp",
+          "workspace_bytes": 20971520
+        },
+        "max_relative_error": 0.0,
+        "times_us": [
+          238.13600000000002,
+          255.964,
+          254.096,
+          242.516,
+          238.402,
+          238.574,
+          249.31400000000002,
+          241.786
+        ],
+        "median_us": 242.151
+      },
+      "online": {
+        "mode": 0,
+        "tiling": {
+          "baseK": 64,
+          "baseM": 128,
+          "baseN": 256,
+          "block_dim": 20,
+          "depthA1": 16,
+          "depthB1": 8,
+          "estimated_nonidle_aics": 20,
+          "family": "BASE",
+          "kValue": 1536,
+          "kind": "matmul_v3_tiling",
+          "mValue": 65536,
+          "nValue": 256,
+          "nd2nzA": 0,
+          "nd2nzB": 0,
+          "output_tiles": 512,
+          "plog": "/home/xianfei/ascend/log/debug/plog/plog-2801296_20261103120442440.log",
+          "singleCoreK": 1536,
+          "singleCoreM": 128,
+          "singleCoreN": 256,
+          "stepKa": 8,
+          "stepKb": 4,
+          "stepM": 1,
+          "stepN": 1,
+          "tilingEnableFixOpti": 0,
+          "tilingEnableFullLoad": 0,
+          "tilingEnableSplitCore": 0,
+          "tiling_key": 65536,
+          "tiling_source": "/home/xianfei/dev/ops-nn-sribd-mip-selector/matmul/mat_mul_v3/op_host/op_tiling/matmul_v3_l2_cache.cpp",
+          "workspace_bytes": 20971520
+        },
+        "max_relative_error": 0.0,
+        "times_us": [
+          236.63400000000001,
+          239.534,
+          227.774,
+          232.044,
+          245.814,
+          236.05599999999998,
+          241.184,
+          236.402
+        ],
+        "median_us": 236.518
+      }
+    },
+    "speedup_default_over_online": 1.023816369155836
+  }
+]

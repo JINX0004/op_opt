@@ -1,0 +1,210 @@
+[
+  {
+    "shape": [
+      1792,
+      896,
+      32768
+    ],
+    "modes": {
+      "single": 6,
+      "deterministic": 3,
+      "default": 3
+    },
+    "reasons": []
+  },
+  {
+    "shape": [
+      2048,
+      896,
+      32768
+    ],
+    "modes": {
+      "single": 6,
+      "deterministic": 3,
+      "default": 3
+    },
+    "reasons": []
+  },
+  {
+    "shape": [
+      2304,
+      768,
+      32768
+    ],
+    "modes": {
+      "single": 6,
+      "deterministic": 3,
+      "default": 3
+    },
+    "reasons": []
+  },
+  {
+    "shape": [
+      2560,
+      768,
+      40960
+    ],
+    "modes": {
+      "single": 6,
+      "deterministic": 3,
+      "default": 3
+    },
+    "reasons": []
+  },
+  {
+    "shape": [
+      1792,
+      1024,
+      40960
+    ],
+    "modes": {
+      "single": 6,
+      "deterministic": 3,
+      "default": 3
+    },
+    "reasons": []
+  },
+  {
+    "shape": [
+      2048,
+      1024,
+      40960
+    ],
+    "modes": {
+      "single": 6,
+      "deterministic": 3,
+      "default": 3
+    },
+    "reasons": []
+  },
+  {
+    "shape": [
+      2304,
+      1024,
+      32768
+    ],
+    "modes": {
+      "single": 6,
+      "deterministic": 3,
+      "default": 3
+    },
+    "reasons": []
+  },
+  {
+    "shape": [
+      2560,
+      1024,
+      32768
+    ],
+    "modes": {
+      "single": 6,
+      "deterministic": 3,
+      "default": 3
+    },
+    "reasons": []
+  },
+  {
+    "shape": [
+      1536,
+      1536,
+      40960
+    ],
+    "modes": {
+      "single": 6,
+      "deterministic": 3,
+      "default": 3
+    },
+    "reasons": []
+  },
+  {
+    "shape": [
+      1792,
+      1792,
+      32768
+    ],
+    "modes": {
+      "single": 6,
+      "deterministic": 3,
+      "default": 6
+    },
+    "reasons": []
+  },
+  {
+    "shape": [
+      2304,
+      1536,
+      36864
+    ],
+    "modes": {
+      "single": 6,
+      "deterministic": 3,
+      "default": 6
+    },
+    "reasons": []
+  },
+  {
+    "shape": [
+      2560,
+      2048,
+      32768
+    ],
+    "modes": {
+      "single": 6,
+      "deterministic": 3,
+      "default": 6
+    },
+    "reasons": []
+  },
+  {
+    "shape": [
+      3072,
+      2048,
+      40960
+    ],
+    "modes": {
+      "single": 6,
+      "deterministic": 3,
+      "default": 6
+    },
+    "reasons": []
+  },
+  {
+    "shape": [
+      2048,
+      2560,
+      36864
+    ],
+    "modes": {
+      "single": 6,
+      "deterministic": 3,
+      "default": 6
+    },
+    "reasons": []
+  },
+  {
+    "shape": [
+      2560,
+      3072,
+      40960
+    ],
+    "modes": {
+      "single": 6,
+      "deterministic": 3,
+      "default": 6
+    },
+    "reasons": []
+  },
+  {
+    "shape": [
+      3072,
+      3584,
+      32768
+    ],
+    "modes": {
+      "single": 6,
+      "deterministic": 3,
+      "default": 6
+    },
+    "reasons": []
+  }
+]

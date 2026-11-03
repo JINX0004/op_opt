@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
     const int warmup = std::stoi(argv[5]);
     const int batches = std::stoi(argv[6]);
     const int repetitions = std::stoi(argv[7]);
-    if (mode > 4 || cores < 1 || cores > 20 || packets > 100000 ||
+    if (mode > 6 || cores < 1 || cores > 20 || packets > 100000 ||
         packet_bytes < 32 || packet_bytes > (mode == 4 ? 262144U : 131072U) ||
         packet_bytes % 32 ||
         warmup < 0 || batches < 1 || repetitions < 1) return 2;
@@ -39,12 +39,16 @@ int main(int argc, char** argv) {
     if (mode == 4 && (packets == 0 || packets > 64 ||
                       packet_bytes < 4096 || packet_bytes > 262144 ||
                       packet_bytes % 4096)) return 2;
-    const uint64_t stride = (mode == 2 || mode == 3) ? 65536 :
+    if ((mode == 5 || mode == 6) &&
+        (packets == 0 || packets > 64 || packet_bytes < 8192 ||
+         packet_bytes > 65536 || packet_bytes % 8192)) return 2;
+    const uint64_t stride = (mode == 2 || mode == 3 || mode == 5 || mode == 6) ? 65536 :
         std::max<uint64_t>(32, uint64_t(packets) * packet_bytes);
     const uint64_t bytes = std::max<uint64_t>(32, stride * cores);
     const uint64_t output_bytes = 32ULL * cores +
         (mode == 2 ? 32768ULL * cores :
-         mode == 3 ? uint64_t(cores) * packets * packet_bytes : 0);
+         (mode == 3 || mode == 5 || mode == 6) ?
+             uint64_t(cores) * packets * packet_bytes : 0);
     if (bytes > (1ULL << 30)) return 2;
     try {
         const bool verbose = std::getenv("SOLVEBASE_PROBE_VERBOSE") != nullptr;
@@ -58,7 +62,7 @@ int main(int argc, char** argv) {
         if (verbose) std::cerr << "allocated " << bytes << " input bytes\n";
         Check(aclrtMemset(output, output_bytes, 0, output_bytes), "aclrtMemset(output)");
         std::vector<uint8_t> host(bytes, 1);
-        if (mode == 2 || mode == 3) {
+        if (mode == 2 || mode == 3 || mode == 5 || mode == 6) {
             for (uint64_t i = 0; i < bytes; i += 2) {
                 host[i] = 0; host[i + 1] = 0x3c; // FP16 value 1.0
             }
@@ -122,6 +126,15 @@ int main(int argc, char** argv) {
                 for (uint32_t p = packets; p > 1; p >>= 1) expected += 0x400;
             if (value != expected)
                 throw std::runtime_error("Cube/Fixpipe output mismatch: " +
+                    std::to_string(value) + " != " + std::to_string(expected));
+        } else if (mode == 5 || mode == 6) {
+            float value = 0.0f;
+            auto* matrix = static_cast<uint8_t*>(output) + 32 * cores;
+            Check(aclrtMemcpy(&value, 4, matrix, 4, ACL_MEMCPY_DEVICE_TO_HOST), "FP32 matrix D2H");
+            const float expected = mode == 5 ? 128.0f :
+                128.0f * static_cast<float>(warmup + batches * repetitions);
+            if (value != expected)
+                throw std::runtime_error("FP32 Fixpipe output mismatch: " +
                     std::to_string(value) + " != " + std::to_string(expected));
         }
         aclrtFree(output);

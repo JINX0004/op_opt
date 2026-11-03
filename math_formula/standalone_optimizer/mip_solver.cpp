@@ -21,6 +21,12 @@ namespace {
 
 constexpr double kRpcBytes = 20.0 * 1024.0 * 1024.0;
 
+bool IsSingleCore(KernelFamily family) {
+    return family == KernelFamily::SingleCoreSplitKMode2 ||
+           family == KernelFamily::SingleCoreSplitKMode5 ||
+           family == KernelFamily::SingleCoreSplitKMode6;
+}
+
 std::uint64_t CeilDiv(std::uint64_t x, std::uint64_t y) {
     return x / y + (x % y != 0);
 }
@@ -37,6 +43,14 @@ struct Rates {
     // Fixed MTE2→V / add / V→MTE2 cost of one extra Split-K partial.
     // Absent from a profile means zero; the reduction probe supplies it.
     double split_partial_us = 0.0;
+    // The serial plain-store probe is used for mode 2/5 and the first
+    // mode-6 K packet unless a source-in-context mode-5 profile supplies
+    // both its total Fixpipe demand and per-IterateAll startup. The mode-6
+    // steady service is the total later-K Fixpipe/atomic demand.
+    std::optional<PrimitiveTiming> sc_fp32_store, sc_fp32_store_steady;
+    std::optional<PrimitiveTiming> sc_mode5_fixpipe, sc_mode5_iterate;
+    std::optional<PrimitiveTiming> sc_atomic_extra, sc_cast;
+    std::optional<PrimitiveTiming> sc_gm_to_l1_a, sc_gm_to_l1_b;
 };
 
 PrimitiveTiming Get(const Hardware& hardware, const char* name, const char* unit) {
@@ -60,7 +74,8 @@ Rates ReadRates(const Hardware& hardware) {
             Get(hardware, "cube", "flop"),
             Get(hardware, "vector_add", "ops"),
             Get(hardware, "sync", "count"),
-            Get(hardware, "nd2nz", "elements"), {}, {}, {}};
+            Get(hardware, "nd2nz", "elements"), {}, {}, {},
+            0.0, {}, {}, {}, {}, {}, {}, {}, {}};
     const bool has_a = hardware.primitives.count("gm_read_a") != 0;
     const bool has_b = hardware.primitives.count("gm_read_b") != 0;
     if (has_a != has_b)
@@ -93,6 +108,30 @@ Rates ReadRates(const Hardware& hardware) {
             partial->second.fixed_latency_us < 0)
             throw std::invalid_argument("invalid primitive split_partial");
         r.split_partial_us = partial->second.fixed_latency_us;
+    }
+    if (hardware.primitives.count("sc_atomic_extra"))
+        r.sc_atomic_extra = Get(hardware, "sc_atomic_extra", "bytes");
+    if (hardware.primitives.count("sc_fp32_store"))
+        r.sc_fp32_store = Get(hardware, "sc_fp32_store", "bytes");
+    if (hardware.primitives.count("sc_fp32_store_steady"))
+        r.sc_fp32_store_steady = Get(hardware, "sc_fp32_store_steady", "bytes");
+    const bool mode5_fix = hardware.primitives.count("sc_mode5_fixpipe") != 0;
+    const bool mode5_iterate = hardware.primitives.count("sc_mode5_iterate") != 0;
+    if (mode5_fix != mode5_iterate)
+        throw std::invalid_argument("sc_mode5_fixpipe and sc_mode5_iterate must be supplied together");
+    if (mode5_fix) {
+        r.sc_mode5_fixpipe = Get(hardware, "sc_mode5_fixpipe", "bytes");
+        r.sc_mode5_iterate = Get(hardware, "sc_mode5_iterate", "count");
+    }
+    if (hardware.primitives.count("sc_cast"))
+        r.sc_cast = Get(hardware, "sc_cast", "elements");
+    const bool has_sc_a = hardware.primitives.count("sc_gm_to_l1_a") != 0;
+    const bool has_sc_b = hardware.primitives.count("sc_gm_to_l1_b") != 0;
+    if (has_sc_a != has_sc_b)
+        throw std::invalid_argument("sc_gm_to_l1_a and sc_gm_to_l1_b must be supplied together");
+    if (has_sc_a) {
+        r.sc_gm_to_l1_a = Get(hardware, "sc_gm_to_l1_a", "bytes");
+        r.sc_gm_to_l1_b = Get(hardware, "sc_gm_to_l1_b", "bytes");
     }
     return r;
 }
@@ -382,8 +421,15 @@ double SplitStageUs(const Workload& w, const Rates& r,
             (static_cast<double>(m_ext) * n_packets +
              static_cast<double>(n_ext) * m_packets);
         const double cube = 2.0 * elements * k_crit / r.cube.rate_per_us;
+        // On the measured converted-A path, stepKa/stepKb group `step`
+        // baseK slices into one GM->L1 transfer. Keep the original
+        // per-baseK startup surrogate for the unconverted path: applying
+        // this grouping there regressed held-out family decisions. The
+        // byte service still covers every operand element in either path.
+        const auto read_startups = w.k > 65535 ? CeilDiv(q_crit, step) : q_crit;
         const double operand_gm = operand_bytes / r.read.rate_per_us +
-            2.0 * spatial * q_crit * r.read.fixed_latency_us;
+            2.0 * spatial * static_cast<double>(read_startups) *
+                r.read.fixed_latency_us;
         const double shard = static_cast<double>(
             SplitVectorMaxElements(m_ext * n_ext, cores));
         cube_stages.push_back(std::max(cube, operand_gm));
@@ -397,6 +443,233 @@ double SplitStageUs(const Workload& w, const Rates& r,
     for (std::size_t i = 1; i < cube_stages.size(); ++i)
         stage += std::max(cube_stages[i], vector_stages[i - 1]);
     return stage + vector_stages.back();
+}
+
+// A panel transforms Cube and AIV completion times as
+// C'=C+c, V'=max(C+a,V+b). Composition and binary powers let the source's
+// contiguous spatial assignment be scored without expanding large M/N grids.
+struct ScPipe {
+    double c = 0.0;
+    double a = -std::numeric_limits<double>::infinity();
+    double b = 0.0;
+};
+
+ScPipe Then(const ScPipe& first, const ScPipe& second) {
+    return {first.c + second.c,
+            std::max(first.a + second.b, first.c + second.a),
+            first.b + second.b};
+}
+
+ScPipe Power(ScPipe unit, std::uint64_t count) {
+    ScPipe result;
+    while (count) {
+        if (count & 1) result = Then(result, unit);
+        count >>= 1;
+        if (count) unit = Then(unit, unit);
+    }
+    return result;
+}
+
+double ScAtomicExtraUs(const Rates& r, double packets, double bytes) {
+    if (!r.sc_atomic_extra) return 0.0;
+    return packets * r.sc_atomic_extra->fixed_latency_us +
+           bytes / r.sc_atomic_extra->rate_per_us;
+}
+
+double ScFp32StoreUs(const Rates& r, double packets, double bytes) {
+    const auto& p = r.sc_fp32_store ? *r.sc_fp32_store : r.write;
+    return packets * p.fixed_latency_us + bytes / p.rate_per_us;
+}
+
+double ScMode6AtomicOutputUs(const Rates& r, double packets, double bytes) {
+    // A source-in-context Fixpipe counter may supply the total atomic output
+    // pipeline demand. The standalone serial probe cannot: it spends much
+    // longer in Fixpipe than the source kernel at the same geometry. Without
+    // an in-context profile, retain the exploratory generic-write + atomic
+    // proxy rather than multiply the serial FP32 store rate across K.
+    if (r.sc_fp32_store_steady) {
+        const auto& p = *r.sc_fp32_store_steady;
+        return packets * p.fixed_latency_us + bytes / p.rate_per_us;
+    }
+    return packets * r.write.fixed_latency_us + bytes / r.write.rate_per_us +
+           ScAtomicExtraUs(r, packets, bytes);
+}
+
+double ScSliceUs(const Rates& r, std::uint64_t m, std::uint64_t n,
+                 std::uint64_t k, bool atomic) {
+    const double mb = static_cast<double>(CeilDiv(m, 128));
+    const double nb = static_cast<double>(CeilDiv(n, 128));
+    const double qk = static_cast<double>(CeilDiv(k, 128));
+    const double cube = 2.0 * m * static_cast<double>(n) * k / r.cube.rate_per_us;
+    const double input = 2.0 * static_cast<double>(k) * (m * nb + n * mb);
+    const double memory = input / r.read.rate_per_us +
+        2.0 * mb * nb * qk * r.read.fixed_latency_us +
+        ScFp32StoreUs(r, mb * nb, 4.0 * m * n) +
+        (atomic ? ScAtomicExtraUs(r, mb * nb, 4.0 * m * n) : 0.0);
+    return std::max(cube, memory);
+}
+
+double ScMode5SliceUs(const Rates& r, std::uint64_t m, std::uint64_t n,
+                      std::uint64_t k) {
+    // The source-in-context Fixpipe primitive already includes repeated
+    // FP32 atomic updates. MTE2, MAC and Fixpipe are concurrent demands;
+    // a new IterateAll call exposes scalar/setup work on each K packet.
+    const double mb = static_cast<double>(CeilDiv(m, 128));
+    const double nb = static_cast<double>(CeilDiv(n, 128));
+    const double qk = static_cast<double>(CeilDiv(k, 128));
+    const double cube = 2.0 * m * static_cast<double>(n) * k /
+        r.cube.rate_per_us;
+    const double input = 2.0 * static_cast<double>(k) * (m * nb + n * mb);
+    const double read = input / r.read.rate_per_us +
+        2.0 * mb * nb * qk * r.read.fixed_latency_us;
+    const double fixpipe = r.sc_mode5_fixpipe->fixed_latency_us * mb * nb +
+        4.0 * m * static_cast<double>(n) /
+            r.sc_mode5_fixpipe->rate_per_us;
+    return std::max({cube, read, fixpipe}) +
+        r.sc_mode5_iterate->fixed_latency_us;
+}
+
+double ScMode6ReadUs(const Rates& r, std::uint64_t m, std::uint64_t n,
+                     std::uint64_t k) {
+    if (r.sc_gm_to_l1_a) {
+        return 2.0 * static_cast<double>(k) * m /
+                   r.sc_gm_to_l1_a->rate_per_us +
+               CeilDiv(m, 128) * r.sc_gm_to_l1_a->fixed_latency_us +
+               2.0 * static_cast<double>(k) * n /
+                   r.sc_gm_to_l1_b->rate_per_us +
+               CeilDiv(n, 128) * r.sc_gm_to_l1_b->fixed_latency_us;
+    }
+    return 2.0 * static_cast<double>(k) * (m + n) / r.read.rate_per_us +
+        (CeilDiv(m, 128) + CeilDiv(n, 128)) * r.read.fixed_latency_us;
+}
+
+double ScMode6MacUs(const Rates& r, std::uint64_t m, std::uint64_t n,
+                    std::uint64_t k, bool atomic) {
+    const double cube = 2.0 * m * static_cast<double>(n) * k / r.cube.rate_per_us;
+    const auto store_service = atomic ? ScMode6AtomicOutputUs : ScFp32StoreUs;
+    const double store = store_service(r,
+        CeilDiv(m, 128) * CeilDiv(n, 128), 4.0 * m * n);
+    const double max_m = std::min<std::uint64_t>(m, 128);
+    const double max_n = std::min<std::uint64_t>(n, 128);
+    const double one_piece = 2.0 * max_m * max_n * k / r.cube.rate_per_us +
+        store_service(r, 1.0, 4.0 * max_m * max_n);
+    return std::max({cube, store, one_piece});
+}
+
+double ScKChainUs(const Workload& w, const Rates& r, const PlanDecision& d,
+                  std::uint64_t m, std::uint64_t n) {
+    const auto packets = CeilDiv(w.k, d.single_core_k);
+    const auto tail = w.k - (packets - 1) * d.single_core_k;
+    if (w.dtype == "fp16" &&
+        d.family == KernelFamily::SingleCoreSplitKMode5 &&
+        r.sc_mode5_fixpipe) {
+        const auto full = ScMode5SliceUs(r, m, n, d.single_core_k);
+        return (packets - 1) * full + ScMode5SliceUs(r, m, n, tail);
+    }
+    if (d.family != KernelFamily::SingleCoreSplitKMode6) {
+        if (packets == 1) return ScSliceUs(r, m, n, tail, false);
+        return ScSliceUs(r, m, n, d.single_core_k, false) +
+               (packets - 2) * ScSliceUs(r, m, n, d.single_core_k, true) +
+               ScSliceUs(r, m, n, tail, true);
+    }
+    const auto full_k = d.single_core_k;
+    const auto read_full = ScMode6ReadUs(r, m, n, full_k);
+    const auto mac_plain = ScMode6MacUs(r, m, n, full_k, false);
+    if (packets == 1) return ScMode6ReadUs(r, m, n, tail) +
+                             ScMode6MacUs(r, m, n, tail, false);
+    const auto mac_atomic = ScMode6MacUs(r, m, n, full_k, true);
+    const auto n_tail = n - (CeilDiv(n, 128) - 1) * 128;
+    const double overlap = 2.0 * m * static_cast<double>(n_tail) * full_k /
+                           r.cube.rate_per_us;
+    const auto read_tail = ScMode6ReadUs(r, m, n, tail);
+    return read_full + mac_plain + (packets - 2) *
+        (mac_atomic + std::max(0.0, read_full - overlap)) +
+        std::max(0.0, read_tail - overlap) +
+        ScMode6MacUs(r, m, n, tail, true);
+}
+
+ScPipe ScPanel(const Workload& w, const Rates& r, const PlanDecision& d,
+               std::uint64_t m, std::uint64_t n) {
+    const double cube = ScKChainUs(w, r, d, m, n);
+    const double shard = static_cast<double>(CeilDiv(m, 2)) * n;
+    const double vector = r.sync.fixed_latency_us +
+        4.0 * shard / r.read.rate_per_us +
+        2.0 * shard / r.write.rate_per_us + r.write.fixed_latency_us +
+        (r.sc_cast ? r.sc_cast->fixed_latency_us +
+                         shard / r.sc_cast->rate_per_us : 0.0);
+    return {cube, cube + vector, vector};
+}
+
+ScPipe ScTile(const Workload& w, const Rates& r, const PlanDecision& d,
+              std::uint64_t m, std::uint64_t n) {
+    if (d.family == KernelFamily::SingleCoreSplitKMode5)
+        return ScPanel(w, r, d, m, n);
+    const auto panel_m = 128 * d.step_m;
+    const auto count = CeilDiv(m, panel_m);
+    const auto tail = m - (count - 1) * panel_m;
+    return Then(Power(ScPanel(w, r, d, panel_m, n), count - 1),
+                ScPanel(w, r, d, tail, n));
+}
+
+double ScStageUs(const Workload& w, const Rates& r, const PlanDecision& d) {
+    const auto n_m = CeilDiv(w.m, d.single_core_m);
+    const auto n_n = CeilDiv(w.n, d.single_core_n);
+    const auto tiles = n_m * n_n;
+    const auto rounds = CeilDiv(tiles, d.used_cores);
+    const auto pre = tiles % d.used_cores ? tiles % d.used_cores : d.used_cores;
+    const auto m_tail = w.m % d.single_core_m;
+    const auto n_tail = w.n % d.single_core_n;
+    const auto full_m = w.m / d.single_core_m;
+    const auto full_n = w.n / d.single_core_n;
+    const auto full = ScTile(w, r, d, d.single_core_m, d.single_core_n);
+    const auto m_edge = m_tail ? ScTile(w, r, d, m_tail, d.single_core_n) : ScPipe{};
+    const auto n_edge = n_tail ? ScTile(w, r, d, d.single_core_m, n_tail) : ScPipe{};
+    const auto corner = m_tail && n_tail ? ScTile(w, r, d, m_tail, n_tail) : ScPipe{};
+    const auto full_row = Then(Power(full, full_m), m_tail ? m_edge : ScPipe{});
+    const auto tail_row = Then(Power(n_edge, full_m), m_tail ? corner : ScPipe{});
+    double critical = 0.0;
+    for (std::uint64_t q = 0; q < d.used_cores; ++q) {
+        std::uint64_t index = q < pre ? q * rounds :
+                              q * (rounds - 1) + pre;
+        std::uint64_t remaining = q < pre ? rounds : rounds - 1;
+        ScPipe sequence;
+        const auto append_partial_row = [&](std::uint64_t row,
+                                            std::uint64_t column,
+                                            std::uint64_t take) {
+            const bool n_is_tail = n_tail && row == full_n;
+            const auto& normal = n_is_tail ? n_edge : full;
+            const auto& last_m = n_is_tail ? corner : m_edge;
+            const auto normal_count = column < full_m ?
+                std::min(take, full_m - column) : 0;
+            sequence = Then(sequence, Power(normal, normal_count));
+            if (take > normal_count) sequence = Then(sequence, last_m);
+        };
+        while (remaining) {
+            const auto row = index / n_m;
+            const auto column = index % n_m;
+            if (column || remaining < n_m) {
+                const auto take = std::min(remaining, n_m - column);
+                append_partial_row(row, column, take);
+                index += take;
+                remaining -= take;
+                continue;
+            }
+            // Whole identical N rows compose in logarithmic time. Only the
+            // final N row can have a different width.
+            const auto rows = remaining / n_m;
+            const auto normal_rows = row < full_n ?
+                std::min(rows, full_n - row) : 0;
+            sequence = Then(sequence, Power(full_row, normal_rows));
+            index += normal_rows * n_m;
+            remaining -= normal_rows * n_m;
+            if (normal_rows == rows) continue;
+            sequence = Then(sequence, tail_row);
+            index += n_m;
+            remaining -= n_m;
+        }
+        critical = std::max(critical, std::max(sequence.a, sequence.b));
+    }
+    return critical;
 }
 
 std::vector<std::uint64_t> TileValues(const std::vector<std::uint64_t>& supplied,
@@ -529,7 +802,7 @@ MipPlan Finish(const Workload& w, const Hardware& h, const CoreMemory& mem,
                double solver_objective) {
     // FinalizePlan is a post-solve legality cross-check. The event graph is
     // scored for reporting; neither call changes the MILP objective or the
-    // choice of the winner between the two implementation families.
+    // choice of the winner among implementation families.
     const auto finalized = FinalizePlan(w, h, decision, id, mem);
     const double recomputed = ReducedObjectiveUs(w, h, decision, mem);
     if (std::abs(recomputed - solver_objective) >
@@ -546,7 +819,8 @@ MipPlan Finish(const Workload& w, const Hardware& h, const CoreMemory& mem,
         decision.family != KernelFamily::DeterministicSplitK ||
         static_cast<long double>(decision.used_cores) * w.m * w.n * 4.0L <=
             static_cast<long double>(finalized.candidate.workspace_bytes);
-    if (CanExpandEvents(w, decision) && graph_workspace_fits) {
+    if (!IsSingleCore(decision.family) && CanExpandEvents(w, decision) &&
+        graph_workspace_fits) {
         try {
             candidate = BuildMatmulEvents(w, std::move(candidate));
             const auto scored = Optimize(w, h, {candidate});
@@ -718,6 +992,70 @@ std::optional<MipPlan> SolveSplit(const Workload& w, const Hardware& h,
                   selected->local_us + CommonUs(w, r));
 }
 
+std::optional<MipPlan> SolveSingleCore(const Workload& w, const Hardware& h,
+                                       const CoreMemory& mem, const Rates& r,
+                                       const std::vector<Geometry>& geometries,
+                                       KernelFamily family) {
+    if (w.dtype != "fp16" && w.dtype != "bf16") return std::nullopt;
+    Model master;
+    struct Choice { PlanDecision decision; int y; double local_us; };
+    std::vector<Choice> choices;
+    std::vector<std::pair<int, double>> select_one;
+    for (const auto& g : geometries) {
+        if (g.base_m != 128 || g.base_n != 128 ||
+            g.core_m > w.m || g.core_n > w.n) continue;
+        const auto cmax = std::min(h.aic_count, g.output_tiles);
+        if (!cmax) continue;
+        double best = std::numeric_limits<double>::infinity();
+        PlanDecision best_d;
+        const bool short_side = w.m < 384 || w.n < 384;
+        for (std::uint64_t step_m = 1; step_m <= 3; ++step_m) {
+            if (family == KernelFamily::SingleCoreSplitKMode5 && step_m != 1)
+                continue;
+            if (family != KernelFamily::SingleCoreSplitKMode5 &&
+                ((short_side && step_m != 1) || (!short_side && step_m == 1)))
+                continue;
+            for (std::uint64_t cores = 1; cores <= cmax; ++cores) {
+                PlanDecision d;
+                d.family = family;
+                d.used_cores = cores;
+                d.single_core_m = g.core_m;
+                d.single_core_n = g.core_n;
+                d.base_m = d.base_n = d.base_k = 128;
+                d.step_m = step_m;
+                d.step_n = family == KernelFamily::SingleCoreSplitKMode5 ? 3 : 1;
+                d.step_k = step_m == 3 || family == KernelFamily::SingleCoreSplitKMode5 ? 3 : 4;
+                d.single_core_k = d.base_k * d.step_k;
+                try {
+                    (void)FinalizePlan(w, h, d, "single_core_preflight", mem);
+                    const double local = ScStageUs(w, r, d);
+                    if (local < best) { best = local; best_d = d; }
+                } catch (const std::invalid_argument&) {
+                    // The source block, host shape gate, or memory is illegal.
+                }
+            }
+        }
+        if (!std::isfinite(best)) continue;
+        const int y = master.Column(best, 0.0, 1.0, true);
+        choices.push_back({best_d, y, best});
+        select_one.emplace_back(y, 1.0);
+    }
+    if (choices.empty()) return std::nullopt;
+    master.Row(1.0, 1.0, select_one);
+    const auto solution = master.Solve();
+    if (!solution) return std::nullopt;
+    const auto selected = std::find_if(choices.begin(), choices.end(),
+        [&](const Choice& choice) { return Integer(solution->at(choice.y), "single-core geometry") == 1; });
+    if (selected == choices.end())
+        throw std::runtime_error("MILP returned no single-core Split-K geometry");
+    const char* id = family == KernelFamily::SingleCoreSplitKMode2 ?
+        "MIP_SINGLE_CORE_SPLIT_K_MODE2" :
+        family == KernelFamily::SingleCoreSplitKMode5 ?
+        "MIP_SINGLE_CORE_SPLIT_K_MODE5" : "MIP_SINGLE_CORE_SPLIT_K_MODE6";
+    return Finish(w, h, mem, selected->decision, id,
+                  selected->local_us + CommonUs(w, r));
+}
+
 }  // namespace
 
 double ReducedObjectiveUs(const Workload& w, const Hardware& h,
@@ -726,6 +1064,8 @@ double ReducedObjectiveUs(const Workload& w, const Hardware& h,
     // checks that the selected master coefficient matches this value.
     const auto r = ReadRates(h);
     (void)FinalizePlan(w, h, d, "reduced_objective", mem);
+    if (IsSingleCore(d.family))
+        return CommonUs(w, r) + ScStageUs(w, r, d);
     if (d.base_m > d.single_core_m || d.base_n > d.single_core_n)
         throw std::invalid_argument("base M/N tile exceeds single-core output tile");
     if (r.base_packet_read && d.family == KernelFamily::Base &&
@@ -773,14 +1113,20 @@ MipResult SolveReducedMip(const Workload& w, const Hardware& h,
     result.base = SolveBase(w, h, mem, rates, geometries,
                             domain.base_core_equals_base);
     result.deterministic_split_k = SolveSplit(w, h, mem, rates, geometries);
+    result.single_core_split_k_mode2 = SolveSingleCore(
+        w, h, mem, rates, geometries, KernelFamily::SingleCoreSplitKMode2);
+    result.single_core_split_k_mode5 = SolveSingleCore(
+        w, h, mem, rates, geometries, KernelFamily::SingleCoreSplitKMode5);
+    result.single_core_split_k_mode6 = SolveSingleCore(
+        w, h, mem, rates, geometries, KernelFamily::SingleCoreSplitKMode6);
     // The outer implementation choice compares certified reduced objectives,
     // not the separately reported event-graph scores.
-    if (result.base && result.deterministic_split_k)
-        result.winner = result.base->surrogate_us <=
-                        result.deterministic_split_k->surrogate_us
-                            ? result.base : result.deterministic_split_k;
-    else if (result.base) result.winner = result.base;
-    else if (result.deterministic_split_k) result.winner = result.deterministic_split_k;
+    for (const auto* plan : {&result.base, &result.deterministic_split_k,
+                             &result.single_core_split_k_mode2,
+                             &result.single_core_split_k_mode5,
+                             &result.single_core_split_k_mode6})
+        if (*plan && (!result.winner || (*plan)->surrogate_us < result.winner->surrogate_us))
+            result.winner = *plan;
     return result;
 }
 

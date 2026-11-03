@@ -89,15 +89,24 @@ FinalizedPlan FinalizePlan(const Workload& workload, const Hardware& hardware,
     // Source deterministic Split-K can use the 3x128 outer M/N tile even
     // when the corresponding output axis is only 128 or 256. BASE still
     // requires a tile within the shape for its spatial AIC assignment.
-    if (d.family == KernelFamily::Base &&
+    const bool single_core_split = d.family == KernelFamily::SingleCoreSplitKMode2 ||
+        d.family == KernelFamily::SingleCoreSplitKMode5 ||
+        d.family == KernelFamily::SingleCoreSplitKMode6;
+    if ((d.family == KernelFamily::Base || single_core_split) &&
         (d.single_core_m > workload.m || d.single_core_n > workload.n))
-        throw std::invalid_argument("BASE single-core output tile exceeds the shape");
+        throw std::invalid_argument("spatial single-core output tile exceeds the shape");
     if (!d.step_k) throw std::invalid_argument("stepK must be positive");
 
     FinalizedPlan plan;
     plan.tiling = d;
     plan.block_dim = d.used_cores;
-    plan.key.split_core_mode = d.family == KernelFamily::Base ? 0 : 3;
+    switch (d.family) {
+        case KernelFamily::Base: plan.key.split_core_mode = 0; break;
+        case KernelFamily::DeterministicSplitK: plan.key.split_core_mode = 3; break;
+        case KernelFamily::SingleCoreSplitKMode2: plan.key.split_core_mode = 2; break;
+        case KernelFamily::SingleCoreSplitKMode5: plan.key.split_core_mode = 5; break;
+        case KernelFamily::SingleCoreSplitKMode6: plan.key.split_core_mode = 6; break;
+    }
     plan.workspace_bytes = kRpcWorkspace;
     plan.nd2nz_a = workload.k > 65535;
     plan.key.mix_nd2nz = plan.nd2nz_a ? 0 : 1;
@@ -122,6 +131,60 @@ FinalizedPlan FinalizePlan(const Workload& workload, const Hardware& hardware,
         plan.workspace_bytes = Add(kRpcWorkspace,
                                    Multiply(d.used_cores, partial, "Split-K partial workspace"),
                                    "Split-K workspace");
+    } else if (single_core_split) {
+        if ((workload.dtype != "fp16" && workload.dtype != "bf16") || workload.n % 128 ||
+            d.base_m != 128 || d.base_n != 128 || d.base_k != 128 ||
+            Multiply(d.base_k, d.step_k, "singleCoreK") != d.single_core_k)
+            throw std::invalid_argument("FP16/BF16 single-core Split-K requires aligned N and 128 base tiles");
+        const auto outputs = Multiply(CeilDiv(workload.m, d.single_core_m),
+                                      CeilDiv(workload.n, d.single_core_n), "output tile count");
+        if (d.used_cores > outputs)
+            throw std::invalid_argument("single-core Split-K assigns more AICs than spatial tiles");
+        const bool mkn_small_k = workload.k == 1536 && workload.m == 384 &&
+            workload.n >= 49152 &&
+            static_cast<long double>(workload.m) * workload.n * 4.0L <=
+                0.65L * memory.l2_bytes;
+        const bool nkm_small_k = workload.k == 1536 && workload.n == 384 &&
+            workload.m >= 49152 &&
+            static_cast<long double>(workload.m) * workload.n * 4.0L <=
+                0.65L * memory.l2_bytes;
+        if (d.family == KernelFamily::SingleCoreSplitKMode5) {
+            if (!nkm_small_k || plan.nd2nz_a || d.step_m != 1 ||
+                d.step_n != 3 || d.step_k != 3)
+                throw std::invalid_argument("FP16/BF16 mode 5 requires the K=1536 NK33 channel");
+        } else {
+            const bool mk33 = d.step_m == 3 && d.step_n == 1 && d.step_k == 3;
+            const bool block24 = (d.step_m == 1 || d.step_m == 2) &&
+                                 d.step_n == 1 && d.step_k == 4;
+            if (!mk33 && !block24)
+                throw std::invalid_argument("FP16/BF16 modes 2/6 require MK33 or 2x4 source block");
+            const bool short_side = workload.m < 384 || workload.n < 384;
+            if ((short_side && d.step_m != 1) ||
+                (!short_side && d.step_m == 1))
+                throw std::invalid_argument("FP16/BF16 single-core Split-K block does not match the short-side rule");
+            if (mkn_small_k && !mk33)
+                throw std::invalid_argument("FP16/BF16 K=1536 MKN channel forces MK33");
+            if (workload.k < 27392 && !mkn_small_k)
+                throw std::invalid_argument("FP16/BF16 mode 2/6 requires long K or K=1536 MKN gate");
+            if (d.family == KernelFamily::SingleCoreSplitKMode6 &&
+                (workload.k > 65535 || mkn_small_k))
+                throw std::invalid_argument("FP16/BF16 mode 6 requires its GM-to-L1 shape gate");
+            if (!mkn_small_k) {
+                const long double load = static_cast<long double>(workload.m) * workload.n /
+                    (static_cast<long double>(d.single_core_m) * d.single_core_n * hardware.aic_count);
+                if (d.single_core_n < 512 || load < 0.7L ||
+                    (workload.n >= 896 && workload.n <= 2048 &&
+                     (d.single_core_n <= 640 || load < 0.85L)))
+                    throw std::invalid_argument("FP16/BF16 single-core Split-K spatial host gate failed");
+            }
+        }
+        // CalcSplitCoreWorkspace: one aligned FP32 output image plus RPC.
+        const auto aligned_n = Multiply(CeilDiv(workload.n, 128), 128,
+                                        "aligned single-core N");
+        plan.workspace_bytes = Add(kRpcWorkspace,
+            Bytes(workload.m, aligned_n, kAccumulatorBytes, 1,
+                  "single-core Split-K output workspace"),
+            "single-core Split-K workspace");
     } else {
         throw std::invalid_argument("unsupported implementation family");
     }
@@ -147,18 +210,36 @@ FinalizedPlan FinalizePlan(const Workload& workload, const Hardware& hardware,
                             "L0C footprint");
     if (a_l0 > memory.l0a_bytes || b_l0 > memory.l0b_bytes || c_l0 > memory.l0c_bytes)
         throw std::invalid_argument("base tile exceeds L0 capacity");
-    const auto a_l1 = Bytes(d.base_m, d.base_k, kInputBytes,
-                            Multiply(2, d.step_k, "L1 A depth"), "L1 A footprint");
-    const auto b_l1 = Bytes(d.base_n, d.base_k, kInputBytes,
-                            Multiply(2, d.step_k, "L1 B depth"), "L1 B footprint");
-    if (Add(a_l1, b_l1, "L1 footprint") > memory.l1_bytes)
+    std::uint64_t l1_footprint = 0;
+    if (single_core_split) {
+        // The source tiler reserves 480 KiB for 3x3 and 512 KiB for
+        // 2x4, including its short-side variant. The mode-6 kernel may
+        // actively use only 384 KiB on that short-side path.
+        // The queried usable L1 reports 256 bytes less than the nominal
+        // allocation; the source reserves that 256-byte margin itself.
+        l1_footprint = d.family == KernelFamily::SingleCoreSplitKMode5 ||
+                       d.step_m == 3 ? 480ULL * 1024 : 512ULL * 1024;
+    } else {
+        const auto a_l1 = Bytes(d.base_m, d.base_k, kInputBytes,
+                                Multiply(2, d.step_k, "L1 A depth"), "L1 A footprint");
+        const auto b_l1 = Bytes(d.base_n, d.base_k, kInputBytes,
+                                Multiply(2, d.step_k, "L1 B depth"), "L1 B footprint");
+        l1_footprint = Add(a_l1, b_l1, "L1 footprint");
+    }
+    if (l1_footprint > memory.l1_bytes + (single_core_split ? 256 : 0))
         throw std::invalid_argument("base tile and stepK exceed L1 capacity");
     if (plan.workspace_bytes > hardware.workspace_limit_bytes)
         throw std::invalid_argument("workspace budget exceeded");
 
     Candidate& candidate = plan.candidate;
     candidate.id = id;
-    candidate.family = d.family == KernelFamily::Base ? "BASE" : "DETERMINISTIC_SPLIT_K";
+    switch (d.family) {
+        case KernelFamily::Base: candidate.family = "BASE"; break;
+        case KernelFamily::DeterministicSplitK: candidate.family = "DETERMINISTIC_SPLIT_K"; break;
+        case KernelFamily::SingleCoreSplitKMode2: candidate.family = "SINGLE_CORE_SPLIT_K_MODE2"; break;
+        case KernelFamily::SingleCoreSplitKMode5: candidate.family = "SINGLE_CORE_SPLIT_K_MODE5"; break;
+        case KernelFamily::SingleCoreSplitKMode6: candidate.family = "SINGLE_CORE_SPLIT_K_MODE6"; break;
+    }
     candidate.tiling_key = "(0," + std::to_string(plan.key.split_core_mode) + ",0," +
                            std::to_string(plan.key.mix_nd2nz) + ",0,0)";
     // Legacy scorer gate: means this candidate passed the standalone preflight.
@@ -170,6 +251,11 @@ FinalizedPlan FinalizePlan(const Workload& workload, const Hardware& hardware,
     candidate.tile = {{"usedCoreNum", d.used_cores}, {"singleCoreM", d.single_core_m},
                       {"singleCoreN", d.single_core_n}, {"singleCoreK", d.single_core_k},
                       {"baseM", d.base_m}, {"baseN", d.base_n}, {"baseK", d.base_k}};
+    if (single_core_split) {
+        candidate.tile["stepK"] = d.step_k;
+        candidate.tile["stepM"] = d.step_m;
+        candidate.tile["stepN"] = d.step_n;
+    }
     return plan;
 }
 

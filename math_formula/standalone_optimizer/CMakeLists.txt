@@ -58,6 +58,9 @@ if(MMOPT_HIGHS_INCLUDE_DIR AND MMOPT_HIGHS_LIBRARY)
 
   add_executable(mmopt_full_solver_audit bench910/full_solver_audit.cpp)
   target_link_libraries(mmopt_full_solver_audit PRIVATE mmopt_mip)
+
+  add_executable(mmopt_splitk_family_model bench910/splitk_family_model.cpp)
+  target_link_libraries(mmopt_splitk_family_model PRIVATE mmopt_mip)
 else()
   message(STATUS "HiGHS not found: reduced MILP target is disabled")
 endif()

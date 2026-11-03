@@ -1,0 +1,1 @@
+{"run_id":1793339740681,"pid":2446182,"kind":"matmul_v3_event","device":4,"m":2560,"n":3072,"k":40960,"dtype":"fp16","input_pattern":"mod4_exact_fp16","batch":0,"repetitions":1,"warmup":0,"workspace_bytes":null,"max_abs_error":0.000000,"max_relative_error":0.000000,"min_us":3009.119987,"median_us":3009.119987,"max_us":3009.119987,"tiling_verified":false}

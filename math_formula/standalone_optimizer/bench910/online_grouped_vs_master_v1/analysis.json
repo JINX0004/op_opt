@@ -1,0 +1,357 @@
+{
+  "cases": 20,
+  "changed_family": 3,
+  "changed_family_wins": 2,
+  "same_family_identical_tiles": 17,
+  "geometric_mean_speedup": 1.043295422219818,
+  "sum_master_us": 17309.311999999998,
+  "sum_online_us": 16821.146,
+  "rows": [
+    {
+      "shape_index": 0,
+      "shape": "16x16x102400",
+      "device": 4,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "master_us": 39.480000000000004,
+      "online_us": 40.870000000000005,
+      "speedup_master_over_online": 0.9659897235135796,
+      "master_rounds_us": [
+        39.480000000000004
+      ],
+      "online_rounds_us": [
+        40.870000000000005
+      ]
+    },
+    {
+      "shape_index": 1,
+      "shape": "32x16x102400",
+      "device": 5,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "master_us": 50.55,
+      "online_us": 46.322,
+      "speedup_master_over_online": 1.0912741246060187,
+      "master_rounds_us": [
+        50.55
+      ],
+      "online_rounds_us": [
+        46.322
+      ]
+    },
+    {
+      "shape_index": 2,
+      "shape": "64x16x102400",
+      "device": 6,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "master_us": 66.35,
+      "online_us": 64.96000000000001,
+      "speedup_master_over_online": 1.0213977832512313,
+      "master_rounds_us": [
+        66.35
+      ],
+      "online_rounds_us": [
+        64.96000000000001
+      ]
+    },
+    {
+      "shape_index": 3,
+      "shape": "128x16x65536",
+      "device": 7,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "master_us": 48.982,
+      "online_us": 50.45,
+      "speedup_master_over_online": 0.9709018830525272,
+      "master_rounds_us": [
+        48.982
+      ],
+      "online_rounds_us": [
+        50.45
+      ]
+    },
+    {
+      "shape_index": 4,
+      "shape": "256x16x32768",
+      "device": 4,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "master_us": 33.67,
+      "online_us": 33.016,
+      "speedup_master_over_online": 1.0198085776593169,
+      "master_rounds_us": [
+        33.67
+      ],
+      "online_rounds_us": [
+        33.016
+      ]
+    },
+    {
+      "shape_index": 5,
+      "shape": "16x32x102400",
+      "device": 5,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "master_us": 44.172,
+      "online_us": 40.18000000000001,
+      "speedup_master_over_online": 1.0993529118964656,
+      "master_rounds_us": [
+        44.172
+      ],
+      "online_rounds_us": [
+        40.18000000000001
+      ]
+    },
+    {
+      "shape_index": 6,
+      "shape": "32x32x102400",
+      "device": 6,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "master_us": 48.482,
+      "online_us": 47.752,
+      "speedup_master_over_online": 1.015287317808678,
+      "master_rounds_us": [
+        48.482
+      ],
+      "online_rounds_us": [
+        47.752
+      ]
+    },
+    {
+      "shape_index": 7,
+      "shape": "64x32x65536",
+      "device": 7,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "master_us": 44.65,
+      "online_us": 45.39,
+      "speedup_master_over_online": 0.9836968495263273,
+      "master_rounds_us": [
+        44.65
+      ],
+      "online_rounds_us": [
+        45.39
+      ]
+    },
+    {
+      "shape_index": 8,
+      "shape": "64x64x65536",
+      "device": 4,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "master_us": 47.67,
+      "online_us": 46.68,
+      "speedup_master_over_online": 1.0212082262210798,
+      "master_rounds_us": [
+        47.67
+      ],
+      "online_rounds_us": [
+        46.68
+      ]
+    },
+    {
+      "shape_index": 9,
+      "shape": "128x128x32768",
+      "device": 5,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "master_us": 30.35,
+      "online_us": 28.532,
+      "speedup_master_over_online": 1.0637179307444273,
+      "master_rounds_us": [
+        30.35
+      ],
+      "online_rounds_us": [
+        28.532
+      ]
+    },
+    {
+      "shape_index": 10,
+      "shape": "1792x768x27392",
+      "device": 6,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "master_us": 383.51599999999996,
+      "online_us": 386.06,
+      "speedup_master_over_online": 0.9934103507226855,
+      "master_rounds_us": [
+        383.51599999999996
+      ],
+      "online_rounds_us": [
+        386.06
+      ]
+    },
+    {
+      "shape_index": 11,
+      "shape": "2048x768x32768",
+      "device": 7,
+      "master_mode": 3,
+      "online_mode": 0,
+      "same_tile": false,
+      "master_us": 749.739,
+      "online_us": 486.12,
+      "speedup_master_over_online": 1.542292026660084,
+      "master_rounds_us": [
+        742.0540000000001,
+        757.424
+      ],
+      "online_rounds_us": [
+        492.028,
+        480.212
+      ]
+    },
+    {
+      "shape_index": 12,
+      "shape": "2560x1024x36864",
+      "device": 4,
+      "master_mode": 3,
+      "online_mode": 6,
+      "same_tile": false,
+      "master_us": 1028.694,
+      "online_us": 839.254,
+      "speedup_master_over_online": 1.2257242741768284,
+      "master_rounds_us": [
+        1016.56,
+        1040.828
+      ],
+      "online_rounds_us": [
+        844.52,
+        833.988
+      ]
+    },
+    {
+      "shape_index": 13,
+      "shape": "1024x2560x36864",
+      "device": 5,
+      "master_mode": 6,
+      "online_mode": 6,
+      "same_tile": true,
+      "master_us": 841.726,
+      "online_us": 840.636,
+      "speedup_master_over_online": 1.001296637307943,
+      "master_rounds_us": [
+        841.726
+      ],
+      "online_rounds_us": [
+        840.636
+      ]
+    },
+    {
+      "shape_index": 14,
+      "shape": "2048x2048x4096",
+      "device": 6,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "master_us": 140.13400000000001,
+      "online_us": 139.60399999999998,
+      "speedup_master_over_online": 1.0037964528237016,
+      "master_rounds_us": [
+        140.13400000000001
+      ],
+      "online_rounds_us": [
+        139.60399999999998
+      ]
+    },
+    {
+      "shape_index": 15,
+      "shape": "4096x4096x8192",
+      "device": 7,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "master_us": 1010.96,
+      "online_us": 996.082,
+      "speedup_master_over_online": 1.0149365212904158,
+      "master_rounds_us": [
+        1010.96
+      ],
+      "online_rounds_us": [
+        996.082
+      ]
+    },
+    {
+      "shape_index": 16,
+      "shape": "4096x4096x32768",
+      "device": 4,
+      "master_mode": 6,
+      "online_mode": 6,
+      "same_tile": true,
+      "master_us": 5640.71,
+      "online_us": 5605.884,
+      "speedup_master_over_online": 1.0062124011128308,
+      "master_rounds_us": [
+        5640.71
+      ],
+      "online_rounds_us": [
+        5605.884
+      ]
+    },
+    {
+      "shape_index": 17,
+      "shape": "49152x384x1536",
+      "device": 5,
+      "master_mode": 5,
+      "online_mode": 0,
+      "same_tile": false,
+      "master_us": 246.88899999999998,
+      "online_us": 258.82000000000005,
+      "speedup_master_over_online": 0.953902325940808,
+      "master_rounds_us": [
+        246.724,
+        247.05399999999997
+      ],
+      "online_rounds_us": [
+        257.326,
+        260.314
+      ]
+    },
+    {
+      "shape_index": 18,
+      "shape": "2560x1024x73728",
+      "device": 6,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "master_us": 2662.044,
+      "online_us": 2652.892,
+      "speedup_master_over_online": 1.0034498200454447,
+      "master_rounds_us": [
+        2662.044
+      ],
+      "online_rounds_us": [
+        2652.892
+      ]
+    },
+    {
+      "shape_index": 19,
+      "shape": "8192x4096x16384",
+      "device": 7,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "master_us": 4150.544,
+      "online_us": 4171.642,
+      "speedup_master_over_online": 0.9949425190368685,
+      "master_rounds_us": [
+        4150.544
+      ],
+      "online_rounds_us": [
+        4171.642
+      ]
+    }
+  ]
+}

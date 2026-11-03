@@ -1,0 +1,322 @@
+{
+  "declared_shapes": 16,
+  "eligible_shapes": 16,
+  "excluded": [],
+  "timed_arm_shape_pairs": 32,
+  "timed_runs": 64,
+  "model_family_accuracy": 0.75,
+  "default_family_accuracy": 0.625,
+  "model_vs_default_geomean_speedup": 1.0336491778068704,
+  "model_vs_default_bootstrap_95pct": [
+    0.9534652007927743,
+    1.1274055443685027
+  ],
+  "median_model_regret_pct": 0.0,
+  "median_default_regret_pct": 0.0,
+  "records": [
+    {
+      "shape": [
+        1792,
+        896,
+        32768
+      ],
+      "default_family": "deterministic",
+      "selected_family": "deterministic",
+      "best_family": "deterministic",
+      "default_us": 685.585,
+      "single_us": 715.3800000000001,
+      "deterministic_us": 685.585,
+      "selected_us": 685.585,
+      "speedup_default_over_model": 1.0,
+      "model_regret_pct": 0.0,
+      "default_regret_pct": 0.0,
+      "model_correct": true,
+      "default_correct": true
+    },
+    {
+      "shape": [
+        2048,
+        896,
+        32768
+      ],
+      "default_family": "deterministic",
+      "selected_family": "deterministic",
+      "best_family": "deterministic",
+      "default_us": 842.0,
+      "single_us": 955.1300000000001,
+      "deterministic_us": 842.0,
+      "selected_us": 842.0,
+      "speedup_default_over_model": 1.0,
+      "model_regret_pct": 0.0,
+      "default_regret_pct": 0.0,
+      "model_correct": true,
+      "default_correct": true
+    },
+    {
+      "shape": [
+        2304,
+        768,
+        32768
+      ],
+      "default_family": "deterministic",
+      "selected_family": "single",
+      "best_family": "single",
+      "default_us": 898.775,
+      "single_us": 738.366,
+      "deterministic_us": 898.775,
+      "selected_us": 738.366,
+      "speedup_default_over_model": 1.2172486273744998,
+      "model_regret_pct": 0.0,
+      "default_regret_pct": 21.72486273744998,
+      "model_correct": true,
+      "default_correct": false
+    },
+    {
+      "shape": [
+        2560,
+        768,
+        40960
+      ],
+      "default_family": "deterministic",
+      "selected_family": "single",
+      "best_family": "deterministic",
+      "default_us": 901.075,
+      "single_us": 1319.2350000000001,
+      "deterministic_us": 901.075,
+      "selected_us": 1319.2350000000001,
+      "speedup_default_over_model": 0.6830284217747407,
+      "model_regret_pct": 46.40679188746775,
+      "default_regret_pct": 0.0,
+      "model_correct": false,
+      "default_correct": true
+    },
+    {
+      "shape": [
+        1792,
+        1024,
+        40960
+      ],
+      "default_family": "deterministic",
+      "selected_family": "deterministic",
+      "best_family": "single",
+      "default_us": 808.355,
+      "single_us": 728.5699999999999,
+      "deterministic_us": 808.355,
+      "selected_us": 808.355,
+      "speedup_default_over_model": 1.0,
+      "model_regret_pct": 10.950903825301639,
+      "default_regret_pct": 10.950903825301639,
+      "model_correct": false,
+      "default_correct": false
+    },
+    {
+      "shape": [
+        2048,
+        1024,
+        40960
+      ],
+      "default_family": "deterministic",
+      "selected_family": "deterministic",
+      "best_family": "single",
+      "default_us": 955.87,
+      "single_us": 839.0350000000001,
+      "deterministic_us": 955.87,
+      "selected_us": 955.87,
+      "speedup_default_over_model": 1.0,
+      "model_regret_pct": 13.924925658643561,
+      "default_regret_pct": 13.924925658643561,
+      "model_correct": false,
+      "default_correct": false
+    },
+    {
+      "shape": [
+        2304,
+        1024,
+        32768
+      ],
+      "default_family": "deterministic",
+      "selected_family": "deterministic",
+      "best_family": "single",
+      "default_us": 1089.1799999999998,
+      "single_us": 661.14,
+      "deterministic_us": 1089.1799999999998,
+      "selected_us": 1089.1799999999998,
+      "speedup_default_over_model": 1.0,
+      "model_regret_pct": 64.74271712496595,
+      "default_regret_pct": 64.74271712496595,
+      "model_correct": false,
+      "default_correct": false
+    },
+    {
+      "shape": [
+        2560,
+        1024,
+        32768
+      ],
+      "default_family": "deterministic",
+      "selected_family": "single",
+      "best_family": "single",
+      "default_us": 1319.775,
+      "single_us": 797.305,
+      "deterministic_us": 1319.775,
+      "selected_us": 797.305,
+      "speedup_default_over_model": 1.6552950251158594,
+      "model_regret_pct": 0.0,
+      "default_regret_pct": 65.52950251158593,
+      "model_correct": true,
+      "default_correct": false
+    },
+    {
+      "shape": [
+        1536,
+        1536,
+        40960
+      ],
+      "default_family": "deterministic",
+      "selected_family": "single",
+      "best_family": "single",
+      "default_us": 1049.53,
+      "single_us": 850.585,
+      "deterministic_us": 1049.53,
+      "selected_us": 850.585,
+      "speedup_default_over_model": 1.2338919684687597,
+      "model_regret_pct": 0.0,
+      "default_regret_pct": 23.38919684687597,
+      "model_correct": true,
+      "default_correct": false
+    },
+    {
+      "shape": [
+        1792,
+        1792,
+        32768
+      ],
+      "default_family": "single",
+      "selected_family": "single",
+      "best_family": "single",
+      "default_us": 997.6800000000001,
+      "single_us": 997.6800000000001,
+      "deterministic_us": 1258.875,
+      "selected_us": 997.6800000000001,
+      "speedup_default_over_model": 1.0,
+      "model_regret_pct": 0.0,
+      "default_regret_pct": 0.0,
+      "model_correct": true,
+      "default_correct": true
+    },
+    {
+      "shape": [
+        2304,
+        1536,
+        36864
+      ],
+      "default_family": "single",
+      "selected_family": "single",
+      "best_family": "single",
+      "default_us": 1129.8210000000001,
+      "single_us": 1129.8210000000001,
+      "deterministic_us": 1348.4,
+      "selected_us": 1129.8210000000001,
+      "speedup_default_over_model": 1.0,
+      "model_regret_pct": 0.0,
+      "default_regret_pct": 0.0,
+      "model_correct": true,
+      "default_correct": true
+    },
+    {
+      "shape": [
+        2560,
+        2048,
+        32768
+      ],
+      "default_family": "single",
+      "selected_family": "single",
+      "best_family": "single",
+      "default_us": 1638.005,
+      "single_us": 1638.005,
+      "deterministic_us": 2848.739,
+      "selected_us": 1638.005,
+      "speedup_default_over_model": 1.0,
+      "model_regret_pct": 0.0,
+      "default_regret_pct": 0.0,
+      "model_correct": true,
+      "default_correct": true
+    },
+    {
+      "shape": [
+        3072,
+        2048,
+        40960
+      ],
+      "default_family": "single",
+      "selected_family": "single",
+      "best_family": "single",
+      "default_us": 2582.455,
+      "single_us": 2582.455,
+      "deterministic_us": 2829.52,
+      "selected_us": 2582.455,
+      "speedup_default_over_model": 1.0,
+      "model_regret_pct": 0.0,
+      "default_regret_pct": 0.0,
+      "model_correct": true,
+      "default_correct": true
+    },
+    {
+      "shape": [
+        2048,
+        2560,
+        36864
+      ],
+      "default_family": "single",
+      "selected_family": "single",
+      "best_family": "single",
+      "default_us": 1826.5149999999999,
+      "single_us": 1826.5149999999999,
+      "deterministic_us": 2120.86,
+      "selected_us": 1826.5149999999999,
+      "speedup_default_over_model": 1.0,
+      "model_regret_pct": 0.0,
+      "default_regret_pct": 0.0,
+      "model_correct": true,
+      "default_correct": true
+    },
+    {
+      "shape": [
+        2560,
+        3072,
+        40960
+      ],
+      "default_family": "single",
+      "selected_family": "single",
+      "best_family": "single",
+      "default_us": 2524.701,
+      "single_us": 2524.701,
+      "deterministic_us": 3482.651,
+      "selected_us": 2524.701,
+      "speedup_default_over_model": 1.0,
+      "model_regret_pct": 0.0,
+      "default_regret_pct": 0.0,
+      "model_correct": true,
+      "default_correct": true
+    },
+    {
+      "shape": [
+        3072,
+        3584,
+        32768
+      ],
+      "default_family": "single",
+      "selected_family": "single",
+      "best_family": "single",
+      "default_us": 3122.624,
+      "single_us": 3122.624,
+      "deterministic_us": 4288.125,
+      "selected_us": 3122.624,
+      "speedup_default_over_model": 1.0,
+      "model_regret_pct": 0.0,
+      "default_regret_pct": 0.0,
+      "model_correct": true,
+      "default_correct": true
+    }
+  ]
+}

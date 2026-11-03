@@ -1,0 +1,18 @@
+{
+  "device": 4,
+  "soc": "Ascend 910B3",
+  "cann": "9.0.0",
+  "master_commit": "b2cdb471de09d93eb79b34812c1ebe4e938ae10c",
+  "online_commit": "3270828b06a38d31d746687c7c871c8bc887e730",
+  "master_test_only_patch": "MMV3_SKIP_LEGACY_OP_CACHE bypass in matmul_v3_tiling.cpp for isolated aclop package; selection logic unchanged",
+  "master_package": "/home/xianfei/solvebase_bench_20261025/ops_nn_master_fp16_package",
+  "online_package": "/home/xianfei/solvebase_bench_20261025/ops_nn_mip_branch_package",
+  "master_host_sha256": "b5b886221f087406f4c2c7c39cb6bb27a8254ac3e55e571779b0a38b82a871ad",
+  "online_host_sha256": "2d8f834ce389be50f8395516b6ff80664bfefb5ccaaad196c49365a3563fd4bc",
+  "harness_sha256": "34098ec252afd746b55d76ff1f48ecca676e65a251e34aca56147be41f64892d",
+  "script_sha256": "407913963ceed0e3a730a0af489a9b8f4af992dacf711151e10b7c5384ab4c16",
+  "kernel_timing": "msprof task_time MatMulV3 kernel, 12 repetitions per round, 10 warmups",
+  "profiling_rounds": "3 for 5 changed-path shapes, 1 for 8 unchanged-path shapes",
+  "interference_flags": [],
+  "package_comparison": "The two package trees have identical files except libcust_opmaster_rt2.0.so and its liboptiling.so alias."
+}

@@ -6,7 +6,8 @@ selects the minimum analytical timeline among supplied complete candidates.
 It is exact for that finite candidate list. The typed `FinalizePlan` preflight
 now validates a narrow 910B3 plan subset and derives its key tuple, launch
 fields, and workspace. An optional HiGHS-backed MILP solves a reduced
-block-tiling model for BASE and deterministic Split-K. It does not serialize `MatmulTilingData`, invoke CANN's
+block-tiling model for BASE, deterministic Split-K, and three FP16/BF16
+single-core Split-K modes. It does not serialize `MatmulTilingData`, invoke CANN's
 tiling finalizer, measure 910B3 primitives, or predict every supported shape.
 The legacy `verified` marker remains an assertion by the manifest producer.
 
@@ -136,10 +137,70 @@ builders and legality checks are connected.
 
 ## Reduced MILP with M/N block tiling
 
-For each branch's objective, decision variables, constraints, and numerical
-example, see [`SOLVE_BASE_FORMULATION.md`](SOLVE_BASE_FORMULATION.md) and
-[`SOLVE_SPLIT_FORMULATION.md`](SOLVE_SPLIT_FORMULATION.md). The Split-K document
-also compares the standalone domain with the current `mat_mul_v3` host tiler.
+For each branch's objective and constraints, see
+[`SOLVE_BASE_FORMULATION.md`](SOLVE_BASE_FORMULATION.md),
+[`SOLVE_SPLIT_FORMULATION.md`](SOLVE_SPLIT_FORMULATION.md), and the FP16/BF16
+single-core Split-K formulations for [mode 2](SOLVE_SC_SPLITK_MODE2_FORMULATION.md),
+[mode 5](SOLVE_SC_SPLITK_MODE5_FORMULATION.md), and
+[mode 6](SOLVE_SC_SPLITK_MODE6_FORMULATION.md). `SolveReducedMip` returns a
+per-family plan and compares all five reduced objectives. The three
+single-core modes use spatial AIC assignment, source 128×128 base tiles,
+fixed 3×3 or 2×4 block patterns, and the FP16/BF16 host shape gates. Mode 5
+is restricted to its K=1536 NKM channel. Their objective uses generic
+rates unless the corresponding measured path primitives are supplied;
+mode 6's internal copy overlap remains
+a reduced approximation. The detailed event-graph score is unavailable
+for these three kernels. A selected tuple still requires source/CANN
+execution validation before it can be treated as a device tiling.
+Without path-specific primitives, FP16 and BF16 receive the same
+reduced objective because both have two-byte operands and outputs. The
+measured FP16 mode-5 path applies only to FP16; BF16 retains the generic
+mode-5 objective pending its own measurement. The [910B3 FP16 single-core
+primitive probes](bench910/SINGLE_CORE_SPLITK_PRIMITIVES_910B3.md)
+measure exploratory FP32 plain-store, atomic-add, FP32-to-FP16 cast, and mode-6
+A/B GM→L1 packet terms. Pass them as `sc_fp32_store`, `sc_atomic_extra`, `sc_cast`, and
+the paired `sc_gm_to_l1_a`/`sc_gm_to_l1_b` primitives to the hardware
+profile for sensitivity studies. `sc_fp32_store` supplies the plain
+partial-store service for modes 2/5 and mode 6's first K packet.
+Mode 6's later K packets use optional `sc_fp32_store_steady` as their
+**total** FP32 atomic-output demand. When absent, generic `gm_write`
+plus `sc_atomic_extra` is an exploratory proxy because the serial FP32
+probe does not match the source pipeline.
+`sc_atomic_extra` adds the later-slice increment, and `sc_cast` adds
+AIV cast service. The A/B fields replace mode 6's generic read service.
+The [device-4 output measurement](bench910/MODE6_OUTPUT_MEASUREMENT_910B3.md)
+fits this total demand at 91,000 bytes/µs per AIC on wide FP16 NN cases
+and checks it on a larger held-out shape. The full runtime model still
+needs independent validation. BF16 accuracy also needs its own rate
+check.
+The [mode-5 paired tile study](bench910/mode5_tile_experiment_v1/MODEL_VALIDATION.md)
+adds `sc_mode5_fixpipe` and `sc_mode5_iterate` as paired optional
+primitives. The first is total source-in-context FP32 output demand;
+the second is per-`IterateAll` setup. On the K=1536, N=384 FP16
+channel, the resulting objective ranks the faster source-sized tile
+above 128×128 at two held-out M sizes. In the subsequent
+[22-shape master comparison](bench910/online_mode5_vs_master_v1/README.md),
+the revised online selector matches master's mode-5 family and tile on
+all three tested M sizes; the mode-5 runs do not show a speedup over master.
+An [expanded 72-shape FP16 follow-up](bench910/online_expanded_vs_master_fp16_v1/README.md)
+confirms seven material changed-family wins but also identifies a
+reproducible enabled-selector BASE slowdown at large M with identical
+audited tiling. This exposed a host L2 work-assignment path difference.
+The [L2 fallback patch and device rerun](bench910/online_l2fallback_vs_master_fp16_v1/README.md)
+then restored master-level timing on five large-M cases while retaining
+three changed-family BASE wins.
+The [100-shape FP16 rerun against clean master](bench910/online_100_vs_master_fp16_v1/README.md)
+measures the pushed L2-fixed branch on devices 4–7. Ten changed-family
+cases win in both rounds; after two eight-round reruns, the all-shape
+geometric mean speedup is 1.0189×. Ninety cases emit identical tiling,
+with a 0.9977× geometric mean ratio; the ten changed-family cases have
+a 1.2318× ratio. The identical-tiling cases help expose timing noise
+in the full-dataset average. A [targeted diagnosis](bench910/online_100_vs_master_fp16_v1/REGRESSION_DIAGNOSIS.md)
+finds no reproducible selector-caused slowdown in two large-M BASE
+controls that initially appeared slower.
+
+The deterministic Split-K document also compares the standalone domain
+with the current `mat_mul_v3` host tiler.
 For device experiments, use the
 [`SolveBase` 910B measurement plan](SOLVE_BASE_910B_MEASUREMENT_PLAN.md)
 to collect primitive timings and validate the reduced objective. The
@@ -169,12 +230,14 @@ correctly and admits the source's one-buffer L0C tile. Its model-tied 256×128
 orientation is 1.197× slower than the 128×256 default across the seven
 checked large shapes.
 
-[`SolveReducedMip`](mip_solver.h) solves two small integer programs, one for
-BASE and one for deterministic Split-K, using the HiGHS C API. It constructs
-a finite set of **spatial geometries**. For each BASE geometry, it eliminates
-the K-tiling decision analytically. For each Split-K geometry, it evaluates
-the bounded feasible K-step and occupied-AIC pairs. A
-one-hot master program then selects the geometry. The result reports each family's
+[`SolveReducedMip`](mip_solver.h) solves five geometry-selection integer
+programs using the HiGHS C API. It constructs a finite set of **spatial
+geometries**. For each BASE geometry, it eliminates the K-tiling decision
+analytically. For each deterministic Split-K geometry, it evaluates the
+bounded feasible K-step and occupied-AIC pairs. For each FP16/BF16 single-core
+Split-K geometry, it evaluates the supported source block patterns and
+occupied-AIC counts. A one-hot master program then selects the geometry
+within each family. The result reports each family's
 optimal **reduced-model** objective, the selected tiling, and its separate
 event-graph score when explicit expansion fits its 200,000-event cap and
 whole-output Split-K partial-workspace representation. The

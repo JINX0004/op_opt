@@ -1,0 +1,2348 @@
+{
+  "cases": 100,
+  "harness_retry_cases": [
+    92
+  ],
+  "eight_round_rerun_cases": [
+    39,
+    86
+  ],
+  "geometric_mean_speedup_before_reruns": 1.01720740856305,
+  "rerun_summary": [
+    {
+      "index": 39,
+      "shape": "65536x256x1536",
+      "initial_speedup": 0.9162035636375216,
+      "rerun_speedup": 1.023816369155836,
+      "online_faster_rounds": 7,
+      "rounds": 8
+    },
+    {
+      "index": 86,
+      "shape": "47104x384x1536",
+      "initial_speedup": 0.954858157615914,
+      "rerun_speedup": 1.0101899604785791,
+      "online_faster_rounds": 4,
+      "rounds": 8
+    }
+  ],
+  "max_relative_error": 0.000445,
+  "changed_family": 10,
+  "family_selection_categories": {
+    "changed": {
+      "cases": 10,
+      "geometric_mean_speedup": 1.2318445651408498,
+      "median_speedup": 1.1726688703867554,
+      "online_faster_cases": 10,
+      "online_slower_cases": 0,
+      "identical_tiling_cases": 0
+    },
+    "unchanged": {
+      "cases": 90,
+      "geometric_mean_speedup": 0.9976512251204541,
+      "median_speedup": 1.0001561718566874,
+      "online_faster_cases": 46,
+      "online_slower_cases": 44,
+      "identical_tiling_cases": 90
+    }
+  },
+  "changed_tile_same_family": 0,
+  "same_tile": 90,
+  "same_geometry": 90,
+  "changed_family_gt_5_percent_wins": 9,
+  "changed_family_gt_5_percent_regressions": 0,
+  "changed_family_both_rounds_win": 10,
+  "geometric_mean_speedup": 1.0189114845257419,
+  "shape_bootstrap_95_speedup": [
+    1.0047602576899888,
+    1.03623093331187
+  ],
+  "sum_master_us": 113954.278,
+  "sum_online_us": 111889.949,
+  "groups": {
+    "previous_general": {
+      "cases": 64,
+      "geometric_mean_speedup": 1.0154844120506006,
+      "changed_family": 8
+    },
+    "previous_mode5_boundary": {
+      "cases": 8,
+      "geometric_mean_speedup": 1.0016639478032132,
+      "changed_family": 0
+    },
+    "new_narrow_long_k": {
+      "cases": 7,
+      "geometric_mean_speedup": 1.0172870085718146,
+      "changed_family": 0
+    },
+    "new_family_transition": {
+      "cases": 7,
+      "geometric_mean_speedup": 1.1044992761083057,
+      "changed_family": 2
+    },
+    "new_mode5_boundary": {
+      "cases": 7,
+      "geometric_mean_speedup": 1.0070166891667793,
+      "changed_family": 0
+    },
+    "new_large_mn": {
+      "cases": 7,
+      "geometric_mean_speedup": 1.0017322067482752,
+      "changed_family": 0
+    }
+  },
+  "diagnostic_repeats": [
+    {
+      "index": 4,
+      "shape": "64x16x65536",
+      "original_speedup": 0.9367736937247138,
+      "repeat_speedup": 1.0646238809958581,
+      "master_rounds_us": [
+        49.512,
+        46.104
+      ],
+      "online_rounds_us": [
+        45.372,
+        44.44
+      ]
+    },
+    {
+      "index": 11,
+      "shape": "512x128x73728",
+      "original_speedup": 0.9234819610904471,
+      "repeat_speedup": 1.0228308633994254,
+      "master_rounds_us": [
+        124.262,
+        125.72399999999999
+      ],
+      "online_rounds_us": [
+        122.382,
+        122.024
+      ]
+    },
+    {
+      "index": 32,
+      "shape": "2048x1536x32768",
+      "original_speedup": 1.0848445432045237,
+      "repeat_speedup": 1.054097819311341,
+      "master_rounds_us": [
+        1195.5320000000002,
+        1192.164
+      ],
+      "online_rounds_us": [
+        1074.902,
+        1190.254
+      ]
+    },
+    {
+      "index": 33,
+      "shape": "2048x2048x27392",
+      "original_speedup": 0.9393715997424434,
+      "repeat_speedup": 0.9989852809573557,
+      "master_rounds_us": [
+        1069.2820000000002,
+        1065.1019999999999
+      ],
+      "online_rounds_us": [
+        1064.482,
+        1072.07
+      ]
+    },
+    {
+      "index": 39,
+      "shape": "65536x256x1536",
+      "original_speedup": 0.9162035636375216,
+      "repeat_speedup": 0.954550746330714,
+      "master_rounds_us": [
+        229.344,
+        229.81400000000002
+      ],
+      "online_rounds_us": [
+        238.346,
+        242.674
+      ]
+    },
+    {
+      "index": 86,
+      "shape": "47104x384x1536",
+      "original_speedup": 0.954858157615914,
+      "repeat_speedup": 0.9610362274843149,
+      "master_rounds_us": [
+        235.324,
+        239.524
+      ],
+      "online_rounds_us": [
+        244.066,
+        250.034
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "index": 0,
+      "measurement_source": "device4",
+      "shape": "16x16x65408",
+      "device": 4,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 29.228,
+      "online_us": 31.0,
+      "speedup": 0.9428387096774195,
+      "rounds": 1,
+      "master_rounds_us": [
+        29.228
+      ],
+      "online_rounds_us": [
+        31.0
+      ],
+      "max_relative_error": 0.00028
+    },
+    {
+      "index": 1,
+      "measurement_source": "device5",
+      "shape": "16x16x65536",
+      "device": 5,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 34.022000000000006,
+      "online_us": 34.56,
+      "speedup": 0.9844328703703704,
+      "rounds": 1,
+      "master_rounds_us": [
+        34.022000000000006
+      ],
+      "online_rounds_us": [
+        34.56
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 2,
+      "measurement_source": "device6",
+      "shape": "16x16x131072",
+      "device": 6,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 47.97,
+      "online_us": 46.513999999999996,
+      "speedup": 1.0313024035774176,
+      "rounds": 1,
+      "master_rounds_us": [
+        47.97
+      ],
+      "online_rounds_us": [
+        46.513999999999996
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 3,
+      "measurement_source": "device7",
+      "shape": "32x64x102400",
+      "device": 7,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 50.592,
+      "online_us": 52.032,
+      "speedup": 0.9723247232472325,
+      "rounds": 1,
+      "master_rounds_us": [
+        50.592
+      ],
+      "online_rounds_us": [
+        52.032
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 4,
+      "measurement_source": "device4",
+      "shape": "64x16x65536",
+      "device": 4,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 43.53,
+      "online_us": 46.468,
+      "speedup": 0.9367736937247138,
+      "rounds": 1,
+      "master_rounds_us": [
+        43.53
+      ],
+      "online_rounds_us": [
+        46.468
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 5,
+      "measurement_source": "device5",
+      "shape": "64x64x102400",
+      "device": 5,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 62.721999999999994,
+      "online_us": 62.442,
+      "speedup": 1.004484161301688,
+      "rounds": 1,
+      "master_rounds_us": [
+        62.721999999999994
+      ],
+      "online_rounds_us": [
+        62.442
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 6,
+      "measurement_source": "device6",
+      "shape": "128x32x65536",
+      "device": 6,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 51.31,
+      "online_us": 52.78,
+      "speedup": 0.9721485411140584,
+      "rounds": 1,
+      "master_rounds_us": [
+        51.31
+      ],
+      "online_rounds_us": [
+        52.78
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 7,
+      "measurement_source": "device7",
+      "shape": "128x64x65536",
+      "device": 7,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 49.782,
+      "online_us": 51.582,
+      "speedup": 0.9651041060835174,
+      "rounds": 1,
+      "master_rounds_us": [
+        49.782
+      ],
+      "online_rounds_us": [
+        51.582
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 8,
+      "measurement_source": "device4",
+      "shape": "256x64x65536",
+      "device": 4,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 85.28999999999999,
+      "online_us": 85.72999999999999,
+      "speedup": 0.9948676076052724,
+      "rounds": 1,
+      "master_rounds_us": [
+        85.28999999999999
+      ],
+      "online_rounds_us": [
+        85.72999999999999
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 9,
+      "measurement_source": "device5",
+      "shape": "256x128x32768",
+      "device": 5,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 34.480000000000004,
+      "online_us": 34.512,
+      "speedup": 0.9990727862772371,
+      "rounds": 1,
+      "master_rounds_us": [
+        34.480000000000004
+      ],
+      "online_rounds_us": [
+        34.512
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 10,
+      "measurement_source": "device6",
+      "shape": "384x128x65536",
+      "device": 6,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 96.422,
+      "online_us": 97.232,
+      "speedup": 0.9916694092479842,
+      "rounds": 1,
+      "master_rounds_us": [
+        96.422
+      ],
+      "online_rounds_us": [
+        97.232
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 11,
+      "measurement_source": "device7",
+      "shape": "512x128x73728",
+      "device": 7,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 120.664,
+      "online_us": 130.662,
+      "speedup": 0.9234819610904471,
+      "rounds": 1,
+      "master_rounds_us": [
+        120.664
+      ],
+      "online_rounds_us": [
+        130.662
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 12,
+      "measurement_source": "device4",
+      "shape": "128x256x32768",
+      "device": 4,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 34.47,
+      "online_us": 35.94,
+      "speedup": 0.9590984974958264,
+      "rounds": 1,
+      "master_rounds_us": [
+        34.47
+      ],
+      "online_rounds_us": [
+        35.94
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 13,
+      "measurement_source": "device5",
+      "shape": "128x512x16384",
+      "device": 5,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 38.769999999999996,
+      "online_us": 38.72,
+      "speedup": 1.0012913223140496,
+      "rounds": 1,
+      "master_rounds_us": [
+        38.769999999999996
+      ],
+      "online_rounds_us": [
+        38.72
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 14,
+      "measurement_source": "device6",
+      "shape": "512x256x32768",
+      "device": 6,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 64.32,
+      "online_us": 65.64,
+      "speedup": 0.9798903107861059,
+      "rounds": 1,
+      "master_rounds_us": [
+        64.32
+      ],
+      "online_rounds_us": [
+        65.64
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 15,
+      "measurement_source": "device7",
+      "shape": "256x512x16384",
+      "device": 7,
+      "master_mode": 3,
+      "online_mode": 0,
+      "same_tile": false,
+      "same_geometry": false,
+      "master_us": 49.92,
+      "online_us": 48.620000000000005,
+      "speedup": 1.0267379679144384,
+      "rounds": 2,
+      "master_rounds_us": [
+        49.85,
+        49.989999999999995
+      ],
+      "online_rounds_us": [
+        48.71,
+        48.53
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 16,
+      "measurement_source": "device4",
+      "shape": "1536x768x24576",
+      "device": 4,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 236.15,
+      "online_us": 236.25,
+      "speedup": 0.9995767195767196,
+      "rounds": 1,
+      "master_rounds_us": [
+        236.15
+      ],
+      "online_rounds_us": [
+        236.25
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 17,
+      "measurement_source": "device5",
+      "shape": "1792x768x32768",
+      "device": 5,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 568.94,
+      "online_us": 577.32,
+      "speedup": 0.9854846532252477,
+      "rounds": 1,
+      "master_rounds_us": [
+        568.94
+      ],
+      "online_rounds_us": [
+        577.32
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 18,
+      "measurement_source": "device6",
+      "shape": "2048x768x27392",
+      "device": 6,
+      "master_mode": 3,
+      "online_mode": 0,
+      "same_tile": false,
+      "same_geometry": false,
+      "master_us": 454.62,
+      "online_us": 395.978,
+      "speedup": 1.1480940860350828,
+      "rounds": 2,
+      "master_rounds_us": [
+        455.38199999999995,
+        453.858
+      ],
+      "online_rounds_us": [
+        403.908,
+        388.048
+      ],
+      "max_relative_error": 0.000445
+    },
+    {
+      "index": 19,
+      "measurement_source": "device7",
+      "shape": "2304x768x32768",
+      "device": 7,
+      "master_mode": 3,
+      "online_mode": 6,
+      "same_tile": false,
+      "same_geometry": false,
+      "master_us": 898.693,
+      "online_us": 775.289,
+      "speedup": 1.1591716121343139,
+      "rounds": 2,
+      "master_rounds_us": [
+        904.39,
+        892.9960000000001
+      ],
+      "online_rounds_us": [
+        773.2339999999999,
+        777.344
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 20,
+      "measurement_source": "device4",
+      "shape": "2560x768x32768",
+      "device": 4,
+      "master_mode": 3,
+      "online_mode": 6,
+      "same_tile": false,
+      "same_geometry": false,
+      "master_us": 1090.392,
+      "online_us": 979.249,
+      "speedup": 1.1134982011725312,
+      "rounds": 2,
+      "master_rounds_us": [
+        1122.132,
+        1058.652
+      ],
+      "online_rounds_us": [
+        952.97,
+        1005.528
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 21,
+      "measurement_source": "device5",
+      "shape": "2048x1024x32768",
+      "device": 5,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 903.348,
+      "online_us": 887.7860000000001,
+      "speedup": 1.0175289991056402,
+      "rounds": 1,
+      "master_rounds_us": [
+        903.348
+      ],
+      "online_rounds_us": [
+        887.7860000000001
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 22,
+      "measurement_source": "device6",
+      "shape": "2304x1024x36864",
+      "device": 6,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 918.276,
+      "online_us": 928.108,
+      "speedup": 0.9894064052890397,
+      "rounds": 1,
+      "master_rounds_us": [
+        918.276
+      ],
+      "online_rounds_us": [
+        928.108
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 23,
+      "measurement_source": "device7",
+      "shape": "2816x1024x36864",
+      "device": 7,
+      "master_mode": 6,
+      "online_mode": 6,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 1204.024,
+      "online_us": 1207.074,
+      "speedup": 0.9974732286504389,
+      "rounds": 1,
+      "master_rounds_us": [
+        1204.024
+      ],
+      "online_rounds_us": [
+        1207.074
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 24,
+      "measurement_source": "device4",
+      "shape": "3072x1024x36864",
+      "device": 4,
+      "master_mode": 6,
+      "online_mode": 6,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 1209.02,
+      "online_us": 1208.98,
+      "speedup": 1.0000330857416997,
+      "rounds": 1,
+      "master_rounds_us": [
+        1209.02
+      ],
+      "online_rounds_us": [
+        1208.98
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 25,
+      "measurement_source": "device5",
+      "shape": "2560x1024x32768",
+      "device": 5,
+      "master_mode": 3,
+      "online_mode": 6,
+      "same_tile": false,
+      "same_geometry": false,
+      "master_us": 1334.018,
+      "online_us": 870.182,
+      "speedup": 1.5330333194665025,
+      "rounds": 2,
+      "master_rounds_us": [
+        1337.998,
+        1330.038
+      ],
+      "online_rounds_us": [
+        797.654,
+        942.71
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 26,
+      "measurement_source": "device6",
+      "shape": "2560x1024x49152",
+      "device": 6,
+      "master_mode": 3,
+      "online_mode": 6,
+      "same_tile": false,
+      "same_geometry": false,
+      "master_us": 1421.269,
+      "online_us": 1198.204,
+      "speedup": 1.1861661286391967,
+      "rounds": 2,
+      "master_rounds_us": [
+        1416.778,
+        1425.76
+      ],
+      "online_rounds_us": [
+        1190.054,
+        1206.3539999999998
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 27,
+      "measurement_source": "device7",
+      "shape": "2560x1024x65536",
+      "device": 7,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 2874.62,
+      "online_us": 2774.444,
+      "speedup": 1.0361066938096426,
+      "rounds": 1,
+      "master_rounds_us": [
+        2874.62
+      ],
+      "online_rounds_us": [
+        2774.444
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 28,
+      "measurement_source": "device4",
+      "shape": "3072x1024x73728",
+      "device": 4,
+      "master_mode": 2,
+      "online_mode": 3,
+      "same_tile": false,
+      "same_geometry": false,
+      "master_us": 4119.2,
+      "online_us": 3699.5739999999996,
+      "speedup": 1.113425491691746,
+      "rounds": 2,
+      "master_rounds_us": [
+        4120.79,
+        4117.61
+      ],
+      "online_rounds_us": [
+        3699.0879999999997,
+        3700.06
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 29,
+      "measurement_source": "device5",
+      "shape": "1024x2304x36864",
+      "device": 5,
+      "master_mode": 6,
+      "online_mode": 6,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 757.9960000000001,
+      "online_us": 788.066,
+      "speedup": 0.9618432973887975,
+      "rounds": 1,
+      "master_rounds_us": [
+        757.9960000000001
+      ],
+      "online_rounds_us": [
+        788.066
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 30,
+      "measurement_source": "device6",
+      "shape": "1024x2816x36864",
+      "device": 6,
+      "master_mode": 6,
+      "online_mode": 6,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 975.3199999999999,
+      "online_us": 972.1320000000001,
+      "speedup": 1.0032793900416814,
+      "rounds": 1,
+      "master_rounds_us": [
+        975.3199999999999
+      ],
+      "online_rounds_us": [
+        972.1320000000001
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 31,
+      "measurement_source": "device7",
+      "shape": "768x2048x32768",
+      "device": 7,
+      "master_mode": 3,
+      "online_mode": 0,
+      "same_tile": false,
+      "same_geometry": false,
+      "master_us": 636.5840000000001,
+      "online_us": 482.709,
+      "speedup": 1.3187738368250852,
+      "rounds": 2,
+      "master_rounds_us": [
+        616.8720000000001,
+        656.296
+      ],
+      "online_rounds_us": [
+        499.358,
+        466.06
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 32,
+      "measurement_source": "device4",
+      "shape": "2048x1536x32768",
+      "device": 4,
+      "master_mode": 6,
+      "online_mode": 6,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 1200.988,
+      "online_us": 1107.06,
+      "speedup": 1.0848445432045237,
+      "rounds": 1,
+      "master_rounds_us": [
+        1200.988
+      ],
+      "online_rounds_us": [
+        1107.06
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 33,
+      "measurement_source": "device5",
+      "shape": "2048x2048x27392",
+      "device": 5,
+      "master_mode": 6,
+      "online_mode": 6,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 1006.64,
+      "online_us": 1071.6100000000001,
+      "speedup": 0.9393715997424434,
+      "rounds": 1,
+      "master_rounds_us": [
+        1006.64
+      ],
+      "online_rounds_us": [
+        1071.6100000000001
+      ],
+      "max_relative_error": 0.000445
+    },
+    {
+      "index": 34,
+      "measurement_source": "device6",
+      "shape": "2048x3072x32768",
+      "device": 6,
+      "master_mode": 6,
+      "online_mode": 6,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 2051.682,
+      "online_us": 2068.112,
+      "speedup": 0.9920555559853623,
+      "rounds": 1,
+      "master_rounds_us": [
+        2051.682
+      ],
+      "online_rounds_us": [
+        2068.112
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 35,
+      "measurement_source": "device7",
+      "shape": "3072x2048x32768",
+      "device": 7,
+      "master_mode": 6,
+      "online_mode": 6,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 2098.59,
+      "online_us": 2099.532,
+      "speedup": 0.9995513285817982,
+      "rounds": 1,
+      "master_rounds_us": [
+        2098.59
+      ],
+      "online_rounds_us": [
+        2099.532
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 36,
+      "measurement_source": "device4",
+      "shape": "16384x256x1024",
+      "device": 4,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 40.196,
+      "online_us": 40.763999999999996,
+      "speedup": 0.9860661367873614,
+      "rounds": 1,
+      "master_rounds_us": [
+        40.196
+      ],
+      "online_rounds_us": [
+        40.763999999999996
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 37,
+      "measurement_source": "device5",
+      "shape": "32768x256x1536",
+      "device": 5,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 99.15,
+      "online_us": 98.87,
+      "speedup": 1.0028320016182866,
+      "rounds": 1,
+      "master_rounds_us": [
+        99.15
+      ],
+      "online_rounds_us": [
+        98.87
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 38,
+      "measurement_source": "device6",
+      "shape": "49152x256x1536",
+      "device": 6,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 146.672,
+      "online_us": 148.082,
+      "speedup": 0.9904782485379722,
+      "rounds": 1,
+      "master_rounds_us": [
+        146.672
+      ],
+      "online_rounds_us": [
+        148.082
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 39,
+      "measurement_source": "eight_round_rerun",
+      "shape": "65536x256x1536",
+      "device": 7,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 242.151,
+      "online_us": 236.518,
+      "speedup": 1.023816369155836,
+      "rounds": 8,
+      "master_rounds_us": [
+        238.13600000000002,
+        255.964,
+        254.096,
+        242.516,
+        238.402,
+        238.574,
+        249.31400000000002,
+        241.786
+      ],
+      "online_rounds_us": [
+        236.63400000000001,
+        239.534,
+        227.774,
+        232.044,
+        245.814,
+        236.05599999999998,
+        241.184,
+        236.402
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 40,
+      "measurement_source": "device4",
+      "shape": "98304x256x1536",
+      "device": 4,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 390.092,
+      "online_us": 399.61,
+      "speedup": 0.9761817772328019,
+      "rounds": 1,
+      "master_rounds_us": [
+        390.092
+      ],
+      "online_rounds_us": [
+        399.61
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 41,
+      "measurement_source": "device5",
+      "shape": "32768x384x1024",
+      "device": 5,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 115.762,
+      "online_us": 116.702,
+      "speedup": 0.9919452965673253,
+      "rounds": 1,
+      "master_rounds_us": [
+        115.762
+      ],
+      "online_rounds_us": [
+        116.702
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 42,
+      "measurement_source": "device6",
+      "shape": "32768x384x1536",
+      "device": 6,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 167.0,
+      "online_us": 166.094,
+      "speedup": 1.0054547424952136,
+      "rounds": 1,
+      "master_rounds_us": [
+        167.0
+      ],
+      "online_rounds_us": [
+        166.094
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 43,
+      "measurement_source": "device7",
+      "shape": "32768x384x2048",
+      "device": 7,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 219.35399999999998,
+      "online_us": 219.19400000000002,
+      "speedup": 1.0007299469875999,
+      "rounds": 1,
+      "master_rounds_us": [
+        219.35399999999998
+      ],
+      "online_rounds_us": [
+        219.19400000000002
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 44,
+      "measurement_source": "device4",
+      "shape": "98304x384x1536",
+      "device": 4,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 625.46,
+      "online_us": 624.94,
+      "speedup": 1.0008320798796684,
+      "rounds": 1,
+      "master_rounds_us": [
+        625.46
+      ],
+      "online_rounds_us": [
+        624.94
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 45,
+      "measurement_source": "device5",
+      "shape": "49152x512x1536",
+      "device": 5,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 291.43600000000004,
+      "online_us": 302.896,
+      "speedup": 0.9621652316306588,
+      "rounds": 1,
+      "master_rounds_us": [
+        291.43600000000004
+      ],
+      "online_rounds_us": [
+        302.896
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 46,
+      "measurement_source": "device6",
+      "shape": "65536x512x2048",
+      "device": 6,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 538.8420000000001,
+      "online_us": 541.648,
+      "speedup": 0.9948195137801673,
+      "rounds": 1,
+      "master_rounds_us": [
+        538.8420000000001
+      ],
+      "online_rounds_us": [
+        541.648
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 47,
+      "measurement_source": "device7",
+      "shape": "81920x512x1536",
+      "device": 7,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 524.79,
+      "online_us": 529.69,
+      "speedup": 0.9907493061979646,
+      "rounds": 1,
+      "master_rounds_us": [
+        524.79
+      ],
+      "online_rounds_us": [
+        529.69
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 48,
+      "measurement_source": "device4",
+      "shape": "2048x4096x4096",
+      "device": 4,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 253.78,
+      "online_us": 254.11,
+      "speedup": 0.9987013498091377,
+      "rounds": 1,
+      "master_rounds_us": [
+        253.78
+      ],
+      "online_rounds_us": [
+        254.11
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 49,
+      "measurement_source": "device5",
+      "shape": "4096x2048x4096",
+      "device": 5,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 254.89600000000002,
+      "online_us": 254.074,
+      "speedup": 1.0032352779111597,
+      "rounds": 1,
+      "master_rounds_us": [
+        254.89600000000002
+      ],
+      "online_rounds_us": [
+        254.074
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 50,
+      "measurement_source": "device6",
+      "shape": "4096x8192x4096",
+      "device": 6,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 994.26,
+      "online_us": 993.6800000000001,
+      "speedup": 1.000583688913936,
+      "rounds": 1,
+      "master_rounds_us": [
+        994.26
+      ],
+      "online_rounds_us": [
+        993.6800000000001
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 51,
+      "measurement_source": "device7",
+      "shape": "8192x4096x4096",
+      "device": 7,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 988.572,
+      "online_us": 987.04,
+      "speedup": 1.0015521154157887,
+      "rounds": 1,
+      "master_rounds_us": [
+        988.572
+      ],
+      "online_rounds_us": [
+        987.04
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 52,
+      "measurement_source": "device4",
+      "shape": "4096x4096x16384",
+      "device": 4,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 2106.1679999999997,
+      "online_us": 2105.58,
+      "speedup": 1.000279257971675,
+      "rounds": 1,
+      "master_rounds_us": [
+        2106.1679999999997
+      ],
+      "online_rounds_us": [
+        2105.58
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 53,
+      "measurement_source": "device5",
+      "shape": "8192x8192x8192",
+      "device": 5,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 3997.98,
+      "online_us": 3998.87,
+      "speedup": 0.9997774371259881,
+      "rounds": 1,
+      "master_rounds_us": [
+        3997.98
+      ],
+      "online_rounds_us": [
+        3998.87
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 54,
+      "measurement_source": "device6",
+      "shape": "8192x4096x32768",
+      "device": 6,
+      "master_mode": 6,
+      "online_mode": 6,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 10081.502,
+      "online_us": 10077.982,
+      "speedup": 1.000349276273762,
+      "rounds": 1,
+      "master_rounds_us": [
+        10081.502
+      ],
+      "online_rounds_us": [
+        10077.982
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 55,
+      "measurement_source": "device7",
+      "shape": "4096x8192x16384",
+      "device": 7,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 4714.504,
+      "online_us": 4702.796,
+      "speedup": 1.0024895827928746,
+      "rounds": 1,
+      "master_rounds_us": [
+        4714.504
+      ],
+      "online_rounds_us": [
+        4702.796
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 56,
+      "measurement_source": "device4",
+      "shape": "10240x3072x8192",
+      "device": 4,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 1903.036,
+      "online_us": 1895.31,
+      "speedup": 1.004076378006764,
+      "rounds": 1,
+      "master_rounds_us": [
+        1903.036
+      ],
+      "online_rounds_us": [
+        1895.31
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 57,
+      "measurement_source": "device5",
+      "shape": "3072x10240x8192",
+      "device": 5,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 1973.83,
+      "online_us": 1982.6799999999998,
+      "speedup": 0.995536344745496,
+      "rounds": 1,
+      "master_rounds_us": [
+        1973.83
+      ],
+      "online_rounds_us": [
+        1982.6799999999998
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 58,
+      "measurement_source": "device6",
+      "shape": "16384x2048x4096",
+      "device": 6,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 1015.16,
+      "online_us": 1013.8,
+      "speedup": 1.0013414874728743,
+      "rounds": 1,
+      "master_rounds_us": [
+        1015.16
+      ],
+      "online_rounds_us": [
+        1013.8
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 59,
+      "measurement_source": "device7",
+      "shape": "2048x16384x4096",
+      "device": 7,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 1158.422,
+      "online_us": 1165.312,
+      "speedup": 0.994087420364675,
+      "rounds": 1,
+      "master_rounds_us": [
+        1158.422
+      ],
+      "online_rounds_us": [
+        1165.312
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 60,
+      "measurement_source": "device4",
+      "shape": "12288x4096x8192",
+      "device": 4,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 3011.21,
+      "online_us": 2999.23,
+      "speedup": 1.0039943585520283,
+      "rounds": 1,
+      "master_rounds_us": [
+        3011.21
+      ],
+      "online_rounds_us": [
+        2999.23
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 61,
+      "measurement_source": "device5",
+      "shape": "4096x12288x8192",
+      "device": 5,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 3121.1440000000002,
+      "online_us": 3119.572,
+      "speedup": 1.000503915280686,
+      "rounds": 1,
+      "master_rounds_us": [
+        3121.1440000000002
+      ],
+      "online_rounds_us": [
+        3119.572
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 62,
+      "measurement_source": "device6",
+      "shape": "8192x8192x16384",
+      "device": 6,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 9602.39,
+      "online_us": 9588.279999999999,
+      "speedup": 1.0014715882306315,
+      "rounds": 1,
+      "master_rounds_us": [
+        9602.39
+      ],
+      "online_rounds_us": [
+        9588.279999999999
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 63,
+      "measurement_source": "device7",
+      "shape": "16384x4096x8192",
+      "device": 7,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 3987.46,
+      "online_us": 3983.9480000000003,
+      "speedup": 1.0008815376104305,
+      "rounds": 1,
+      "master_rounds_us": [
+        3987.46
+      ],
+      "online_rounds_us": [
+        3983.9480000000003
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 64,
+      "measurement_source": "device4",
+      "shape": "45056x384x1536",
+      "device": 4,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 241.74,
+      "online_us": 239.92000000000002,
+      "speedup": 1.0075858619539846,
+      "rounds": 1,
+      "master_rounds_us": [
+        241.74
+      ],
+      "online_rounds_us": [
+        239.92000000000002
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 65,
+      "measurement_source": "device5",
+      "shape": "53248x384x1536",
+      "device": 5,
+      "master_mode": 5,
+      "online_mode": 5,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 260.805,
+      "online_us": 258.53000000000003,
+      "speedup": 1.0087997524465244,
+      "rounds": 2,
+      "master_rounds_us": [
+        259.85400000000004,
+        261.756
+      ],
+      "online_rounds_us": [
+        258.73400000000004,
+        258.326
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 66,
+      "measurement_source": "device6",
+      "shape": "57344x384x1536",
+      "device": 6,
+      "master_mode": 5,
+      "online_mode": 5,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 282.92,
+      "online_us": 283.12699999999995,
+      "speedup": 0.999268879336835,
+      "rounds": 2,
+      "master_rounds_us": [
+        283.164,
+        282.67600000000004
+      ],
+      "online_rounds_us": [
+        283.116,
+        283.138
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 67,
+      "measurement_source": "device7",
+      "shape": "61440x384x1536",
+      "device": 7,
+      "master_mode": 5,
+      "online_mode": 5,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 294.317,
+      "online_us": 295.861,
+      "speedup": 0.9947813331260288,
+      "rounds": 2,
+      "master_rounds_us": [
+        295.546,
+        293.08799999999997
+      ],
+      "online_rounds_us": [
+        296.148,
+        295.574
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 68,
+      "measurement_source": "device4",
+      "shape": "69632x384x1536",
+      "device": 4,
+      "master_mode": 5,
+      "online_mode": 5,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 339.505,
+      "online_us": 338.872,
+      "speedup": 1.001867961944333,
+      "rounds": 2,
+      "master_rounds_us": [
+        341.78,
+        337.23
+      ],
+      "online_rounds_us": [
+        338.592,
+        339.15200000000004
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 69,
+      "measurement_source": "device5",
+      "shape": "73728x384x1536",
+      "device": 5,
+      "master_mode": 5,
+      "online_mode": 5,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 351.988,
+      "online_us": 352.20799999999997,
+      "speedup": 0.9993753691000773,
+      "rounds": 2,
+      "master_rounds_us": [
+        354.328,
+        349.648
+      ],
+      "online_rounds_us": [
+        349.748,
+        354.668
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 70,
+      "measurement_source": "device6",
+      "shape": "86016x384x1536",
+      "device": 6,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 544.89,
+      "online_us": 548.072,
+      "speedup": 0.9941941934636325,
+      "rounds": 1,
+      "master_rounds_us": [
+        544.89
+      ],
+      "online_rounds_us": [
+        548.072
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 71,
+      "measurement_source": "device7",
+      "shape": "90112x384x1536",
+      "device": 7,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 572.09,
+      "online_us": 567.8,
+      "speedup": 1.0075554772807327,
+      "rounds": 1,
+      "master_rounds_us": [
+        572.09
+      ],
+      "online_rounds_us": [
+        567.8
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 72,
+      "measurement_source": "device4",
+      "shape": "16x64x65536",
+      "device": 4,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 34.05,
+      "online_us": 32.68000000000001,
+      "speedup": 1.0419216646266827,
+      "rounds": 1,
+      "master_rounds_us": [
+        34.05
+      ],
+      "online_rounds_us": [
+        32.68000000000001
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 73,
+      "measurement_source": "device5",
+      "shape": "32x128x65536",
+      "device": 5,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 40.872,
+      "online_us": 38.540000000000006,
+      "speedup": 1.0605085625324338,
+      "rounds": 1,
+      "master_rounds_us": [
+        40.872
+      ],
+      "online_rounds_us": [
+        38.540000000000006
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 74,
+      "measurement_source": "device6",
+      "shape": "64x128x73728",
+      "device": 6,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 49.58,
+      "online_us": 49.252,
+      "speedup": 1.0066596280354096,
+      "rounds": 1,
+      "master_rounds_us": [
+        49.58
+      ],
+      "online_rounds_us": [
+        49.252
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 75,
+      "measurement_source": "device7",
+      "shape": "128x256x102400",
+      "device": 7,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 89.53399999999999,
+      "online_us": 88.982,
+      "speedup": 1.0062035018318312,
+      "rounds": 1,
+      "master_rounds_us": [
+        89.53399999999999
+      ],
+      "online_rounds_us": [
+        88.982
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 76,
+      "measurement_source": "device4",
+      "shape": "256x256x65536",
+      "device": 4,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 106.07,
+      "online_us": 102.42,
+      "speedup": 1.0356375707869556,
+      "rounds": 1,
+      "master_rounds_us": [
+        106.07
+      ],
+      "online_rounds_us": [
+        102.42
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 77,
+      "measurement_source": "device5",
+      "shape": "512x512x65536",
+      "device": 5,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 301.606,
+      "online_us": 307.126,
+      "speedup": 0.9820269205472673,
+      "rounds": 1,
+      "master_rounds_us": [
+        301.606
+      ],
+      "online_rounds_us": [
+        307.126
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 78,
+      "measurement_source": "device6",
+      "shape": "1024x128x102400",
+      "device": 6,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 725.864,
+      "online_us": 732.824,
+      "speedup": 0.9905024944597886,
+      "rounds": 1,
+      "master_rounds_us": [
+        725.864
+      ],
+      "online_rounds_us": [
+        732.824
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 79,
+      "measurement_source": "device7",
+      "shape": "1664x768x32768",
+      "device": 7,
+      "master_mode": 3,
+      "online_mode": 0,
+      "same_tile": false,
+      "same_geometry": false,
+      "master_us": 502.00499999999994,
+      "online_us": 313.394,
+      "speedup": 1.6018334747953054,
+      "rounds": 2,
+      "master_rounds_us": [
+        488.15,
+        515.8599999999999
+      ],
+      "online_rounds_us": [
+        315.334,
+        311.454
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 80,
+      "measurement_source": "device4",
+      "shape": "1920x768x32768",
+      "device": 4,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 649.1800000000001,
+      "online_us": 652.1800000000001,
+      "speedup": 0.9954000429329326,
+      "rounds": 1,
+      "master_rounds_us": [
+        649.1800000000001
+      ],
+      "online_rounds_us": [
+        652.1800000000001
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 81,
+      "measurement_source": "device5",
+      "shape": "2176x768x32768",
+      "device": 5,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 830.396,
+      "online_us": 819.848,
+      "speedup": 1.0128657995140562,
+      "rounds": 1,
+      "master_rounds_us": [
+        830.396
+      ],
+      "online_rounds_us": [
+        819.848
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 82,
+      "measurement_source": "device6",
+      "shape": "2432x768x32768",
+      "device": 6,
+      "master_mode": 3,
+      "online_mode": 6,
+      "same_tile": false,
+      "same_geometry": false,
+      "master_us": 986.924,
+      "online_us": 798.261,
+      "speedup": 1.236342499508306,
+      "rounds": 2,
+      "master_rounds_us": [
+        978.8779999999999,
+        994.97
+      ],
+      "online_rounds_us": [
+        791.784,
+        804.738
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 83,
+      "measurement_source": "device7",
+      "shape": "2304x1024x32768",
+      "device": 7,
+      "master_mode": 3,
+      "online_mode": 3,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 1080.392,
+      "online_us": 1101.912,
+      "speedup": 0.9804703097888035,
+      "rounds": 1,
+      "master_rounds_us": [
+        1080.392
+      ],
+      "online_rounds_us": [
+        1101.912
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 84,
+      "measurement_source": "device4",
+      "shape": "2816x1024x49152",
+      "device": 4,
+      "master_mode": 6,
+      "online_mode": 6,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 1604.75,
+      "online_us": 1602.12,
+      "speedup": 1.0016415749132401,
+      "rounds": 1,
+      "master_rounds_us": [
+        1604.75
+      ],
+      "online_rounds_us": [
+        1602.12
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 85,
+      "measurement_source": "device5",
+      "shape": "1024x2432x32768",
+      "device": 5,
+      "master_mode": 6,
+      "online_mode": 6,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 740.816,
+      "online_us": 724.444,
+      "speedup": 1.0225994003677303,
+      "rounds": 1,
+      "master_rounds_us": [
+        740.816
+      ],
+      "online_rounds_us": [
+        724.444
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 86,
+      "measurement_source": "eight_round_rerun",
+      "shape": "47104x384x1536",
+      "device": 6,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 243.081,
+      "online_us": 240.629,
+      "speedup": 1.0101899604785791,
+      "rounds": 8,
+      "master_rounds_us": [
+        243.416,
+        243.678,
+        235.204,
+        235.278,
+        245.06599999999997,
+        234.974,
+        249.166,
+        242.74599999999998
+      ],
+      "online_rounds_us": [
+        235.074,
+        238.944,
+        242.314,
+        251.01600000000002,
+        243.144,
+        235.214,
+        238.61599999999999,
+        251.85399999999998
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 87,
+      "measurement_source": "device7",
+      "shape": "51200x384x1536",
+      "device": 7,
+      "master_mode": 5,
+      "online_mode": 5,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 249.31,
+      "online_us": 248.268,
+      "speedup": 1.004197077351894,
+      "rounds": 2,
+      "master_rounds_us": [
+        250.034,
+        248.586
+      ],
+      "online_rounds_us": [
+        248.482,
+        248.054
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 88,
+      "measurement_source": "device4",
+      "shape": "63488x384x1536",
+      "device": 4,
+      "master_mode": 5,
+      "online_mode": 5,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 306.64,
+      "online_us": 307.28999999999996,
+      "speedup": 0.9978847342900844,
+      "rounds": 2,
+      "master_rounds_us": [
+        307.02,
+        306.26
+      ],
+      "online_rounds_us": [
+        308.06,
+        306.52
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 89,
+      "measurement_source": "device5",
+      "shape": "77824x384x1536",
+      "device": 5,
+      "master_mode": 5,
+      "online_mode": 5,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 371.268,
+      "online_us": 371.802,
+      "speedup": 0.9985637516742781,
+      "rounds": 2,
+      "master_rounds_us": [
+        371.328,
+        371.20799999999997
+      ],
+      "online_rounds_us": [
+        371.908,
+        371.696
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 90,
+      "measurement_source": "device6",
+      "shape": "83968x384x1536",
+      "device": 6,
+      "master_mode": 5,
+      "online_mode": 5,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 413.288,
+      "online_us": 401.142,
+      "speedup": 1.0302785547262565,
+      "rounds": 2,
+      "master_rounds_us": [
+        404.558,
+        422.01800000000003
+      ],
+      "online_rounds_us": [
+        403.64599999999996,
+        398.63800000000003
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 91,
+      "measurement_source": "device7",
+      "shape": "94208x384x1536",
+      "device": 7,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 598.58,
+      "online_us": 593.952,
+      "speedup": 1.007791875437746,
+      "rounds": 1,
+      "master_rounds_us": [
+        598.58
+      ],
+      "online_rounds_us": [
+        593.952
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 92,
+      "measurement_source": "retry92b",
+      "shape": "65536x448x1536",
+      "device": 4,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 412.12,
+      "online_us": 411.88,
+      "speedup": 1.0005826939885403,
+      "rounds": 1,
+      "master_rounds_us": [
+        412.12
+      ],
+      "online_rounds_us": [
+        411.88
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 93,
+      "measurement_source": "device5",
+      "shape": "3072x8192x8192",
+      "device": 5,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 1522.0279999999998,
+      "online_us": 1522.922,
+      "speedup": 0.999412970592059,
+      "rounds": 1,
+      "master_rounds_us": [
+        1522.0279999999998
+      ],
+      "online_rounds_us": [
+        1522.922
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 94,
+      "measurement_source": "device6",
+      "shape": "8192x3072x8192",
+      "device": 6,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 1527.658,
+      "online_us": 1524.12,
+      "speedup": 1.0023213395270714,
+      "rounds": 1,
+      "master_rounds_us": [
+        1527.658
+      ],
+      "online_rounds_us": [
+        1524.12
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 95,
+      "measurement_source": "device7",
+      "shape": "12288x2048x16384",
+      "device": 7,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 3177.036,
+      "online_us": 3140.52,
+      "speedup": 1.0116273738107064,
+      "rounds": 1,
+      "master_rounds_us": [
+        3177.036
+      ],
+      "online_rounds_us": [
+        3140.52
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 96,
+      "measurement_source": "device4",
+      "shape": "2048x12288x16384",
+      "device": 4,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 3260.276,
+      "online_us": 3265.04,
+      "speedup": 0.9985409060838458,
+      "rounds": 1,
+      "master_rounds_us": [
+        3260.276
+      ],
+      "online_rounds_us": [
+        3265.04
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 97,
+      "measurement_source": "device5",
+      "shape": "16384x8192x4096",
+      "device": 5,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 3927.8379999999997,
+      "online_us": 3926.366,
+      "speedup": 1.0003749013719045,
+      "rounds": 1,
+      "master_rounds_us": [
+        3927.8379999999997
+      ],
+      "online_rounds_us": [
+        3926.366
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 98,
+      "measurement_source": "device6",
+      "shape": "8192x16384x4096",
+      "device": 6,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 4725.076,
+      "online_us": 4731.776,
+      "speedup": 0.9985840411718561,
+      "rounds": 1,
+      "master_rounds_us": [
+        4725.076
+      ],
+      "online_rounds_us": [
+        4731.776
+      ],
+      "max_relative_error": 0.0
+    },
+    {
+      "index": 99,
+      "measurement_source": "device7",
+      "shape": "10240x10240x4096",
+      "device": 7,
+      "master_mode": 0,
+      "online_mode": 0,
+      "same_tile": true,
+      "same_geometry": true,
+      "master_us": 3170.704,
+      "online_us": 3166.504,
+      "speedup": 1.0013263839237216,
+      "rounds": 1,
+      "master_rounds_us": [
+        3170.704
+      ],
+      "online_rounds_us": [
+        3166.504
+      ],
+      "max_relative_error": 0.0
+    }
+  ]
+}

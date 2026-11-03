@@ -1,0 +1,21 @@
+{
+  "method": "hybrid substitution, not a fresh 72-case patched run",
+  "shape_count": 72,
+  "replaced_shapes": [
+    "65536x256x1536",
+    "65536x512x2048",
+    "73728x384x1536",
+    "81920x512x1536",
+    "86016x384x1536",
+    "90112x384x1536",
+    "98304x384x1536"
+  ],
+  "old_package_geometric_mean_speedup": 0.9954939464387902,
+  "hybrid_geometric_mean_speedup": 1.0198000722802278,
+  "hybrid_shape_bootstrap_95": [
+    1.0061245000596066,
+    1.0364909638772437
+  ],
+  "hybrid_gt_5_percent_wins": 9,
+  "hybrid_gt_5_percent_regressions": 2
+}

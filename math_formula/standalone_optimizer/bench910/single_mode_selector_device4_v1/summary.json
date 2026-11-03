@@ -1,0 +1,150 @@
+{
+  "declared_shapes": 8,
+  "eligible_shapes": 8,
+  "excluded": [],
+  "timed_runs": 34,
+  "mip_accuracy_within_mode2_6": 1.0,
+  "mode6_vs_mode2_geomean_speedup": 1.141534032117243,
+  "mode6_vs_mode2_bootstrap_95pct": [
+    1.097533518234569,
+    1.1904203683045196
+  ],
+  "records": [
+    {
+      "shape": [
+        1792,
+        1792,
+        36864
+      ],
+      "default_mode": 6,
+      "predicted_mode2_us": 3156.39344,
+      "predicted_mode6_us": 1436.7598,
+      "selected_mode": 6,
+      "measured_mode2_us": 1283.145,
+      "measured_mode6_us": 1112.255,
+      "measured_faster_mode": 6,
+      "mode6_vs_mode2_speedup": 1.153642824711959,
+      "default_us": null,
+      "mode6_vs_default_speedup": null
+    },
+    {
+      "shape": [
+        2048,
+        2048,
+        40960
+      ],
+      "default_mode": 6,
+      "predicted_mode2_us": 4212.94014,
+      "predicted_mode6_us": 1911.34878,
+      "selected_mode": 6,
+      "measured_mode2_us": 1778.0900000000001,
+      "measured_mode6_us": 1580.4959999999999,
+      "measured_faster_mode": 6,
+      "mode6_vs_mode2_speedup": 1.125020246808597,
+      "default_us": null,
+      "mode6_vs_default_speedup": null
+    },
+    {
+      "shape": [
+        2304,
+        2048,
+        32768
+      ],
+      "default_mode": 6,
+      "predicted_mode2_us": 3696.87467,
+      "predicted_mode6_us": 1670.45812,
+      "selected_mode": 6,
+      "measured_mode2_us": 1465.115,
+      "measured_mode6_us": 1393.304,
+      "measured_faster_mode": 6,
+      "mode6_vs_mode2_speedup": 1.0515400802696324,
+      "default_us": null,
+      "mode6_vs_default_speedup": null
+    },
+    {
+      "shape": [
+        2560,
+        2560,
+        36864
+      ],
+      "default_mode": 6,
+      "predicted_mode2_us": 5427.94583,
+      "predicted_mode6_us": 2260.74792,
+      "selected_mode": 6,
+      "measured_mode2_us": 2196.075,
+      "measured_mode6_us": 1953.804,
+      "measured_faster_mode": 6,
+      "mode6_vs_mode2_speedup": 1.1239996437718418,
+      "default_us": null,
+      "mode6_vs_default_speedup": null
+    },
+    {
+      "shape": [
+        3072,
+        2048,
+        32768
+      ],
+      "default_mode": 6,
+      "predicted_mode2_us": 5133.15773,
+      "predicted_mode6_us": 2072.78966,
+      "selected_mode": 6,
+      "measured_mode2_us": 2578.375,
+      "measured_mode6_us": 2099.53,
+      "measured_faster_mode": 6,
+      "mode6_vs_mode2_speedup": 1.228072473363086,
+      "default_us": null,
+      "mode6_vs_default_speedup": null
+    },
+    {
+      "shape": [
+        2304,
+        3072,
+        40960
+      ],
+      "default_mode": 6,
+      "predicted_mode2_us": 6777.77572,
+      "predicted_mode6_us": 2931.27328,
+      "selected_mode": 6,
+      "measured_mode2_us": 2482.41,
+      "measured_mode6_us": 2317.61,
+      "measured_faster_mode": 6,
+      "mode6_vs_mode2_speedup": 1.0711077359866412,
+      "default_us": null,
+      "mode6_vs_default_speedup": null
+    },
+    {
+      "shape": [
+        2560,
+        1024,
+        36864
+      ],
+      "default_mode": 3,
+      "predicted_mode2_us": 2173.47901,
+      "predicted_mode6_us": 1311.93721,
+      "selected_mode": 6,
+      "measured_mode2_us": 1057.96,
+      "measured_mode6_us": 836.6850000000001,
+      "measured_faster_mode": 6,
+      "mode6_vs_mode2_speedup": 1.2644663164751369,
+      "default_us": 1022.02,
+      "mode6_vs_default_speedup": 1.2215110824264805
+    },
+    {
+      "shape": [
+        2304,
+        2048,
+        65408
+      ],
+      "default_mode": 6,
+      "predicted_mode2_us": 7395.86307,
+      "predicted_mode6_us": 3312.26974,
+      "selected_mode": 6,
+      "measured_mode2_us": 2813.325,
+      "measured_mode6_us": 2489.4139999999998,
+      "measured_faster_mode": 6,
+      "mode6_vs_mode2_speedup": 1.1301153604824268,
+      "default_us": null,
+      "mode6_vs_default_speedup": null
+    }
+  ]
+}

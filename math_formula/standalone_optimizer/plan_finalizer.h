@@ -7,11 +7,15 @@
 
 namespace mmopt {
 
-enum class KernelFamily { Base, DeterministicSplitK };
+enum class KernelFamily {
+    Base, DeterministicSplitK, SingleCoreSplitKMode2,
+    SingleCoreSplitKMode5, SingleCoreSplitKMode6
+};
 
-// The seven dimensions represented by the current analytical event builder.
-// step_k is a derived consistency check: single_core_k = base_k * step_k for
-// Split-K. It is one for BASE, whose single_core_k covers the full K axis.
+// Shared plan fields for the reduced objectives. The original event builder
+// uses the seven M/N/K tile fields; the FP16/BF16 single-core models also use
+// step_m and step_n. For Split-K, single_core_k=base_k*step_k. BASE uses
+// step_k=1 and single_core_k covering the full K axis.
 struct PlanDecision {
     KernelFamily family = KernelFamily::Base;
     std::uint64_t used_cores = 0;
@@ -22,6 +26,10 @@ struct PlanDecision {
     std::uint64_t base_n = 0;
     std::uint64_t base_k = 0;
     std::uint64_t step_k = 1;
+    // Source single-core Split-K block: MK33=(3,1,3), 2x4=(2,1,4),
+    // short-side=(1,1,4), and NK33=(1,3,3). Legacy families ignore these.
+    std::uint64_t step_m = 1;
+    std::uint64_t step_n = 1;
 };
 
 // Usable capacities queried on an Ascend 910B3 with CANN 9.0.0. Pass fresh
@@ -32,6 +40,7 @@ struct CoreMemory {
     std::uint64_t l0a_bytes = 65536;
     std::uint64_t l0b_bytes = 65536;
     std::uint64_t l0c_bytes = 131072;
+    std::uint64_t l2_bytes = 201326592;
     // Plain BASE may emit dbL0C=1; keep the conservative two-buffer
     // preflight by default and set this to 1 only for that source path.
     std::uint64_t base_l0c_buffers = 2;
@@ -66,7 +75,8 @@ struct FinalizedPlan {
 };
 
 // Narrow standalone preflight for ND/ND/ND NN, FP16/BF16, no bias, aligned
-// shape and base tiles, and BASE or deterministic Split-K. Includes the
+// shape and base tiles. FP16/BF16 single-core Split-K modes 2/5/6 additionally
+// require source block patterns and their mode-specific gates. Includes the
 // source's head ND2NZ conversion branch for long K (e.g. 16x16x102400).
 // Throws std::invalid_argument for an unsupported or infeasible decision.
 FinalizedPlan FinalizePlan(const Workload& workload, const Hardware& hardware,

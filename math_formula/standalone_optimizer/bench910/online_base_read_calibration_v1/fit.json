@@ -1,0 +1,185 @@
+{
+  "parameters": {
+    "one_core": {
+      "a_fixed_us": 0.1731666666666667,
+      "a_byte_us": 3.82232666015625e-06,
+      "b_fixed_us": 0.11958333333333337,
+      "b_byte_us": 4.247029622395833e-06,
+      "b_narrow_row_us": 0.008047993977864584
+    },
+    "twenty_core": {
+      "a_fixed_us": 0.12958333333333338,
+      "a_byte_us": 5.30242919921875e-06,
+      "b_fixed_us": 0.12475000000000014,
+      "b_byte_us": 5.107879638671873e-06,
+      "b_narrow_row_us": 0.01169736735026042
+    },
+    "narrow_contention_exponent": 2
+  },
+  "holdout_checks": [
+    {
+      "operand": "A",
+      "tile_axis": 128,
+      "k_span": 256,
+      "cores": 1,
+      "measured_us_per_packet": 0.4173333333333334,
+      "predicted_us_per_packet": 0.4236666666666667,
+      "relative_error": 0.015175718849840179
+    },
+    {
+      "operand": "A",
+      "tile_axis": 128,
+      "k_span": 256,
+      "cores": 20,
+      "measured_us_per_packet": 0.4805,
+      "predicted_us_per_packet": 0.47708333333333336,
+      "relative_error": -0.007110648629899321
+    },
+    {
+      "operand": "A",
+      "tile_axis": 128,
+      "k_span": 512,
+      "cores": 1,
+      "measured_us_per_packet": 0.7020833333333334,
+      "predicted_us_per_packet": 0.6741666666666667,
+      "relative_error": -0.039762611275964435
+    },
+    {
+      "operand": "A",
+      "tile_axis": 128,
+      "k_span": 512,
+      "cores": 20,
+      "measured_us_per_packet": 0.8316666666666667,
+      "predicted_us_per_packet": 0.8245833333333333,
+      "relative_error": -0.008517034068136269
+    },
+    {
+      "operand": "A",
+      "tile_axis": 256,
+      "k_span": 256,
+      "cores": 1,
+      "measured_us_per_packet": 0.6958333333333334,
+      "predicted_us_per_packet": 0.6741666666666667,
+      "relative_error": -0.03113772455089828
+    },
+    {
+      "operand": "A",
+      "tile_axis": 256,
+      "k_span": 256,
+      "cores": 20,
+      "measured_us_per_packet": 0.8216666666666667,
+      "predicted_us_per_packet": 0.8245833333333333,
+      "relative_error": 0.003549695740365126
+    },
+    {
+      "operand": "B",
+      "tile_axis": 16,
+      "k_span": 2048,
+      "cores": 1,
+      "measured_us_per_packet": 16.972083333333334,
+      "predicted_us_per_packet": 16.880208333333336,
+      "relative_error": -0.005413301254510975
+    },
+    {
+      "operand": "B",
+      "tile_axis": 16,
+      "k_span": 2048,
+      "cores": 20,
+      "measured_us_per_packet": 25.290416666666662,
+      "predicted_us_per_packet": 24.41570833333334,
+      "relative_error": -0.03458655287740708
+    },
+    {
+      "operand": "B",
+      "tile_axis": 16,
+      "k_span": 4096,
+      "cores": 4,
+      "measured_us_per_packet": 34.077083333333334,
+      "predicted_us_per_packet": 34.03212557710065,
+      "relative_error": -0.0013192958972726163
+    },
+    {
+      "operand": "B",
+      "tile_axis": 16,
+      "k_span": 4096,
+      "cores": 10,
+      "measured_us_per_packet": 36.85,
+      "predicted_us_per_packet": 37.05067405355494,
+      "relative_error": 0.005445700232155798
+    },
+    {
+      "operand": "B",
+      "tile_axis": 64,
+      "k_span": 1024,
+      "cores": 1,
+      "measured_us_per_packet": 0.6945833333333332,
+      "predicted_us_per_packet": 0.67625,
+      "relative_error": -0.026394721055788658
+    },
+    {
+      "operand": "B",
+      "tile_axis": 64,
+      "k_span": 1024,
+      "cores": 20,
+      "measured_us_per_packet": 0.7870833333333334,
+      "predicted_us_per_packet": 0.7942499999999999,
+      "relative_error": 0.009105346744309002
+    },
+    {
+      "operand": "B",
+      "tile_axis": 128,
+      "k_span": 256,
+      "cores": 1,
+      "measured_us_per_packet": 0.43083333333333335,
+      "predicted_us_per_packet": 0.3979166666666667,
+      "relative_error": -0.0764023210831721
+    },
+    {
+      "operand": "B",
+      "tile_axis": 128,
+      "k_span": 256,
+      "cores": 20,
+      "measured_us_per_packet": 0.455,
+      "predicted_us_per_packet": 0.4595,
+      "relative_error": 0.009890109890109898
+    },
+    {
+      "operand": "B",
+      "tile_axis": 128,
+      "k_span": 512,
+      "cores": 1,
+      "measured_us_per_packet": 0.6779166666666668,
+      "predicted_us_per_packet": 0.67625,
+      "relative_error": -0.0024585125998772945
+    },
+    {
+      "operand": "B",
+      "tile_axis": 128,
+      "k_span": 512,
+      "cores": 20,
+      "measured_us_per_packet": 0.7804166666666666,
+      "predicted_us_per_packet": 0.7942499999999999,
+      "relative_error": 0.01772557394554181
+    },
+    {
+      "operand": "B",
+      "tile_axis": 256,
+      "k_span": 256,
+      "cores": 1,
+      "measured_us_per_packet": 0.7149999999999999,
+      "predicted_us_per_packet": 0.67625,
+      "relative_error": -0.054195804195803984
+    },
+    {
+      "operand": "B",
+      "tile_axis": 256,
+      "k_span": 256,
+      "cores": 20,
+      "measured_us_per_packet": 0.80125,
+      "predicted_us_per_packet": 0.7942499999999999,
+      "relative_error": -0.008736349453978305
+    }
+  ],
+  "max_abs_holdout_relative_error": 0.0764023210831721,
+  "model_base_16x16x102400_us": 864.2379748953012
+}

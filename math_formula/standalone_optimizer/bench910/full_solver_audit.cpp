@@ -20,6 +20,94 @@ int main(int argc, char** argv) {
          {"nd2nz", {"elements", 0.0, 1000000.0}},
          {"sync", {"count", 0.1, 1.0}},
          {"split_partial", {"count", 1.28, 1.0}}}};
+    if (argc > 1 && (std::string(argv[1]) == "converted_a_select" ||
+                     std::string(argv[1]) == "converted_a_source" ||
+                     std::string(argv[1]) == "converted_a_core_m")) {
+        // Compare the two source-emitted geometries from the long-K phase
+        // sweep. The 2-GiB cap is only for diagnostic scoring: the source
+        // Split-K tuple needs 530 MiB, above the normal 512-MiB model cap.
+        hardware.workspace_limit_bytes = 2ULL * 1024 * 1024 * 1024;
+        mmopt::CoreMemory base_memory;
+        base_memory.base_l0c_buffers = 1;
+        mmopt::PlanDecision base;
+        base.family = mmopt::KernelFamily::Base;
+        base.used_cores = 20;
+        base.single_core_m = base.base_m = 128;
+        base.single_core_n = base.base_n = 256;
+        base.base_k = 64;
+        mmopt::PlanDecision split;
+        split.family = mmopt::KernelFamily::DeterministicSplitK;
+        split.used_cores = 20;
+        split.single_core_m = 2560;
+        split.single_core_n = 384;
+        split.single_core_k = 384;
+        split.base_m = split.base_n = split.base_k = 128;
+        split.step_k = 3;
+        if (std::string(argv[1]) == "converted_a_select") {
+            // Match the measured-output primitive profile used by the
+            // local FP16 family audit. Report both the online-style
+            // conservative L0C budget and source BASE's one-buffer budget.
+            hardware.workspace_limit_bytes = 512ULL * 1024 * 1024;
+            auto& p = hardware.primitives;
+            p["sc_fp32_store"] = {"bytes", 0.2432, 34190.0};
+            p["sc_fp32_store_steady"] = {"bytes", 0.0, 91000.0};
+            p["sc_atomic_extra"] = {"bytes", 0.0541, 106618.0};
+            p["sc_cast"] = {"elements", 0.0156, 116718.0};
+            p["sc_gm_to_l1_a"] = {"bytes", 0.3124, 270810.0};
+            p["sc_gm_to_l1_b"] = {"bytes", 0.0227, 115414.0};
+            mmopt::MipTileDomain domain;
+            domain.base_core_equals_base = true;
+            const mmopt::Workload w{2560, 1024, 73728, "fp16"};
+            const auto family = [](const std::optional<mmopt::MipPlan>& plan) {
+                return plan ? plan->surrogate_us : -1.0;
+            };
+            std::cout << "base_l0c_buffers,base_us,split_us,mode2_us,mode5_us,mode6_us,winner\n";
+            for (const auto buffers : {2ULL, 1ULL}) {
+                mmopt::CoreMemory memory;
+                memory.base_l0c_buffers = buffers;
+                const auto result = mmopt::SolveReducedMip(w, hardware, memory, domain);
+                std::cout << buffers << ',' << family(result.base) << ','
+                          << family(result.deterministic_split_k) << ','
+                          << family(result.single_core_split_k_mode2) << ','
+                          << family(result.single_core_split_k_mode5) << ','
+                          << family(result.single_core_split_k_mode6) << ','
+                          << (result.winner ? result.winner->candidate.family : "none")
+                          << '\n';
+            }
+            return 0;
+        }
+        if (std::string(argv[1]) == "converted_a_core_m") {
+            const mmopt::Workload w{2560, 1024, 73728, "fp16"};
+            std::cout << "step_k,core_m,core_n,workspace_bytes,model_us,within_512_mib\n";
+            for (const auto step_k : {1ULL, 3ULL}) {
+                split.step_k = step_k;
+                split.single_core_k = 128 * step_k;
+                for (const auto core_n : {128ULL, 384ULL}) {
+                    for (const auto core_m : {128ULL, 256ULL, 512ULL, 1280ULL, 2560ULL}) {
+                        split.single_core_m = core_m;
+                        split.single_core_n = core_n;
+                        const auto workspace = mmopt::FinalizePlan(
+                            w, hardware, split, "core_m_audit").workspace_bytes;
+                        const auto score = mmopt::ReducedObjectiveUs(w, hardware, split);
+                        std::cout << step_k << ',' << core_m << ',' << core_n << ','
+                                  << workspace << ',' << score << ','
+                                  << (workspace <= 512ULL * 1024 * 1024) << '\n';
+                    }
+                }
+            }
+            return 0;
+        }
+        std::cout << "k,base_us,split_us,model_winner\n";
+        for (const auto k : {65408ULL, 65536ULL, 73728ULL}) {
+            const mmopt::Workload w{2560, 1024, k, "fp16"};
+            base.single_core_k = k;
+            const auto base_us = mmopt::ReducedObjectiveUs(w, hardware, base, base_memory);
+            const auto split_us = mmopt::ReducedObjectiveUs(w, hardware, split);
+            std::cout << k << ',' << base_us << ',' << split_us << ','
+                      << (base_us < split_us ? "BASE" : "SPLIT_K") << '\n';
+        }
+        return 0;
+    }
     const std::vector<std::tuple<int, int, int>> small_shapes = {
         {128, 256, 1024}, {128, 256, 4096},
         {256, 256, 1024}, {256, 256, 4096},

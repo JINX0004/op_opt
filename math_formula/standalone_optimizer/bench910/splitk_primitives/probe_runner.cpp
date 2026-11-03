@@ -29,17 +29,19 @@ int main(int argc, char** argv) {
     const auto base_d = static_cast<uint32_t>(std::stoul(argv[7]));
     const auto warmup = std::stoi(argv[8]);
     const auto repetitions = std::stoi(argv[9]);
-    if (mode > 3 || !m || !k || !elements || elements > 8192 ||
+    if (mode > 4 || !m || !k || !elements || elements > 8192 ||
         elements % 256 || !partials ||
         (mode == 2 && partials > 20) ||
-        (mode == 3 && partials > 128) ||
+        ((mode == 3 || mode == 4) && partials > 128) ||
         !base_n || !base_d || warmup < 0 || repetitions < 1) return 2;
     const uint64_t input_bytes = mode == 1 ? 2ULL * m * k :
         mode == 2 ? 4ULL * 40 * elements * partials :
-        mode == 3 ? 4ULL * 40 * elements * 2 : 32;
+        mode == 3 ? 4ULL * 40 * elements * 2 :
+        mode == 4 ? 4ULL * 40 * elements : 32;
     const uint64_t output_bytes = mode == 1 ? 2ULL * m * k :
         mode == 2 ? 2ULL * 40 * elements :
-        mode == 3 ? 4ULL * 40 * elements : 32;
+        mode == 3 ? 4ULL * 40 * elements :
+        mode == 4 ? 2ULL * 40 * elements : 32;
     if (input_bytes > 512ULL * 1024 * 1024 ||
         output_bytes > 512ULL * 1024 * 1024) return 2;
     try {
@@ -56,7 +58,7 @@ int main(int argc, char** argv) {
             for (uint64_t i = 0; i < input_bytes; i += 2) {
                 host[i] = 0; host[i + 1] = 0x3c; // FP16 1
             }
-        } else if (mode == 2 || mode == 3) {
+        } else if (mode == 2 || mode == 3 || mode == 4) {
             const float one = 1.0f;
             for (uint64_t i = 0; i < input_bytes; i += 4)
                 std::memcpy(host.data() + i, &one, 4);
@@ -89,7 +91,7 @@ int main(int argc, char** argv) {
             if (observed[core * 8] != mode + core + 1)
                 throw std::runtime_error("AIV token mismatch on core " +
                                          std::to_string(core));
-        if (mode == 1 || mode == 2) {
+        if (mode == 1 || mode == 2 || mode == 4) {
             uint16_t first = 0, last = 0;
             Check(aclrtMemcpy(&first, 2, output, 2,
                               ACL_MEMCPY_DEVICE_TO_HOST), "first output");

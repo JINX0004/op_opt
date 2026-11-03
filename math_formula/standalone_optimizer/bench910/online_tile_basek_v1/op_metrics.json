@@ -1,0 +1,35 @@
+{
+  "master": {
+    "Task Duration(us)": 51.388000000000005,
+    "aicore_time(us)": 30.552500000000002,
+    "aic_mac_time(us)": 1.4460000000000002,
+    "aic_mac_ratio": 0.047,
+    "aic_scalar_time(us)": 22.8975,
+    "aic_scalar_ratio": 0.747,
+    "aic_mte2_time(us)": 3.256,
+    "aic_mte2_ratio": 0.1075,
+    "cube_utilization(%)": 61.4125
+  },
+  "online": {
+    "Task Duration(us)": 936.26,
+    "aicore_time(us)": 58.8545,
+    "aic_mac_time(us)": 2.267,
+    "aic_mac_ratio": 0.0385,
+    "aic_scalar_time(us)": 10.649,
+    "aic_scalar_ratio": 0.1815,
+    "aic_mte2_time(us)": 42.573,
+    "aic_mte2_ratio": 0.723,
+    "cube_utilization(%)": 6.2885
+  },
+  "tile": {
+    "Task Duration(us)": 858.67,
+    "aicore_time(us)": 56.561,
+    "aic_mac_time(us)": 0.528,
+    "aic_mac_ratio": 0.009,
+    "aic_scalar_time(us)": 8.572500000000002,
+    "aic_scalar_ratio": 0.152,
+    "aic_mte2_time(us)": 42.2055,
+    "aic_mte2_ratio": 0.746,
+    "cube_utilization(%)": 6.587
+  }
+}

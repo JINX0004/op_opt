@@ -7,6 +7,20 @@ solves a one-hot geometry master. The result is optimal within $T_D$
 below and its finite geometry grid. It is not an exact MatMulV3 schedule
 or a device-time guarantee.
 
+The current geometry grid is broader than the MatMulV3 deterministic
+Split-K host tiler. At `(M,N,K)=(2560,1024,73728)`, the deployed online
+selector's earlier reduced solve chose `singleCoreM×N=128×128`, whereas
+the source's NK-order branch emits `2560×384`: it starts from
+`singleCoreM=M` and `singleCoreN=stepN×baseN`, then may split M for L2.
+The [current outer-M diagnostic](bench910/converted_a_probe_v1/PHASE_MEASUREMENT.md#why-the-optimized-singlecorem-can-be-too-small)
+shows that the reduced objective gives identical time to M=128 and
+M=2560 when N, base tile, K step, and core count are fixed. Thus the
+returned M can be an arbitrary tie; it is not a runtime prediction that
+smaller M is better. The online selector uses the reduced result to
+choose the family, while source tiling emits the actual tile. The
+selected geometry needs a source-path feasibility check before being
+treated as an executable tiling.
+
 ## Variables, counts, and source assignment
 
 The workload is FP16/BF16 multiplication of $(M,K)$ by $(K,N)$ on
@@ -73,7 +87,7 @@ one representative panel; an implementation sums the real tail extents.
 ## Reduced timing objective
 
 Let $R_C$ be Cube FLOP/µs per AIC, $R_R$ shared GM read bytes/µs, and
-$R_V$ vector-add ops/µs per AIV. $\lambda_R$ is the fixed operand-read
+$R_V$ vector-add ops/µs per AIV. $\lambda_R$ is the fixed GM-to-L1 step-read
 cost, $\lambda_{\rm sync}$ the per-panel Cube/vector signal, and
 $\lambda_{\rm store}$ the final cast and FP16 store. $\lambda_{\rm partial}$
 is the fixed `MTE2→V`, add, `V→MTE2` cost of each extra partial. The
@@ -90,7 +104,8 @@ $$
 T_{\rm cube}&=
 \max\!\left(
 \frac{2\,O_{\rm panel}\,k_{\rm crit}}{R_C},\;
-\frac{D_{\rm panel}}{R_R}+2S_{\rm panel}\,q_{\rm crit}\,\lambda_R
+\frac{D_{\rm panel}}{R_R}
++2S_{\rm panel}g(q_{\rm crit},s,K)\lambda_R
 \right),\\[4pt]
 T_V&=
 \lambda_{\rm sync}
@@ -101,7 +116,21 @@ L+T_{\rm cube}+(N_{\rm panel}-1)\max(T_{\rm cube},T_V)+T_V.
 \end{aligned}
 $$
 
-$S_{\rm panel}$ is the base-packet count of that panel. For one panel
+$S_{\rm panel}$ is the spatial base-packet count of that panel. The
+startup count is path-specific:
+
+$$
+g(q_{\rm crit},s,K)=
+\begin{cases}
+\lceil q_{\rm crit}/s\rceil, & K>65535\quad\text{(converted A)},\\
+q_{\rm crit}, & K\le65535\quad\text{(unconverted A surrogate)}.
+\end{cases}
+$$
+
+On the measured converted-A path, each operand's L1 K step covers up to
+$s$ base-K slices. The unconverted path retains its earlier effective
+per-baseK startup; grouping it degraded family selection on held-out
+device cases. Byte service still covers all K slices. For one panel
 the pipeline collapses to $L+T_{\rm cube}+T_V$. With many panels it is
 the two-buffer schedule, not $N_{\rm panel}$ copies of the whole chain
 stacked with no overlap. Cache reuse, the source's NZ row sharding, and
@@ -113,6 +142,18 @@ $N_{\rm panel}=1$, so $T_D=L+T_{\rm cube}+T_V$ and the new latency appears
 as $(c-1)\lambda_{\rm partial}$: fifteen extra partials at $c=16$, ten at
 $c=11$. Measured kernel medians for that shape are 15.70 µs for source
 BASE and 19.12 µs for deterministic Split-K.
+
+The [converted-A in-context phase sweep](bench910/converted_a_probe_v1/PHASE_MEASUREMENT.md)
+shows a long-K limitation of the fixed operand-read term. At
+$(M,N,K)=(2560,1024,73728)$ on the source $2560\times384$ Split-K tile,
+the old $2S_{\rm panel}q_{\rm crit}\lambda_R$ summed to 1052.35 µs across
+three panels. Counting the source's $s=3$ L1 K steps instead gives
+350.78 µs. The modeled GM payload term alone is 1627.88 µs, versus the
+measured 1715.65 µs post-wait AIC interval. This grouping removes a
+known overcount but does not identify the true on-path startup latency:
+the source pipelines transfers and may reuse L2 data. The common
+converted-A handoff also remains underestimated. Both need validation
+across source-emitted tilings before changing the online selector.
 
 ## Feasible set and solution
 

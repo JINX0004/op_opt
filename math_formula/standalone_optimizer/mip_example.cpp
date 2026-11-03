@@ -49,6 +49,9 @@ int main() {
     std::cout << "Selection: optimal reduced MILP objective within the declared tile grid\n";
     Print("BASE", result.base);
     Print("DETERMINISTIC_SPLIT_K", result.deterministic_split_k);
+    Print("SINGLE_CORE_SPLIT_K_MODE2", result.single_core_split_k_mode2);
+    Print("SINGLE_CORE_SPLIT_K_MODE5", result.single_core_split_k_mode5);
+    Print("SINGLE_CORE_SPLIT_K_MODE6", result.single_core_split_k_mode6);
     Print("WINNER", result.winner);
     return result.winner ? 0 : 3;
 }

@@ -1,0 +1,146 @@
+[
+  {
+    "operand": "A",
+    "copies": 1,
+    "cores": 1,
+    "tile_axis": 16,
+    "k_span": 4096,
+    "shape": [
+      16,
+      16,
+      102400
+    ],
+    "task_times_us": [
+      5.22,
+      5.04,
+      4.46,
+      4.62,
+      4.88,
+      4.82,
+      4.98,
+      4.92
+    ],
+    "median_us": 4.9,
+    "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/online_tile_basek_v1/mte2_measure/A_p1/PROF_000001_20261102123729443_04070784PLGQKHQM/mindstudio_profiler_output/task_time_20261102123735.csv"
+  },
+  {
+    "operand": "A",
+    "copies": 13,
+    "cores": 1,
+    "tile_axis": 16,
+    "k_span": 4096,
+    "shape": [
+      16,
+      16,
+      102400
+    ],
+    "task_times_us": [
+      13.82,
+      14.06,
+      13.96,
+      13.14,
+      13.34,
+      13.18,
+      13.42,
+      13.54
+    ],
+    "median_us": 13.48,
+    "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/online_tile_basek_v1/mte2_measure/A_p13/PROF_000001_20261102123740068_04071170JJGFCQMP/mindstudio_profiler_output/task_time_20261102123746.csv"
+  },
+  {
+    "operand": "A",
+    "copies": 25,
+    "cores": 1,
+    "tile_axis": 16,
+    "k_span": 4096,
+    "shape": [
+      16,
+      16,
+      102400
+    ],
+    "task_times_us": [
+      21.16,
+      21.64,
+      21.4,
+      21.58,
+      21.82,
+      22.52,
+      21.46,
+      21.14
+    ],
+    "median_us": 21.52,
+    "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/online_tile_basek_v1/mte2_measure/A_p25/PROF_000001_20261102123750689_04071752LQDCRHBE/mindstudio_profiler_output/task_time_20261102123756.csv"
+  },
+  {
+    "operand": "B",
+    "copies": 1,
+    "cores": 1,
+    "tile_axis": 16,
+    "k_span": 4096,
+    "shape": [
+      16,
+      16,
+      102400
+    ],
+    "task_times_us": [
+      37.94,
+      37.94,
+      37.74,
+      38.08,
+      37.82,
+      38.0,
+      38.0,
+      38.2
+    ],
+    "median_us": 37.97,
+    "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/online_tile_basek_v1/mte2_measure/B_p1/PROF_000001_20261102123801288_04072138IJPCMNHD/mindstudio_profiler_output/task_time_20261102123807.csv"
+  },
+  {
+    "operand": "B",
+    "copies": 13,
+    "cores": 1,
+    "tile_axis": 16,
+    "k_span": 4096,
+    "shape": [
+      16,
+      16,
+      102400
+    ],
+    "task_times_us": [
+      439.8,
+      439.18,
+      441.58,
+      442.58,
+      440.98,
+      441.5,
+      441.66,
+      442.3
+    ],
+    "median_us": 441.53999999999996,
+    "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/online_tile_basek_v1/mte2_measure/B_p13/PROF_000001_20261102123811927_04072710QIPOCEEB/mindstudio_profiler_output/task_time_20261102123817.csv"
+  },
+  {
+    "operand": "B",
+    "copies": 25,
+    "cores": 1,
+    "tile_axis": 16,
+    "k_span": 4096,
+    "shape": [
+      16,
+      16,
+      102400
+    ],
+    "task_times_us": [
+      844.62,
+      844.9,
+      841.66,
+      839.82,
+      844.24,
+      846.78,
+      845.34,
+      842.96
+    ],
+    "median_us": 844.4300000000001,
+    "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/online_tile_basek_v1/mte2_measure/B_p25/PROF_000001_20261102123821664_04073267CFLIDIAA/mindstudio_profiler_output/task_time_20261102123827.csv"
+  }
+]
