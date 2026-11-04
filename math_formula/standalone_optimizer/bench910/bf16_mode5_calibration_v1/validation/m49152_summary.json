@@ -1,0 +1,98 @@
+[
+  {
+    "m": 49152,
+    "device": 6,
+    "arm": "master",
+    "round": 0,
+    "median_us": 250.324,
+    "max_relative_error": 0.0,
+    "tiling": {
+      "tilingEnableSplitCore": 5,
+      "singleCoreM": 2464,
+      "singleCoreN": 384,
+      "singleCoreK": 384,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 128,
+      "stepM": 1,
+      "stepN": 3,
+      "stepKa": 3,
+      "stepKb": 3,
+      "block_dim": 20,
+      "workspace_bytes": 96468992
+    },
+    "case_path": "/home/xianfei/solvebase_bench_20261025/cases/bf16_mode5_validation_v1/m49152_d6_r0_master/case.json"
+  },
+  {
+    "m": 49152,
+    "device": 6,
+    "arm": "online",
+    "round": 0,
+    "median_us": 247.604,
+    "max_relative_error": 0.0,
+    "tiling": {
+      "tilingEnableSplitCore": 5,
+      "singleCoreM": 2464,
+      "singleCoreN": 384,
+      "singleCoreK": 384,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 128,
+      "stepM": 1,
+      "stepN": 3,
+      "stepKa": 3,
+      "stepKb": 3,
+      "block_dim": 20,
+      "workspace_bytes": 96468992
+    },
+    "case_path": "/home/xianfei/solvebase_bench_20261025/cases/bf16_mode5_validation_v1/m49152_d6_r0_online/case.json"
+  },
+  {
+    "m": 49152,
+    "device": 6,
+    "arm": "online",
+    "round": 1,
+    "median_us": 248.084,
+    "max_relative_error": 0.0,
+    "tiling": {
+      "tilingEnableSplitCore": 5,
+      "singleCoreM": 2464,
+      "singleCoreN": 384,
+      "singleCoreK": 384,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 128,
+      "stepM": 1,
+      "stepN": 3,
+      "stepKa": 3,
+      "stepKb": 3,
+      "block_dim": 20,
+      "workspace_bytes": 96468992
+    },
+    "case_path": "/home/xianfei/solvebase_bench_20261025/cases/bf16_mode5_validation_v1/m49152_d6_r1_online/case.json"
+  },
+  {
+    "m": 49152,
+    "device": 6,
+    "arm": "master",
+    "round": 1,
+    "median_us": 250.304,
+    "max_relative_error": 0.0,
+    "tiling": {
+      "tilingEnableSplitCore": 5,
+      "singleCoreM": 2464,
+      "singleCoreN": 384,
+      "singleCoreK": 384,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 128,
+      "stepM": 1,
+      "stepN": 3,
+      "stepKa": 3,
+      "stepKb": 3,
+      "block_dim": 20,
+      "workspace_bytes": 96468992
+    },
+    "case_path": "/home/xianfei/solvebase_bench_20261025/cases/bf16_mode5_validation_v1/m49152_d6_r1_master/case.json"
+  }
+]

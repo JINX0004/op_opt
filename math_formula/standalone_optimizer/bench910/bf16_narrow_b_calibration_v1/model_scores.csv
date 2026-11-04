@@ -1,0 +1,11 @@
+profile,candidate,objective_us,used_cores,base_k
+BF16_generic,winner,18.0023,1,1024
+BF16_generic,BASE,18.0023,1,1024
+BF16_generic,deterministic,26.8077,9,128
+BF16_generic,source_BASE_64,228.034,1,64
+BF16_generic,model_BASE_1024,18.0023,1,1024
+BF16_with_FP16_rows,winner,26.8077,9,128
+BF16_with_FP16_rows,BASE,544.406,1,1024
+BF16_with_FP16_rows,deterministic,26.8077,9,128
+BF16_with_FP16_rows,source_BASE_64,754.437,1,64
+BF16_with_FP16_rows,model_BASE_1024,544.406,1,1024

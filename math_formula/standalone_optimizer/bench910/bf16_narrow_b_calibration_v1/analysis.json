@@ -1,0 +1,437 @@
+{
+  "event_slopes": {
+    "bf16_A16_K4096_c1": {
+      "per_packet_us": [
+        0.33312499999999995,
+        0.39354162499999995,
+        0.51703125
+      ],
+      "median_us": 0.39354162499999995
+    },
+    "bf16_B16_K4096_c1": {
+      "per_packet_us": [
+        33.588384875,
+        33.668282125,
+        33.83078020833333
+      ],
+      "median_us": 33.668282125
+    },
+    "bf16_B16_K4096_c20": {
+      "per_packet_us": [
+        48.41333383333333,
+        48.60562520833333,
+        48.67629958333333
+      ],
+      "median_us": 48.60562520833333
+    },
+    "bf16_B32_K2048_c1": {
+      "per_packet_us": [
+        0.3465624583333333,
+        0.46890625,
+        0.486302125
+      ],
+      "median_us": 0.46890625
+    },
+    "bf16_B32_K2048_c20": {
+      "per_packet_us": [
+        0.5570312916666665,
+        0.620625,
+        0.5815104166666667
+      ],
+      "median_us": 0.5815104166666667
+    },
+    "bf16_B128_K512_c1": {
+      "per_packet_us": [
+        0.4215104583333333,
+        0.5400000416666667,
+        0.48958333333333326
+      ],
+      "median_us": 0.48958333333333326
+    },
+    "fp16_A16_K4096_c1": {
+      "per_packet_us": [
+        0.4313541666666667,
+        0.4383333333333334,
+        0.3200520833333334
+      ],
+      "median_us": 0.4313541666666667
+    },
+    "fp16_B16_K4096_c1": {
+      "per_packet_us": [
+        33.65198025,
+        33.59390575,
+        33.594582833333334
+      ],
+      "median_us": 33.594582833333334
+    },
+    "fp16_B16_K4096_c20": {
+      "per_packet_us": [
+        48.543592,
+        48.588124416666666,
+        48.496717875
+      ],
+      "median_us": 48.543592
+    },
+    "fp16_B32_K2048_c1": {
+      "per_packet_us": [
+        0.3977604166666666,
+        0.4848958749999999,
+        0.40609375
+      ],
+      "median_us": 0.40609375
+    },
+    "fp16_B32_K2048_c20": {
+      "per_packet_us": [
+        0.47255208333333326,
+        0.528020875,
+        0.585208375
+      ],
+      "median_us": 0.528020875
+    },
+    "fp16_B128_K512_c1": {
+      "per_packet_us": [
+        0.4569792083333333,
+        0.5328645416666666,
+        -0.00546883333333333
+      ],
+      "median_us": 0.4569792083333333
+    }
+  },
+  "task_slopes": {
+    "bf16_B16_K4096_c1": {
+      "per_packet_us": [
+        33.66833333333334
+      ],
+      "median_us": 33.66833333333334
+    },
+    "bf16_B16_K4096_c20": {
+      "per_packet_us": [
+        48.58166666666668
+      ],
+      "median_us": 48.58166666666668
+    },
+    "fp16_B16_K4096_c1": {
+      "per_packet_us": [
+        33.61325
+      ],
+      "median_us": 33.61325
+    },
+    "fp16_B16_K4096_c20": {
+      "per_packet_us": [
+        48.523666666666664
+      ],
+      "median_us": 48.523666666666664
+    }
+  },
+  "boundary": [
+    {
+      "shape": [
+        16,
+        16,
+        65408
+      ],
+      "arms": {
+        "master": {
+          "mode": 3,
+          "tile": {
+            "singleCoreM": 384,
+            "singleCoreN": 16,
+            "singleCoreK": 384,
+            "baseM": 128,
+            "baseN": 128,
+            "baseK": 128,
+            "block_dim": 20
+          },
+          "round_us": [
+            30.58,
+            30.98
+          ],
+          "median_us": 30.78
+        },
+        "generic": {
+          "mode": 0,
+          "tile": {
+            "singleCoreM": 16,
+            "singleCoreN": 16,
+            "singleCoreK": 65408,
+            "baseM": 16,
+            "baseN": 16,
+            "baseK": 64,
+            "block_dim": 20
+          },
+          "round_us": [
+            598.98,
+            599.58
+          ],
+          "median_us": 599.28
+        },
+        "online": {
+          "mode": 3,
+          "tile": {
+            "singleCoreM": 384,
+            "singleCoreN": 16,
+            "singleCoreK": 384,
+            "baseM": 128,
+            "baseN": 128,
+            "baseK": 128,
+            "block_dim": 20
+          },
+          "round_us": [
+            33.24,
+            30.86
+          ],
+          "median_us": 32.05
+        }
+      },
+      "generic_over_online": 18.698283931357256
+    },
+    {
+      "shape": [
+        32,
+        16,
+        65408
+      ],
+      "arms": {
+        "master": {
+          "mode": 3,
+          "tile": {
+            "singleCoreM": 384,
+            "singleCoreN": 16,
+            "singleCoreK": 384,
+            "baseM": 128,
+            "baseN": 128,
+            "baseK": 128,
+            "block_dim": 20
+          },
+          "round_us": [
+            31.44,
+            31.2
+          ],
+          "median_us": 31.32
+        },
+        "generic": {
+          "mode": 0,
+          "tile": {
+            "singleCoreM": 16,
+            "singleCoreN": 16,
+            "singleCoreK": 65408,
+            "baseM": 16,
+            "baseN": 16,
+            "baseK": 64,
+            "block_dim": 20
+          },
+          "round_us": [
+            604.52,
+            603.48
+          ],
+          "median_us": 604.0
+        },
+        "online": {
+          "mode": 3,
+          "tile": {
+            "singleCoreM": 384,
+            "singleCoreN": 16,
+            "singleCoreK": 384,
+            "baseM": 128,
+            "baseN": 128,
+            "baseK": 128,
+            "block_dim": 20
+          },
+          "round_us": [
+            31.12,
+            30.44
+          ],
+          "median_us": 30.78
+        }
+      },
+      "generic_over_online": 19.623131903833656
+    },
+    {
+      "shape": [
+        16,
+        16,
+        65536
+      ],
+      "arms": {
+        "master": {
+          "mode": 3,
+          "tile": {
+            "singleCoreM": 384,
+            "singleCoreN": 16,
+            "singleCoreK": 384,
+            "baseM": 128,
+            "baseN": 128,
+            "baseK": 128,
+            "block_dim": 20
+          },
+          "round_us": [
+            35.66
+          ],
+          "median_us": 35.66
+        },
+        "generic": {
+          "mode": 3,
+          "tile": {
+            "singleCoreM": 384,
+            "singleCoreN": 16,
+            "singleCoreK": 384,
+            "baseM": 128,
+            "baseN": 128,
+            "baseK": 128,
+            "block_dim": 20
+          },
+          "round_us": [
+            34.24
+          ],
+          "median_us": 34.24
+        },
+        "online": {
+          "mode": 3,
+          "tile": {
+            "singleCoreM": 384,
+            "singleCoreN": 16,
+            "singleCoreK": 384,
+            "baseM": 128,
+            "baseN": 128,
+            "baseK": 128,
+            "block_dim": 20
+          },
+          "round_us": [
+            33.7
+          ],
+          "median_us": 33.7
+        }
+      },
+      "generic_over_online": 1.0160237388724036
+    },
+    {
+      "shape": [
+        16,
+        16,
+        102400
+      ],
+      "arms": {
+        "master": {
+          "mode": 3,
+          "tile": {
+            "singleCoreM": 384,
+            "singleCoreN": 16,
+            "singleCoreK": 384,
+            "baseM": 128,
+            "baseN": 128,
+            "baseK": 128,
+            "block_dim": 20
+          },
+          "round_us": [
+            40.136
+          ],
+          "median_us": 40.136
+        },
+        "generic": {
+          "mode": 3,
+          "tile": {
+            "singleCoreM": 384,
+            "singleCoreN": 16,
+            "singleCoreK": 384,
+            "baseM": 128,
+            "baseN": 128,
+            "baseK": 128,
+            "block_dim": 20
+          },
+          "round_us": [
+            41.2
+          ],
+          "median_us": 41.2
+        },
+        "online": {
+          "mode": 3,
+          "tile": {
+            "singleCoreM": 384,
+            "singleCoreN": 16,
+            "singleCoreK": 384,
+            "baseM": 128,
+            "baseN": 128,
+            "baseK": 128,
+            "block_dim": 20
+          },
+          "round_us": [
+            41.94
+          ],
+          "median_us": 41.94
+        }
+      },
+      "generic_over_online": 0.9823557463042443
+    },
+    {
+      "shape": [
+        256,
+        512,
+        16384
+      ],
+      "arms": {
+        "master": {
+          "mode": 3,
+          "tile": {
+            "singleCoreM": 384,
+            "singleCoreN": 512,
+            "singleCoreK": 384,
+            "baseM": 128,
+            "baseN": 128,
+            "baseK": 128,
+            "block_dim": 20
+          },
+          "round_us": [
+            46.0
+          ],
+          "median_us": 46.0
+        },
+        "generic": {
+          "mode": 0,
+          "tile": {
+            "singleCoreM": 64,
+            "singleCoreN": 128,
+            "singleCoreK": 16384,
+            "baseM": 64,
+            "baseN": 128,
+            "baseK": 128,
+            "block_dim": 20
+          },
+          "round_us": [
+            48.92
+          ],
+          "median_us": 48.92
+        },
+        "online": {
+          "mode": 0,
+          "tile": {
+            "singleCoreM": 64,
+            "singleCoreN": 128,
+            "singleCoreK": 16384,
+            "baseM": 64,
+            "baseN": 128,
+            "baseK": 128,
+            "block_dim": 20
+          },
+          "round_us": [
+            50.04
+          ],
+          "median_us": 50.04
+        }
+      },
+      "generic_over_online": 0.9776179056754597
+    }
+  ],
+  "decision_changes": [
+    {
+      "m": "16",
+      "n": "16",
+      "k": "65408",
+      "generic_mode": "0",
+      "generic_us": "18.0023",
+      "narrow_mode": "3",
+      "narrow_us": "26.8077"
+    }
+  ],
+  "preflight_fallbacks": 2,
+  "max_relative_error": 0.002667
+}

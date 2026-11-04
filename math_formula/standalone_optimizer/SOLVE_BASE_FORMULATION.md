@@ -177,8 +177,11 @@ generic objective for wider tiles. The term is proportional to the number
 of B source rows and interpolates quadratically with occupied AIC count
 between measured one-core and 20-core rates. The experimental `full` value
 enables the broader source-step A/B packet fit; it is diagnostic because
-paired source-backed tests found two large-shape family regressions. BF16
-retains the default profile. The domain flag `base_core_equals_base`
+paired source-backed tests found two large-shape family regressions. The
+experimental BF16 profile now includes the same narrow-B row coefficients
+after [paired BF16 packet measurements](bench910/bf16_narrow_b_calibration_v1/README.md)
+matched FP16 within 0.2%; BF16 does not use the FP16-only environment
+switch. The domain flag `base_core_equals_base`
 constrains geometry and does not itself activate either read profile.
 
 The [device-4 calibration and selection experiment](bench910/online_base_read_calibration_v1/README.md)
@@ -188,7 +191,9 @@ fitted packet model predicts 864 µs for that BASE case. The older
 large-tile, 20-AIC packet coefficients instead predict about 165 µs for
 the model BASE tile. The narrow-row profile corrected the online family
 choice from BASE to deterministic Split-K on 16×16×102400 FP16 and seven
-nearby held-out shapes. This is a family-choice result, not proof that
+nearby held-out shapes. The BF16 follow-up corrected the analogous
+16×16×65408 family choice, while its source-emitted BASE tile still has
+an inaccurate absolute objective. This is a family-choice result, not proof that
 the profile accurately predicts every candidate's runtime: for N=32,
 the model's hypothetical BASE tile used baseN=16 while the source emitted
 baseN=32 when BASE was forced.

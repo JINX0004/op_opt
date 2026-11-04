@@ -1,0 +1,178 @@
+{
+  "shape_count": 11,
+  "old_geomean_master_over_online": 0.9897440554292583,
+  "composite_latest_geomean_master_over_online": 1.0506693932153304,
+  "fresh_mode5_shapes": [
+    [
+      49152,
+      384,
+      1536
+    ],
+    [
+      65536,
+      384,
+      1536
+    ],
+    [
+      81920,
+      384,
+      1536
+    ]
+  ],
+  "cases": [
+    {
+      "shape": [
+        16,
+        16,
+        102400
+      ],
+      "old_master_us": 41.6,
+      "old_online_us": 43.28,
+      "latest_master_us": 41.6,
+      "latest_online_us": 43.28,
+      "old_speedup": 0.9611829944547134,
+      "latest_speedup": 0.9611829944547134,
+      "latest_source": "bf16_online_vs_master_20261103/measurements.json"
+    },
+    {
+      "shape": [
+        384,
+        49152,
+        1536
+      ],
+      "old_master_us": 264.454,
+      "old_online_us": 249.246,
+      "latest_master_us": 264.454,
+      "latest_online_us": 249.246,
+      "old_speedup": 1.0610160243293774,
+      "latest_speedup": 1.0610160243293774,
+      "latest_source": "bf16_online_vs_master_20261103/measurements.json"
+    },
+    {
+      "shape": [
+        384,
+        65536,
+        1536
+      ],
+      "old_master_us": 1027.24,
+      "old_online_us": 1028.06,
+      "latest_master_us": 1027.24,
+      "latest_online_us": 1028.06,
+      "old_speedup": 0.9992023811839776,
+      "latest_speedup": 0.9992023811839776,
+      "latest_source": "bf16_online_vs_master_20261103/measurements.json"
+    },
+    {
+      "shape": [
+        2048,
+        2048,
+        27392
+      ],
+      "old_master_us": 1073.304,
+      "old_online_us": 1071.62,
+      "latest_master_us": 1073.304,
+      "latest_online_us": 1071.62,
+      "old_speedup": 1.0015714525671415,
+      "latest_speedup": 1.0015714525671415,
+      "latest_source": "bf16_online_vs_master_20261103/measurements.json"
+    },
+    {
+      "shape": [
+        2304,
+        768,
+        32768
+      ],
+      "old_master_us": 900.1980000000001,
+      "old_online_us": 742.674,
+      "latest_master_us": 900.1980000000001,
+      "latest_online_us": 742.674,
+      "old_speedup": 1.2121038302135259,
+      "latest_speedup": 1.2121038302135259,
+      "latest_source": "bf16_online_vs_master_20261103/measurements.json"
+    },
+    {
+      "shape": [
+        2560,
+        1024,
+        32768
+      ],
+      "old_master_us": 1314.1660000000002,
+      "old_online_us": 932.656,
+      "latest_master_us": 1314.1660000000002,
+      "latest_online_us": 932.656,
+      "old_speedup": 1.4090575732102728,
+      "latest_speedup": 1.4090575732102728,
+      "latest_source": "bf16_online_vs_master_20261103/measurements.json"
+    },
+    {
+      "shape": [
+        2560,
+        1024,
+        73728
+      ],
+      "old_master_us": 2678.932,
+      "old_online_us": 2664.256,
+      "latest_master_us": 2678.932,
+      "latest_online_us": 2664.256,
+      "old_speedup": 1.0055084796656177,
+      "latest_speedup": 1.0055084796656177,
+      "latest_source": "bf16_online_vs_master_20261103/measurements.json"
+    },
+    {
+      "shape": [
+        49152,
+        384,
+        1536
+      ],
+      "old_master_us": 247.808,
+      "old_online_us": 269.424,
+      "latest_master_us": 250.31400000000002,
+      "latest_online_us": 247.844,
+      "old_speedup": 0.9197695825167765,
+      "latest_speedup": 1.009965946321073,
+      "latest_source": "validation/m49152_summary.json"
+    },
+    {
+      "shape": [
+        65536,
+        256,
+        1536
+      ],
+      "old_master_us": 226.804,
+      "old_online_us": 237.524,
+      "latest_master_us": 226.804,
+      "latest_online_us": 237.524,
+      "old_speedup": 0.9548677186305384,
+      "latest_speedup": 0.9548677186305384,
+      "latest_source": "bf16_online_vs_master_20261103/measurements.json"
+    },
+    {
+      "shape": [
+        65536,
+        384,
+        1536
+      ],
+      "old_master_us": 323.504,
+      "old_online_us": 417.406,
+      "latest_master_us": 317.38599999999997,
+      "latest_online_us": 314.354,
+      "old_speedup": 0.7750343789979062,
+      "latest_speedup": 1.0096451770933406,
+      "latest_source": "validation/m65536_summary.json"
+    },
+    {
+      "shape": [
+        81920,
+        384,
+        1536
+      ],
+      "old_master_us": 387.856,
+      "old_online_us": 518.298,
+      "latest_master_us": 405.848,
+      "latest_online_us": 402.13599999999997,
+      "old_speedup": 0.7483262524647982,
+      "latest_speedup": 1.0092307080191778,
+      "latest_source": "validation/m81920_summary.json"
+    }
+  ]
+}

@@ -154,8 +154,9 @@ for these three kernels. A selected tuple still requires source/CANN
 execution validation before it can be treated as a device tiling.
 Without path-specific primitives, FP16 and BF16 receive the same
 reduced objective because both have two-byte operands and outputs. The
-measured FP16 mode-5 path applies only to FP16; BF16 retains the generic
-mode-5 objective pending its own measurement. The [910B3 FP16 single-core
+experimental BF16 profile now includes [measured mode-5 output terms](bench910/bf16_mode5_calibration_v1/README.md)
+and a [validated narrow-B BASE row term](bench910/bf16_narrow_b_calibration_v1/README.md).
+The [910B3 FP16 single-core
 primitive probes](bench910/SINGLE_CORE_SPLITK_PRIMITIVES_910B3.md)
 measure exploratory FP32 plain-store, atomic-add, FP32-to-FP16 cast, and mode-6
 A/B GM→L1 packet terms. Pass them as `sc_fp32_store`, `sc_atomic_extra`, `sc_cast`, and

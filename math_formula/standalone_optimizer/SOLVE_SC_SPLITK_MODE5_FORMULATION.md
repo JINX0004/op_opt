@@ -83,9 +83,9 @@ optional `sc_cast` adds $\lambda_{\rm cast}+Q/R_{\rm cast}$ to $T_V$.
 Both default to zero when omitted. The
 FP32 workspace is cast to FP16/BF16 output after each tile's K loop.
 
-## Measured FP16 mode-5 service option
+## Measured FP16/BF16 mode-5 service option
 
-The 910B3 FP16 profile can additionally supply both `sc_mode5_fixpipe`
+The 910B3 FP16 and BF16 profiles supply both `sc_mode5_fixpipe`
 and `sc_mode5_iterate`. With these paired primitives, the source's MAC,
 MTE2, and Fixpipe activity is represented as concurrent service
 demands within each K slice, followed by one exposed `IterateAll` setup:
@@ -101,19 +101,20 @@ T_{5,\mathrm{slice}}(m,n,k)&=
 $$
 
 The K chain sums this expression over its four 384-K slices. The tile
-pipeline and spatial assignment below are unchanged. The measured
-coefficients are $R_{F,5}=108{,}000$ bytes/µs,
-$\lambda_{F,5}=0$, and $\lambda_{I,5}=1.8$ µs per `IterateAll`. The
-Fixpipe term is the total in-context demand for plain and atomic FP32
-updates; adding `sc_atomic_extra` again would double-count it. The
-1.8-µs setup is derived from the change in reported AIC scalar active
-time between the two executed tiles at 49152×384×1536, divided by
-the extra `IterateAll` calls. It is a measured per-call primitive, not a
-whole-kernel multiplier. The [validation report](bench910/mode5_tile_experiment_v1/MODEL_VALIDATION.md)
-checks two other shapes without changing these coefficients.
+pipeline and spatial assignment below are unchanged. Both measured
+profiles use $R_{F,5}=108{,}000$ bytes/µs and $\lambda_{F,5}=0$.
+The per-`IterateAll` setup is 1.8 µs for FP16 and 1.76 µs for BF16.
+The Fixpipe term is the total in-context demand for plain and atomic FP32
+updates; adding `sc_atomic_extra` again would double-count it. Each
+setup coefficient comes from the difference in AIC scalar active time
+between a source-sized and a 128×128 tile, divided by the extra
+`IterateAll` calls. These are component measurements, not whole-kernel
+multipliers. The [FP16 validation](bench910/mode5_tile_experiment_v1/MODEL_VALIDATION.md)
+and [BF16 calibration](bench910/bf16_mode5_calibration_v1/README.md) report
+the device measurements and held-out checks.
 
-When either primitive is absent, or the input is BF16, the original
-$T_{\rm slice}$ definition above remains in force.
+When either primitive is absent, the original $T_{\rm slice}$ definition
+above remains in force.
 
 $L$ is the launch term from the
 [BASE objective](SOLVE_BASE_FORMULATION.md#objective). Here $K=1536$
@@ -174,7 +175,7 @@ contention remain unresolved.
 
 The [910B3 mode-5 tile diagnosis](bench910/MODE5_TILE_DIAGNOSIS_910B3.md)
 shows why the original reduced objective reversed the measured tile
-ranking at 49152×384×1536. The measured FP16 option above chooses the
-source-sized tile on that shape and two held-out M sizes. It still
-underpredicts those kernel times by roughly 8–15%, and the BASE versus
-mode-5 family margin is less reliable than the mode-5 tile ranking.
+ranking at 49152×384×1536. The measured FP16/BF16 option above chooses
+the source-sized tile on that shape and two held-out M sizes per dtype.
+It still underpredicts kernel times, and the BASE versus mode-5 family
+margin is less reliable than the mode-5 tile ranking.
