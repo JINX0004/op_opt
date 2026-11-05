@@ -156,6 +156,9 @@ Without path-specific primitives, FP16 and BF16 receive the same
 reduced objective because both have two-byte operands and outputs. The
 experimental BF16 profile now includes [measured mode-5 output terms](bench910/bf16_mode5_calibration_v1/README.md)
 and a [validated narrow-B BASE row term](bench910/bf16_narrow_b_calibration_v1/README.md).
+The online-branch [BF16 source-BASE follow-up](bench910/bf16_source_base_v1/README.md)
+scores the source-prepared BASE tile, groups narrow-B read startup by L1
+K step, and reports a fresh 100-shape device comparison with clean master.
 The [910B3 FP16 single-core
 primitive probes](bench910/SINGLE_CORE_SPLITK_PRIMITIVES_910B3.md)
 measure exploratory FP32 plain-store, atomic-add, FP32-to-FP16 cast, and mode-6

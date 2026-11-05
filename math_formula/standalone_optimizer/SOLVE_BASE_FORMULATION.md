@@ -184,6 +184,17 @@ matched FP16 within 0.2%; BF16 does not use the FP16-only environment
 switch. The domain flag `base_core_equals_base`
 constrains geometry and does not itself activate either read profile.
 
+On the experimental BF16 online branch, family selection scores the plain
+BASE tile already prepared by MatMulV3 rather than the reduced solver's
+hypothetical BASE optimum. That source tile uses one L0C buffer for
+preflight. When `baseN < 32`, its generic fixed read-startup term uses
+$P_A=\lceil K/(\mathrm{stepKa}\,baseK)\rceil$ and
+$P_B=\lceil K/(\mathrm{stepKb}\,baseK)\rceil$ in place of one startup
+per `baseK` slice. Byte service and the measured narrow-B row service
+are unchanged. This is specific to the measured BF16 narrow-B path;
+FP16 and wider BF16 BASE tiles retain their prior read-startup objective.
+The source K steps are recomputed from the source L1-depth rules above.
+
 The [device-4 calibration and selection experiment](bench910/online_base_read_calibration_v1/README.md)
 measured the 16-wide B source packet at about 844 µs for 25 copies,
 compared with about 858 µs for the corresponding whole BASE kernel. The
@@ -192,8 +203,10 @@ large-tile, 20-AIC packet coefficients instead predict about 165 µs for
 the model BASE tile. The narrow-row profile corrected the online family
 choice from BASE to deterministic Split-K on 16×16×102400 FP16 and seven
 nearby held-out shapes. The BF16 follow-up corrected the analogous
-16×16×65408 family choice, while its source-emitted BASE tile still has
-an inaccurate absolute objective. This is a family-choice result, not proof that
+16×16×65408 family choice. Scoring the source-emitted `baseK=64` tile
+with L1-step read startups changes its objective from 754.44 to 533.88 µs,
+versus 599.28 µs measured. The absolute timeline remains approximate.
+This is a family-choice result, not proof that
 the profile accurately predicts every candidate's runtime: for N=32,
 the model's hypothetical BASE tile used baseN=16 while the source emitted
 baseN=32 when BASE was forced.

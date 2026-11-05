@@ -1,5 +1,10 @@
 # BF16 narrow-B BASE correction at K=65408 — 910B3
 
+**Follow-up:** The [source-emitted BASE scoring and fresh 100-shape run](../bf16_source_base_v1/README.md)
+group the narrow-B read startups by L1 K step and compare the actual
+source-prepared BASE tile. The observations below describe the earlier
+model before that follow-up.
+
 ## Finding
 
 The BF16 online selector inherited the old generic BASE read objective for

@@ -4,7 +4,8 @@
 identified and corrected the `16×16×65408` family decision in an isolated
 source-backed test. The results below are the historical generic BF16
 selector baseline; the corrected branch has not yet had a fresh 100-shape
-device timing run.
+device timing run at this stage. A later [fresh 100-shape comparison](../bf16_source_base_v1/README.md)
+scores the source-prepared BASE tile and includes the narrow-B correction.
 
 This experiment runs the calibrated BF16 online selector on the same
 [100 distinct shapes](dataset.json) used for the earlier
