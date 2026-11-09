@@ -12,8 +12,8 @@ An opt-in [source-model profile](../fp32_mode2_v1/remote_selector/model/hardware
 now adds a shared MTE2 bound and a busiest-core bound for an experimentally
 supported access class. It scores the executed tile at **520.9 µs** and the
 source-generated `128×128×64` BASE tile at **525.7 µs**, versus **522.5 µs**
-and **531.8 µs** measured. The ordinary FP32 profile and the product's FP32
-family-selection gate are unchanged.
+and **531.8 µs** measured. The default MatMulV3 FP32 source path remains
+unchanged; the CLI and opt-in host path now use this profile.
 
 ## Formulation
 
@@ -108,8 +108,9 @@ L2-capacity explanation. The source uses `baseK=32` for N=96 versus
 N=80/112 take an ND→NZ B path and are not represented by the direct-copy
 scorer.
 
-These limits mean the opt-in profile is suitable for studying the stated
-access class, not yet for enabling the online FP32 family selector.
+These limits mean the profile supports experimental online FP32 family
+selection under `MMV3_ONLINE_SELECTOR=1`, with the default source path
+retained. They do not support enabling it by default.
 
 ## Rerun of the 100-case FP32 selector comparison
 
@@ -149,3 +150,22 @@ source-generated tiling inside the selected family; they exclude
 host-side selector time and do not time the model's proposed tile.
 The [machine-readable summary](selector_100_analysis.json) records
 the complete counts and interval.
+
+## Opt-in MatMulV3 host smoke test
+
+The 910 selector branch now uses `ExperimentalFp32BaseMte2910B3()` for
+FP32 CLI rows and FP32 host decisions when `MMV3_ONLINE_SELECTOR=1`.
+The MatMulV3 host gate accepts same-type FP32 NN/ND under that switch;
+the switch-unset path still uses source selection. Mode 5 additionally
+requires its source experiment gate, and mode 6 is excluded for FP32.
+
+The rebuilt CANN 9.0.0 host library was placed in an isolated test
+package. At `4096×64×27328`, the [device smoke record](online_smoke_record.json)
+shows the same package emitted source BASE (`128×128×64`, 538.30 µs)
+with the switch unset and deterministic Split-K (`4096×384×192`,
+483.16 µs) with it set. Both arms reported zero output error.
+The standalone CLI's 100 decisions and objective values match
+[the previous profile sweep](selector_100.csv) exactly. This validates
+the wiring and this one host case; the 100-case performance comparison
+above remains a family-forcing experiment, not a full online-host
+device rerun.

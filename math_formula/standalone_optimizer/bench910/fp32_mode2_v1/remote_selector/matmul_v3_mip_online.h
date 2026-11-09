@@ -53,7 +53,9 @@ inline OnlineMipChoice LookupOnlineMipMode(std::uint64_t m, std::uint64_t n,
     static const auto narrow_hardware = mmopt::NarrowB910B3();
     static const auto full_hardware = mmopt::RowAware910B3();
     static const auto bf16_hardware = mmopt::ExperimentalBf16910B3();
-    const auto& hardware = types.a == "bf16" ? bf16_hardware :
+    static const auto fp32_hardware = mmopt::ExperimentalFp32BaseMte2910B3();
+    const auto& hardware = types.a == "fp32" ? fp32_hardware :
+        types.a == "bf16" ? bf16_hardware :
         read_profile == "full" ? full_hardware :
         read_profile == "1" ? narrow_hardware : default_hardware;
     static const auto domain = mmopt::SourceCompatibleDomain();

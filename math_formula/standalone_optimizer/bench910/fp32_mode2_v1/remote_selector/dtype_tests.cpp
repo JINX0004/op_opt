@@ -325,6 +325,12 @@ int main() {
                     score_source_base(768, 2048, 32768, mte2_fp32)) < 1e-9);
     assert(std::abs(score_source_base(4096, 4096, 16384, old_fp32) -
                     score_source_base(4096, 4096, 16384, mte2_fp32)) < 1e-9);
+    // The online FP32 selector uses the measured narrow-N profile. This
+    // 910B3 case changes from hypothetical BASE to deterministic Split-K.
+    const auto online_fp32 = optiling::matmul_v3::LookupOnlineMipMode(
+        4096, 64, 27328, "fp32");
+    assert(online_fp32.mode == 3);
+    assert(online_fp32.objective_us > 375.0 && online_fp32.objective_us < 379.0);
     bool converted_fp32_rejected = false;
     try { (void)SolveReducedMip({16, 16, 65536, "fp32"},
                                 fp16_hardware, {}, split_domain); }

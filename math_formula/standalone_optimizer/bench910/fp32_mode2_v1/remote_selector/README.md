@@ -108,9 +108,10 @@ cmake --build /tmp/mmv3-mip-build -j4
 printf '2560 1024 36864 fp16\n' | /tmp/mmv3-mip-build/mmopt_selector
 ```
 
-`fp16`, `bf16`, and experimental `fp32` are accepted. The model preflight
-rejects unsupported shapes. The CLI exits nonzero for a malformed row or
-model failure.
+`fp16`, `bf16`, and experimental `fp32` are accepted. FP32 rows use
+`ExperimentalFp32BaseMte2910B3()`, including the narrow-N MTE2 service.
+The model preflight rejects unsupported shapes. The CLI exits nonzero
+for a malformed row or model failure.
 
 ## Build and use the host tiler
 
@@ -140,19 +141,23 @@ experiment package used for the smoke test is
 
 Set `MMV3_ONLINE_SELECTOR=1` only in the experimental arm. Leave it unset for
 the original source decision. The online choice applies only to ND,
-nontransposed, no-bias FP16/BF16 A, B, and output on a 20-AIC 910B3 with the
-expected capabilities. Invalid or unsupported model inputs fall back to the
-source selector. Repeated `(M,N,K,A,B,output,accumulator)` choices are cached
-in the process.
+nontransposed, no-bias, same-type FP16/BF16/FP32 A, B, and output on a
+20-AIC 910B3 with the expected capabilities. FP32 uses the experimental
+BASE MTE2 profile only with `MMV3_ONLINE_SELECTOR=1`; the default FP32
+path remains source selection. FP32 mode 5 additionally requires
+`MMV3_FP32_MODE5_EXPERIMENT`, and FP32 mode 6 is excluded. Invalid or
+unsupported model inputs fall back to the source selector. Repeated
+`(M,N,K,A,B,output,accumulator)` choices are cached in the process.
 
-For the BASE K-tile experiment, set both `MMV3_ONLINE_SELECTOR=1` and
-`MMV3_ONLINE_TILE=1`. The host keeps the source's spatial tile and launch
+For the FP16/BF16 BASE K-tile experiment, set both
+`MMV3_ONLINE_SELECTOR=1` and `MMV3_ONLINE_TILE=1`. The host keeps the source's spatial tile and launch
 count, and replaces `baseK` only when the model chose the same
 `singleCoreM/N/K` and `baseM/N` and the tile passes buffer checks. It then
 recalculates `depthA1/B1` and `stepKa/Kb` before serialization. For
 16×16×102400 FP16, the model proposes `baseK=1024` while the unmodified
 source uses `baseK=64`. Validate correctness and device latency before
-extending this path to other geometries or families.
+extending this path to other geometries or families. FP32 online selection
+does not inject a model K tile, even if `MMV3_ONLINE_TILE=1` is set.
 
 For the isolated `aclop` benchmark, also set
 `MMV3_SKIP_LEGACY_OP_CACHE=1`. Its package does not provide the optional
@@ -188,6 +193,6 @@ its own geometry and output timing path. The [source domain description](FP32_SO
 gives the constraints and current validation. The FP32 Cube rate was
 fitted to one source BASE tile; the mode-2 output service reuses a measured
 FP32 atomic-output rate as a provisional proxy. FP32 converted-A
-(`K>65535`) is still outside this domain. The product online selector's
-FP32 gate is closed; the CLI permits diagnosis without changing the
-production path.
+(`K>65535`) is still outside this domain. The default FP32 source path
+remains unchanged; the experimental online path requires
+`MMV3_ONLINE_SELECTOR=1`.

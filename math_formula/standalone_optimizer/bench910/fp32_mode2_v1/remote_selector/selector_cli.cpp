@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
     const auto narrow_hardware = mmopt::NarrowB910B3();
     const auto full_hardware = mmopt::RowAware910B3();
     const auto bf16_hardware = mmopt::ExperimentalBf16910B3();
-    const auto fp32_hardware = mmopt::ExperimentalFp32910B3();
+    const auto fp32_hardware = mmopt::ExperimentalFp32BaseMte2910B3();
     const auto domain = mmopt::SourceCompatibleDomain();
     std::cout << "m,n,k,dtype,mode,objective_us,used_cores,singleCoreM,singleCoreN,singleCoreK,baseM,baseN,baseK,stepM,stepN,stepK";
     if (source_base_mode)

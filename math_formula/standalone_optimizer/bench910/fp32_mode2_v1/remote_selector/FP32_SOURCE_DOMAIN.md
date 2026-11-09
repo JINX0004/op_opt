@@ -1,7 +1,8 @@
 # Experimental FP32 source-informed tiling domain
 
 `SourceCompatibleDomain()` now enables `fp32_source_patterns` for FP32 only.
-FP16/BF16 candidates and the product online gate are unchanged. An explicitly
+FP16/BF16 candidates are unchanged. FP32 online selection is enabled only
+when `MMV3_ONLINE_SELECTOR=1`. An explicitly
 customized tile vector uses the existing unrestricted domain, so callers can
 still study alternative geometries.
 
@@ -64,8 +65,8 @@ Across all 27 boundary shapes, three family decisions change, all at
 timing profile, particularly small-output BASE and Split-K reduction costs.
 
 `mmopt_dtype_tests` covers the exact 512×512, small-M/N padded, and narrow-N
-source patterns. The FP16 golden test passes unchanged. The product FP32
-online selector remains disabled.
+source patterns. The FP16 golden test passes unchanged. The default FP32
+source selector remains active unless `MMV3_ONLINE_SELECTOR=1` is set.
 
 ## FP32 mode-2 follow-up
 
@@ -86,8 +87,9 @@ matched, all output audits passed, and kernel times differed by less than
 0.981× all-case geometric-mean speedup against master, compared with
 0.979× before mode 2. The remaining 21 deterministic Split-K to BASE
 changes are the main source of regressions. This test injects only the
-implementation family, not the model's selected mode-2 tiling. The FP32
-product gate remains closed.
+implementation family, not the model's selected mode-2 tiling. The default
+FP32 host path remains source selection; experimental online selection
+requires `MMV3_ONLINE_SELECTOR=1`.
 
 ## FP32 mode-5 follow-up
 
@@ -108,8 +110,9 @@ the optimizer can propose.
 link rates of 460,800/230,400 bytes/µs per AIC. Only FP32 mode 2 uses
 them. The experimental slice score is the maximum of Cube plus one
 output-piece drain, GM→L1 plus serial A/B L1→L0 service plus that
-drain, and total Fixpipe demand. The default FP32 profile still omits
-these primitives, leaving all online decisions unchanged.
+drain, and total Fixpipe demand. The opt-in online FP32 profile now
+includes these primitives through `ExperimentalFp32BaseMte2910B3()`;
+the default source path remains unchanged.
 
 The separate 32-case fixed-tile K sweep reduced source-tile mean
 absolute timing error from 18.21% to 3.22% (17.76% to 2.59% when

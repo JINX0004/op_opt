@@ -16,7 +16,9 @@ The FP16/BF16 equations describe the checked-in standalone model. The
 FP32 substitutions below describe the experimental 910 selector branch,
 as captured in its [model snapshot](bench910/fp32_mode2_v1/remote_selector/model/mip_solver.cpp);
 the local `main` checkout's `mip_solver.cpp` and `plan_finalizer.cpp`
-still accept only FP16/BF16. The product FP32 online gate remains closed.
+still accept only FP16/BF16. The experimental branch accepts FP32 online
+family selection only with `MMV3_ONLINE_SELECTOR=1`; the default host path
+remains source selection.
 
 ## Inputs, derived counts, and decisions
 
@@ -578,14 +580,14 @@ throughput inferred from source-kernel measurements is 1.52 MB/µs at
 provisional in-context services, not independently isolated hardware
 constants. The ordinary path retains its original score.
 
-This is an **opt-in diagnostic**, not a calibrated general BASE solver
-or an enabled online FP32 decision. It improves the five activated cases
+This aligned-pitch bound began as an **opt-in diagnostic**, not a calibrated
+general BASE solver. It improves the five activated cases
 within an earlier 81-case source-tile set, but still misses tail-M
 shapes by about 13% and overestimates one N=1024 case by 8.8%. The
 [measurement and per-case comparison](bench910/fp32_base_formula_v2/README.md)
 show the evidence and limitations. A source-region assignment and
-MTE2/Cube overlap model remain necessary before this profile can be
-used for family selection.
+MTE2/Cube overlap model remain necessary before using it for default
+FP32 family selection.
 
 A separate [4096×64×27456 FP32 tile experiment](bench910/fp32_4096x64_tile_probe_v1/README.md)
 executed the optimizer's own 16-core `256×64×32` BASE tile. Its
@@ -623,5 +625,6 @@ The originally problematic executed tile scores 520.9 µs versus
 522.5 µs measured; a new K=20160 holdout pair has 3.3% mean
 absolute percentage error on the two activated tiles. The same study
 shows that 16-KiB-aligned A pitches and N=96 need distinct service
-models, so this remains an opt-in diagnostic, not an online FP32
-family-selection profile.
+models. The experimental branch now uses this profile for online FP32
+family selection only with `MMV3_ONLINE_SELECTOR=1`; these limitations
+preclude enabling it by default.
