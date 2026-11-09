@@ -1,0 +1,5 @@
+{
+  "benchmark_sha256": "7541423b581d7362a39455cef94624804dbb74a320aa568ae7f9a24f31fda62e",
+  "host_tiling_sha256": "f1485343adcee5ff710c722b23514d38a485769add5ab36ebd9b47300c728018",
+  "package": "/home/xianfei/solvebase_bench_20261025/fp32_mode2_in_context_pitch_v1/ops_nn_pitch_overlay_package"
+}

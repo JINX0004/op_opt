@@ -1,0 +1,1438 @@
+{
+  "all": {
+    "count": 100,
+    "geomean_speedup": 0.9807254224640711,
+    "proposed_faster": 37,
+    "master_faster": 63
+  },
+  "family_changed": {
+    "count": 26,
+    "geomean_speedup": 0.95968630461605,
+    "proposed_faster": 12,
+    "master_faster": 14
+  },
+  "family_unchanged": {
+    "count": 74,
+    "geomean_speedup": 0.9882265284269255,
+    "proposed_faster": 25,
+    "master_faster": 49
+  },
+  "validated_mode2_indices": [
+    17,
+    18,
+    20,
+    22,
+    23,
+    42
+  ],
+  "transitions": {
+    "0->0": 56,
+    "2->0": 4,
+    "2->2": 6,
+    "2->3": 1,
+    "3->0": 21,
+    "3->3": 12
+  },
+  "rows": [
+    {
+      "index": 0,
+      "shape": [
+        16,
+        16,
+        65408
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 39.89,
+      "proposed_us": 145.57999999999998,
+      "speedup": 0.2740074186014563
+    },
+    {
+      "index": 1,
+      "shape": [
+        256,
+        128,
+        32768
+      ],
+      "master_mode": 3,
+      "old_model_mode": 3,
+      "new_model_mode": 3,
+      "master_us": 53.92,
+      "proposed_us": 56.02,
+      "speedup": 0.9625133880756872
+    },
+    {
+      "index": 2,
+      "shape": [
+        128,
+        256,
+        32768
+      ],
+      "master_mode": 3,
+      "old_model_mode": 3,
+      "new_model_mode": 3,
+      "master_us": 52.84,
+      "proposed_us": 55.684,
+      "speedup": 0.9489260828963437
+    },
+    {
+      "index": 3,
+      "shape": [
+        128,
+        512,
+        16384
+      ],
+      "master_mode": 3,
+      "old_model_mode": 3,
+      "new_model_mode": 3,
+      "master_us": 63.02,
+      "proposed_us": 63.144,
+      "speedup": 0.9980362346382872
+    },
+    {
+      "index": 4,
+      "shape": [
+        512,
+        256,
+        32768
+      ],
+      "master_mode": 3,
+      "old_model_mode": 3,
+      "new_model_mode": 3,
+      "master_us": 150.9,
+      "proposed_us": 152.26,
+      "speedup": 0.9910679101536846
+    },
+    {
+      "index": 5,
+      "shape": [
+        256,
+        512,
+        16384
+      ],
+      "master_mode": 3,
+      "old_model_mode": 3,
+      "new_model_mode": 3,
+      "master_us": 94.224,
+      "proposed_us": 94.54,
+      "speedup": 0.9966574994711233
+    },
+    {
+      "index": 6,
+      "shape": [
+        1536,
+        768,
+        24576
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 881.256,
+      "proposed_us": 881.98,
+      "speedup": 0.9991791197079298
+    },
+    {
+      "index": 7,
+      "shape": [
+        1792,
+        768,
+        32768
+      ],
+      "master_mode": 3,
+      "old_model_mode": 3,
+      "new_model_mode": 3,
+      "master_us": 1431.568,
+      "proposed_us": 1431.228,
+      "speedup": 1.000237558236703
+    },
+    {
+      "index": 8,
+      "shape": [
+        2048,
+        768,
+        27392
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 1426.51,
+      "proposed_us": 1469.13,
+      "speedup": 0.9709896333204004
+    },
+    {
+      "index": 9,
+      "shape": [
+        2304,
+        768,
+        32768
+      ],
+      "master_mode": 3,
+      "old_model_mode": 3,
+      "new_model_mode": 3,
+      "master_us": 1819.156,
+      "proposed_us": 1809.336,
+      "speedup": 1.0054274054128143
+    },
+    {
+      "index": 10,
+      "shape": [
+        2560,
+        768,
+        32768
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 2036.71,
+      "proposed_us": 2505.928,
+      "speedup": 0.812756791096951
+    },
+    {
+      "index": 11,
+      "shape": [
+        2048,
+        1024,
+        32768
+      ],
+      "master_mode": 3,
+      "old_model_mode": 3,
+      "new_model_mode": 3,
+      "master_us": 2156.82,
+      "proposed_us": 2158.184,
+      "speedup": 0.9993679871595749
+    },
+    {
+      "index": 12,
+      "shape": [
+        2304,
+        1024,
+        36864
+      ],
+      "master_mode": 3,
+      "old_model_mode": 3,
+      "new_model_mode": 3,
+      "master_us": 2630.776,
+      "proposed_us": 2634.2,
+      "speedup": 0.9987001746260724
+    },
+    {
+      "index": 13,
+      "shape": [
+        2816,
+        1024,
+        36864
+      ],
+      "master_mode": 2,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 3929.928,
+      "proposed_us": 3306.1440000000002,
+      "speedup": 1.188674177531287
+    },
+    {
+      "index": 14,
+      "shape": [
+        3072,
+        1024,
+        36864
+      ],
+      "master_mode": 2,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 4090.132,
+      "proposed_us": 3301.066,
+      "speedup": 1.2390336939643134
+    },
+    {
+      "index": 15,
+      "shape": [
+        2560,
+        1024,
+        32768
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 2708.752,
+      "proposed_us": 2942.952,
+      "speedup": 0.9204200408297518
+    },
+    {
+      "index": 16,
+      "shape": [
+        2560,
+        1024,
+        49152
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 3901.17,
+      "proposed_us": 4721.12,
+      "speedup": 0.8263229911546413
+    },
+    {
+      "index": 17,
+      "shape": [
+        1024,
+        2304,
+        36864
+      ],
+      "master_mode": 2,
+      "old_model_mode": 3,
+      "new_model_mode": 2,
+      "master_us": 2970.88,
+      "proposed_us": 2976.66,
+      "speedup": 0.9980582263342136
+    },
+    {
+      "index": 18,
+      "shape": [
+        1024,
+        2816,
+        36864
+      ],
+      "master_mode": 2,
+      "old_model_mode": 0,
+      "new_model_mode": 2,
+      "master_us": 3471.488,
+      "proposed_us": 3473.288,
+      "speedup": 0.9994817590709437
+    },
+    {
+      "index": 19,
+      "shape": [
+        768,
+        2048,
+        32768
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 1651.792,
+      "proposed_us": 1820.5459999999998,
+      "speedup": 0.9073058302289533
+    },
+    {
+      "index": 20,
+      "shape": [
+        2048,
+        1536,
+        32768
+      ],
+      "master_mode": 2,
+      "old_model_mode": 0,
+      "new_model_mode": 2,
+      "master_us": 3274.14,
+      "proposed_us": 3283.34,
+      "speedup": 0.9971979752325375
+    },
+    {
+      "index": 21,
+      "shape": [
+        2048,
+        2048,
+        27392
+      ],
+      "master_mode": 2,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 3508.018,
+      "proposed_us": 3465.26,
+      "speedup": 1.0123390452664447
+    },
+    {
+      "index": 22,
+      "shape": [
+        2048,
+        3072,
+        32768
+      ],
+      "master_mode": 2,
+      "old_model_mode": 0,
+      "new_model_mode": 2,
+      "master_us": 6117.364,
+      "proposed_us": 6121.94,
+      "speedup": 0.999252524526539
+    },
+    {
+      "index": 23,
+      "shape": [
+        3072,
+        2048,
+        32768
+      ],
+      "master_mode": 2,
+      "old_model_mode": 0,
+      "new_model_mode": 2,
+      "master_us": 6998.58,
+      "proposed_us": 7054.64,
+      "speedup": 0.9920534570155245
+    },
+    {
+      "index": 24,
+      "shape": [
+        16384,
+        256,
+        1024
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 134.88,
+      "proposed_us": 135.2,
+      "speedup": 0.9976331360946746
+    },
+    {
+      "index": 25,
+      "shape": [
+        32768,
+        256,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 364.728,
+      "proposed_us": 362.988,
+      "speedup": 1.0047935468941123
+    },
+    {
+      "index": 26,
+      "shape": [
+        49152,
+        256,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 558.672,
+      "proposed_us": 559.408,
+      "speedup": 0.9986843234276235
+    },
+    {
+      "index": 27,
+      "shape": [
+        65536,
+        256,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 720.656,
+      "proposed_us": 719.356,
+      "speedup": 1.0018071719704846
+    },
+    {
+      "index": 28,
+      "shape": [
+        98304,
+        256,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 1083.136,
+      "proposed_us": 1074.92,
+      "speedup": 1.0076433595058236
+    },
+    {
+      "index": 29,
+      "shape": [
+        32768,
+        384,
+        1024
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 362.764,
+      "proposed_us": 361.808,
+      "speedup": 1.0026422854110468
+    },
+    {
+      "index": 30,
+      "shape": [
+        32768,
+        384,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 546.552,
+      "proposed_us": 545.748,
+      "speedup": 1.001473207414411
+    },
+    {
+      "index": 31,
+      "shape": [
+        32768,
+        384,
+        2048
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 727.676,
+      "proposed_us": 731.876,
+      "speedup": 0.9942613229563478
+    },
+    {
+      "index": 32,
+      "shape": [
+        98304,
+        384,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 1612.28,
+      "proposed_us": 1679.96,
+      "speedup": 0.959713326507774
+    },
+    {
+      "index": 33,
+      "shape": [
+        49152,
+        512,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 1072.56,
+      "proposed_us": 1073.0,
+      "speedup": 0.9995899347623485
+    },
+    {
+      "index": 34,
+      "shape": [
+        65536,
+        512,
+        2048
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 1900.88,
+      "proposed_us": 1900.916,
+      "speedup": 0.9999810617618033
+    },
+    {
+      "index": 35,
+      "shape": [
+        81920,
+        512,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 1755.972,
+      "proposed_us": 1761.356,
+      "speedup": 0.9969432641669259
+    },
+    {
+      "index": 36,
+      "shape": [
+        2048,
+        4096,
+        4096
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 954.24,
+      "proposed_us": 954.22,
+      "speedup": 1.000020959527153
+    },
+    {
+      "index": 37,
+      "shape": [
+        4096,
+        2048,
+        4096
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 954.1,
+      "proposed_us": 953.64,
+      "speedup": 1.000482362317017
+    },
+    {
+      "index": 38,
+      "shape": [
+        4096,
+        8192,
+        4096
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 3800.616,
+      "proposed_us": 3798.076,
+      "speedup": 1.000668759656205
+    },
+    {
+      "index": 39,
+      "shape": [
+        8192,
+        4096,
+        4096
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 3792.556,
+      "proposed_us": 3793.016,
+      "speedup": 0.9998787244767752
+    },
+    {
+      "index": 40,
+      "shape": [
+        4096,
+        4096,
+        16384
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 7628.9,
+      "proposed_us": 7614.2,
+      "speedup": 1.001930603346379
+    },
+    {
+      "index": 41,
+      "shape": [
+        8192,
+        8192,
+        8192
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 15008.184,
+      "proposed_us": 15007.76,
+      "speedup": 1.000028252050939
+    },
+    {
+      "index": 42,
+      "shape": [
+        8192,
+        4096,
+        32768
+      ],
+      "master_mode": 2,
+      "old_model_mode": 0,
+      "new_model_mode": 2,
+      "master_us": 33839.256,
+      "proposed_us": 33820.216,
+      "speedup": 1.0005629768893256
+    },
+    {
+      "index": 43,
+      "shape": [
+        4096,
+        8192,
+        16384
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 15348.048,
+      "proposed_us": 15414.528,
+      "speedup": 0.9956871854915051
+    },
+    {
+      "index": 44,
+      "shape": [
+        10240,
+        3072,
+        8192
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 6998.82,
+      "proposed_us": 7000.46,
+      "speedup": 0.9997657296806209
+    },
+    {
+      "index": 45,
+      "shape": [
+        3072,
+        10240,
+        8192
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 6997.86,
+      "proposed_us": 6998.88,
+      "speedup": 0.9998542623962691
+    },
+    {
+      "index": 46,
+      "shape": [
+        16384,
+        2048,
+        4096
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 3793.676,
+      "proposed_us": 3793.516,
+      "speedup": 1.0000421772308328
+    },
+    {
+      "index": 47,
+      "shape": [
+        2048,
+        16384,
+        4096
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 3794.236,
+      "proposed_us": 3796.116,
+      "speedup": 0.9995047569673845
+    },
+    {
+      "index": 48,
+      "shape": [
+        12288,
+        4096,
+        8192
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 11221.88,
+      "proposed_us": 11221.66,
+      "speedup": 1.0000196049425842
+    },
+    {
+      "index": 49,
+      "shape": [
+        4096,
+        12288,
+        8192
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 11221.484,
+      "proposed_us": 11221.304,
+      "speedup": 1.0000160409164567
+    },
+    {
+      "index": 50,
+      "shape": [
+        8192,
+        8192,
+        16384
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 30421.708,
+      "proposed_us": 30392.284,
+      "speedup": 1.0009681404661788
+    },
+    {
+      "index": 51,
+      "shape": [
+        16384,
+        4096,
+        8192
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 15008.88,
+      "proposed_us": 15009.0,
+      "speedup": 0.9999920047971217
+    },
+    {
+      "index": 52,
+      "shape": [
+        45056,
+        384,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 753.94,
+      "proposed_us": 794.76,
+      "speedup": 0.9486385827167951
+    },
+    {
+      "index": 53,
+      "shape": [
+        53248,
+        384,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 882.596,
+      "proposed_us": 922.76,
+      "speedup": 0.9564740560925918
+    },
+    {
+      "index": 54,
+      "shape": [
+        57344,
+        384,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 949.1,
+      "proposed_us": 986.24,
+      "speedup": 0.9623418234912394
+    },
+    {
+      "index": 55,
+      "shape": [
+        61440,
+        384,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 1009.584,
+      "proposed_us": 1048.92,
+      "speedup": 0.9624985699576706
+    },
+    {
+      "index": 56,
+      "shape": [
+        69632,
+        384,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 1156.56,
+      "proposed_us": 1207.856,
+      "speedup": 0.9575313613543336
+    },
+    {
+      "index": 57,
+      "shape": [
+        73728,
+        384,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 1216.384,
+      "proposed_us": 1261.204,
+      "speedup": 0.9644625294559802
+    },
+    {
+      "index": 58,
+      "shape": [
+        86016,
+        384,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 1417.288,
+      "proposed_us": 1485.388,
+      "speedup": 0.954153392918214
+    },
+    {
+      "index": 59,
+      "shape": [
+        90112,
+        384,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 1487.048,
+      "proposed_us": 1544.712,
+      "speedup": 0.9626700640637219
+    },
+    {
+      "index": 60,
+      "shape": [
+        1664,
+        768,
+        32768
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 1336.0700000000002,
+      "proposed_us": 1815.24,
+      "speedup": 0.7360293955620194
+    },
+    {
+      "index": 61,
+      "shape": [
+        1920,
+        768,
+        32768
+      ],
+      "master_mode": 3,
+      "old_model_mode": 3,
+      "new_model_mode": 3,
+      "master_us": 1521.848,
+      "proposed_us": 1526.828,
+      "speedup": 0.9967383359487775
+    },
+    {
+      "index": 62,
+      "shape": [
+        2176,
+        768,
+        32768
+      ],
+      "master_mode": 3,
+      "old_model_mode": 3,
+      "new_model_mode": 3,
+      "master_us": 1718.992,
+      "proposed_us": 1715.956,
+      "speedup": 1.0017692761352857
+    },
+    {
+      "index": 63,
+      "shape": [
+        2432,
+        768,
+        32768
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 1914.75,
+      "proposed_us": 2666.802,
+      "speedup": 0.7179948117633029
+    },
+    {
+      "index": 64,
+      "shape": [
+        2304,
+        1024,
+        32768
+      ],
+      "master_mode": 3,
+      "old_model_mode": 3,
+      "new_model_mode": 3,
+      "master_us": 2428.4,
+      "proposed_us": 2416.2,
+      "speedup": 1.0050492508898272
+    },
+    {
+      "index": 65,
+      "shape": [
+        2816,
+        1024,
+        49152
+      ],
+      "master_mode": 2,
+      "old_model_mode": 3,
+      "new_model_mode": 3,
+      "master_us": 5716.104,
+      "proposed_us": 4476.07,
+      "speedup": 1.2770363287437418
+    },
+    {
+      "index": 66,
+      "shape": [
+        1024,
+        2432,
+        32768
+      ],
+      "master_mode": 2,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 2661.014,
+      "proposed_us": 2424.4300000000003,
+      "speedup": 1.0975833494883334
+    },
+    {
+      "index": 67,
+      "shape": [
+        47104,
+        384,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 780.296,
+      "proposed_us": 804.036,
+      "speedup": 0.9704739588774633
+    },
+    {
+      "index": 68,
+      "shape": [
+        51200,
+        384,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 842.88,
+      "proposed_us": 878.12,
+      "speedup": 0.9598688106409147
+    },
+    {
+      "index": 69,
+      "shape": [
+        63488,
+        384,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 1050.78,
+      "proposed_us": 1090.18,
+      "speedup": 0.9638591792181107
+    },
+    {
+      "index": 70,
+      "shape": [
+        77824,
+        384,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 1282.568,
+      "proposed_us": 1341.008,
+      "speedup": 0.9564208416355457
+    },
+    {
+      "index": 71,
+      "shape": [
+        83968,
+        384,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 1384.568,
+      "proposed_us": 1431.308,
+      "speedup": 0.9673445547708809
+    },
+    {
+      "index": 72,
+      "shape": [
+        94208,
+        384,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 1548.2,
+      "proposed_us": 1605.8,
+      "speedup": 0.9641300286461577
+    },
+    {
+      "index": 73,
+      "shape": [
+        65536,
+        448,
+        1536
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 1280.624,
+      "proposed_us": 1382.888,
+      "speedup": 0.9260504104453868
+    },
+    {
+      "index": 74,
+      "shape": [
+        3072,
+        8192,
+        8192
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 5687.712,
+      "proposed_us": 5687.092,
+      "speedup": 1.0001090188096131
+    },
+    {
+      "index": 75,
+      "shape": [
+        8192,
+        3072,
+        8192
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 5687.712,
+      "proposed_us": 5687.692,
+      "speedup": 1.0000035163648102
+    },
+    {
+      "index": 76,
+      "shape": [
+        12288,
+        2048,
+        16384
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 11367.68,
+      "proposed_us": 11369.576,
+      "speedup": 0.999833239163888
+    },
+    {
+      "index": 77,
+      "shape": [
+        2048,
+        12288,
+        16384
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 11530.652,
+      "proposed_us": 11564.652,
+      "speedup": 0.9970600066478438
+    },
+    {
+      "index": 78,
+      "shape": [
+        16384,
+        8192,
+        4096
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 14945.98,
+      "proposed_us": 14947.316,
+      "speedup": 0.9999106194048483
+    },
+    {
+      "index": 79,
+      "shape": [
+        10240,
+        10240,
+        4096
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 11718.112,
+      "proposed_us": 11708.572,
+      "speedup": 1.0008147876615525
+    },
+    {
+      "index": 80,
+      "shape": [
+        16,
+        16,
+        6080
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 17.096,
+      "proposed_us": 17.08,
+      "speedup": 1.000936768149883
+    },
+    {
+      "index": 81,
+      "shape": [
+        16,
+        16,
+        6144
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 16.788,
+      "proposed_us": 17.59,
+      "speedup": 0.9544059124502559
+    },
+    {
+      "index": 82,
+      "shape": [
+        16,
+        16,
+        6208
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 16.25,
+      "proposed_us": 16.97,
+      "speedup": 0.9575721862109606
+    },
+    {
+      "index": 83,
+      "shape": [
+        64,
+        64,
+        6080
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 17.04,
+      "proposed_us": 17.304,
+      "speedup": 0.984743411927878
+    },
+    {
+      "index": 84,
+      "shape": [
+        64,
+        64,
+        6144
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 20.99,
+      "proposed_us": 18.27,
+      "speedup": 1.1488779419813901
+    },
+    {
+      "index": 85,
+      "shape": [
+        64,
+        64,
+        6208
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 21.520000000000003,
+      "proposed_us": 19.509999999999998,
+      "speedup": 1.103024090210149
+    },
+    {
+      "index": 86,
+      "shape": [
+        128,
+        128,
+        7616
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 32.52,
+      "proposed_us": 32.664,
+      "speedup": 0.9955914768552535
+    },
+    {
+      "index": 87,
+      "shape": [
+        128,
+        128,
+        7680
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 27.659999999999997,
+      "proposed_us": 33.111999999999995,
+      "speedup": 0.835346702101957
+    },
+    {
+      "index": 88,
+      "shape": [
+        128,
+        128,
+        7744
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 29.567999999999998,
+      "proposed_us": 32.278,
+      "speedup": 0.9160418861143813
+    },
+    {
+      "index": 89,
+      "shape": [
+        256,
+        256,
+        7616
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 34.12,
+      "proposed_us": 35.216,
+      "speedup": 0.9688777828259881
+    },
+    {
+      "index": 90,
+      "shape": [
+        256,
+        256,
+        7680
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 39.42,
+      "proposed_us": 35.762,
+      "speedup": 1.1022873441082714
+    },
+    {
+      "index": 91,
+      "shape": [
+        256,
+        256,
+        7744
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 46.2,
+      "proposed_us": 35.162,
+      "speedup": 1.3139184346737958
+    },
+    {
+      "index": 92,
+      "shape": [
+        512,
+        512,
+        27328
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 220.384,
+      "proposed_us": 219.22,
+      "speedup": 1.0053097345132742
+    },
+    {
+      "index": 93,
+      "shape": [
+        512,
+        512,
+        27392
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 275.244,
+      "proposed_us": 220.004,
+      "speedup": 1.251086343884657
+    },
+    {
+      "index": 94,
+      "shape": [
+        512,
+        512,
+        27456
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 265.274,
+      "proposed_us": 220.73399999999998,
+      "speedup": 1.201781329564091
+    },
+    {
+      "index": 95,
+      "shape": [
+        2048,
+        64,
+        27328
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 209.064,
+      "proposed_us": 220.504,
+      "speedup": 0.9481188549867576
+    },
+    {
+      "index": 96,
+      "shape": [
+        2048,
+        64,
+        27392
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 238.16,
+      "proposed_us": 196.55,
+      "speedup": 1.2117018570338336
+    },
+    {
+      "index": 97,
+      "shape": [
+        4096,
+        64,
+        27328
+      ],
+      "master_mode": 0,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 546.472,
+      "proposed_us": 540.832,
+      "speedup": 1.0104283770191114
+    },
+    {
+      "index": 98,
+      "shape": [
+        4096,
+        64,
+        27392
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 493.788,
+      "proposed_us": 501.75,
+      "speedup": 0.9841315396113602
+    },
+    {
+      "index": 99,
+      "shape": [
+        4096,
+        64,
+        27456
+      ],
+      "master_mode": 3,
+      "old_model_mode": 0,
+      "new_model_mode": 0,
+      "master_us": 488.96799999999996,
+      "proposed_us": 540.562,
+      "speedup": 0.9045548891708999
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "all": {
+    "count": 32,
+    "baseline_mape_pct": 18.21125,
+    "pipeline_mape_pct": 3.22325
+  },
+  "excluding_k49152": {
+    "count": 28,
+    "baseline_mape_pct": 17.757892857142856,
+    "pipeline_mape_pct": 2.5888214285714284
+  },
+  "by_geometry_excluding_k49152": {
+    "2048x2048": {
+      "count": 5,
+      "baseline_mape_pct": 7.136,
+      "pipeline_mape_pct": 5.1918
+    },
+    "2816x1024": {
+      "count": 11,
+      "baseline_mape_pct": 21.988545454545456,
+      "pipeline_mape_pct": 1.0167272727272727
+    },
+    "2816x1536": {
+      "count": 7,
+      "baseline_mape_pct": 18.42957142857143,
+      "pipeline_mape_pct": 2.6719999999999997
+    },
+    "3072x1024": {
+      "count": 5,
+      "baseline_mape_pct": 18.132,
+      "pipeline_mape_pct": 3.328
+    }
+  }
+}

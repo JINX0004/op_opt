@@ -1,0 +1,67 @@
+{
+  "all": {
+    "count": 100,
+    "geomean_master_over_selector": 0.9858667058204945,
+    "selector_faster": 41,
+    "master_faster": 59
+  },
+  "family_changed": {
+    "count": 24,
+    "geomean_master_over_selector": 0.9763899464079548,
+    "selector_faster": 16,
+    "master_faster": 8
+  },
+  "family_unchanged": {
+    "count": 76,
+    "geomean_master_over_selector": 0.9888784341086803,
+    "selector_faster": 25,
+    "master_faster": 51
+  },
+  "bootstrap_95pct": [
+    0.9498933071682307,
+    1.0138144813061072
+  ],
+  "new_decisions": [
+    {
+      "index": 97,
+      "shape": "4096x64x27328",
+      "master_mode": 0,
+      "previous_mode": 0,
+      "selector_mode": 3,
+      "model_score_us": 376.78083,
+      "master_us": 538.3199999999999,
+      "selector_us": 482.44,
+      "ratio": 1.115827874968908,
+      "measurement_source": "fresh paired run",
+      "family_changed_vs_master": true
+    },
+    {
+      "index": 98,
+      "shape": "4096x64x27392",
+      "master_mode": 3,
+      "previous_mode": 0,
+      "selector_mode": 3,
+      "model_score_us": 377.20476,
+      "master_us": 488.092,
+      "selector_us": 490.6,
+      "ratio": 0.9948878923766815,
+      "measurement_source": "fresh paired run",
+      "family_changed_vs_master": false
+    },
+    {
+      "index": 99,
+      "shape": "4096x64x27456",
+      "master_mode": 3,
+      "previous_mode": 0,
+      "selector_mode": 3,
+      "model_score_us": 377.62869,
+      "master_us": 489.51800000000003,
+      "selector_us": 490.99800000000005,
+      "ratio": 0.9969857311027743,
+      "measurement_source": "fresh paired run",
+      "family_changed_vs_master": false
+    }
+  ],
+  "reused_pairs": 97,
+  "fresh_pairs": 3
+}

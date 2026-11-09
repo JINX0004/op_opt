@@ -12,13 +12,24 @@ overpredicted kernel time substantially. The current objective charges
 packet startup to the busiest assigned AIC instead. Its rates, overlap
 assumptions, and absolute runtime are still exploratory.
 
+The FP16/BF16 equations describe the checked-in standalone model. The
+FP32 substitutions below describe the experimental 910 selector branch,
+as captured in its [model snapshot](bench910/fp32_mode2_v1/remote_selector/model/mip_solver.cpp);
+the local `main` checkout's `mip_solver.cpp` and `plan_finalizer.cpp`
+still accept only FP16/BF16. The product FP32 online gate remains closed.
+
 ## Inputs, derived counts, and decisions
 
-The input workload is $(M,N,K)$, with $A$ allocated Cube cores. The
+The input workload is $(M,N,K)$, with $A$ allocated Cube cores. Let
+$b_A,b_B,b_C$ be the bytes per A, B, and output element. For the same-type
+paths discussed here, they are all 2 for FP16/BF16 and all 4 for FP32;
+the Cube accumulator is FP32 in both cases. The
 implementation forms a finite spatial grid from `MipTileDomain`. A geometry
 is $g=(C_M,C_N,B_M,B_N)$, where $C_M,C_N$ are `singleCoreM/N` and $B_M,B_N$
 are `baseM/N`. Each component is a positive, 16-aligned integer within its
-corresponding shape axis, and $B_M\le C_M$, $B_N\le C_N$. Empty domain
+corresponding shape axis, and $B_M\le C_M$, $B_N\le C_N$. The FP32
+source-informed domain also admits a source-observed padded N tile
+$C_N=B_N=128$ when $N=64$. Empty domain
 vectors use the defaults described in [the optimizer README](README.md#reduced-milp-with-mn-block-tiling).
 
 For a fixed geometry, let
@@ -34,7 +45,7 @@ N_N(g)&=\left\lfloor\frac N{C_N}\right\rfloor
         \left\lceil\frac{C_N}{B_N}\right\rceil
        +\left\lceil\frac{N\bmod C_N}{B_N}\right\rceil,\\
 S(g)&=N_M(g)N_N(g),\\
-D_A(g)&=2KMN_N(g),\qquad D_B(g)=2KNN_M(g),\\
+D_A(g)&=b_AKMN_N(g),\qquad D_B(g)=b_BKNN_M(g),\\
 D(g)&=D_A(g)+D_B(g),\\
 O&=MN,\qquad F=2MNK.
 \end{aligned}
@@ -42,8 +53,8 @@ $$
 
 $N_o$ is the number of outer output tiles. $N_M,N_N$ count inner base
 packets along each axis, including an outer-tile tail; $S$ is their product.
-$D_A,D_B$ are the separate modeled A/B GM read requests in bytes for
-FP16/BF16 inputs under the present no-cache traffic assumption. They are
+$D_A,D_B$ are the separate modeled A/B GM read requests in bytes under
+the present no-cache traffic assumption. They are
 not measured HBM misses: L2 reuse can make physical HBM traffic smaller.
 $O$ is the number of output
 elements and $F$ is the total floating-point work.
@@ -96,7 +107,7 @@ $$
 \boxed{\displaystyle
 T_B(g,b,c)=L+\max\!\left\{
 \underbrace{\max_{0\le q<c}\frac{2K E_q}{R_C}}_{T_{\rm Cube}},
-\underbrace{\frac{D_A(g)}{R_A}+\frac{D_B(g)}{R_B}+\frac{2O}{R_W}
+\underbrace{\frac{D_A(g)}{R_A}+\frac{D_B(g)}{R_B}+\frac{b_CO}{R_W}
  +\max_{0\le q<c}\left(S_qP_B(b)(\lambda_A+\lambda_B)+O_q\lambda_W\right)}_{T_{\rm GM}}
 \right\}.}
 $$
@@ -105,7 +116,7 @@ The GM expression represents one modeled operand-read pair per spatial
 base packet and K packet, plus an output write per outer tile. Fixed
 packet latency follows the busiest AIC rather than a serial sum across
 all AICs; aggregate bytes still use the modeled device rates. The factor
-$2O$ is the modeled output byte count. Cube and GM service are combined
+$b_CO$ is the modeled output byte count. Cube and GM service are combined
 with `max` as a throughput approximation; the equation does not resolve
 event precedence, transfer overlap, buffering, cache reuse, or
 shared-device contention in detail.
@@ -146,7 +157,7 @@ rates $q_A,q_B$, the modeled per-AIC read service is
 
 $$
 R_q=S_q(P_A\alpha_A+P_B'\alpha_B)
- +\frac{2KU^A_q}{r_A}+\frac{2KU^B_q}{r_B}
+ +\frac{b_AKU^A_q}{r_A}+\frac{b_BKU^B_q}{r_B}
  +\frac{P_AU^A_q}{q_A}+\frac{KS_q}{q_B}.
 $$
 
@@ -155,7 +166,7 @@ The packet objective replaces $T_B$ by
 $$
 T_B^{\rm packet}=L+\max_q\max\left\{
 \frac{2KE_q}{R_C},
-R_q+\frac{2MN}{R_W}+O_q\lambda_W\right\}.
+R_q+\frac{b_CMN}{R_W}+O_q\lambda_W\right\}.
 $$
 
 Its serial A/B service and `max` overlap are still a reduced estimate;
@@ -166,6 +177,50 @@ shapes, with at most 4.49% absolute runtime error for that tile pair. One
 held-out primitive packet shape still has an 18.3% slope error. Therefore
 this profile is opt-in and is not the default parameter set for arbitrary
 tile geometries or implementations.
+
+The four-primitive A/B packet objective above has **not** been established
+for FP32. The experimental selector now sizes source L1 packets with
+`ElementBytes(A/B)`, so FP32 uses four bytes per element. It applies a
+separate, provisional FP32 source-step objective only when the caller
+passes a source-emitted BASE tile to `ReducedObjectiveUs(..., true)` or
+`mmopt_selector --source-base`. Hypothetical optimized BASE candidates
+retain the generic objective. The source score counts L1 windows for
+GM-read startup and adds a measured in-context exposed service of
+0.06636304 µs per baseK packet. That coefficient was fit from a fixed
+16×16×32 source-tile K sweep; it is not an isolated MTE1 primitive.
+The [FP32 BASE call and packet study](bench910/fp32_base_calls_v1/README.md)
+reports held-out results and wider-tile limits. The FP32 online host gate
+remains closed.
+
+### FP32 BASE row-pitch dependence found on 910B3
+
+The [controlled FP32 BASE K sweep](bench910/fp32_base_formula_v2/README.md)
+shows a limitation of the reduced `max(Cube, shared bytes + packet)`
+objective that cannot be resolved by changing only the global read-byte
+rate. With the same source-emitted `128×256×32` tile and `stepKa/stepKb=8/4`,
+2560×768×K takes 1749/2398/1776 µs for K=32512/32768/33024, although
+the source-tile scores are 1778/1792/1806 µs. The exact-K runtime is
+36.1% above its neighboring mean. A second same-device series at
+K=48896/49152/49408 has a 34.7% exact-K excess. Each case was measured
+in two reversed-order rounds with unchanged source tile fields.
+
+An independent 20-AIC source-shaped GM→L1 probe finds increased A-packet
+service at the two exact K values; B-packet service stays approximately
+constant. A's physical row pitch is $b_AK$, which the current primitive
+does not use. The isolated A increase does not quantitatively explain
+the whole-kernel excess, so the conflict location and complete dependency
+chain remain undetermined. Other BASE errors at narrow logical N need
+separate treatment.
+
+A general source-backed extension should score actual output-tile order
+and L1 K windows with max-plus A/B read, Cube, and output events. The
+A-read primitive must accept physical row pitch, tile bytes, active AICs,
+and cache-region context; its service should be calibrated on source-like
+access sequences rather than fitted as a whole-kernel K-specific penalty.
+Take the maximum of the resulting busiest-AIC completion and aggregate
+device bandwidth service. The [study](bench910/fp32_base_formula_v2/README.md#formula-change-to-develop)
+gives a candidate recurrence and the measurements needed before it can
+replace the present FP32 BASE objective.
 
 By default, the MatMulV3 online selector calls `Calibrated910B3()` from
 `experimental/mip_selector/model/hardware_profile.h`. That profile does
@@ -226,14 +281,16 @@ latency, plus an A ND→NZ conversion when $K>65535$:
 $$
 L=\lambda_{\rm launch}+
 \mathbf1_{K>65535}\left(
-\lambda_R+\frac{2MK}{R_R}
+\lambda_R+\frac{b_AMK}{R_R}
 +\lambda_{\rm ND\to NZ}+\frac{MK}{R_{\rm ND\to NZ}}
-+\lambda_W+\frac{2MK}{R_W}+\lambda_{\rm sync}
++\lambda_W+\frac{b_AMK}{R_W}+\lambda_{\rm sync}
 \right).
 $$
 
 The conversion term and its workspace allocation depend on the original
-shape, not the geometry. `SolveBase` requires zero fixed Cube latency,
+shape, not the geometry. The present FP32 preflight rejects $K>65535$, so
+this conversion equation is currently exercised only by FP16/BF16.
+`SolveBase` requires zero fixed Cube latency,
 because that latency is absent from this reduced objective.
 
 For $(M,N,K)=(2048,2048,4096)$ with source-compatible tiles,
@@ -258,15 +315,19 @@ geometry cost are
 $$
 \begin{aligned}
 1\le b&\le K/16, & 1\le c&\le\min(A,N_o(g)),\\
-64B_Mb&\le C_{0A}, &64B_Nb&\le C_{0B},\\
-64(B_M+B_N)b&\le C_1, &4d_CB_MB_N&\le C_{0C},\\
+32b_AB_Mb&\le C_{0A}, &32b_BB_Nb&\le C_{0B},\\
+32(b_AB_M+b_BB_N)b&\le C_1, &4d_CB_MB_N&\le C_{0C},\\
 W_0&\le W_{\max},
-&W_0&=20\,\mathrm{MiB}+\mathbf1_{K>65535}(2MK).
+&W_0&=20\,\mathrm{MiB}+\mathbf1_{K>65535}(b_AMK).
 \end{aligned}
 $$
 
 The L0A/L0B and L1 inequalities are the code's double-buffer footprints
 after substituting `baseK = 16b`; L0C stores $d_C$ FP32 accumulator tiles.
+For FP16/BF16, $32b_A=32b_B=64$, recovering the previous bounds. For
+FP32, these coefficients are 128, so the largest capacity-admissible
+`baseK` at the same M/N tile is generally smaller. The FP32 model does
+not currently admit the $K>65535$ converted-A case.
 `SolveBase` first rejects the family if $W_0>W_{\max}$. It then discards a
 geometry if L0C fails or no positive $b$ or $c$ exists. Geometric alignment,
 $B_M\le C_M$, and $B_N\le C_N$ are enforced when the grid is built.
@@ -285,6 +346,43 @@ load mode; they do not change the separate Split-K domain. A separate
 supports larger single-core output regions and needs its own objective
 and eligibility constraints.
 
+### FP32 source-informed domain
+
+For the evaluated same-type FP32 NN/ND path (FP32 output, FP32
+accumulation, no bias, HF32 disabled),
+`SourceCompatibleDomain()` searches 16-aligned local M/N tiles up to 256
+with $C_M=B_M$ and $C_N=B_N$. It also permits the source-observed N=64
+to baseN=128 padding. This is a bounded optimization domain, not an
+exact reproduction of the host's default BASE tile. Its $b_A=b_B=b_C=4$
+changes byte service and the BASE L0A/L0B/L1 bounds; L0C still stores
+four-byte accumulators. The experimental FP32 profile uses an effective
+$R_C=3{,}600{,}000$ FLOP/µs per AIC, while the FP16 profile uses
+$14{,}719{,}432$ FLOP/µs. The FP32 profile currently inherits GM rates
+from the FP16/BF16 fit, so the resulting ranking is provisional.
+
+The generic objective still charges one read startup per `baseK` packet.
+MatMulV3 instead groups these packets into `stepKa` and `stepKb` L1
+windows. BASE correctly reports `singleCoreK=K`: that is the K span
+owned by one output block. On the FP32 ND-B, HF32-disabled path, the
+kernel subdivides a span above 8192 into
+$R=\lceil K/8192\rceil$ repeated `SetSingleShape`/`Iterate`/
+`GetTensorC` calls, with atomic output updates after the first call.
+The first $R-1$ call lengths are
+$\operatorname{alignUp}(\lceil K/R\rceil,64)$; the final call covers the
+remaining K. This is separate from the L0 `baseK` tile. Neither this
+call count nor its repeated output service is in the generic reduced
+objective. The provisional source-tile score computes the call count and
+can charge optional `base_fp32_call` and `base_fp32_atomic_output`
+primitives, but the installed FP32 profile leaves both unset. Controlled
+K-boundary pairs showed no consistent positive step when another call
+appears; the dominant exposed service at 16×16 instead tracks baseK
+packets. Wider tiles and output traffic still need separate measurement.
+In particular, selecting the largest feasible
+`baseK` is an optimum of the **model**, not a claim that the host can emit
+or efficiently execute that tile. See the
+[FP32 source-domain audit](bench910/fp32_mode2_v1/remote_selector/FP32_SOURCE_DOMAIN.md)
+and [source-tile diagnosis](bench910/fp32_100_rerun_20261106/BASE_SINGLECOREK_DIAGNOSIS.md).
+
 For the **generic byte-only objective**, at fixed feasible $g$ and $c$,
 increasing $b$ cannot increase $T_B$:
 it only reduces or preserves the packet count $P_B$. The balanced-class
@@ -296,9 +394,9 @@ $$
 \begin{aligned}
 b_g^*&=\min\!\left(
 \frac K{16},
-\left\lfloor\frac{C_{0A}}{64B_M}\right\rfloor,
-\left\lfloor\frac{C_{0B}}{64B_N}\right\rfloor,
-\left\lfloor\frac{C_1}{64(B_M+B_N)}\right\rfloor
+\left\lfloor\frac{C_{0A}}{32b_AB_M}\right\rfloor,
+\left\lfloor\frac{C_{0B}}{32b_BB_N}\right\rfloor,
+\left\lfloor\frac{C_1}{32(b_AB_M+b_BB_N)}\right\rfloor
 \right),\\
 c_g^*&\in\underset{1\le c\le\min(A,N_o(g))}{\arg\min}
                    T_B(g,b_g^*,c),\\
@@ -419,3 +517,111 @@ const auto result = mmopt::SolveReducedMip(workload, hardware, {}, domain);
 `result.winner` may select Split-K instead; `result.base` is the object
 described here. The value 2.475556 µs is a **model estimate**, not a device
 measurement.
+
+### FP32 substitution for one geometry
+
+Keep the worked example's $(M,N,K)=(256,256,1024)$ and
+$g=(128,128,128,128)$, but use same-type FP32 and its experimental
+$R_C=3{,}600{,}000$ FLOP/µs per AIC. For this arithmetic illustration,
+retain the example's $R_R=R_W=1{,}600{,}000$ bytes/µs and 0.005 µs
+operation latencies; these are **not** a measured FP32 transfer profile.
+The changed terms are
+
+$$
+\begin{aligned}
+(b_A,b_B,b_C)&=(4,4,4),&D_A+D_B&=4{,}194{,}304\ \mathrm{bytes},\\
+b_CO&=262{,}144\ \mathrm{bytes},
+&b_g^*&=\min(64,4,4,16)=4,\\
+\text{baseK}&=64,&P_B&=\lceil1024/64\rceil=16.
+\end{aligned}
+$$
+
+At $c=4$, every AIC owns one $128\times128$ output tile. The service
+terms are $T_{\rm Cube}=2(1024)(128)^2/3{,}600{,}000
+=9.320676$ µs and
+$T_{\rm GM}=4{,}194{,}304/1{,}600{,}000
++262{,}144/1{,}600{,}000+2(16)(0.005)+0.005
+=2.95028$ µs. Thus this candidate scores
+$T_B=0.2+\max(9.320676,2.95028)=9.520676$ µs. This is the score of
+one geometry at four AICs, not the minimum over all FP32 geometries or
+a measured kernel time.
+
+### Opt-in FP32 source BASE MTE2 service bound
+
+The large-K FP32 source tile can be MTE2-limited even when the generic
+Cube bound wins the reduced objective above. For a plain source BASE tile
+with $C_M=B_M$ and $C_N=B_N$, the **issued** GM→L1 bytes are
+
+$$
+D_A=b_A K M\left\lceil\frac{N}{B_N}\right\rceil,\qquad
+D_B=b_B K N\left\lceil\frac{M}{B_M}\right\rceil.
+$$
+
+The experimental profile adds a transfer-service bound, retaining the
+existing Cube, packet, output, and call terms:
+
+$$
+T_B^{\rm exp}=L+\max\left\{T_{\rm Cube},
+T_{\rm existing\ read+packet},
+\frac{D_A+D_B}{R_{\rm MTE2}(b_AK,\mathcal L)}\right\}
++T_{\rm call}+T_{\rm atomic}.
+$$
+
+$R_{\rm MTE2}$ is an aggregate throughput primitive conditioned on the
+physical A row pitch and an abstract L2 region context $\mathcal L$.
+In the first 910B3 diagnostic profile, the additional bound activates
+only when A exceeds 192 MiB, a minimum four-by-four base-tile cache
+region cannot meet the source's 100-MiB working-set target, and A's
+physical row pitch is divisible by 32 KiB. Measured source-kernel
+throughput inferred from source-kernel measurements is 1.52 MB/µs at
+32-KiB alignment and 1.26 MB/µs at 64-KiB alignment. These are
+provisional in-context services, not independently isolated hardware
+constants. The ordinary path retains its original score.
+
+This is an **opt-in diagnostic**, not a calibrated general BASE solver
+or an enabled online FP32 decision. It improves the five activated cases
+within an earlier 81-case source-tile set, but still misses tail-M
+shapes by about 13% and overestimates one N=1024 case by 8.8%. The
+[measurement and per-case comparison](bench910/fp32_base_formula_v2/README.md)
+show the evidence and limitations. A source-region assignment and
+MTE2/Cube overlap model remain necessary before this profile can be
+used for family selection.
+
+A separate [4096×64×27456 FP32 tile experiment](bench910/fp32_4096x64_tile_probe_v1/README.md)
+executed the optimizer's own 16-core `256×64×32` BASE tile. Its
+342.7-µs score underestimated the 522.5-µs measured kernel, while
+the measured GM→L1 byte count matched the formula exactly and MTE2
+was busy for 99.2% of AIC cycles. The A row pitch is 109,824 bytes,
+outside the aligned-pitch classes of the optional service bound, so
+that bound does not activate. A further
+[910B3 narrow-N study](bench910/fp32_base_narrow_mte2_v1/README.md)
+adds a separately gated service for unaligned-pitch, direct-copy
+N=64/128 BASE. For core $i$, let $a_i$ and $b_i$ be its assigned
+packet sums of actual A-row and B-row extents. With
+$S_A=\mathrm{stepKa}B_K$, its requested bytes and A row windows are
+
+$$
+D_i=K(b_Aa_i+b_Bb_i),\qquad
+W_i^A=\left\lceil K/S_A\right\rceil a_i.
+$$
+
+The additional MTE2 lower bound is
+
+$$
+T_{\mathrm{MTE2,narrow}}=\max\left\{
+\frac{D_A+D_B}{R_{\mathrm{shared}}},\quad
+\max_i\left(\frac{D_i}{R_{\mathrm{core}}}+\tau_AW_i^A\right)
+\right\}.
+$$
+
+The experimental 910B3 profile uses $R_{\mathrm{shared}}=1.29$ MB/µs,
+$R_{\mathrm{core}}=0.119$ MB/µs, and $\tau_A=0.00405$ µs per A row
+window. It applies only above a 256-MiB A footprint, when the A row
+pitch is not divisible by 16 KiB, the source cannot form its minimum
+L2 region, and the tile has $C_M=B_M,C_N=B_N,N\in\{64,128\}$.
+The originally problematic executed tile scores 520.9 µs versus
+522.5 µs measured; a new K=20160 holdout pair has 3.3% mean
+absolute percentage error on the two activated tiles. The same study
+shows that 16-KiB-aligned A pitches and N=96 need distinct service
+models, so this remains an opt-in diagnostic, not an online FP32
+family-selection profile.

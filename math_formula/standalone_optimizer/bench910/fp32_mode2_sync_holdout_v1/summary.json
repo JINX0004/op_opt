@@ -1,0 +1,312 @@
+[
+  {
+    "m": 2048,
+    "n": 2048,
+    "tile": {
+      "singleCoreM": 208,
+      "singleCoreN": 1024,
+      "singleCoreK": 256,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 2,
+      "stepN": 1,
+      "block_dim": 20
+    },
+    "kernel_center_excess_us": 69.0039999999999,
+    "mte2_center_excess_us": 47.480999999999995,
+    "modes": [
+      {
+        "sync_mode": 0,
+        "pitch_us": {
+          "48896": 2861.057949,
+          "49152": 3555.952072,
+          "49408": 2853.993988
+        },
+        "center_excess_us": 698.4261035,
+        "center_excess_rounds_us": [
+          688.6679649999996,
+          708.1842420000003
+        ],
+        "absolute_error_vs_kernel_excess_us": 629.4221035,
+        "prior_copy_barrier_excess_us": 697.8691100000001
+      },
+      {
+        "sync_mode": 1,
+        "pitch_us": {
+          "48896": 2580.2060125,
+          "49152": 3285.1119995,
+          "49408": 2578.3880235
+        },
+        "center_excess_us": 705.8149814999997,
+        "center_excess_rounds_us": [
+          708.389854,
+          703.2401089999998
+        ],
+        "absolute_error_vs_kernel_excess_us": 636.8109814999998
+      },
+      {
+        "sync_mode": 2,
+        "pitch_us": {
+          "48896": 2538.6260035,
+          "49152": 3249.444008,
+          "49408": 2536.9560245000002
+        },
+        "center_excess_us": 711.6529939999996,
+        "center_excess_rounds_us": [
+          697.4940299999994,
+          725.8119580000002
+        ],
+        "absolute_error_vs_kernel_excess_us": 642.6489939999997
+      }
+    ]
+  },
+  {
+    "m": 2816,
+    "n": 1024,
+    "tile": {
+      "singleCoreM": 144,
+      "singleCoreN": 1024,
+      "singleCoreK": 256,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 2,
+      "stepN": 1,
+      "block_dim": 20
+    },
+    "kernel_center_excess_us": 439.2650000000003,
+    "mte2_center_excess_us": 409.0715,
+    "modes": [
+      {
+        "sync_mode": 0,
+        "pitch_us": {
+          "48896": 2914.204025,
+          "49152": 3900.2939225,
+          "49408": 2910.3119850000003
+        },
+        "center_excess_us": 988.0359174999999,
+        "center_excess_rounds_us": [
+          988.9098165,
+          987.1620185000002
+        ],
+        "absolute_error_vs_kernel_excess_us": 548.7709174999995,
+        "prior_copy_barrier_excess_us": 995.9451669999999
+      },
+      {
+        "sync_mode": 1,
+        "pitch_us": {
+          "48896": 2765.1040080000002,
+          "49152": 3743.919945,
+          "49408": 2748.4760285
+        },
+        "center_excess_us": 987.1299267499999,
+        "center_excess_rounds_us": [
+          992.2539710000001,
+          982.0058825000001
+        ],
+        "absolute_error_vs_kernel_excess_us": 547.8649267499995
+      },
+      {
+        "sync_mode": 2,
+        "pitch_us": {
+          "48896": 2716.5299415,
+          "49152": 3705.3440095,
+          "49408": 2716.6540145
+        },
+        "center_excess_us": 988.7520315000002,
+        "center_excess_rounds_us": [
+          992.7521710000001,
+          984.7518919999998
+        ],
+        "absolute_error_vs_kernel_excess_us": 549.4870314999998
+      }
+    ]
+  },
+  {
+    "m": 2816,
+    "n": 1536,
+    "tile": {
+      "singleCoreM": 144,
+      "singleCoreN": 1536,
+      "singleCoreK": 256,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 2,
+      "stepN": 1,
+      "block_dim": 20
+    },
+    "kernel_center_excess_us": 442.0620000000008,
+    "mte2_center_excess_us": 286.6672500000004,
+    "modes": [
+      {
+        "sync_mode": 0,
+        "pitch_us": {
+          "48896": 4166.794013500001,
+          "49152": 5135.460090500001,
+          "49408": 4156.521988
+        },
+        "center_excess_us": 973.80208975,
+        "center_excess_rounds_us": [
+          984.2842105,
+          963.3199690000001
+        ],
+        "absolute_error_vs_kernel_excess_us": 531.7400897499992,
+        "prior_copy_barrier_excess_us": 968.4700964999993
+      },
+      {
+        "sync_mode": 1,
+        "pitch_us": {
+          "48896": 3825.1319885000003,
+          "49152": 4790.7239915,
+          "49408": 3822.1559525000002
+        },
+        "center_excess_us": 967.0800209999998,
+        "center_excess_rounds_us": [
+          957.1460725000006,
+          977.0139694999998
+        ],
+        "absolute_error_vs_kernel_excess_us": 525.018020999999
+      },
+      {
+        "sync_mode": 2,
+        "pitch_us": {
+          "48896": 3784.3580245000003,
+          "49152": 4742.8718565,
+          "49408": 3780.467987
+        },
+        "center_excess_us": 960.4588507499998,
+        "center_excess_rounds_us": [
+          958.8319775,
+          962.085724
+        ],
+        "absolute_error_vs_kernel_excess_us": 518.396850749999
+      }
+    ]
+  },
+  {
+    "m": 3072,
+    "n": 1024,
+    "tile": {
+      "singleCoreM": 160,
+      "singleCoreN": 1024,
+      "singleCoreK": 256,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 2,
+      "stepN": 1,
+      "block_dim": 20
+    },
+    "kernel_center_excess_us": 585.1599999999999,
+    "mte2_center_excess_us": 476.45875000000024,
+    "modes": [
+      {
+        "sync_mode": 0,
+        "pitch_us": {
+          "48896": 2747.173977,
+          "49152": 3872.751999,
+          "49408": 2748.445988
+        },
+        "center_excess_us": 1124.9420165000001,
+        "center_excess_rounds_us": [
+          1116.8620110000002,
+          1133.022022
+        ],
+        "absolute_error_vs_kernel_excess_us": 539.7820165000003,
+        "prior_copy_barrier_excess_us": 1115.8118250000002
+      },
+      {
+        "sync_mode": 1,
+        "pitch_us": {
+          "48896": 2571.4220045,
+          "49152": 3727.3159029999997,
+          "49408": 2565.4819485
+        },
+        "center_excess_us": 1158.8639264999997,
+        "center_excess_rounds_us": [
+          1163.4298330000001,
+          1154.2980199999997
+        ],
+        "absolute_error_vs_kernel_excess_us": 573.7039264999999
+      },
+      {
+        "sync_mode": 2,
+        "pitch_us": {
+          "48896": 2542.0040129999998,
+          "49152": 3675.165939,
+          "49408": 2539.6220205
+        },
+        "center_excess_us": 1134.3529222500001,
+        "center_excess_rounds_us": [
+          1122.45779,
+          1146.2480544999999
+        ],
+        "absolute_error_vs_kernel_excess_us": 549.1929222500003
+      }
+    ]
+  },
+  {
+    "m": 8192,
+    "n": 4096,
+    "tile": {
+      "singleCoreM": 824,
+      "singleCoreN": 2048,
+      "singleCoreK": 192,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 3,
+      "stepN": 1,
+      "block_dim": 20
+    },
+    "kernel_center_excess_us": 706.9259999999995,
+    "mte2_center_excess_us": -3024.4174999999977,
+    "modes": [
+      {
+        "sync_mode": 0,
+        "pitch_us": {
+          "48896": 17310.9375,
+          "49152": 21526.7364505,
+          "49408": 17308.3465575
+        },
+        "center_excess_us": 4217.09442175,
+        "center_excess_rounds_us": [
+          4228.1204224999965,
+          4206.068421000004
+        ],
+        "absolute_error_vs_kernel_excess_us": 3510.1684217500006,
+        "prior_copy_barrier_excess_us": 4229.618072749996
+      },
+      {
+        "sync_mode": 1,
+        "pitch_us": {
+          "48896": 15274.738312000001,
+          "49152": 19493.3364865,
+          "49408": 15265.9858705
+        },
+        "center_excess_us": 4222.974395249999,
+        "center_excess_rounds_us": [
+          4213.128661500003,
+          4232.820129
+        ],
+        "absolute_error_vs_kernel_excess_us": 3516.04839525
+      },
+      {
+        "sync_mode": 2,
+        "pitch_us": {
+          "48896": 15162.1276855,
+          "49152": 19360.902405,
+          "49408": 15159.4459535
+        },
+        "center_excess_us": 4200.1155855,
+        "center_excess_rounds_us": [
+          4196.294403,
+          4203.936768
+        ],
+        "absolute_error_vs_kernel_excess_us": 3493.1895855000002
+      }
+    ]
+  }
+]

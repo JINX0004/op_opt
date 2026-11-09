@@ -1,0 +1,1083 @@
+[
+  {
+    "index": 0,
+    "group": "small_mn_6144",
+    "shape": [
+      16,
+      16,
+      6080
+    ],
+    "source_mode": 0,
+    "source_family": "BASE",
+    "model_mode": 0,
+    "model_family": "BASE",
+    "family_agrees": true,
+    "model_winner_us": 5.68342,
+    "model_base_us": 5.68342,
+    "model_split_us": 12.2542,
+    "source_core": [
+      16,
+      16,
+      6080
+    ],
+    "source_base": [
+      16,
+      16,
+      32
+    ],
+    "model_core": [
+      16,
+      16,
+      6080
+    ],
+    "model_base": [
+      16,
+      16,
+      512
+    ],
+    "correctness_error": 0.0,
+    "source_tile_model_us": 44.708138,
+    "measured_kernel_us": 16.62,
+    "source_tile_error_pct": 169.00203369434414
+  },
+  {
+    "index": 1,
+    "group": "small_mn_6144",
+    "shape": [
+      16,
+      16,
+      6144
+    ],
+    "source_mode": 3,
+    "source_family": "DETERMINISTIC_SPLIT_K",
+    "model_mode": 0,
+    "model_family": "BASE",
+    "family_agrees": false,
+    "model_winner_us": 5.68563,
+    "model_base_us": 5.68563,
+    "model_split_us": 12.2564,
+    "source_core": [
+      384,
+      16,
+      192
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      16,
+      16,
+      6144
+    ],
+    "model_base": [
+      16,
+      16,
+      512
+    ],
+    "correctness_error": 0.0,
+    "source_score_error": "16x16x6144: base M/N tile exceeds single-core output tile",
+    "measured_kernel_us": 16.78
+  },
+  {
+    "index": 2,
+    "group": "small_mn_6144",
+    "shape": [
+      16,
+      16,
+      6208
+    ],
+    "source_mode": 3,
+    "source_family": "DETERMINISTIC_SPLIT_K",
+    "model_mode": 0,
+    "model_family": "BASE",
+    "family_agrees": false,
+    "model_winner_us": 5.90707,
+    "model_base_us": 5.90707,
+    "model_split_us": 12.4779,
+    "source_core": [
+      384,
+      16,
+      192
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      16,
+      16,
+      6208
+    ],
+    "model_base": [
+      16,
+      16,
+      512
+    ],
+    "correctness_error": 0.0,
+    "source_score_error": "16x16x6208: base M/N tile exceeds single-core output tile"
+  },
+  {
+    "index": 3,
+    "group": "small_mn_6144",
+    "shape": [
+      64,
+      64,
+      6080
+    ],
+    "source_mode": 0,
+    "source_family": "BASE",
+    "model_mode": 0,
+    "model_family": "BASE",
+    "family_agrees": true,
+    "model_winner_us": 8.8327,
+    "model_base_us": 8.8327,
+    "model_split_us": 12.8849,
+    "source_core": [
+      16,
+      128,
+      6080
+    ],
+    "source_base": [
+      16,
+      128,
+      64
+    ],
+    "model_core": [
+      16,
+      16,
+      6080
+    ],
+    "model_base": [
+      16,
+      16,
+      512
+    ],
+    "correctness_error": 0.0,
+    "source_score_error": "64x64x6080: spatial single-core output tile exceeds the shape",
+    "measured_kernel_us": 18.056
+  },
+  {
+    "index": 4,
+    "group": "small_mn_6144",
+    "shape": [
+      64,
+      64,
+      6144
+    ],
+    "source_mode": 3,
+    "source_family": "DETERMINISTIC_SPLIT_K",
+    "model_mode": 0,
+    "model_family": "BASE",
+    "family_agrees": false,
+    "model_winner_us": 8.86803,
+    "model_base_us": 8.86803,
+    "model_split_us": 12.8937,
+    "source_core": [
+      384,
+      64,
+      192
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      16,
+      16,
+      6144
+    ],
+    "model_base": [
+      16,
+      16,
+      512
+    ],
+    "correctness_error": 0.0,
+    "source_score_error": "64x64x6144: base M/N tile exceeds single-core output tile",
+    "measured_kernel_us": 19.44
+  },
+  {
+    "index": 5,
+    "group": "small_mn_6144",
+    "shape": [
+      64,
+      64,
+      6208
+    ],
+    "source_mode": 3,
+    "source_family": "DETERMINISTIC_SPLIT_K",
+    "model_mode": 0,
+    "model_family": "BASE",
+    "family_agrees": false,
+    "model_winner_us": 9.12259,
+    "model_base_us": 9.12259,
+    "model_split_us": 13.1218,
+    "source_core": [
+      384,
+      64,
+      192
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      16,
+      16,
+      6208
+    ],
+    "model_base": [
+      16,
+      16,
+      512
+    ],
+    "correctness_error": 0.0,
+    "source_score_error": "64x64x6208: base M/N tile exceeds single-core output tile"
+  },
+  {
+    "index": 6,
+    "group": "mn_7680",
+    "shape": [
+      128,
+      128,
+      7616
+    ],
+    "source_mode": 0,
+    "source_family": "BASE",
+    "model_mode": 0,
+    "model_family": "BASE",
+    "family_agrees": true,
+    "model_winner_us": 17.84023,
+    "model_base_us": 17.8402,
+    "model_split_us": 20.5328,
+    "source_core": [
+      16,
+      128,
+      7616
+    ],
+    "source_base": [
+      16,
+      128,
+      64
+    ],
+    "model_core": [
+      32,
+      32,
+      7616
+    ],
+    "model_base": [
+      32,
+      32,
+      256
+    ],
+    "correctness_error": 0.0,
+    "source_tile_model_us": 38.403579,
+    "measured_kernel_us": 32.264,
+    "source_tile_error_pct": 19.029193528390763
+  },
+  {
+    "index": 7,
+    "group": "mn_7680",
+    "shape": [
+      128,
+      128,
+      7680
+    ],
+    "source_mode": 3,
+    "source_family": "DETERMINISTIC_SPLIT_K",
+    "model_mode": 0,
+    "model_family": "BASE",
+    "family_agrees": false,
+    "model_winner_us": 17.91088,
+    "model_base_us": 17.9109,
+    "model_split_us": 20.6479,
+    "source_core": [
+      384,
+      128,
+      192
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      32,
+      32,
+      7680
+    ],
+    "model_base": [
+      32,
+      32,
+      256
+    ],
+    "correctness_error": 0.0,
+    "source_tile_model_us": 30.765629,
+    "measured_kernel_us": 27.88,
+    "source_tile_error_pct": 10.350175753228118
+  },
+  {
+    "index": 8,
+    "group": "mn_7680",
+    "shape": [
+      128,
+      128,
+      7744
+    ],
+    "source_mode": 3,
+    "source_family": "DETERMINISTIC_SPLIT_K",
+    "model_mode": 0,
+    "model_family": "BASE",
+    "family_agrees": false,
+    "model_winner_us": 18.20078,
+    "model_base_us": 18.2008,
+    "model_split_us": 21.1154,
+    "source_core": [
+      384,
+      128,
+      192
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      32,
+      32,
+      7744
+    ],
+    "model_base": [
+      32,
+      32,
+      256
+    ],
+    "correctness_error": 0.0,
+    "source_tile_model_us": 32.513256
+  },
+  {
+    "index": 9,
+    "group": "mn_7680",
+    "shape": [
+      256,
+      256,
+      7616
+    ],
+    "source_mode": 0,
+    "source_family": "BASE",
+    "model_mode": 0,
+    "model_family": "BASE",
+    "family_agrees": true,
+    "model_winner_us": 32.86294,
+    "model_base_us": 32.8629,
+    "model_split_us": 39.5345,
+    "source_core": [
+      32,
+      128,
+      7616
+    ],
+    "source_base": [
+      32,
+      128,
+      64
+    ],
+    "model_core": [
+      64,
+      64,
+      7616
+    ],
+    "model_base": [
+      64,
+      64,
+      128
+    ],
+    "correctness_error": 0.0,
+    "source_tile_model_us": 50.002054,
+    "measured_kernel_us": 34.68,
+    "source_tile_error_pct": 44.1812399077278
+  },
+  {
+    "index": 10,
+    "group": "mn_7680",
+    "shape": [
+      256,
+      256,
+      7680
+    ],
+    "source_mode": 3,
+    "source_family": "DETERMINISTIC_SPLIT_K",
+    "model_mode": 0,
+    "model_family": "BASE",
+    "family_agrees": false,
+    "model_winner_us": 33.00425,
+    "model_base_us": 33.0042,
+    "model_split_us": 39.5345,
+    "source_core": [
+      384,
+      256,
+      192
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      64,
+      64,
+      7680
+    ],
+    "model_base": [
+      64,
+      64,
+      128
+    ],
+    "correctness_error": 0.0,
+    "source_tile_model_us": 41.27474,
+    "measured_kernel_us": 37.84,
+    "source_tile_error_pct": 9.07700845665962
+  },
+  {
+    "index": 11,
+    "group": "mn_7680",
+    "shape": [
+      256,
+      256,
+      7744
+    ],
+    "source_mode": 3,
+    "source_family": "DETERMINISTIC_SPLIT_K",
+    "model_mode": 0,
+    "model_family": "BASE",
+    "family_agrees": false,
+    "model_winner_us": 33.3648,
+    "model_base_us": 33.3648,
+    "model_split_us": 40.5845,
+    "source_core": [
+      384,
+      256,
+      192
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      64,
+      64,
+      7744
+    ],
+    "model_base": [
+      64,
+      64,
+      128
+    ],
+    "correctness_error": 0.0,
+    "source_tile_model_us": 48.265247
+  },
+  {
+    "index": 12,
+    "group": "general_27392",
+    "shape": [
+      128,
+      128,
+      27328
+    ],
+    "source_mode": 3,
+    "source_family": "DETERMINISTIC_SPLIT_K",
+    "model_mode": 3,
+    "model_family": "DETERMINISTIC_SPLIT_K",
+    "family_agrees": true,
+    "model_winner_us": 37.53405,
+    "model_base_us": 56.4834,
+    "model_split_us": 37.5341,
+    "source_core": [
+      384,
+      128,
+      192
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      128,
+      128,
+      64
+    ],
+    "model_base": [
+      128,
+      128,
+      64
+    ],
+    "correctness_error": 0.0,
+    "source_tile_model_us": 41.251389,
+    "measured_kernel_us": 37.0,
+    "source_tile_error_pct": 11.490240540540553
+  },
+  {
+    "index": 13,
+    "group": "general_27392",
+    "shape": [
+      128,
+      128,
+      27392
+    ],
+    "source_mode": 3,
+    "source_family": "DETERMINISTIC_SPLIT_K",
+    "model_mode": 3,
+    "model_family": "DETERMINISTIC_SPLIT_K",
+    "family_agrees": true,
+    "model_winner_us": 37.53405,
+    "model_base_us": 56.554,
+    "model_split_us": 37.5341,
+    "source_core": [
+      384,
+      128,
+      192
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      128,
+      128,
+      64
+    ],
+    "model_base": [
+      128,
+      128,
+      64
+    ],
+    "correctness_error": 0.0,
+    "source_tile_model_us": 41.251389,
+    "measured_kernel_us": 38.4,
+    "source_tile_error_pct": 7.425492187500016
+  },
+  {
+    "index": 14,
+    "group": "general_27392",
+    "shape": [
+      128,
+      128,
+      27456
+    ],
+    "source_mode": 3,
+    "source_family": "DETERMINISTIC_SPLIT_K",
+    "model_mode": 3,
+    "model_family": "DETERMINISTIC_SPLIT_K",
+    "family_agrees": true,
+    "model_winner_us": 37.53405,
+    "model_base_us": 56.8439,
+    "model_split_us": 37.5341,
+    "source_core": [
+      384,
+      128,
+      192
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      128,
+      128,
+      64
+    ],
+    "model_base": [
+      128,
+      128,
+      64
+    ],
+    "correctness_error": 0.0,
+    "source_tile_model_us": 41.251389
+  },
+  {
+    "index": 15,
+    "group": "general_27392",
+    "shape": [
+      256,
+      256,
+      27328
+    ],
+    "source_mode": 3,
+    "source_family": "DETERMINISTIC_SPLIT_K",
+    "model_mode": 3,
+    "model_family": "DETERMINISTIC_SPLIT_K",
+    "family_agrees": true,
+    "model_winner_us": 78.54188,
+    "model_base_us": 110.149,
+    "model_split_us": 78.5419,
+    "source_core": [
+      384,
+      256,
+      192
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      128,
+      128,
+      64
+    ],
+    "model_base": [
+      128,
+      128,
+      64
+    ],
+    "correctness_error": 0.0,
+    "source_tile_model_us": 83.21778,
+    "measured_kernel_us": 80.0,
+    "source_tile_error_pct": 4.0222250000000015
+  },
+  {
+    "index": 16,
+    "group": "general_27392",
+    "shape": [
+      256,
+      256,
+      27392
+    ],
+    "source_mode": 3,
+    "source_family": "DETERMINISTIC_SPLIT_K",
+    "model_mode": 3,
+    "model_family": "DETERMINISTIC_SPLIT_K",
+    "family_agrees": true,
+    "model_winner_us": 78.54188,
+    "model_base_us": 110.291,
+    "model_split_us": 78.5419,
+    "source_core": [
+      384,
+      256,
+      192
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      128,
+      128,
+      64
+    ],
+    "model_base": [
+      128,
+      128,
+      64
+    ],
+    "correctness_error": 0.0,
+    "source_tile_model_us": 83.21778,
+    "measured_kernel_us": 79.66,
+    "source_tile_error_pct": 4.466206377102688
+  },
+  {
+    "index": 17,
+    "group": "general_27392",
+    "shape": [
+      256,
+      256,
+      27456
+    ],
+    "source_mode": 3,
+    "source_family": "DETERMINISTIC_SPLIT_K",
+    "model_mode": 3,
+    "model_family": "DETERMINISTIC_SPLIT_K",
+    "family_agrees": true,
+    "model_winner_us": 78.54188,
+    "model_base_us": 110.651,
+    "model_split_us": 78.5419,
+    "source_core": [
+      384,
+      256,
+      192
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      128,
+      128,
+      64
+    ],
+    "model_base": [
+      128,
+      128,
+      64
+    ],
+    "correctness_error": 0.0,
+    "source_tile_model_us": 83.21778
+  },
+  {
+    "index": 18,
+    "group": "general_27392",
+    "shape": [
+      512,
+      512,
+      27328
+    ],
+    "source_mode": 0,
+    "source_family": "BASE",
+    "model_mode": 3,
+    "model_family": "DETERMINISTIC_SPLIT_K",
+    "family_agrees": false,
+    "model_winner_us": 232.34859,
+    "model_base_us": 251.426,
+    "model_split_us": 232.349,
+    "source_core": [
+      112,
+      128,
+      27328
+    ],
+    "source_base": [
+      112,
+      128,
+      64
+    ],
+    "model_core": [
+      128,
+      128,
+      64
+    ],
+    "model_base": [
+      128,
+      128,
+      64
+    ],
+    "correctness_error": 0.0,
+    "source_tile_model_us": 232.421627,
+    "measured_kernel_us": 219.62,
+    "source_tile_error_pct": 5.828989618431835
+  },
+  {
+    "index": 19,
+    "group": "general_27392",
+    "shape": [
+      512,
+      512,
+      27392
+    ],
+    "source_mode": 3,
+    "source_family": "DETERMINISTIC_SPLIT_K",
+    "model_mode": 3,
+    "model_family": "DETERMINISTIC_SPLIT_K",
+    "family_agrees": true,
+    "model_winner_us": 232.34859,
+    "model_base_us": 252.008,
+    "model_split_us": 232.349,
+    "source_core": [
+      384,
+      512,
+      192
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      128,
+      128,
+      64
+    ],
+    "model_base": [
+      128,
+      128,
+      64
+    ],
+    "correctness_error": 0.0,
+    "source_tile_model_us": 250.98994,
+    "measured_kernel_us": 264.98,
+    "source_tile_error_pct": -5.279666389916226
+  },
+  {
+    "index": 20,
+    "group": "general_27392",
+    "shape": [
+      512,
+      512,
+      27456
+    ],
+    "source_mode": 3,
+    "source_family": "DETERMINISTIC_SPLIT_K",
+    "model_mode": 3,
+    "model_family": "DETERMINISTIC_SPLIT_K",
+    "family_agrees": true,
+    "model_winner_us": 232.34859,
+    "model_base_us": 252.591,
+    "model_split_us": 232.349,
+    "source_core": [
+      384,
+      512,
+      192
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      128,
+      128,
+      64
+    ],
+    "model_base": [
+      128,
+      128,
+      64
+    ],
+    "correctness_error": 0.0,
+    "source_tile_model_us": 250.98994
+  },
+  {
+    "index": 21,
+    "group": "fp32_narrow_n",
+    "shape": [
+      2048,
+      64,
+      27328
+    ],
+    "source_mode": 0,
+    "source_family": "BASE",
+    "model_mode": 0,
+    "model_family": "BASE",
+    "family_agrees": true,
+    "model_winner_us": 187.06702,
+    "model_base_us": 187.067,
+    "model_split_us": 195.006,
+    "source_core": [
+      112,
+      128,
+      27328
+    ],
+    "source_base": [
+      112,
+      128,
+      64
+    ],
+    "model_core": [
+      128,
+      64,
+      27328
+    ],
+    "model_base": [
+      128,
+      64,
+      64
+    ],
+    "correctness_error": 0.0,
+    "source_score_error": "2048x64x27328: spatial single-core output tile exceeds the shape",
+    "measured_kernel_us": 218.62
+  },
+  {
+    "index": 22,
+    "group": "fp32_narrow_n",
+    "shape": [
+      2048,
+      64,
+      27392
+    ],
+    "source_mode": 3,
+    "source_family": "DETERMINISTIC_SPLIT_K",
+    "model_mode": 0,
+    "model_family": "BASE",
+    "family_agrees": false,
+    "model_winner_us": 187.49823,
+    "model_base_us": 187.498,
+    "model_split_us": 195.218,
+    "source_core": [
+      2048,
+      384,
+      192
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      128,
+      64,
+      27392
+    ],
+    "model_base": [
+      128,
+      64,
+      64
+    ],
+    "correctness_error": 0.0,
+    "source_tile_model_us": 202.233673,
+    "measured_kernel_us": 250.68,
+    "source_tile_error_pct": -19.32596417743737
+  },
+  {
+    "index": 23,
+    "group": "fp32_narrow_n",
+    "shape": [
+      2048,
+      64,
+      27456
+    ],
+    "source_mode": 3,
+    "source_family": "DETERMINISTIC_SPLIT_K",
+    "model_mode": 0,
+    "model_family": "BASE",
+    "family_agrees": false,
+    "model_winner_us": 187.92943,
+    "model_base_us": 187.929,
+    "model_split_us": 195.43,
+    "source_core": [
+      2048,
+      384,
+      192
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      128,
+      64,
+      27456
+    ],
+    "model_base": [
+      128,
+      64,
+      64
+    ],
+    "correctness_error": 0.0,
+    "source_tile_model_us": 202.445637
+  },
+  {
+    "index": 24,
+    "group": "fp32_narrow_n",
+    "shape": [
+      4096,
+      64,
+      27328
+    ],
+    "source_mode": 0,
+    "source_family": "BASE",
+    "model_mode": 0,
+    "model_family": "BASE",
+    "family_agrees": true,
+    "model_winner_us": 341.12189,
+    "model_base_us": 341.122,
+    "model_split_us": 362.749,
+    "source_core": [
+      128,
+      128,
+      27328
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      256,
+      64,
+      27328
+    ],
+    "model_base": [
+      256,
+      64,
+      32
+    ],
+    "correctness_error": 0.0,
+    "source_score_error": "4096x64x27328: spatial single-core output tile exceeds the shape"
+  },
+  {
+    "index": 25,
+    "group": "fp32_narrow_n",
+    "shape": [
+      4096,
+      64,
+      27392
+    ],
+    "source_mode": 3,
+    "source_family": "DETERMINISTIC_SPLIT_K",
+    "model_mode": 0,
+    "model_family": "BASE",
+    "family_agrees": false,
+    "model_winner_us": 341.91364,
+    "model_base_us": 341.914,
+    "model_split_us": 363.173,
+    "source_core": [
+      4096,
+      384,
+      192
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      256,
+      64,
+      27392
+    ],
+    "model_base": [
+      256,
+      64,
+      32
+    ],
+    "correctness_error": 0.0,
+    "source_tile_model_us": 377.20476
+  },
+  {
+    "index": 26,
+    "group": "fp32_narrow_n",
+    "shape": [
+      4096,
+      64,
+      27456
+    ],
+    "source_mode": 3,
+    "source_family": "DETERMINISTIC_SPLIT_K",
+    "model_mode": 0,
+    "model_family": "BASE",
+    "family_agrees": false,
+    "model_winner_us": 342.7054,
+    "model_base_us": 342.705,
+    "model_split_us": 363.597,
+    "source_core": [
+      4096,
+      384,
+      192
+    ],
+    "source_base": [
+      128,
+      128,
+      64
+    ],
+    "model_core": [
+      256,
+      64,
+      27456
+    ],
+    "model_base": [
+      256,
+      64,
+      32
+    ],
+    "correctness_error": 0.0,
+    "source_tile_model_us": 377.628688
+  }
+]

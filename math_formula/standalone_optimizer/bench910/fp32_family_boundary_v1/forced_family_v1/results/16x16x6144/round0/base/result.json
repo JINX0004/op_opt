@@ -1,0 +1,56 @@
+{
+  "arm": "base",
+  "event": {
+    "batch": 0,
+    "device": 4,
+    "dtype": "fp32",
+    "first_host_us": 9093288.48,
+    "first_wall_us": 9093370.801,
+    "host_median_us": 150.591,
+    "input_pattern": "mod4_exact_fp32",
+    "k": 6144,
+    "kind": "matmul_v3_event",
+    "m": 16,
+    "max_abs_error": 0.0,
+    "max_relative_error": 0.0,
+    "max_us": 360.980004,
+    "median_us": 247.720003,
+    "min_us": 182.960004,
+    "n": 16,
+    "pid": 1320330,
+    "repetitions": 8,
+    "run_id": 1793934382178,
+    "tiling_verified": false,
+    "wall_median_us": 408.305,
+    "warmup": 5,
+    "workspace_bytes": null
+  },
+  "mode": 0,
+  "profile": {
+    "durations_us": [
+      18.56,
+      18.6,
+      18.68,
+      18.584,
+      18.624,
+      18.736,
+      17.12,
+      18.4
+    ],
+    "kernel_count": 8,
+    "kernel_names": [
+      "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65536"
+    ],
+    "kind": "msprof_kernel",
+    "max_us": 18.736,
+    "median_us": 18.592,
+    "min_us": 17.12,
+    "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_forced_family_v1/16x16x6144/round0/base/msprof/PROF_000001_20261106110612716_01320330PGOMIAGF/mindstudio_profiler_output/task_time_20261106110631.csv"
+  },
+  "round": 0,
+  "shape": [
+    16,
+    16,
+    6144
+  ]
+}

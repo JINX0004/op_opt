@@ -1,0 +1,1304 @@
+[
+  {
+    "audit": {
+      "arm": "proposed",
+      "device": 6,
+      "event": {
+        "batch": 0,
+        "device": 6,
+        "dtype": "fp32",
+        "first_host_us": 9799458.447,
+        "first_wall_us": 9801483.216,
+        "host_median_us": 943.279,
+        "input_pattern": "mod4_exact_fp32",
+        "k": 32512,
+        "kind": "matmul_v3_event",
+        "m": 2560,
+        "max_abs_error": 0.0,
+        "max_relative_error": 0.0,
+        "max_us": 2765.820026,
+        "median_us": 2765.820026,
+        "min_us": 2765.820026,
+        "n": 768,
+        "pid": 2163334,
+        "repetitions": 1,
+        "run_id": 1794106852163,
+        "tiling_verified": false,
+        "wall_median_us": 3268.11,
+        "warmup": 0,
+        "workspace_bytes": null
+      },
+      "index": 32512,
+      "shape": [
+        2560,
+        768,
+        32512
+      ],
+      "tiling": {
+        "baseK": 64,
+        "baseM": 128,
+        "baseN": 128,
+        "block_dim": 20,
+        "depthA1": 8,
+        "depthB1": 8,
+        "estimated_nonidle_aics": 20,
+        "family": "OTHER",
+        "kValue": 32512,
+        "kind": "matmul_v3_tiling",
+        "mValue": 2560,
+        "nValue": 768,
+        "nd2nzA": 0,
+        "nd2nzB": 0,
+        "output_tiles": 20,
+        "plog": "/home/xianfei/ascend/log/debug/plog/plog-2163334_20261108110032040.log",
+        "singleCoreK": 256,
+        "singleCoreM": 128,
+        "singleCoreN": 768,
+        "stepKa": 4,
+        "stepKb": 4,
+        "stepM": 2,
+        "stepN": 1,
+        "tilingEnableFixOpti": 0,
+        "tilingEnableFullLoad": 0,
+        "tilingEnableSplitCore": 2,
+        "tiling_key": 65568,
+        "tiling_source": "/home/xianfei/solvebase_bench_20261025/ops_nn_source_build/matmul/mat_mul_v3/op_host/op_tiling/matmul_v3_l2_cache.cpp",
+        "workspace_bytes": 28835840
+      }
+    },
+    "device": 6,
+    "measurements": [
+      {
+        "counters": {
+          "aic_fixpipe_time(us)": 541.054,
+          "aic_mac_time(us)": 1738.442,
+          "aic_mte1_time(us)": 761.08,
+          "aic_mte2_time(us)": 1482.297,
+          "aic_scalar_time(us)": 517.222,
+          "aicore_time(us)": 2107.01
+        },
+        "profile": {
+          "arm": "proposed",
+          "device": 6,
+          "event": {
+            "batch": 0,
+            "device": 6,
+            "dtype": "fp32",
+            "first_host_us": 9767706.608,
+            "first_wall_us": 9769969.319,
+            "host_median_us": 118.391,
+            "input_pattern": "mod4_exact_fp32",
+            "k": 32512,
+            "kind": "matmul_v3_event",
+            "m": 2560,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "max_us": 2212.379932,
+            "median_us": 2205.539942,
+            "min_us": 2173.73991,
+            "n": 768,
+            "pid": 2167499,
+            "repetitions": 5,
+            "run_id": 1794106916445,
+            "tiling_verified": false,
+            "wall_median_us": 2390.292,
+            "warmup": 5,
+            "workspace_bytes": null
+          },
+          "index": 32512,
+          "mode": 2,
+          "profile": {
+            "durations_us": [
+              2107.8,
+              2113.52,
+              2111.164,
+              2107.38,
+              2107.944
+            ],
+            "kernel_count": 5,
+            "kernel_names": [
+              "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65568"
+            ],
+            "kind": "msprof_kernel",
+            "max_us": 2113.52,
+            "median_us": 2107.944,
+            "min_us": 2107.38,
+            "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_base_formula_v2/exact_mode2_k_neighbors/device6/32512_2560x768x32512/round0/proposed/msprof/PROF_000001_20261108110145785_02167499CDGLJFDH/mindstudio_profiler_output/task_time_20261108110205.csv"
+          },
+          "round": 0,
+          "shape": [
+            2560,
+            768,
+            32512
+          ]
+        },
+        "round": 0
+      },
+      {
+        "counters": {
+          "aic_fixpipe_time(us)": 542.813,
+          "aic_mac_time(us)": 1738.435,
+          "aic_mte1_time(us)": 761.083,
+          "aic_mte2_time(us)": 1489.14,
+          "aic_scalar_time(us)": 519.113,
+          "aicore_time(us)": 2109.694
+        },
+        "profile": {
+          "arm": "proposed",
+          "device": 6,
+          "event": {
+            "batch": 0,
+            "device": 6,
+            "dtype": "fp32",
+            "first_host_us": 8880039.863,
+            "first_wall_us": 8882326.674,
+            "host_median_us": 156.121,
+            "input_pattern": "mod4_exact_fp32",
+            "k": 32512,
+            "kind": "matmul_v3_event",
+            "m": 2560,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "max_us": 2282.939911,
+            "median_us": 2254.460096,
+            "min_us": 2236.200094,
+            "n": 768,
+            "pid": 2176921,
+            "repetitions": 5,
+            "run_id": 1794107052577,
+            "tiling_verified": false,
+            "wall_median_us": 2515.023,
+            "warmup": 5,
+            "workspace_bytes": null
+          },
+          "index": 32512,
+          "mode": 2,
+          "profile": {
+            "durations_us": [
+              2110.284,
+              2110.244,
+              2113.504,
+              2113.16,
+              2110.744
+            ],
+            "kernel_count": 5,
+            "kernel_names": [
+              "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65568"
+            ],
+            "kind": "msprof_kernel",
+            "max_us": 2113.504,
+            "median_us": 2110.744,
+            "min_us": 2110.244,
+            "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_base_formula_v2/exact_mode2_k_neighbors/device6/32512_2560x768x32512/round1/proposed/msprof/PROF_000001_20261108110402777_02176921JIIJQEEL/mindstudio_profiler_output/task_time_20261108110422.csv"
+          },
+          "round": 1,
+          "shape": [
+            2560,
+            768,
+            32512
+          ]
+        },
+        "round": 1
+      }
+    ],
+    "median_counters": {
+      "aic_fixpipe_time(us)": 541.9335,
+      "aic_mac_time(us)": 1738.4385,
+      "aic_mte1_time(us)": 761.0815,
+      "aic_mte2_time(us)": 1485.7185,
+      "aic_scalar_time(us)": 518.1675,
+      "aicore_time(us)": 2108.352
+    },
+    "median_us": 2109.344,
+    "shape": [
+      2560,
+      768,
+      32512
+    ]
+  },
+  {
+    "audit": {
+      "arm": "proposed",
+      "device": 6,
+      "event": {
+        "batch": 0,
+        "device": 6,
+        "dtype": "fp32",
+        "first_host_us": 9378194.788,
+        "first_wall_us": 9380602.06,
+        "host_median_us": 813.967,
+        "input_pattern": "mod4_exact_fp32",
+        "k": 32768,
+        "kind": "matmul_v3_event",
+        "m": 2560,
+        "max_abs_error": 0.0,
+        "max_relative_error": 0.0,
+        "max_us": 3281.860113,
+        "median_us": 3281.860113,
+        "min_us": 3281.860113,
+        "n": 768,
+        "pid": 2164844,
+        "repetitions": 1,
+        "run_id": 1794106873431,
+        "tiling_verified": false,
+        "wall_median_us": 3782.714,
+        "warmup": 0,
+        "workspace_bytes": null
+      },
+      "index": 32768,
+      "shape": [
+        2560,
+        768,
+        32768
+      ],
+      "tiling": {
+        "baseK": 64,
+        "baseM": 128,
+        "baseN": 128,
+        "block_dim": 20,
+        "depthA1": 8,
+        "depthB1": 8,
+        "estimated_nonidle_aics": 20,
+        "family": "OTHER",
+        "kValue": 32768,
+        "kind": "matmul_v3_tiling",
+        "mValue": 2560,
+        "nValue": 768,
+        "nd2nzA": 0,
+        "nd2nzB": 0,
+        "output_tiles": 20,
+        "plog": "/home/xianfei/ascend/log/debug/plog/plog-2164844_20261108110101186.log",
+        "singleCoreK": 256,
+        "singleCoreM": 128,
+        "singleCoreN": 768,
+        "stepKa": 4,
+        "stepKb": 4,
+        "stepM": 2,
+        "stepN": 1,
+        "tilingEnableFixOpti": 0,
+        "tilingEnableFullLoad": 0,
+        "tilingEnableSplitCore": 2,
+        "tiling_key": 65568,
+        "tiling_source": "/home/xianfei/solvebase_bench_20261025/ops_nn_source_build/matmul/mat_mul_v3/op_host/op_tiling/matmul_v3_l2_cache.cpp",
+        "workspace_bytes": 28835840
+      }
+    },
+    "device": 6,
+    "measurements": [
+      {
+        "counters": {
+          "aic_fixpipe_time(us)": 732.007,
+          "aic_mac_time(us)": 1752.134,
+          "aic_mte1_time(us)": 767.07,
+          "aic_mte2_time(us)": 2084.072,
+          "aic_scalar_time(us)": 521.846,
+          "aicore_time(us)": 2703.284
+        },
+        "profile": {
+          "arm": "proposed",
+          "device": 6,
+          "event": {
+            "batch": 0,
+            "device": 6,
+            "dtype": "fp32",
+            "first_host_us": 12033988.628,
+            "first_wall_us": 12036406.471,
+            "host_median_us": 252.003,
+            "input_pattern": "mod4_exact_fp32",
+            "k": 32768,
+            "kind": "matmul_v3_event",
+            "m": 2560,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "max_us": 3019.680023,
+            "median_us": 2985.48007,
+            "min_us": 2937.619925,
+            "n": 768,
+            "pid": 2169301,
+            "repetitions": 5,
+            "run_id": 1794106944699,
+            "tiling_verified": false,
+            "wall_median_us": 3289.29,
+            "warmup": 5,
+            "workspace_bytes": null
+          },
+          "index": 32768,
+          "mode": 2,
+          "profile": {
+            "durations_us": [
+              2703.912,
+              2706.496,
+              2704.712,
+              2704.416,
+              2703.796
+            ],
+            "kernel_count": 5,
+            "kernel_names": [
+              "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65568"
+            ],
+            "kind": "msprof_kernel",
+            "max_us": 2706.496,
+            "median_us": 2704.416,
+            "min_us": 2703.796,
+            "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_base_formula_v2/exact_mode2_k_neighbors/device6/32768_2560x768x32768/round0/proposed/msprof/PROF_000001_20261108110211772_02169301JFBNMDRD/mindstudio_profiler_output/task_time_20261108110235.csv"
+          },
+          "round": 0,
+          "shape": [
+            2560,
+            768,
+            32768
+          ]
+        },
+        "round": 0
+      },
+      {
+        "counters": {
+          "aic_fixpipe_time(us)": 730.367,
+          "aic_mac_time(us)": 1752.131,
+          "aic_mte1_time(us)": 767.313,
+          "aic_mte2_time(us)": 2078.559,
+          "aic_scalar_time(us)": 521.201,
+          "aicore_time(us)": 2700.459
+        },
+        "profile": {
+          "arm": "proposed",
+          "device": 6,
+          "event": {
+            "batch": 0,
+            "device": 6,
+            "dtype": "fp32",
+            "first_host_us": 11923827.546,
+            "first_wall_us": 11926377.059,
+            "host_median_us": 245.232,
+            "input_pattern": "mod4_exact_fp32",
+            "k": 32768,
+            "kind": "matmul_v3_event",
+            "m": 2560,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "max_us": 2964.740038,
+            "median_us": 2942.019939,
+            "min_us": 2925.640106,
+            "n": 768,
+            "pid": 2174961,
+            "repetitions": 5,
+            "run_id": 1794107026901,
+            "tiling_verified": false,
+            "wall_median_us": 3201.099,
+            "warmup": 5,
+            "workspace_bytes": null
+          },
+          "index": 32768,
+          "mode": 2,
+          "profile": {
+            "durations_us": [
+              2703.136,
+              2699.196,
+              2701.116,
+              2701.452,
+              2702.156
+            ],
+            "kernel_count": 5,
+            "kernel_names": [
+              "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65568"
+            ],
+            "kind": "msprof_kernel",
+            "max_us": 2703.136,
+            "median_us": 2701.452,
+            "min_us": 2699.196,
+            "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_base_formula_v2/exact_mode2_k_neighbors/device6/32768_2560x768x32768/round1/proposed/msprof/PROF_000001_20261108110334017_02174961LIQQREKE/mindstudio_profiler_output/task_time_20261108110356.csv"
+          },
+          "round": 1,
+          "shape": [
+            2560,
+            768,
+            32768
+          ]
+        },
+        "round": 1
+      }
+    ],
+    "median_counters": {
+      "aic_fixpipe_time(us)": 731.1869999999999,
+      "aic_mac_time(us)": 1752.1325000000002,
+      "aic_mte1_time(us)": 767.1915,
+      "aic_mte2_time(us)": 2081.3155,
+      "aic_scalar_time(us)": 521.5235,
+      "aicore_time(us)": 2701.8715
+    },
+    "median_us": 2702.934,
+    "shape": [
+      2560,
+      768,
+      32768
+    ]
+  },
+  {
+    "audit": {
+      "arm": "proposed",
+      "device": 6,
+      "event": {
+        "batch": 0,
+        "device": 6,
+        "dtype": "fp32",
+        "first_host_us": 11311084.116,
+        "first_wall_us": 11313180.445,
+        "host_median_us": 1010.679,
+        "input_pattern": "mod4_exact_fp32",
+        "k": 33024,
+        "kind": "matmul_v3_event",
+        "m": 2560,
+        "max_abs_error": 0.0,
+        "max_relative_error": 0.0,
+        "max_us": 2885.60009,
+        "median_us": 2885.60009,
+        "min_us": 2885.60009,
+        "n": 768,
+        "pid": 2166041,
+        "repetitions": 1,
+        "run_id": 1794106895714,
+        "tiling_verified": false,
+        "wall_median_us": 3424.771,
+        "warmup": 0,
+        "workspace_bytes": null
+      },
+      "index": 33024,
+      "shape": [
+        2560,
+        768,
+        33024
+      ],
+      "tiling": {
+        "baseK": 64,
+        "baseM": 128,
+        "baseN": 128,
+        "block_dim": 20,
+        "depthA1": 8,
+        "depthB1": 8,
+        "estimated_nonidle_aics": 20,
+        "family": "OTHER",
+        "kValue": 33024,
+        "kind": "matmul_v3_tiling",
+        "mValue": 2560,
+        "nValue": 768,
+        "nd2nzA": 0,
+        "nd2nzB": 0,
+        "output_tiles": 20,
+        "plog": "/home/xianfei/ascend/log/debug/plog/plog-2166041_20261108110121403.log",
+        "singleCoreK": 256,
+        "singleCoreM": 128,
+        "singleCoreN": 768,
+        "stepKa": 4,
+        "stepKb": 4,
+        "stepM": 2,
+        "stepN": 1,
+        "tilingEnableFixOpti": 0,
+        "tilingEnableFullLoad": 0,
+        "tilingEnableSplitCore": 2,
+        "tiling_key": 65568,
+        "tiling_source": "/home/xianfei/solvebase_bench_20261025/ops_nn_source_build/matmul/mat_mul_v3/op_host/op_tiling/matmul_v3_l2_cache.cpp",
+        "workspace_bytes": 28835840
+      }
+    },
+    "device": 6,
+    "measurements": [
+      {
+        "counters": {
+          "aic_fixpipe_time(us)": 551.232,
+          "aic_mac_time(us)": 1765.817,
+          "aic_mte1_time(us)": 773.136,
+          "aic_mte2_time(us)": 1512.743,
+          "aic_scalar_time(us)": 526.313,
+          "aicore_time(us)": 2143.535
+        },
+        "profile": {
+          "arm": "proposed",
+          "device": 6,
+          "event": {
+            "batch": 0,
+            "device": 6,
+            "dtype": "fp32",
+            "first_host_us": 9357867.542,
+            "first_wall_us": 9360153.403,
+            "host_median_us": 192.912,
+            "input_pattern": "mod4_exact_fp32",
+            "k": 33024,
+            "kind": "matmul_v3_event",
+            "m": 2560,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "max_us": 2433.379889,
+            "median_us": 2359.080076,
+            "min_us": 2333.980083,
+            "n": 768,
+            "pid": 2171306,
+            "repetitions": 5,
+            "run_id": 1794106972895,
+            "tiling_verified": false,
+            "wall_median_us": 2689.885,
+            "warmup": 5,
+            "workspace_bytes": null
+          },
+          "index": 33024,
+          "mode": 2,
+          "profile": {
+            "durations_us": [
+              2144.904,
+              2144.24,
+              2144.264,
+              2144.58,
+              2144.544
+            ],
+            "kernel_count": 5,
+            "kernel_names": [
+              "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65568"
+            ],
+            "kind": "msprof_kernel",
+            "max_us": 2144.904,
+            "median_us": 2144.544,
+            "min_us": 2144.24,
+            "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_base_formula_v2/exact_mode2_k_neighbors/device6/33024_2560x768x33024/round0/proposed/msprof/PROF_000001_20261108110242534_02171306JRBKQRMI/mindstudio_profiler_output/task_time_20261108110301.csv"
+          },
+          "round": 0,
+          "shape": [
+            2560,
+            768,
+            33024
+          ]
+        },
+        "round": 0
+      },
+      {
+        "counters": {
+          "aic_fixpipe_time(us)": 552.857,
+          "aic_mac_time(us)": 1765.843,
+          "aic_mte1_time(us)": 773.007,
+          "aic_mte2_time(us)": 1512.852,
+          "aic_scalar_time(us)": 527.157,
+          "aicore_time(us)": 2149.547
+        },
+        "profile": {
+          "arm": "proposed",
+          "device": 6,
+          "event": {
+            "batch": 0,
+            "device": 6,
+            "dtype": "fp32",
+            "first_host_us": 9497672.955,
+            "first_wall_us": 9499949.806,
+            "host_median_us": 204.382,
+            "input_pattern": "mod4_exact_fp32",
+            "k": 33024,
+            "kind": "matmul_v3_event",
+            "m": 2560,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "max_us": 2473.239899,
+            "median_us": 2377.099991,
+            "min_us": 2310.379982,
+            "n": 768,
+            "pid": 2173051,
+            "repetitions": 5,
+            "run_id": 1794106997768,
+            "tiling_verified": false,
+            "wall_median_us": 2716.595,
+            "warmup": 5,
+            "workspace_bytes": null
+          },
+          "index": 33024,
+          "mode": 2,
+          "profile": {
+            "durations_us": [
+              2147.204,
+              2149.92,
+              2150.724,
+              2150.824,
+              2150.54
+            ],
+            "kernel_count": 5,
+            "kernel_names": [
+              "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65568"
+            ],
+            "kind": "msprof_kernel",
+            "max_us": 2150.824,
+            "median_us": 2150.54,
+            "min_us": 2147.204,
+            "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_base_formula_v2/exact_mode2_k_neighbors/device6/33024_2560x768x33024/round1/proposed/msprof/PROF_000001_20261108110307263_02173051LRKCOLQH/mindstudio_profiler_output/task_time_20261108110327.csv"
+          },
+          "round": 1,
+          "shape": [
+            2560,
+            768,
+            33024
+          ]
+        },
+        "round": 1
+      }
+    ],
+    "median_counters": {
+      "aic_fixpipe_time(us)": 552.0445,
+      "aic_mac_time(us)": 1765.83,
+      "aic_mte1_time(us)": 773.0715,
+      "aic_mte2_time(us)": 1512.7975000000001,
+      "aic_scalar_time(us)": 526.735,
+      "aicore_time(us)": 2146.541
+    },
+    "median_us": 2147.542,
+    "shape": [
+      2560,
+      768,
+      33024
+    ]
+  },
+  {
+    "audit": {
+      "arm": "proposed",
+      "device": 7,
+      "event": {
+        "batch": 0,
+        "device": 7,
+        "dtype": "fp32",
+        "first_host_us": 9843421.267,
+        "first_wall_us": 9846116.671,
+        "host_median_us": 807.328,
+        "input_pattern": "mod4_exact_fp32",
+        "k": 32512,
+        "kind": "matmul_v3_event",
+        "m": 2560,
+        "max_abs_error": 0.0,
+        "max_relative_error": 0.0,
+        "max_us": 3239.300013,
+        "median_us": 3239.300013,
+        "min_us": 3239.300013,
+        "n": 1024,
+        "pid": 2163327,
+        "repetitions": 1,
+        "run_id": 1794106848812,
+        "tiling_verified": false,
+        "wall_median_us": 3663.093,
+        "warmup": 0,
+        "workspace_bytes": null
+      },
+      "index": 32512,
+      "shape": [
+        2560,
+        1024,
+        32512
+      ],
+      "tiling": {
+        "baseK": 64,
+        "baseM": 128,
+        "baseN": 128,
+        "block_dim": 20,
+        "depthA1": 8,
+        "depthB1": 8,
+        "estimated_nonidle_aics": 20,
+        "family": "OTHER",
+        "kValue": 32512,
+        "kind": "matmul_v3_tiling",
+        "mValue": 2560,
+        "nValue": 1024,
+        "nd2nzA": 0,
+        "nd2nzB": 0,
+        "output_tiles": 20,
+        "plog": "/home/xianfei/ascend/log/debug/plog/plog-2163327_20261108110031769.log",
+        "singleCoreK": 256,
+        "singleCoreM": 128,
+        "singleCoreN": 1024,
+        "stepKa": 4,
+        "stepKb": 4,
+        "stepM": 2,
+        "stepN": 1,
+        "tilingEnableFixOpti": 0,
+        "tilingEnableFullLoad": 0,
+        "tilingEnableSplitCore": 2,
+        "tiling_key": 65568,
+        "tiling_source": "/home/xianfei/solvebase_bench_20261025/ops_nn_source_build/matmul/mat_mul_v3/op_host/op_tiling/matmul_v3_l2_cache.cpp",
+        "workspace_bytes": 31457280
+      }
+    },
+    "device": 7,
+    "measurements": [
+      {
+        "counters": {
+          "aic_fixpipe_time(us)": 738.596,
+          "aic_mac_time(us)": 2316.38,
+          "aic_mte1_time(us)": 1018.578,
+          "aic_mte2_time(us)": 1874.543,
+          "aic_scalar_time(us)": 673.185,
+          "aicore_time(us)": 2685.633
+        },
+        "profile": {
+          "arm": "proposed",
+          "device": 7,
+          "event": {
+            "batch": 0,
+            "device": 7,
+            "dtype": "fp32",
+            "first_host_us": 10185440.28,
+            "first_wall_us": 10188282.416,
+            "host_median_us": 245.312,
+            "input_pattern": "mod4_exact_fp32",
+            "k": 32512,
+            "kind": "matmul_v3_event",
+            "m": 2560,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "max_us": 2959.340096,
+            "median_us": 2923.559904,
+            "min_us": 2898.420095,
+            "n": 1024,
+            "pid": 2167490,
+            "repetitions": 5,
+            "run_id": 1794106917066,
+            "tiling_verified": false,
+            "wall_median_us": 3211.409,
+            "warmup": 5,
+            "workspace_bytes": null
+          },
+          "index": 32512,
+          "mode": 2,
+          "profile": {
+            "durations_us": [
+              2685.016,
+              2684.876,
+              2688.232,
+              2687.272,
+              2686.692
+            ],
+            "kernel_count": 5,
+            "kernel_names": [
+              "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65568"
+            ],
+            "kind": "msprof_kernel",
+            "max_us": 2688.232,
+            "median_us": 2686.692,
+            "min_us": 2684.876,
+            "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_base_formula_v2/exact_mode2_k_neighbors/device7/32512_2560x1024x32512/round0/proposed/msprof/PROF_000001_20261108110145905_02167490FFCPMDMB/mindstudio_profiler_output/task_time_20261108110207.csv"
+          },
+          "round": 0,
+          "shape": [
+            2560,
+            1024,
+            32512
+          ]
+        },
+        "round": 0
+      },
+      {
+        "counters": {
+          "aic_fixpipe_time(us)": 739.93,
+          "aic_mac_time(us)": 2316.378,
+          "aic_mte1_time(us)": 1018.299,
+          "aic_mte2_time(us)": 1864.302,
+          "aic_scalar_time(us)": 674.333,
+          "aicore_time(us)": 2682.572
+        },
+        "profile": {
+          "arm": "proposed",
+          "device": 7,
+          "event": {
+            "batch": 0,
+            "device": 7,
+            "dtype": "fp32",
+            "first_host_us": 11777807.071,
+            "first_wall_us": 11780616.087,
+            "host_median_us": 225.602,
+            "input_pattern": "mod4_exact_fp32",
+            "k": 32512,
+            "kind": "matmul_v3_event",
+            "m": 2560,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "max_us": 2922.240019,
+            "median_us": 2904.779911,
+            "min_us": 2886.339903,
+            "n": 1024,
+            "pid": 2177029,
+            "repetitions": 5,
+            "run_id": 1794107057508,
+            "tiling_verified": false,
+            "wall_median_us": 3164.689,
+            "warmup": 5,
+            "workspace_bytes": null
+          },
+          "index": 32512,
+          "mode": 2,
+          "profile": {
+            "durations_us": [
+              2683.676,
+              2686.376,
+              2681.956,
+              2686.292,
+              2681.832
+            ],
+            "kernel_count": 5,
+            "kernel_names": [
+              "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65568"
+            ],
+            "kind": "msprof_kernel",
+            "max_us": 2686.376,
+            "median_us": 2683.676,
+            "min_us": 2681.832,
+            "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_base_formula_v2/exact_mode2_k_neighbors/device7/32512_2560x1024x32512/round1/proposed/msprof/PROF_000001_20261108110404727_02177029HMCMIGAP/mindstudio_profiler_output/task_time_20261108110427.csv"
+          },
+          "round": 1,
+          "shape": [
+            2560,
+            1024,
+            32512
+          ]
+        },
+        "round": 1
+      }
+    ],
+    "median_counters": {
+      "aic_fixpipe_time(us)": 739.2629999999999,
+      "aic_mac_time(us)": 2316.379,
+      "aic_mte1_time(us)": 1018.4385,
+      "aic_mte2_time(us)": 1869.4225,
+      "aic_scalar_time(us)": 673.759,
+      "aicore_time(us)": 2684.1025
+    },
+    "median_us": 2685.184,
+    "shape": [
+      2560,
+      1024,
+      32512
+    ]
+  },
+  {
+    "audit": {
+      "arm": "proposed",
+      "device": 7,
+      "event": {
+        "batch": 0,
+        "device": 7,
+        "dtype": "fp32",
+        "first_host_us": 11844459.69,
+        "first_wall_us": 11847338.206,
+        "host_median_us": 895.238,
+        "input_pattern": "mod4_exact_fp32",
+        "k": 32768,
+        "kind": "matmul_v3_event",
+        "m": 2560,
+        "max_abs_error": 0.0,
+        "max_relative_error": 0.0,
+        "max_us": 3920.559883,
+        "median_us": 3920.559883,
+        "min_us": 3920.559883,
+        "n": 1024,
+        "pid": 2164749,
+        "repetitions": 1,
+        "run_id": 1794106872252,
+        "tiling_verified": false,
+        "wall_median_us": 4451.491,
+        "warmup": 0,
+        "workspace_bytes": null
+      },
+      "index": 32768,
+      "shape": [
+        2560,
+        1024,
+        32768
+      ],
+      "tiling": {
+        "baseK": 64,
+        "baseM": 128,
+        "baseN": 128,
+        "block_dim": 20,
+        "depthA1": 8,
+        "depthB1": 8,
+        "estimated_nonidle_aics": 20,
+        "family": "OTHER",
+        "kValue": 32768,
+        "kind": "matmul_v3_tiling",
+        "mValue": 2560,
+        "nValue": 1024,
+        "nd2nzA": 0,
+        "nd2nzB": 0,
+        "output_tiles": 20,
+        "plog": "/home/xianfei/ascend/log/debug/plog/plog-2164749_20261108110057126.log",
+        "singleCoreK": 256,
+        "singleCoreM": 128,
+        "singleCoreN": 1024,
+        "stepKa": 4,
+        "stepKb": 4,
+        "stepM": 2,
+        "stepN": 1,
+        "tilingEnableFixOpti": 0,
+        "tilingEnableFullLoad": 0,
+        "tilingEnableSplitCore": 2,
+        "tiling_key": 65568,
+        "tiling_source": "/home/xianfei/solvebase_bench_20261025/ops_nn_source_build/matmul/mat_mul_v3/op_host/op_tiling/matmul_v3_l2_cache.cpp",
+        "workspace_bytes": 31457280
+      }
+    },
+    "device": 7,
+    "measurements": [
+      {
+        "counters": {
+          "aic_fixpipe_time(us)": 924.006,
+          "aic_mac_time(us)": 2334.632,
+          "aic_mte1_time(us)": 1026.148,
+          "aic_mte2_time(us)": 2474.817,
+          "aic_scalar_time(us)": 679.908,
+          "aicore_time(us)": 3281.831
+        },
+        "profile": {
+          "arm": "proposed",
+          "device": 7,
+          "event": {
+            "batch": 0,
+            "device": 7,
+            "dtype": "fp32",
+            "first_host_us": 10460374.805,
+            "first_wall_us": 10463483.303,
+            "host_median_us": 214.492,
+            "input_pattern": "mod4_exact_fp32",
+            "k": 32768,
+            "kind": "matmul_v3_event",
+            "m": 2560,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "max_us": 3504.96006,
+            "median_us": 3486.23991,
+            "min_us": 3440.020084,
+            "n": 1024,
+            "pid": 2169387,
+            "repetitions": 5,
+            "run_id": 1794106944932,
+            "tiling_verified": false,
+            "wall_median_us": 3751.544,
+            "warmup": 5,
+            "workspace_bytes": null
+          },
+          "index": 32768,
+          "mode": 2,
+          "profile": {
+            "durations_us": [
+              3283.984,
+              3282.924,
+              3283.164,
+              3280.124,
+              3280.808
+            ],
+            "kernel_count": 5,
+            "kernel_names": [
+              "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65568"
+            ],
+            "kind": "msprof_kernel",
+            "max_us": 3283.984,
+            "median_us": 3282.924,
+            "min_us": 3280.124,
+            "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_base_formula_v2/exact_mode2_k_neighbors/device7/32768_2560x1024x32768/round0/proposed/msprof/PROF_000001_20261108110213572_02169387MIQEJOAQ/mindstudio_profiler_output/task_time_20261108110234.csv"
+          },
+          "round": 0,
+          "shape": [
+            2560,
+            1024,
+            32768
+          ]
+        },
+        "round": 0
+      },
+      {
+        "counters": {
+          "aic_fixpipe_time(us)": 925.362,
+          "aic_mac_time(us)": 2334.606,
+          "aic_mte1_time(us)": 1026.353,
+          "aic_mte2_time(us)": 2476.778,
+          "aic_scalar_time(us)": 680.671,
+          "aicore_time(us)": 3282.294
+        },
+        "profile": {
+          "arm": "proposed",
+          "device": 7,
+          "event": {
+            "batch": 0,
+            "device": 7,
+            "dtype": "fp32",
+            "first_host_us": 8889728.051,
+            "first_wall_us": 8892880.07,
+            "host_median_us": 202.212,
+            "input_pattern": "mod4_exact_fp32",
+            "k": 32768,
+            "kind": "matmul_v3_event",
+            "m": 2560,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "max_us": 3486.999989,
+            "median_us": 3479.520082,
+            "min_us": 3462.199926,
+            "n": 1024,
+            "pid": 2175150,
+            "repetitions": 5,
+            "run_id": 1794107029876,
+            "tiling_verified": false,
+            "wall_median_us": 3676.884,
+            "warmup": 5,
+            "workspace_bytes": null
+          },
+          "index": 32768,
+          "mode": 2,
+          "profile": {
+            "durations_us": [
+              3283.104,
+              3285.128,
+              3285.724,
+              3282.244,
+              3283.304
+            ],
+            "kernel_count": 5,
+            "kernel_names": [
+              "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65568"
+            ],
+            "kind": "msprof_kernel",
+            "max_us": 3285.724,
+            "median_us": 3283.304,
+            "min_us": 3282.244,
+            "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_base_formula_v2/exact_mode2_k_neighbors/device7/32768_2560x1024x32768/round1/proposed/msprof/PROF_000001_20261108110339939_02175150QLBAIIMH/mindstudio_profiler_output/task_time_20261108110358.csv"
+          },
+          "round": 1,
+          "shape": [
+            2560,
+            1024,
+            32768
+          ]
+        },
+        "round": 1
+      }
+    ],
+    "median_counters": {
+      "aic_fixpipe_time(us)": 924.684,
+      "aic_mac_time(us)": 2334.619,
+      "aic_mte1_time(us)": 1026.2505,
+      "aic_mte2_time(us)": 2475.7974999999997,
+      "aic_scalar_time(us)": 680.2895000000001,
+      "aicore_time(us)": 3282.0625
+    },
+    "median_us": 3283.114,
+    "shape": [
+      2560,
+      1024,
+      32768
+    ]
+  },
+  {
+    "audit": {
+      "arm": "proposed",
+      "device": 7,
+      "event": {
+        "batch": 0,
+        "device": 7,
+        "dtype": "fp32",
+        "first_host_us": 10843257.967,
+        "first_wall_us": 10846013.262,
+        "host_median_us": 968.269,
+        "input_pattern": "mod4_exact_fp32",
+        "k": 33024,
+        "kind": "matmul_v3_event",
+        "m": 2560,
+        "max_abs_error": 0.0,
+        "max_relative_error": 0.0,
+        "max_us": 3415.740013,
+        "median_us": 3415.740013,
+        "min_us": 3415.740013,
+        "n": 1024,
+        "pid": 2166048,
+        "repetitions": 1,
+        "run_id": 1794106895325,
+        "tiling_verified": false,
+        "wall_median_us": 3925.656,
+        "warmup": 0,
+        "workspace_bytes": null
+      },
+      "index": 33024,
+      "shape": [
+        2560,
+        1024,
+        33024
+      ],
+      "tiling": {
+        "baseK": 64,
+        "baseM": 128,
+        "baseN": 128,
+        "block_dim": 20,
+        "depthA1": 8,
+        "depthB1": 8,
+        "estimated_nonidle_aics": 20,
+        "family": "OTHER",
+        "kValue": 33024,
+        "kind": "matmul_v3_tiling",
+        "mValue": 2560,
+        "nValue": 1024,
+        "nd2nzA": 0,
+        "nd2nzB": 0,
+        "output_tiles": 20,
+        "plog": "/home/xianfei/ascend/log/debug/plog/plog-2166048_20261108110121494.log",
+        "singleCoreK": 256,
+        "singleCoreM": 128,
+        "singleCoreN": 1024,
+        "stepKa": 4,
+        "stepKb": 4,
+        "stepM": 2,
+        "stepN": 1,
+        "tilingEnableFixOpti": 0,
+        "tilingEnableFullLoad": 0,
+        "tilingEnableSplitCore": 2,
+        "tiling_key": 65568,
+        "tiling_source": "/home/xianfei/solvebase_bench_20261025/ops_nn_source_build/matmul/mat_mul_v3/op_host/op_tiling/matmul_v3_l2_cache.cpp",
+        "workspace_bytes": 31457280
+      }
+    },
+    "device": 7,
+    "measurements": [
+      {
+        "counters": {
+          "aic_fixpipe_time(us)": 746.371,
+          "aic_mac_time(us)": 2352.876,
+          "aic_mte1_time(us)": 1034.474,
+          "aic_mte2_time(us)": 1900.518,
+          "aic_scalar_time(us)": 684.723,
+          "aicore_time(us)": 2726.102
+        },
+        "profile": {
+          "arm": "proposed",
+          "device": 7,
+          "event": {
+            "batch": 0,
+            "device": 7,
+            "dtype": "fp32",
+            "first_host_us": 11976990.778,
+            "first_wall_us": 11979826.914,
+            "host_median_us": 241.982,
+            "input_pattern": "mod4_exact_fp32",
+            "k": 33024,
+            "kind": "matmul_v3_event",
+            "m": 2560,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "max_us": 2977.279902,
+            "median_us": 2972.120047,
+            "min_us": 2954.979897,
+            "n": 1024,
+            "pid": 2171295,
+            "repetitions": 5,
+            "run_id": 1794106974411,
+            "tiling_verified": false,
+            "wall_median_us": 3215.91,
+            "warmup": 5,
+            "workspace_bytes": null
+          },
+          "index": 33024,
+          "mode": 2,
+          "profile": {
+            "durations_us": [
+              2726.432,
+              2729.296,
+              2727.156,
+              2731.116,
+              2726.856
+            ],
+            "kernel_count": 5,
+            "kernel_names": [
+              "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65568"
+            ],
+            "kind": "msprof_kernel",
+            "max_us": 2731.116,
+            "median_us": 2727.156,
+            "min_us": 2726.432,
+            "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_base_formula_v2/exact_mode2_k_neighbors/device7/33024_2560x1024x33024/round0/proposed/msprof/PROF_000001_20261108110241400_02171295HHGBFMID/mindstudio_profiler_output/task_time_20261108110305.csv"
+          },
+          "round": 0,
+          "shape": [
+            2560,
+            1024,
+            33024
+          ]
+        },
+        "round": 0
+      },
+      {
+        "counters": {
+          "aic_fixpipe_time(us)": 746.771,
+          "aic_mac_time(us)": 2352.858,
+          "aic_mte1_time(us)": 1034.674,
+          "aic_mte2_time(us)": 1891.244,
+          "aic_scalar_time(us)": 683.913,
+          "aicore_time(us)": 2720.249
+        },
+        "profile": {
+          "arm": "proposed",
+          "device": 7,
+          "event": {
+            "batch": 0,
+            "device": 7,
+            "dtype": "fp32",
+            "first_host_us": 10804347.445,
+            "first_wall_us": 10807168.471,
+            "host_median_us": 247.392,
+            "input_pattern": "mod4_exact_fp32",
+            "k": 33024,
+            "kind": "matmul_v3_event",
+            "m": 2560,
+            "max_abs_error": 0.0,
+            "max_relative_error": 0.0,
+            "max_us": 3095.200062,
+            "median_us": 3036.180019,
+            "min_us": 2920.219898,
+            "n": 1024,
+            "pid": 2173396,
+            "repetitions": 5,
+            "run_id": 1794107003158,
+            "tiling_verified": false,
+            "wall_median_us": 3348.05,
+            "warmup": 5,
+            "workspace_bytes": null
+          },
+          "index": 33024,
+          "mode": 2,
+          "profile": {
+            "durations_us": [
+              2719.636,
+              2720.656,
+              2724.576,
+              2721.312,
+              2724.056
+            ],
+            "kernel_count": 5,
+            "kernel_names": [
+              "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65568"
+            ],
+            "kind": "msprof_kernel",
+            "max_us": 2724.576,
+            "median_us": 2721.312,
+            "min_us": 2719.636,
+            "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_base_formula_v2/exact_mode2_k_neighbors/device7/33024_2560x1024x33024/round1/proposed/msprof/PROF_000001_20261108110311284_02173396GGNPNLKP/mindstudio_profiler_output/task_time_20261108110333.csv"
+          },
+          "round": 1,
+          "shape": [
+            2560,
+            1024,
+            33024
+          ]
+        },
+        "round": 1
+      }
+    ],
+    "median_counters": {
+      "aic_fixpipe_time(us)": 746.5709999999999,
+      "aic_mac_time(us)": 2352.867,
+      "aic_mte1_time(us)": 1034.574,
+      "aic_mte2_time(us)": 1895.8809999999999,
+      "aic_scalar_time(us)": 684.318,
+      "aicore_time(us)": 2723.1755
+    },
+    "median_us": 2724.234,
+    "shape": [
+      2560,
+      1024,
+      33024
+    ]
+  }
+]

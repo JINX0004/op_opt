@@ -1,0 +1,83 @@
+{
+  "shape": [
+    73728,
+    384,
+    1536
+  ],
+  "arm": "mode5",
+  "device": 4,
+  "event": {
+    "run_id": 1793952449666,
+    "pid": 2304285,
+    "kind": "matmul_v3_event",
+    "device": 4,
+    "m": 73728,
+    "n": 384,
+    "k": 1536,
+    "dtype": "fp32",
+    "input_pattern": "mod4_exact_fp32",
+    "batch": 0,
+    "repetitions": 5,
+    "warmup": 5,
+    "first_host_us": 11425535.512,
+    "first_wall_us": 11426976.936,
+    "host_median_us": 1168.972,
+    "wall_median_us": 2862.878,
+    "workspace_bytes": null,
+    "max_abs_error": 0.0,
+    "max_relative_error": 0.0,
+    "min_us": 2128.720045,
+    "median_us": 2366.820097,
+    "max_us": 2500.479937,
+    "tiling_verified": false
+  },
+  "tiling": {
+    "baseK": 64,
+    "baseM": 128,
+    "baseN": 128,
+    "block_dim": 20,
+    "depthA1": 6,
+    "depthB1": 9,
+    "estimated_nonidle_aics": 20,
+    "family": "OTHER",
+    "kValue": 1536,
+    "kind": "matmul_v3_tiling",
+    "mValue": 73728,
+    "nValue": 384,
+    "nd2nzA": 0,
+    "nd2nzB": 0,
+    "output_tiles": 20,
+    "plog": "/home/xianfei/ascend/log/debug/plog/plog-2304285_20261106160714438.log",
+    "singleCoreK": 192,
+    "singleCoreM": 3688,
+    "singleCoreN": 384,
+    "stepKa": 3,
+    "stepKb": 3,
+    "stepM": 1,
+    "stepN": 3,
+    "tilingEnableFixOpti": 0,
+    "tilingEnableFullLoad": 0,
+    "tilingEnableSplitCore": 5,
+    "tiling_key": 65616,
+    "tiling_source": "/home/xianfei/solvebase_bench_20261025/ops_nn_source_build/matmul/mat_mul_v3/op_host/op_tiling/matmul_v3_l2_cache.cpp",
+    "workspace_bytes": 134217728
+  },
+  "profile": {
+    "durations_us": [
+      1239.72,
+      1241.696,
+      1239.784,
+      1241.824,
+      1242.584
+    ],
+    "kernel_count": 5,
+    "kernel_names": [
+      "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65616"
+    ],
+    "kind": "msprof_kernel",
+    "max_us": 1242.584,
+    "median_us": 1241.696,
+    "min_us": 1239.72,
+    "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_mode5_v1/73728x384x1536/mode5/msprof/PROF_000001_20261106160716753_02304285INLFMFII/mindstudio_profiler_output/task_time_20261106160740.csv"
+  }
+}

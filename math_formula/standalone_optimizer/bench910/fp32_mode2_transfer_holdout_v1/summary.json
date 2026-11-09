@@ -1,0 +1,253 @@
+[
+  {
+    "m": 2048,
+    "n": 2048,
+    "device": 6,
+    "tile": {
+      "singleCoreM": 208,
+      "singleCoreN": 1024,
+      "singleCoreK": 256,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 2,
+      "stepN": 1,
+      "block_dim": 20
+    },
+    "logical_k": 48384,
+    "probe_us": {
+      "48896": 2854.9240115000002,
+      "49152": 3555.1601410000003,
+      "49408": 2859.6580505
+    },
+    "source_kernel_us": {
+      "48896": 6240.304,
+      "49152": 6341.714,
+      "49408": 6305.116
+    },
+    "source_mte2_us": {
+      "48896": 1626.4515000000001,
+      "49152": 1682.978,
+      "49408": 1644.5425
+    },
+    "probe_center_excess_us": 697.8691100000001,
+    "probe_center_excess_rounds_us": [
+      694.3541525,
+      701.3840675000001
+    ],
+    "source_kernel_center_excess_us": 69.0039999999999,
+    "source_mte2_center_excess_us": 47.480999999999995,
+    "traffic_checks": [
+      {
+        "pitch": 48896,
+        "source_requested_kib": 4694336.0,
+        "probe_requested_kib": 4644864.0,
+        "source_minus_scaled_probe_kib": 320.0,
+        "source_l2_hit_fraction": 0.8333349310926357,
+        "probe_l2_hit_fraction": 0.833333584506275
+      },
+      {
+        "pitch": 49152,
+        "source_requested_kib": 4718912.0,
+        "probe_requested_kib": 4644864.0,
+        "source_minus_scaled_probe_kib": 320.0,
+        "source_l2_hit_fraction": 0.833328984457719,
+        "probe_l2_hit_fraction": 0.833333584506275
+      }
+    ]
+  },
+  {
+    "m": 2816,
+    "n": 1024,
+    "device": 4,
+    "tile": {
+      "singleCoreM": 144,
+      "singleCoreN": 1024,
+      "singleCoreK": 256,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 2,
+      "stepN": 1,
+      "block_dim": 20
+    },
+    "logical_k": 48384,
+    "probe_us": {
+      "48896": 2916.541958,
+      "49152": 3912.250137,
+      "49408": 2916.067982
+    },
+    "source_kernel_us": {
+      "48896": 5233.32,
+      "49152": 5697.75,
+      "49408": 5283.65
+    },
+    "source_mte2_us": {
+      "48896": 2079.922,
+      "49152": 2485.919,
+      "49408": 2073.773
+    },
+    "probe_center_excess_us": 995.9451669999999,
+    "probe_center_excess_rounds_us": [
+      1010.5961794999998,
+      981.2941544999999
+    ],
+    "source_kernel_center_excess_us": 439.2650000000003,
+    "source_mte2_center_excess_us": 409.0715,
+    "traffic_checks": []
+  },
+  {
+    "m": 2816,
+    "n": 1536,
+    "device": 7,
+    "tile": {
+      "singleCoreM": 144,
+      "singleCoreN": 1536,
+      "singleCoreK": 256,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 2,
+      "stepN": 1,
+      "block_dim": 20
+    },
+    "logical_k": 48384,
+    "probe_us": {
+      "48896": 4168.8899995,
+      "49152": 5134.926033,
+      "49408": 4164.0218735
+    },
+    "source_kernel_us": {
+      "48896": 7569.371999999999,
+      "49152": 8051.76,
+      "49408": 7650.023999999999
+    },
+    "source_mte2_us": {
+      "48896": 3152.7565,
+      "49152": 3468.1440000000002,
+      "49408": 3210.197
+    },
+    "probe_center_excess_us": 968.4700964999993,
+    "probe_center_excess_rounds_us": [
+      966.2120814999998,
+      970.7281114999996
+    ],
+    "source_kernel_center_excess_us": 442.0620000000008,
+    "source_mte2_center_excess_us": 286.6672500000004,
+    "traffic_checks": []
+  },
+  {
+    "m": 3072,
+    "n": 1024,
+    "device": 5,
+    "tile": {
+      "singleCoreM": 160,
+      "singleCoreN": 1024,
+      "singleCoreK": 256,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 2,
+      "stepN": 1,
+      "block_dim": 20
+    },
+    "logical_k": 48384,
+    "probe_us": {
+      "48896": 2754.9020765,
+      "49152": 3865.0598525,
+      "49408": 2743.5939785
+    },
+    "source_kernel_us": {
+      "48896": 5437.278,
+      "49152": 6050.15,
+      "49408": 5492.701999999999
+    },
+    "source_mte2_us": {
+      "48896": 2286.089,
+      "49152": 2769.6545,
+      "49408": 2300.3025
+    },
+    "probe_center_excess_us": 1115.8118250000002,
+    "probe_center_excess_rounds_us": [
+      1113.6857985000001,
+      1117.9378514999999
+    ],
+    "source_kernel_center_excess_us": 585.1599999999999,
+    "source_mte2_center_excess_us": 476.45875000000024,
+    "traffic_checks": [
+      {
+        "pitch": 48896,
+        "source_requested_kib": 4498752.0,
+        "probe_requested_kib": 4451328.0,
+        "source_minus_scaled_probe_kib": 320.0,
+        "source_l2_hit_fraction": 0.7974911081971087,
+        "probe_l2_hit_fraction": 0.8260872300105954
+      },
+      {
+        "pitch": 49152,
+        "source_requested_kib": 4522304.0,
+        "probe_requested_kib": 4451328.0,
+        "source_minus_scaled_probe_kib": 320.0,
+        "source_l2_hit_fraction": 0.7977363046239013,
+        "probe_l2_hit_fraction": 0.8260872300105954
+      }
+    ]
+  },
+  {
+    "m": 8192,
+    "n": 4096,
+    "device": 5,
+    "tile": {
+      "singleCoreM": 824,
+      "singleCoreN": 2048,
+      "singleCoreK": 192,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 3,
+      "stepN": 1,
+      "block_dim": 20
+    },
+    "logical_k": 48384,
+    "probe_us": {
+      "48896": 17306.575775,
+      "49152": 21534.651947,
+      "49408": 17303.4919735
+    },
+    "source_kernel_us": {
+      "48896": 49590.902,
+      "49152": 50560.462,
+      "49408": 50116.17
+    },
+    "source_mte2_us": {
+      "48896": 17264.692499999997,
+      "49152": 14330.097,
+      "49408": 17444.336499999998
+    },
+    "probe_center_excess_us": 4229.618072749996,
+    "probe_center_excess_rounds_us": [
+      4233.730316499998,
+      4225.505828999998
+    ],
+    "source_kernel_center_excess_us": 706.9259999999995,
+    "source_mte2_center_excess_us": -3024.4174999999977,
+    "traffic_checks": [
+      {
+        "pitch": 48896,
+        "source_requested_kib": 26599744.0,
+        "probe_requested_kib": 26320896.0,
+        "source_minus_scaled_probe_kib": 320.0,
+        "source_l2_hit_fraction": 0.8627196547090703,
+        "probe_l2_hit_fraction": 0.8627451305377992
+      },
+      {
+        "pitch": 49152,
+        "source_requested_kib": 26739008.0,
+        "probe_requested_kib": 26320896.0,
+        "source_minus_scaled_probe_kib": 320.0,
+        "source_l2_hit_fraction": 0.8627278939911472,
+        "probe_l2_hit_fraction": 0.8627451305377992
+      }
+    ]
+  }
+]

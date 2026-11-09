@@ -1,0 +1,250 @@
+[
+  {
+    "shape": [
+      3072,
+      1024,
+      48384
+    ],
+    "mode": 0,
+    "pitch": 49152,
+    "device": 5,
+    "metrics": {
+      "aic_GM_to_L1_datas": 4451328.0,
+      "aic_read_main_memory_datas": 4451340.375,
+      "aic_L0C_to_GM_datas": 0.0,
+      "aic_write_main_memory_datas": 7.375
+    },
+    "runner": {
+      "pitch": 49152,
+      "logical_k": 48384,
+      "m": 3072,
+      "n": 1024,
+      "core_m": 160,
+      "core_n": 1024,
+      "inner_m": 256,
+      "packet_k": 256,
+      "mode": 0,
+      "cores": 20,
+      "device": 5,
+      "scratch_sample": 0.0,
+      "device_elapsed_us": 3833.826701
+    }
+  },
+  {
+    "shape": [
+      3072,
+      1024,
+      48384
+    ],
+    "mode": 1,
+    "pitch": 49152,
+    "device": 5,
+    "metrics": {
+      "aic_GM_to_L1_datas": 4451328.0,
+      "aic_read_main_memory_datas": 4451340.375,
+      "aic_L0C_to_GM_datas": 0.0,
+      "aic_write_main_memory_datas": 7.375
+    },
+    "runner": {
+      "pitch": 49152,
+      "logical_k": 48384,
+      "m": 3072,
+      "n": 1024,
+      "core_m": 160,
+      "core_n": 1024,
+      "inner_m": 256,
+      "packet_k": 256,
+      "mode": 1,
+      "cores": 20,
+      "device": 5,
+      "scratch_sample": 0.0,
+      "device_elapsed_us": 5013.593356
+    }
+  },
+  {
+    "shape": [
+      3072,
+      1024,
+      48384
+    ],
+    "mode": 2,
+    "pitch": 49152,
+    "device": 5,
+    "metrics": {
+      "aic_GM_to_L1_datas": 4451328.0,
+      "aic_read_main_memory_datas": 4451340.375,
+      "aic_L0C_to_GM_datas": 0.0,
+      "aic_write_main_memory_datas": 7.375
+    },
+    "runner": {
+      "pitch": 49152,
+      "logical_k": 48384,
+      "m": 3072,
+      "n": 1024,
+      "core_m": 160,
+      "core_n": 1024,
+      "inner_m": 256,
+      "packet_k": 256,
+      "mode": 2,
+      "cores": 20,
+      "device": 5,
+      "scratch_sample": 0.0,
+      "device_elapsed_us": 7976.819992
+    }
+  },
+  {
+    "shape": [
+      3072,
+      1024,
+      48384
+    ],
+    "mode": 3,
+    "pitch": 49152,
+    "device": 5,
+    "metrics": {
+      "aic_GM_to_L1_datas": 4451328.0,
+      "aic_read_main_memory_datas": 4451340.375,
+      "aic_L0C_to_GM_datas": 2322432.0,
+      "aic_write_main_memory_datas": 2322439.375
+    },
+    "runner": {
+      "pitch": 49152,
+      "logical_k": 48384,
+      "m": 3072,
+      "n": 1024,
+      "core_m": 160,
+      "core_n": 1024,
+      "inner_m": 256,
+      "packet_k": 256,
+      "mode": 3,
+      "cores": 20,
+      "device": 5,
+      "scratch_sample": 27002.982422,
+      "device_elapsed_us": 9028.273265
+    }
+  },
+  {
+    "shape": [
+      2048,
+      2048,
+      48384
+    ],
+    "mode": 0,
+    "pitch": 49152,
+    "device": 6,
+    "metrics": {
+      "aic_GM_to_L1_datas": 4644864.0,
+      "aic_read_main_memory_datas": 4644876.375,
+      "aic_L0C_to_GM_datas": 0.0,
+      "aic_write_main_memory_datas": 7.375
+    },
+    "runner": {
+      "pitch": 49152,
+      "logical_k": 48384,
+      "m": 2048,
+      "n": 2048,
+      "core_m": 208,
+      "core_n": 1024,
+      "inner_m": 256,
+      "packet_k": 256,
+      "mode": 0,
+      "cores": 20,
+      "device": 6,
+      "scratch_sample": 0.0,
+      "device_elapsed_us": 3502.900124
+    }
+  },
+  {
+    "shape": [
+      2048,
+      2048,
+      48384
+    ],
+    "mode": 1,
+    "pitch": 49152,
+    "device": 6,
+    "metrics": {
+      "aic_GM_to_L1_datas": 4644864.0,
+      "aic_read_main_memory_datas": 4644876.375,
+      "aic_L0C_to_GM_datas": 0.0,
+      "aic_write_main_memory_datas": 7.375
+    },
+    "runner": {
+      "pitch": 49152,
+      "logical_k": 48384,
+      "m": 2048,
+      "n": 2048,
+      "core_m": 208,
+      "core_n": 1024,
+      "inner_m": 256,
+      "packet_k": 256,
+      "mode": 1,
+      "cores": 20,
+      "device": 6,
+      "scratch_sample": 0.0,
+      "device_elapsed_us": 4897.520065
+    }
+  },
+  {
+    "shape": [
+      2048,
+      2048,
+      48384
+    ],
+    "mode": 2,
+    "pitch": 49152,
+    "device": 6,
+    "metrics": {
+      "aic_GM_to_L1_datas": 4644864.0,
+      "aic_read_main_memory_datas": 4644876.375,
+      "aic_L0C_to_GM_datas": 0.0,
+      "aic_write_main_memory_datas": 7.375
+    },
+    "runner": {
+      "pitch": 49152,
+      "logical_k": 48384,
+      "m": 2048,
+      "n": 2048,
+      "core_m": 208,
+      "core_n": 1024,
+      "inner_m": 256,
+      "packet_k": 256,
+      "mode": 2,
+      "cores": 20,
+      "device": 6,
+      "scratch_sample": 0.0,
+      "device_elapsed_us": 10013.306936
+    }
+  },
+  {
+    "shape": [
+      2048,
+      2048,
+      48384
+    ],
+    "mode": 3,
+    "pitch": 49152,
+    "device": 6,
+    "metrics": {
+      "aic_GM_to_L1_datas": 4644864.0,
+      "aic_read_main_memory_datas": 4644876.375,
+      "aic_L0C_to_GM_datas": 3096576.0,
+      "aic_write_main_memory_datas": 3096583.375
+    },
+    "runner": {
+      "pitch": 49152,
+      "logical_k": 48384,
+      "m": 2048,
+      "n": 2048,
+      "core_m": 208,
+      "core_n": 1024,
+      "inner_m": 256,
+      "packet_k": 256,
+      "mode": 3,
+      "cores": 20,
+      "device": 6,
+      "scratch_sample": 27002.982422,
+      "device_elapsed_us": 11258.753459
+    }
+  }
+]

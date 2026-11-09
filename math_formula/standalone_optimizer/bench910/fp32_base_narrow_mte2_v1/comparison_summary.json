@@ -1,0 +1,42 @@
+{
+  "broad_holdout": {
+    "cases": 7,
+    "changed": 2,
+    "baseline_mape_pct": 41.027,
+    "transfer_mape_pct": 31.19,
+    "changed_baseline_mape_pct": 41.212,
+    "changed_transfer_mape_pct": 6.783
+  },
+  "calibration_and_first_holdout": {
+    "cases": 8,
+    "changed": 6,
+    "baseline_mape_pct": 33.131,
+    "transfer_mape_pct": 6.061,
+    "changed_baseline_mape_pct": 37.891,
+    "changed_transfer_mape_pct": 1.798
+  },
+  "final_development": {
+    "cases": 8,
+    "changed": 5,
+    "baseline_mape_pct": 35.187,
+    "transfer_mape_pct": 16.583,
+    "changed_baseline_mape_pct": 37.873,
+    "changed_transfer_mape_pct": 8.106
+  },
+  "independent_alignment_holdout": {
+    "cases": 8,
+    "changed": 2,
+    "baseline_mape_pct": 30.186,
+    "transfer_mape_pct": 22.425,
+    "changed_baseline_mape_pct": 34.367,
+    "changed_transfer_mape_pct": 3.327
+  },
+  "unaligned_development_and_holdout": {
+    "cases": 4,
+    "changed": 0,
+    "baseline_mape_pct": 56.308,
+    "transfer_mape_pct": 56.308,
+    "changed_baseline_mape_pct": null,
+    "changed_transfer_mape_pct": null
+  }
+}

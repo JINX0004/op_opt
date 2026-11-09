@@ -1,0 +1,1058 @@
+{
+  "complete": true,
+  "record_count": 100,
+  "failures": [],
+  "all": {
+    "count": 100,
+    "geomean_speedup": 0.9785443532455408,
+    "median_speedup": 0.9989396471670011,
+    "model_faster": 39,
+    "master_faster": 61,
+    "same_timing": 0
+  },
+  "family_changed": {
+    "count": 32,
+    "geomean_speedup": 0.9600108697444019,
+    "median_speedup": 0.9775605864658803,
+    "model_faster": 15,
+    "master_faster": 17,
+    "same_timing": 0
+  },
+  "family_unchanged": {
+    "count": 68,
+    "geomean_speedup": 0.9873893793876889,
+    "median_speedup": 0.9992735534337523,
+    "model_faster": 24,
+    "master_faster": 44,
+    "same_timing": 0
+  },
+  "master_base_or_deterministic": {
+    "count": 89,
+    "geomean_speedup": 0.9704462868133441,
+    "median_speedup": 0.9980362346382872,
+    "model_faster": 31,
+    "master_faster": 58,
+    "same_timing": 0
+  },
+  "changed_within_supported": {
+    "count": 21,
+    "geomean_speedup": 0.9175524649577007,
+    "median_speedup": 0.9544059124502559,
+    "model_faster": 7,
+    "master_faster": 14,
+    "same_timing": 0
+  },
+  "master_other_family": {
+    "count": 11,
+    "geomean_speedup": 1.046599944362049,
+    "median_speedup": 1.056678700141199,
+    "model_faster": 8,
+    "master_faster": 3,
+    "same_timing": 0
+  },
+  "groups": {
+    "fp16_supported": {
+      "count": 80,
+      "geomean_speedup": 0.9654365236730786,
+      "median_speedup": 0.9989396471670011,
+      "model_faster": 29,
+      "master_faster": 51,
+      "same_timing": 0
+    },
+    "fp32_boundary": {
+      "count": 20,
+      "geomean_speedup": 1.0327796619912888,
+      "median_speedup": 0.9982641225025684,
+      "model_faster": 10,
+      "master_faster": 10,
+      "same_timing": 0
+    }
+  },
+  "shape_bootstrap_95pct": [
+    0.9453795694414949,
+    1.0049889866008224
+  ],
+  "max_relative_error": 0.0,
+  "worst_model_family": [
+    {
+      "index": 0,
+      "group": "fp16_supported",
+      "shape": "16x16x65408",
+      "device": 4,
+      "master_mode": 3,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 39.89,
+      "model_family_us": 145.57999999999998,
+      "speedup": 0.2740074186014563,
+      "rounds": 2,
+      "master_core": "384x16x192",
+      "model_family_core": "16x16x65408",
+      "model_objective_us": 33.16204,
+      "master_rounds_us": [
+        38.44,
+        41.34
+      ],
+      "model_family_rounds_us": [
+        145.28,
+        145.88
+      ]
+    },
+    {
+      "index": 63,
+      "group": "fp16_supported",
+      "shape": "2432x768x32768",
+      "device": 7,
+      "master_mode": 3,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 1914.75,
+      "model_family_us": 2666.802,
+      "speedup": 0.7179948117633029,
+      "rounds": 2,
+      "master_core": "2432x384x192",
+      "model_family_core": "128x256x32768",
+      "model_objective_us": 1792.24971,
+      "master_rounds_us": [
+        1915.0,
+        1914.5
+      ],
+      "model_family_rounds_us": [
+        2622.072,
+        2711.532
+      ]
+    },
+    {
+      "index": 60,
+      "group": "fp16_supported",
+      "shape": "1664x768x32768",
+      "device": 4,
+      "master_mode": 3,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 1336.0700000000002,
+      "model_family_us": 1815.24,
+      "speedup": 0.7360293955620194,
+      "rounds": 2,
+      "master_core": "1664x384x192",
+      "model_family_core": "128x256x32768",
+      "model_objective_us": 1195.72647,
+      "master_rounds_us": [
+        1336.72,
+        1335.42
+      ],
+      "model_family_rounds_us": [
+        1815.56,
+        1814.92
+      ]
+    },
+    {
+      "index": 10,
+      "group": "fp16_supported",
+      "shape": "2560x768x32768",
+      "device": 6,
+      "master_mode": 3,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 2036.71,
+      "model_family_us": 2505.928,
+      "speedup": 0.812756791096951,
+      "rounds": 2,
+      "master_core": "2560x384x192",
+      "model_family_core": "128x256x32768",
+      "model_objective_us": 1792.24971,
+      "master_rounds_us": [
+        2049.92,
+        2023.5
+      ],
+      "model_family_rounds_us": [
+        2543.388,
+        2468.468
+      ]
+    },
+    {
+      "index": 16,
+      "group": "fp16_supported",
+      "shape": "2560x1024x49152",
+      "device": 4,
+      "master_mode": 3,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 3901.17,
+      "model_family_us": 4721.12,
+      "speedup": 0.8263229911546413,
+      "rounds": 2,
+      "master_core": "2560x384x192",
+      "model_family_core": "128x256x49152",
+      "model_objective_us": 3581.81941,
+      "master_rounds_us": [
+        3901.9,
+        3900.44
+      ],
+      "model_family_rounds_us": [
+        4639.42,
+        4802.82
+      ]
+    },
+    {
+      "index": 87,
+      "group": "fp32_boundary",
+      "shape": "128x128x7680",
+      "device": 7,
+      "master_mode": 3,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 27.659999999999997,
+      "model_family_us": 33.111999999999995,
+      "speedup": 0.835346702101957,
+      "rounds": 2,
+      "master_core": "384x128x192",
+      "model_family_core": "16x128x7680",
+      "model_objective_us": 17.91088,
+      "master_rounds_us": [
+        29.24,
+        26.08
+      ],
+      "model_family_rounds_us": [
+        33.064,
+        33.16
+      ]
+    },
+    {
+      "index": 20,
+      "group": "fp16_supported",
+      "shape": "2048x1536x32768",
+      "device": 4,
+      "master_mode": 2,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 3273.222,
+      "model_family_us": 3901.34,
+      "speedup": 0.838999420711858,
+      "rounds": 2,
+      "master_core": "208x768x256",
+      "model_family_core": "128x256x32768",
+      "model_objective_us": 2985.29618,
+      "master_rounds_us": [
+        3275.184,
+        3271.26
+      ],
+      "model_family_rounds_us": [
+        3908.6,
+        3894.08
+      ]
+    },
+    {
+      "index": 22,
+      "group": "fp16_supported",
+      "shape": "2048x3072x32768",
+      "device": 6,
+      "master_mode": 2,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 6122.860000000001,
+      "model_family_us": 6910.067999999999,
+      "speedup": 0.8860781109534669,
+      "rounds": 2,
+      "master_core": "208x1536x256",
+      "model_family_core": "128x256x32768",
+      "model_objective_us": 5967.91236,
+      "master_rounds_us": [
+        6126.42,
+        6119.3
+      ],
+      "model_family_rounds_us": [
+        6892.276,
+        6927.86
+      ]
+    },
+    {
+      "index": 42,
+      "group": "fp16_supported",
+      "shape": "8192x4096x32768",
+      "device": 6,
+      "master_mode": 2,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 33909.558000000005,
+      "model_family_us": 37553.598,
+      "speedup": 0.9029642911978769,
+      "rounds": 2,
+      "master_core": "824x2048x192",
+      "model_family_core": "128x256x32768",
+      "model_objective_us": 30723.62663,
+      "master_rounds_us": [
+        33869.816,
+        33949.3
+      ],
+      "model_family_rounds_us": [
+        37571.448,
+        37535.748
+      ]
+    },
+    {
+      "index": 99,
+      "group": "fp32_boundary",
+      "shape": "4096x64x27456",
+      "device": 7,
+      "master_mode": 3,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 488.96799999999996,
+      "model_family_us": 540.562,
+      "speedup": 0.9045548891708999,
+      "rounds": 2,
+      "master_core": "4096x384x192",
+      "model_family_core": "128x128x27456",
+      "model_objective_us": 342.7054,
+      "master_rounds_us": [
+        490.368,
+        487.568
+      ],
+      "model_family_rounds_us": [
+        539.892,
+        541.232
+      ]
+    },
+    {
+      "index": 19,
+      "group": "fp16_supported",
+      "shape": "768x2048x32768",
+      "device": 7,
+      "master_mode": 3,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 1651.792,
+      "model_family_us": 1820.5459999999998,
+      "speedup": 0.9073058302289533,
+      "rounds": 2,
+      "master_core": "384x2048x192",
+      "model_family_core": "128x256x32768",
+      "model_objective_us": 1493.98809,
+      "master_rounds_us": [
+        1649.472,
+        1654.112
+      ],
+      "model_family_rounds_us": [
+        1813.552,
+        1827.54
+      ]
+    },
+    {
+      "index": 88,
+      "group": "fp32_boundary",
+      "shape": "128x128x7744",
+      "device": 4,
+      "master_mode": 3,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 29.567999999999998,
+      "model_family_us": 32.278,
+      "speedup": 0.9160418861143813,
+      "rounds": 2,
+      "master_core": "384x128x192",
+      "model_family_core": "16x128x7744",
+      "model_objective_us": 18.20078,
+      "master_rounds_us": [
+        29.72,
+        29.416
+      ],
+      "model_family_rounds_us": [
+        31.936,
+        32.62
+      ]
+    },
+    {
+      "index": 15,
+      "group": "fp16_supported",
+      "shape": "2560x1024x32768",
+      "device": 7,
+      "master_mode": 3,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 2708.752,
+      "model_family_us": 2942.952,
+      "speedup": 0.9204200408297518,
+      "rounds": 2,
+      "master_core": "2560x384x192",
+      "model_family_core": "128x256x32768",
+      "model_objective_us": 2388.77294,
+      "master_rounds_us": [
+        2703.712,
+        2713.792
+      ],
+      "model_family_rounds_us": [
+        2883.0,
+        3002.904
+      ]
+    },
+    {
+      "index": 73,
+      "group": "fp16_supported",
+      "shape": "65536x448x1536",
+      "device": 5,
+      "master_mode": 0,
+      "model_mode": 0,
+      "changed_family": false,
+      "changed_tiling": false,
+      "master_us": 1280.624,
+      "model_family_us": 1382.888,
+      "speedup": 0.9260504104453868,
+      "rounds": 1,
+      "master_core": "128x256x1536",
+      "model_family_core": "128x256x1536",
+      "model_objective_us": 1397.78735,
+      "master_rounds_us": [
+        1280.624
+      ],
+      "model_family_rounds_us": [
+        1382.888
+      ]
+    },
+    {
+      "index": 95,
+      "group": "fp32_boundary",
+      "shape": "2048x64x27328",
+      "device": 7,
+      "master_mode": 0,
+      "model_mode": 0,
+      "changed_family": false,
+      "changed_tiling": false,
+      "master_us": 209.064,
+      "model_family_us": 220.504,
+      "speedup": 0.9481188549867576,
+      "rounds": 1,
+      "master_core": "112x128x27328",
+      "model_family_core": "112x128x27328",
+      "model_objective_us": 187.06702,
+      "master_rounds_us": [
+        209.064
+      ],
+      "model_family_rounds_us": [
+        220.504
+      ]
+    },
+    {
+      "index": 52,
+      "group": "fp16_supported",
+      "shape": "45056x384x1536",
+      "device": 4,
+      "master_mode": 0,
+      "model_mode": 0,
+      "changed_family": false,
+      "changed_tiling": false,
+      "master_us": 753.94,
+      "model_family_us": 794.76,
+      "speedup": 0.9486385827167951,
+      "rounds": 1,
+      "master_core": "128x256x1536",
+      "model_family_core": "128x256x1536",
+      "model_objective_us": 751.07243,
+      "master_rounds_us": [
+        753.94
+      ],
+      "model_family_rounds_us": [
+        794.76
+      ]
+    },
+    {
+      "index": 2,
+      "group": "fp16_supported",
+      "shape": "128x256x32768",
+      "device": 6,
+      "master_mode": 3,
+      "model_mode": 3,
+      "changed_family": false,
+      "changed_tiling": false,
+      "master_us": 52.84,
+      "model_family_us": 55.684,
+      "speedup": 0.9489260828963437,
+      "rounds": 1,
+      "master_core": "384x256x192",
+      "model_family_core": "384x256x192",
+      "model_objective_us": 58.73545,
+      "master_rounds_us": [
+        52.84
+      ],
+      "model_family_rounds_us": [
+        55.684
+      ]
+    },
+    {
+      "index": 58,
+      "group": "fp16_supported",
+      "shape": "86016x384x1536",
+      "device": 6,
+      "master_mode": 0,
+      "model_mode": 0,
+      "changed_family": false,
+      "changed_tiling": false,
+      "master_us": 1417.288,
+      "model_family_us": 1485.388,
+      "speedup": 0.954153392918214,
+      "rounds": 1,
+      "master_core": "128x256x1536",
+      "model_family_core": "128x256x1536",
+      "model_objective_us": 1430.44294,
+      "master_rounds_us": [
+        1417.288
+      ],
+      "model_family_rounds_us": [
+        1485.388
+      ]
+    },
+    {
+      "index": 81,
+      "group": "fp32_boundary",
+      "shape": "16x16x6144",
+      "device": 5,
+      "master_mode": 3,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 16.788,
+      "model_family_us": 17.59,
+      "speedup": 0.9544059124502559,
+      "rounds": 2,
+      "master_core": "384x16x192",
+      "model_family_core": "16x16x6144",
+      "model_objective_us": 5.68563,
+      "master_rounds_us": [
+        16.736,
+        16.84
+      ],
+      "model_family_rounds_us": [
+        17.82,
+        17.36
+      ]
+    },
+    {
+      "index": 70,
+      "group": "fp16_supported",
+      "shape": "77824x384x1536",
+      "device": 6,
+      "master_mode": 0,
+      "model_mode": 0,
+      "changed_family": false,
+      "changed_tiling": false,
+      "master_us": 1282.568,
+      "model_family_us": 1341.008,
+      "speedup": 0.9564208416355457,
+      "rounds": 1,
+      "master_core": "128x256x1536",
+      "model_family_core": "128x256x1536",
+      "model_objective_us": 1297.82344,
+      "master_rounds_us": [
+        1282.568
+      ],
+      "model_family_rounds_us": [
+        1341.008
+      ]
+    }
+  ],
+  "best_model_family": [
+    {
+      "index": 91,
+      "group": "fp32_boundary",
+      "shape": "256x256x7744",
+      "device": 7,
+      "master_mode": 3,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 46.2,
+      "model_family_us": 35.162,
+      "speedup": 1.3139184346737958,
+      "rounds": 2,
+      "master_core": "384x256x192",
+      "model_family_core": "32x128x7744",
+      "model_objective_us": 33.3648,
+      "master_rounds_us": [
+        46.62,
+        45.78
+      ],
+      "model_family_rounds_us": [
+        35.524,
+        34.8
+      ]
+    },
+    {
+      "index": 65,
+      "group": "fp16_supported",
+      "shape": "2816x1024x49152",
+      "device": 5,
+      "master_mode": 2,
+      "model_mode": 3,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 5716.104,
+      "model_family_us": 4476.07,
+      "speedup": 1.2770363287437418,
+      "rounds": 2,
+      "master_core": "144x1024x256",
+      "model_family_core": "2816x384x192",
+      "model_objective_us": 4026.17484,
+      "master_rounds_us": [
+        5775.992,
+        5656.216
+      ],
+      "model_family_rounds_us": [
+        4491.268,
+        4460.872
+      ]
+    },
+    {
+      "index": 93,
+      "group": "fp32_boundary",
+      "shape": "512x512x27392",
+      "device": 5,
+      "master_mode": 3,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 275.244,
+      "model_family_us": 220.004,
+      "speedup": 1.251086343884657,
+      "rounds": 2,
+      "master_core": "384x512x192",
+      "model_family_core": "112x128x27392",
+      "model_objective_us": 232.95881,
+      "master_rounds_us": [
+        279.444,
+        271.044
+      ],
+      "model_family_rounds_us": [
+        220.164,
+        219.844
+      ]
+    },
+    {
+      "index": 14,
+      "group": "fp16_supported",
+      "shape": "3072x1024x36864",
+      "device": 6,
+      "master_mode": 2,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 4090.132,
+      "model_family_us": 3301.066,
+      "speedup": 1.2390336939643134,
+      "rounds": 2,
+      "master_core": "160x1024x256",
+      "model_family_core": "128x256x36864",
+      "model_objective_us": 3358.1232,
+      "master_rounds_us": [
+        4086.56,
+        4093.704
+      ],
+      "model_family_rounds_us": [
+        3302.984,
+        3299.148
+      ]
+    },
+    {
+      "index": 96,
+      "group": "fp32_boundary",
+      "shape": "2048x64x27392",
+      "device": 4,
+      "master_mode": 3,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 238.16,
+      "model_family_us": 196.55,
+      "speedup": 1.2117018570338336,
+      "rounds": 2,
+      "master_core": "2048x384x192",
+      "model_family_core": "112x128x27392",
+      "model_objective_us": 187.49823,
+      "master_rounds_us": [
+        238.48,
+        237.84
+      ],
+      "model_family_rounds_us": [
+        191.38,
+        201.72
+      ]
+    },
+    {
+      "index": 94,
+      "group": "fp32_boundary",
+      "shape": "512x512x27456",
+      "device": 6,
+      "master_mode": 3,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 265.274,
+      "model_family_us": 220.73399999999998,
+      "speedup": 1.201781329564091,
+      "rounds": 2,
+      "master_core": "384x512x192",
+      "model_family_core": "112x128x27456",
+      "model_objective_us": 233.496,
+      "master_rounds_us": [
+        265.704,
+        264.844
+      ],
+      "model_family_rounds_us": [
+        220.804,
+        220.664
+      ]
+    },
+    {
+      "index": 13,
+      "group": "fp16_supported",
+      "shape": "2816x1024x36864",
+      "device": 5,
+      "master_mode": 2,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 3929.928,
+      "model_family_us": 3306.1440000000002,
+      "speedup": 1.188674177531287,
+      "rounds": 2,
+      "master_core": "144x1024x256",
+      "model_family_core": "128x256x36864",
+      "model_objective_us": 3022.57888,
+      "master_rounds_us": [
+        3930.76,
+        3929.096
+      ],
+      "model_family_rounds_us": [
+        3305.164,
+        3307.124
+      ]
+    },
+    {
+      "index": 84,
+      "group": "fp32_boundary",
+      "shape": "64x64x6144",
+      "device": 4,
+      "master_mode": 3,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 20.99,
+      "model_family_us": 18.27,
+      "speedup": 1.1488779419813901,
+      "rounds": 2,
+      "master_core": "384x64x192",
+      "model_family_core": "16x128x6144",
+      "model_objective_us": 8.86803,
+      "master_rounds_us": [
+        20.08,
+        21.9
+      ],
+      "model_family_rounds_us": [
+        18.4,
+        18.14
+      ]
+    },
+    {
+      "index": 85,
+      "group": "fp32_boundary",
+      "shape": "64x64x6208",
+      "device": 5,
+      "master_mode": 3,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 21.520000000000003,
+      "model_family_us": 19.509999999999998,
+      "speedup": 1.103024090210149,
+      "rounds": 2,
+      "master_core": "384x64x192",
+      "model_family_core": "16x128x6208",
+      "model_objective_us": 9.12259,
+      "master_rounds_us": [
+        21.1,
+        21.94
+      ],
+      "model_family_rounds_us": [
+        18.14,
+        20.88
+      ]
+    },
+    {
+      "index": 90,
+      "group": "fp32_boundary",
+      "shape": "256x256x7680",
+      "device": 6,
+      "master_mode": 3,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 39.42,
+      "model_family_us": 35.762,
+      "speedup": 1.1022873441082714,
+      "rounds": 2,
+      "master_core": "384x256x192",
+      "model_family_core": "32x128x7680",
+      "model_objective_us": 33.00425,
+      "master_rounds_us": [
+        39.1,
+        39.74
+      ],
+      "model_family_rounds_us": [
+        35.664,
+        35.86
+      ]
+    },
+    {
+      "index": 66,
+      "group": "fp16_supported",
+      "shape": "1024x2432x32768",
+      "device": 6,
+      "master_mode": 2,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 2661.014,
+      "model_family_us": 2424.4300000000003,
+      "speedup": 1.0975833494883334,
+      "rounds": 2,
+      "master_core": "256x512x256",
+      "model_family_core": "128x256x32768",
+      "model_objective_us": 2388.77294,
+      "master_rounds_us": [
+        2659.672,
+        2662.356
+      ],
+      "model_family_rounds_us": [
+        2425.888,
+        2422.972
+      ]
+    },
+    {
+      "index": 17,
+      "group": "fp16_supported",
+      "shape": "1024x2304x36864",
+      "device": 5,
+      "master_mode": 2,
+      "model_mode": 3,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 2955.76,
+      "model_family_us": 2711.4539999999997,
+      "speedup": 1.0901014732317054,
+      "rounds": 2,
+      "master_core": "256x512x256",
+      "model_family_core": "384x2304x192",
+      "model_objective_us": 2544.12516,
+      "master_rounds_us": [
+        2952.62,
+        2958.9
+      ],
+      "model_family_rounds_us": [
+        2704.816,
+        2718.092
+      ]
+    },
+    {
+      "index": 18,
+      "group": "fp16_supported",
+      "shape": "1024x2816x36864",
+      "device": 6,
+      "master_mode": 2,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 3470.8999999999996,
+      "model_family_us": 3284.7259999999997,
+      "speedup": 1.056678700141199,
+      "rounds": 2,
+      "master_core": "256x576x256",
+      "model_family_core": "128x256x36864",
+      "model_objective_us": 3022.57888,
+      "master_rounds_us": [
+        3471.312,
+        3470.488
+      ],
+      "model_family_rounds_us": [
+        3284.444,
+        3285.008
+      ]
+    },
+    {
+      "index": 23,
+      "group": "fp16_supported",
+      "shape": "3072x2048x32768",
+      "device": 7,
+      "master_mode": 2,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 7069.142,
+      "model_family_us": 6921.588,
+      "speedup": 1.0213179403339234,
+      "rounds": 2,
+      "master_core": "160x2048x256",
+      "model_family_core": "128x256x32768",
+      "model_objective_us": 5967.91236,
+      "master_rounds_us": [
+        7097.304,
+        7040.98
+      ],
+      "model_family_rounds_us": [
+        6893.716,
+        6949.46
+      ]
+    },
+    {
+      "index": 21,
+      "group": "fp16_supported",
+      "shape": "2048x2048x27392",
+      "device": 5,
+      "master_mode": 2,
+      "model_mode": 0,
+      "changed_family": true,
+      "changed_tiling": true,
+      "master_us": 3508.018,
+      "model_family_us": 3465.26,
+      "speedup": 1.0123390452664447,
+      "rounds": 2,
+      "master_core": "208x1024x256",
+      "model_family_core": "128x256x27392",
+      "model_objective_us": 3243.94492,
+      "master_rounds_us": [
+        3509.528,
+        3506.508
+      ],
+      "model_family_rounds_us": [
+        3463.268,
+        3467.252
+      ]
+    },
+    {
+      "index": 97,
+      "group": "fp32_boundary",
+      "shape": "4096x64x27328",
+      "device": 5,
+      "master_mode": 0,
+      "model_mode": 0,
+      "changed_family": false,
+      "changed_tiling": false,
+      "master_us": 546.472,
+      "model_family_us": 540.832,
+      "speedup": 1.0104283770191114,
+      "rounds": 1,
+      "master_core": "128x128x27328",
+      "model_family_core": "128x128x27328",
+      "model_objective_us": 341.12189,
+      "master_rounds_us": [
+        546.472
+      ],
+      "model_family_rounds_us": [
+        540.832
+      ]
+    },
+    {
+      "index": 28,
+      "group": "fp16_supported",
+      "shape": "98304x256x1536",
+      "device": 4,
+      "master_mode": 0,
+      "model_mode": 0,
+      "changed_family": false,
+      "changed_tiling": false,
+      "master_us": 1083.136,
+      "model_family_us": 1074.92,
+      "speedup": 1.0076433595058236,
+      "rounds": 1,
+      "master_core": "128x256x1536",
+      "model_family_core": "128x256x1536",
+      "model_objective_us": 1090.75768,
+      "master_rounds_us": [
+        1083.136
+      ],
+      "model_family_rounds_us": [
+        1074.92
+      ]
+    },
+    {
+      "index": 9,
+      "group": "fp16_supported",
+      "shape": "2304x768x32768",
+      "device": 5,
+      "master_mode": 3,
+      "model_mode": 3,
+      "changed_family": false,
+      "changed_tiling": false,
+      "master_us": 1819.156,
+      "model_family_us": 1809.336,
+      "speedup": 1.0054274054128143,
+      "rounds": 1,
+      "master_core": "2304x384x192",
+      "model_family_core": "2304x384x192",
+      "model_objective_us": 1726.37597,
+      "master_rounds_us": [
+        1819.156
+      ],
+      "model_family_rounds_us": [
+        1809.336
+      ]
+    },
+    {
+      "index": 92,
+      "group": "fp32_boundary",
+      "shape": "512x512x27328",
+      "device": 4,
+      "master_mode": 0,
+      "model_mode": 0,
+      "changed_family": false,
+      "changed_tiling": false,
+      "master_us": 220.384,
+      "model_family_us": 219.22,
+      "speedup": 1.0053097345132742,
+      "rounds": 1,
+      "master_core": "112x128x27328",
+      "model_family_core": "112x128x27328",
+      "model_objective_us": 232.42163,
+      "master_rounds_us": [
+        220.384
+      ],
+      "model_family_rounds_us": [
+        219.22
+      ]
+    },
+    {
+      "index": 64,
+      "group": "fp16_supported",
+      "shape": "2304x1024x32768",
+      "device": 4,
+      "master_mode": 3,
+      "model_mode": 3,
+      "changed_family": false,
+      "changed_tiling": false,
+      "master_us": 2428.4,
+      "model_family_us": 2416.2,
+      "speedup": 1.0050492508898272,
+      "rounds": 1,
+      "master_core": "2304x384x192",
+      "model_family_core": "2304x384x192",
+      "model_objective_us": 2292.46692,
+      "master_rounds_us": [
+        2428.4
+      ],
+      "model_family_rounds_us": [
+        2416.2
+      ]
+    }
+  ]
+}

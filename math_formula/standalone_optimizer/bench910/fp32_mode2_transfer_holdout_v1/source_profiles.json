@@ -1,0 +1,842 @@
+[
+  {
+    "shape": [
+      2816,
+      1024,
+      48896
+    ],
+    "device": 4,
+    "tile": {
+      "tilingEnableSplitCore": 2,
+      "singleCoreM": 144,
+      "singleCoreN": 1024,
+      "singleCoreK": 256,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 2,
+      "stepN": 1,
+      "stepKa": 4,
+      "stepKb": 4,
+      "depthA1": 8,
+      "depthB1": 8,
+      "block_dim": 20,
+      "workspace_bytes": 32505856,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "tiling_key": 65568
+    },
+    "measurements": [
+      {
+        "round": 0,
+        "kernel_us": 5234.64,
+        "counters": {
+          "aicore_time(us)": 5109.084,
+          "aic_mac_time(us)": 4013.46,
+          "aic_mte1_time(us)": 2461.832,
+          "aic_mte2_time(us)": 2084.505,
+          "aic_fixpipe_time(us)": 1357.728,
+          "aic_scalar_time(us)": 1709.662
+        }
+      },
+      {
+        "round": 1,
+        "kernel_us": 5232.0,
+        "counters": {
+          "aicore_time(us)": 5106.534,
+          "aic_mac_time(us)": 4013.449,
+          "aic_mte1_time(us)": 2462.588,
+          "aic_mte2_time(us)": 2075.339,
+          "aic_fixpipe_time(us)": 1362.987,
+          "aic_scalar_time(us)": 1708.571
+        }
+      }
+    ],
+    "kernel_us": 5233.32,
+    "mte2_us": 2079.922
+  },
+  {
+    "shape": [
+      2816,
+      1024,
+      49152
+    ],
+    "device": 4,
+    "tile": {
+      "tilingEnableSplitCore": 2,
+      "singleCoreM": 144,
+      "singleCoreN": 1024,
+      "singleCoreK": 256,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 2,
+      "stepN": 1,
+      "stepKa": 4,
+      "stepKb": 4,
+      "depthA1": 8,
+      "depthB1": 8,
+      "block_dim": 20,
+      "workspace_bytes": 32505856,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "tiling_key": 65568
+    },
+    "measurements": [
+      {
+        "round": 0,
+        "kernel_us": 5761.04,
+        "counters": {
+          "aicore_time(us)": 5614.103,
+          "aic_mac_time(us)": 4034.598,
+          "aic_mte1_time(us)": 2479.504,
+          "aic_mte2_time(us)": 2581.598,
+          "aic_fixpipe_time(us)": 1436.986,
+          "aic_scalar_time(us)": 1717.584
+        }
+      },
+      {
+        "round": 1,
+        "kernel_us": 5634.46,
+        "counters": {
+          "aicore_time(us)": 5494.77,
+          "aic_mac_time(us)": 4034.653,
+          "aic_mte1_time(us)": 2480.89,
+          "aic_mte2_time(us)": 2390.24,
+          "aic_fixpipe_time(us)": 1417.092,
+          "aic_scalar_time(us)": 1718.593
+        }
+      }
+    ],
+    "kernel_us": 5697.75,
+    "mte2_us": 2485.919
+  },
+  {
+    "shape": [
+      2816,
+      1024,
+      49408
+    ],
+    "device": 4,
+    "tile": {
+      "tilingEnableSplitCore": 2,
+      "singleCoreM": 144,
+      "singleCoreN": 1024,
+      "singleCoreK": 256,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 2,
+      "stepN": 1,
+      "stepKa": 4,
+      "stepKb": 4,
+      "depthA1": 8,
+      "depthB1": 8,
+      "block_dim": 20,
+      "workspace_bytes": 32505856,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "tiling_key": 65568
+    },
+    "measurements": [
+      {
+        "round": 0,
+        "kernel_us": 5279.76,
+        "counters": {
+          "aicore_time(us)": 5153.486,
+          "aic_mac_time(us)": 4055.481,
+          "aic_mte1_time(us)": 2489.647,
+          "aic_mte2_time(us)": 2035.847,
+          "aic_fixpipe_time(us)": 1370.597,
+          "aic_scalar_time(us)": 1727.592
+        }
+      },
+      {
+        "round": 1,
+        "kernel_us": 5287.54,
+        "counters": {
+          "aicore_time(us)": 5160.891,
+          "aic_mac_time(us)": 4055.491,
+          "aic_mte1_time(us)": 2487.619,
+          "aic_mte2_time(us)": 2111.699,
+          "aic_fixpipe_time(us)": 1374.42,
+          "aic_scalar_time(us)": 1727.26
+        }
+      }
+    ],
+    "kernel_us": 5283.65,
+    "mte2_us": 2073.773
+  },
+  {
+    "shape": [
+      3072,
+      1024,
+      48896
+    ],
+    "device": 5,
+    "tile": {
+      "tilingEnableSplitCore": 2,
+      "singleCoreM": 160,
+      "singleCoreN": 1024,
+      "singleCoreK": 256,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 2,
+      "stepN": 1,
+      "stepKa": 4,
+      "stepKb": 4,
+      "depthA1": 8,
+      "depthB1": 8,
+      "block_dim": 20,
+      "workspace_bytes": 33554432,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "tiling_key": 65568
+    },
+    "measurements": [
+      {
+        "round": 0,
+        "kernel_us": 5432.028,
+        "counters": {
+          "aicore_time(us)": 5285.2,
+          "aic_mac_time(us)": 4331.298,
+          "aic_mte1_time(us)": 2531.996,
+          "aic_mte2_time(us)": 2270.118,
+          "aic_fixpipe_time(us)": 1415.608,
+          "aic_scalar_time(us)": 1710.259
+        }
+      },
+      {
+        "round": 1,
+        "kernel_us": 5442.528,
+        "counters": {
+          "aicore_time(us)": 5295.77,
+          "aic_mac_time(us)": 4331.309,
+          "aic_mte1_time(us)": 2530.322,
+          "aic_mte2_time(us)": 2302.06,
+          "aic_fixpipe_time(us)": 1412.474,
+          "aic_scalar_time(us)": 1710.218
+        }
+      }
+    ],
+    "kernel_us": 5437.278,
+    "mte2_us": 2286.089
+  },
+  {
+    "shape": [
+      3072,
+      1024,
+      49152
+    ],
+    "device": 5,
+    "tile": {
+      "tilingEnableSplitCore": 2,
+      "singleCoreM": 160,
+      "singleCoreN": 1024,
+      "singleCoreK": 256,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 2,
+      "stepN": 1,
+      "stepKa": 4,
+      "stepKb": 4,
+      "depthA1": 8,
+      "depthB1": 8,
+      "block_dim": 20,
+      "workspace_bytes": 33554432,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "tiling_key": 65568
+    },
+    "measurements": [
+      {
+        "round": 0,
+        "kernel_us": 5964.34,
+        "counters": {
+          "aicore_time(us)": 5798.984,
+          "aic_mac_time(us)": 4353.889,
+          "aic_mte1_time(us)": 2552.759,
+          "aic_mte2_time(us)": 2616.864,
+          "aic_fixpipe_time(us)": 1476.76,
+          "aic_scalar_time(us)": 1719.172
+        }
+      },
+      {
+        "round": 1,
+        "kernel_us": 6135.96,
+        "counters": {
+          "aicore_time(us)": 5963.501,
+          "aic_mac_time(us)": 4353.893,
+          "aic_mte1_time(us)": 2546.953,
+          "aic_mte2_time(us)": 2922.445,
+          "aic_fixpipe_time(us)": 1509.636,
+          "aic_scalar_time(us)": 1719.072
+        }
+      }
+    ],
+    "kernel_us": 6050.15,
+    "mte2_us": 2769.6545
+  },
+  {
+    "shape": [
+      3072,
+      1024,
+      49408
+    ],
+    "device": 5,
+    "tile": {
+      "tilingEnableSplitCore": 2,
+      "singleCoreM": 160,
+      "singleCoreN": 1024,
+      "singleCoreK": 256,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 2,
+      "stepN": 1,
+      "stepKa": 4,
+      "stepKb": 4,
+      "depthA1": 8,
+      "depthB1": 8,
+      "block_dim": 20,
+      "workspace_bytes": 33554432,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "tiling_key": 65568
+    },
+    "measurements": [
+      {
+        "round": 0,
+        "kernel_us": 5495.172,
+        "counters": {
+          "aicore_time(us)": 5346.907,
+          "aic_mac_time(us)": 4376.657,
+          "aic_mte1_time(us)": 2559.487,
+          "aic_mte2_time(us)": 2302.663,
+          "aic_fixpipe_time(us)": 1430.981,
+          "aic_scalar_time(us)": 1729.581
+        }
+      },
+      {
+        "round": 1,
+        "kernel_us": 5490.232,
+        "counters": {
+          "aicore_time(us)": 5342.248,
+          "aic_mac_time(us)": 4376.662,
+          "aic_mte1_time(us)": 2558.55,
+          "aic_mte2_time(us)": 2297.942,
+          "aic_fixpipe_time(us)": 1429.234,
+          "aic_scalar_time(us)": 1727.153
+        }
+      }
+    ],
+    "kernel_us": 5492.701999999999,
+    "mte2_us": 2300.3025
+  },
+  {
+    "shape": [
+      2048,
+      2048,
+      48896
+    ],
+    "device": 6,
+    "tile": {
+      "tilingEnableSplitCore": 2,
+      "singleCoreM": 208,
+      "singleCoreN": 1024,
+      "singleCoreK": 256,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 2,
+      "stepN": 1,
+      "stepKa": 4,
+      "stepKb": 4,
+      "depthA1": 8,
+      "depthB1": 8,
+      "block_dim": 20,
+      "workspace_bytes": 37748736,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "tiling_key": 65568
+    },
+    "measurements": [
+      {
+        "round": 0,
+        "kernel_us": 6237.984,
+        "counters": {
+          "aicore_time(us)": 6165.211,
+          "aic_mac_time(us)": 5580.822,
+          "aic_mte1_time(us)": 2917.537,
+          "aic_mte2_time(us)": 1626.79,
+          "aic_fixpipe_time(us)": 1676.015,
+          "aic_scalar_time(us)": 1746.212
+        }
+      },
+      {
+        "round": 1,
+        "kernel_us": 6242.624,
+        "counters": {
+          "aicore_time(us)": 6168.717,
+          "aic_mac_time(us)": 5580.841,
+          "aic_mte1_time(us)": 2917.596,
+          "aic_mte2_time(us)": 1626.113,
+          "aic_fixpipe_time(us)": 1675.223,
+          "aic_scalar_time(us)": 1748.477
+        }
+      }
+    ],
+    "kernel_us": 6240.304,
+    "mte2_us": 1626.4515000000001
+  },
+  {
+    "shape": [
+      2048,
+      2048,
+      49152
+    ],
+    "device": 6,
+    "tile": {
+      "tilingEnableSplitCore": 2,
+      "singleCoreM": 208,
+      "singleCoreN": 1024,
+      "singleCoreK": 256,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 2,
+      "stepN": 1,
+      "stepKa": 4,
+      "stepKb": 4,
+      "depthA1": 8,
+      "depthB1": 8,
+      "block_dim": 20,
+      "workspace_bytes": 37748736,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "tiling_key": 65568
+    },
+    "measurements": [
+      {
+        "round": 0,
+        "kernel_us": 6325.644,
+        "counters": {
+          "aicore_time(us)": 6237.755,
+          "aic_mac_time(us)": 5610.094,
+          "aic_mte1_time(us)": 2932.852,
+          "aic_mte2_time(us)": 1672.11,
+          "aic_fixpipe_time(us)": 1690.257,
+          "aic_scalar_time(us)": 1757.498
+        }
+      },
+      {
+        "round": 1,
+        "kernel_us": 6357.784,
+        "counters": {
+          "aicore_time(us)": 6256.278,
+          "aic_mac_time(us)": 5609.899,
+          "aic_mte1_time(us)": 2932.946,
+          "aic_mte2_time(us)": 1693.846,
+          "aic_fixpipe_time(us)": 1691.525,
+          "aic_scalar_time(us)": 1756.118
+        }
+      }
+    ],
+    "kernel_us": 6341.714,
+    "mte2_us": 1682.978
+  },
+  {
+    "shape": [
+      2048,
+      2048,
+      49408
+    ],
+    "device": 6,
+    "tile": {
+      "tilingEnableSplitCore": 2,
+      "singleCoreM": 208,
+      "singleCoreN": 1024,
+      "singleCoreK": 256,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 2,
+      "stepN": 1,
+      "stepKa": 4,
+      "stepKb": 4,
+      "depthA1": 8,
+      "depthB1": 8,
+      "block_dim": 20,
+      "workspace_bytes": 37748736,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "tiling_key": 65568
+    },
+    "measurements": [
+      {
+        "round": 0,
+        "kernel_us": 6305.924,
+        "counters": {
+          "aicore_time(us)": 6232.979,
+          "aic_mac_time(us)": 5639.207,
+          "aic_mte1_time(us)": 2947.843,
+          "aic_mte2_time(us)": 1646.166,
+          "aic_fixpipe_time(us)": 1693.144,
+          "aic_scalar_time(us)": 1766.711
+        }
+      },
+      {
+        "round": 1,
+        "kernel_us": 6304.308,
+        "counters": {
+          "aicore_time(us)": 6231.071,
+          "aic_mac_time(us)": 5639.303,
+          "aic_mte1_time(us)": 2948.187,
+          "aic_mte2_time(us)": 1642.919,
+          "aic_fixpipe_time(us)": 1697.032,
+          "aic_scalar_time(us)": 1765.52
+        }
+      }
+    ],
+    "kernel_us": 6305.116,
+    "mte2_us": 1644.5425
+  },
+  {
+    "shape": [
+      2816,
+      1536,
+      48896
+    ],
+    "device": 7,
+    "tile": {
+      "tilingEnableSplitCore": 2,
+      "singleCoreM": 144,
+      "singleCoreN": 1536,
+      "singleCoreK": 256,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 2,
+      "stepN": 1,
+      "stepKa": 4,
+      "stepKb": 4,
+      "depthA1": 8,
+      "depthB1": 8,
+      "block_dim": 20,
+      "workspace_bytes": 38273024,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "tiling_key": 65568
+    },
+    "measurements": [
+      {
+        "round": 0,
+        "kernel_us": 7578.192,
+        "counters": {
+          "aicore_time(us)": 7399.882,
+          "aic_mac_time(us)": 6021.002,
+          "aic_mte1_time(us)": 3691.463,
+          "aic_mte2_time(us)": 3224.938,
+          "aic_fixpipe_time(us)": 2054.295,
+          "aic_scalar_time(us)": 2528.64
+        }
+      },
+      {
+        "round": 1,
+        "kernel_us": 7560.552,
+        "counters": {
+          "aicore_time(us)": 7382.073,
+          "aic_mac_time(us)": 6020.978,
+          "aic_mte1_time(us)": 3694.739,
+          "aic_mte2_time(us)": 3080.575,
+          "aic_fixpipe_time(us)": 2044.094,
+          "aic_scalar_time(us)": 2528.27
+        }
+      }
+    ],
+    "kernel_us": 7569.371999999999,
+    "mte2_us": 3152.7565
+  },
+  {
+    "shape": [
+      2816,
+      1536,
+      49152
+    ],
+    "device": 7,
+    "tile": {
+      "tilingEnableSplitCore": 2,
+      "singleCoreM": 144,
+      "singleCoreN": 1536,
+      "singleCoreK": 256,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 2,
+      "stepN": 1,
+      "stepKa": 4,
+      "stepKb": 4,
+      "depthA1": 8,
+      "depthB1": 8,
+      "block_dim": 20,
+      "workspace_bytes": 38273024,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "tiling_key": 65568
+    },
+    "measurements": [
+      {
+        "round": 0,
+        "kernel_us": 8073.1,
+        "counters": {
+          "aicore_time(us)": 7875.595,
+          "aic_mac_time(us)": 6052.608,
+          "aic_mte1_time(us)": 3718.408,
+          "aic_mte2_time(us)": 3521.917,
+          "aic_fixpipe_time(us)": 2116.908,
+          "aic_scalar_time(us)": 2543.075
+        }
+      },
+      {
+        "round": 1,
+        "kernel_us": 8030.42,
+        "counters": {
+          "aicore_time(us)": 7834.032,
+          "aic_mac_time(us)": 6052.588,
+          "aic_mte1_time(us)": 3721.17,
+          "aic_mte2_time(us)": 3414.371,
+          "aic_fixpipe_time(us)": 2107.451,
+          "aic_scalar_time(us)": 2541.155
+        }
+      }
+    ],
+    "kernel_us": 8051.76,
+    "mte2_us": 3468.1440000000002
+  },
+  {
+    "shape": [
+      2816,
+      1536,
+      49408
+    ],
+    "device": 7,
+    "tile": {
+      "tilingEnableSplitCore": 2,
+      "singleCoreM": 144,
+      "singleCoreN": 1536,
+      "singleCoreK": 256,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 2,
+      "stepN": 1,
+      "stepKa": 4,
+      "stepKb": 4,
+      "depthA1": 8,
+      "depthB1": 8,
+      "block_dim": 20,
+      "workspace_bytes": 38273024,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "tiling_key": 65568
+    },
+    "measurements": [
+      {
+        "round": 0,
+        "kernel_us": 7653.016,
+        "counters": {
+          "aicore_time(us)": 7472.518,
+          "aic_mac_time(us)": 6084.004,
+          "aic_mte1_time(us)": 3731.284,
+          "aic_mte2_time(us)": 3241.06,
+          "aic_fixpipe_time(us)": 2072.793,
+          "aic_scalar_time(us)": 2554.818
+        }
+      },
+      {
+        "round": 1,
+        "kernel_us": 7647.032,
+        "counters": {
+          "aicore_time(us)": 7466.957,
+          "aic_mac_time(us)": 6084.015,
+          "aic_mte1_time(us)": 3731.669,
+          "aic_mte2_time(us)": 3179.334,
+          "aic_fixpipe_time(us)": 2069.59,
+          "aic_scalar_time(us)": 2555.503
+        }
+      }
+    ],
+    "kernel_us": 7650.023999999999,
+    "mte2_us": 3210.197
+  },
+  {
+    "shape": [
+      8192,
+      4096,
+      48896
+    ],
+    "device": 5,
+    "tile": {
+      "tilingEnableSplitCore": 2,
+      "singleCoreM": 824,
+      "singleCoreN": 2048,
+      "singleCoreK": 192,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 3,
+      "stepN": 1,
+      "stepKa": 3,
+      "stepKb": 3,
+      "depthA1": 9,
+      "depthB1": 6,
+      "block_dim": 20,
+      "workspace_bytes": 155189248,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "tiling_key": 65568
+    },
+    "measurements": [
+      {
+        "round": 0,
+        "kernel_us": 49588.272,
+        "counters": {
+          "aicore_time(us)": 49586.256,
+          "aic_mac_time(us)": 45122.698,
+          "aic_mte1_time(us)": 20306.836,
+          "aic_mte2_time(us)": 17253.639,
+          "aic_fixpipe_time(us)": 17652.82,
+          "aic_scalar_time(us)": 14716.042
+        }
+      },
+      {
+        "round": 1,
+        "kernel_us": 49593.532,
+        "counters": {
+          "aicore_time(us)": 49591.461,
+          "aic_mac_time(us)": 45122.756,
+          "aic_mte1_time(us)": 20304.88,
+          "aic_mte2_time(us)": 17275.746,
+          "aic_fixpipe_time(us)": 17660.726,
+          "aic_scalar_time(us)": 14715.48
+        }
+      }
+    ],
+    "kernel_us": 49590.902,
+    "mte2_us": 17264.692499999997
+  },
+  {
+    "shape": [
+      8192,
+      4096,
+      49152
+    ],
+    "device": 5,
+    "tile": {
+      "tilingEnableSplitCore": 2,
+      "singleCoreM": 824,
+      "singleCoreN": 2048,
+      "singleCoreK": 192,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 3,
+      "stepN": 1,
+      "stepKa": 3,
+      "stepKb": 3,
+      "depthA1": 9,
+      "depthB1": 6,
+      "block_dim": 20,
+      "workspace_bytes": 155189248,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "tiling_key": 65568
+    },
+    "measurements": [
+      {
+        "round": 0,
+        "kernel_us": 50584.492,
+        "counters": {
+          "aicore_time(us)": 50582.273,
+          "aic_mac_time(us)": 45356.912,
+          "aic_mte1_time(us)": 20511.108,
+          "aic_mte2_time(us)": 14379.589,
+          "aic_fixpipe_time(us)": 17634.604,
+          "aic_scalar_time(us)": 14781.386
+        }
+      },
+      {
+        "round": 1,
+        "kernel_us": 50536.432,
+        "counters": {
+          "aicore_time(us)": 50533.132,
+          "aic_mac_time(us)": 45356.719,
+          "aic_mte1_time(us)": 20514.506,
+          "aic_mte2_time(us)": 14280.605,
+          "aic_fixpipe_time(us)": 17620.38,
+          "aic_scalar_time(us)": 14780.432
+        }
+      }
+    ],
+    "kernel_us": 50560.462,
+    "mte2_us": 14330.097
+  },
+  {
+    "shape": [
+      8192,
+      4096,
+      49408
+    ],
+    "device": 5,
+    "tile": {
+      "tilingEnableSplitCore": 2,
+      "singleCoreM": 824,
+      "singleCoreN": 2048,
+      "singleCoreK": 192,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 64,
+      "stepM": 3,
+      "stepN": 1,
+      "stepKa": 3,
+      "stepKb": 3,
+      "depthA1": 9,
+      "depthB1": 6,
+      "block_dim": 20,
+      "workspace_bytes": 155189248,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "tiling_key": 65568
+    },
+    "measurements": [
+      {
+        "round": 0,
+        "kernel_us": 50116.34,
+        "counters": {
+          "aicore_time(us)": 50114.152,
+          "aic_mac_time(us)": 45598.099,
+          "aic_mte1_time(us)": 20518.723,
+          "aic_mte2_time(us)": 17427.708,
+          "aic_fixpipe_time(us)": 17867.759,
+          "aic_scalar_time(us)": 14881.232
+        }
+      },
+      {
+        "round": 1,
+        "kernel_us": 50116.0,
+        "counters": {
+          "aicore_time(us)": 50113.841,
+          "aic_mac_time(us)": 45598.093,
+          "aic_mte1_time(us)": 20519.742,
+          "aic_mte2_time(us)": 17460.965,
+          "aic_fixpipe_time(us)": 17870.051,
+          "aic_scalar_time(us)": 14882.953
+        }
+      }
+    ],
+    "kernel_us": 50116.17,
+    "mte2_us": 17444.336499999998
+  }
+]

@@ -1,0 +1,222 @@
+[
+  {
+    "center_excess_us": 416.70500000000084,
+    "device": 4,
+    "max_relative_error": 0.0,
+    "median_us": {
+      "48896": 5233.03,
+      "49152": 5678.46,
+      "49408": 5290.48
+    },
+    "round_us": {
+      "48896": [
+        5230.36,
+        5230.98,
+        5235.08,
+        5242.24
+      ],
+      "49152": [
+        5708.6,
+        5484.0,
+        5787.28,
+        5648.32
+      ],
+      "49408": [
+        5288.44,
+        5286.256,
+        5294.616,
+        5292.52
+      ]
+    },
+    "shape": [
+      2816,
+      1024,
+      48384
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 32505856
+    }
+  },
+  {
+    "center_excess_us": 596.8130000000001,
+    "device": 5,
+    "max_relative_error": 0.0,
+    "median_us": {
+      "48896": 5438.448,
+      "49152": 6062.552,
+      "49408": 5493.03
+    },
+    "round_us": {
+      "48896": [
+        5437.328,
+        5439.968,
+        5435.504,
+        5439.568
+      ],
+      "49152": [
+        6052.324,
+        6072.78,
+        6138.964,
+        5904.16
+      ],
+      "49408": [
+        5492.388,
+        5493.672,
+        5492.052,
+        5495.788
+      ]
+    },
+    "shape": [
+      3072,
+      1024,
+      48384
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 160,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 33554432
+    }
+  },
+  {
+    "center_excess_us": 77.4930000000004,
+    "device": 6,
+    "max_relative_error": 0.0,
+    "median_us": {
+      "48896": 6240.7919999999995,
+      "49152": 6350.956,
+      "49408": 6306.134
+    },
+    "round_us": {
+      "48896": [
+        6240.744,
+        6241.884,
+        6240.84,
+        6238.424
+      ],
+      "49152": [
+        6372.948,
+        6347.684,
+        6354.228,
+        6331.468
+      ],
+      "49408": [
+        6306.184,
+        6303.384,
+        6306.084,
+        6306.608
+      ]
+    },
+    "shape": [
+      2048,
+      2048,
+      48384
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 208,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 37748736
+    }
+  },
+  {
+    "center_excess_us": 414.72100000000137,
+    "device": 7,
+    "max_relative_error": 0.0,
+    "median_us": {
+      "48896": 7568.45,
+      "49152": 8021.352000000001,
+      "49408": 7644.812
+    },
+    "round_us": {
+      "48896": [
+        7575.912,
+        7564.148,
+        7566.672,
+        7570.228
+      ],
+      "49152": [
+        7930.36,
+        8023.64,
+        8019.064,
+        8108.94
+      ],
+      "49408": [
+        7650.212,
+        7642.872,
+        7646.752,
+        7642.072
+      ]
+    },
+    "shape": [
+      2816,
+      1536,
+      48384
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1536,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 38273024
+    }
+  }
+]

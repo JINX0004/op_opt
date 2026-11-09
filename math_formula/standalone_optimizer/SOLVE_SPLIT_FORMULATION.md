@@ -7,8 +7,15 @@ solves a one-hot geometry master. The result is optimal within $T_D$
 below and its finite geometry grid. It is not an exact MatMulV3 schedule
 or a device-time guarantee.
 
-The current geometry grid is broader than the MatMulV3 deterministic
-Split-K host tiler. At `(M,N,K)=(2560,1024,73728)`, the deployed online
+The FP16/BF16 equations describe the checked-in standalone model. The
+FP32 substitutions below describe the experimental 910 selector branch,
+as captured in its [model snapshot](bench910/fp32_mode2_v1/remote_selector/model/mip_solver.cpp);
+the local `main` checkout's `mip_solver.cpp` and `plan_finalizer.cpp`
+still accept only FP16/BF16. The product FP32 online gate remains closed.
+
+The general FP16/BF16 geometry grid is broader than the MatMulV3
+deterministic Split-K host tiler. At `(M,N,K)=(2560,1024,73728)` in FP16,
+the deployed online
 selector's earlier reduced solve chose `singleCoreM×N=128×128`, whereas
 the source's NK-order branch emits `2560×384`: it starts from
 `singleCoreM=M` and `singleCoreN=stepN×baseN`, then may split M for L2.
@@ -23,13 +30,19 @@ treated as an executable tiling.
 
 ## Variables, counts, and source assignment
 
-The workload is FP16/BF16 multiplication of $(M,K)$ by $(K,N)$ on
-$A\le20$ available AICs. A geometry is
+The workload is same-type FP16, BF16, or FP32 multiplication of $(M,K)$
+by $(K,N)$, with FP32 accumulation and $A\le20$ available AICs. Let
+$b_A,b_B,b_C$ be A, B, and final-output bytes per element (2 for each
+FP16/BF16 tensor and 4 for each FP32 tensor), and let $b_P=4$ be bytes
+per FP32 partial. A geometry is
 $g=(C_M,C_N,B_M,B_N)$, where $C$ is a single-core output extent and $B$
 is a base Cube tile. Local integer decisions are occupied AIC count
-$c\ge2$ and K step $s\ge1$. This branch fixes baseK $=128$ and
-singleCoreK $=128s$. The standalone preflight requires $K$ divisible
-by 128. Define $q=K/128$ and $P(s)=\lceil q/s\rceil$.
+$c\ge2$ and K step $s\ge1$. The dtype path fixes
+$B_K=\text{baseK}=128$ for FP16/BF16 and $B_K=64$ for FP32, with
+`singleCoreK` $=B_Ks$. Define $q=\lceil K/B_K\rceil$ and
+$P(s)=\lceil q/s\rceil$. The supported NN/ND preflight requires K to
+be 256-byte aligned, so $q=K/B_K$ for these dtype paths; the last
+$s$-packet K slice may be short.
 
 $$
 \begin{aligned}
@@ -39,7 +52,7 @@ N_M(g)&=\lfloor M/C_M\rfloor\lceil C_M/B_M\rceil
 N_N(g)&=\lfloor N/C_N\rfloor\lceil C_N/B_N\rceil
        +\lceil(N\bmod C_N)/B_N\rceil,\\
 S(g)&=N_M(g)N_N(g),\qquad O=MN,\\
-D(g)&=2K\{M N_N(g)+N N_M(g)\}.
+D(g)&=K\{b_A M N_N(g)+b_B N N_M(g)\}.
 \end{aligned}
 $$
 
@@ -51,7 +64,7 @@ $r(s,c)=\lceil P(s)/c\rceil$ slices, containing at most
 $$
 q_{\rm crit}(s,c)=\min\{q,sr(s,c)\}
 \quad\text{base K packets},\qquad
-k_{\rm crit}=\min\{K,128q_{\rm crit}\}.
+k_{\rm crit}=\min\{K,B_Kq_{\rm crit}\}.
 $$
 
 The cap handles a short final K slice. A source-valid outer tile may
@@ -89,8 +102,13 @@ one representative panel; an implementation sums the real tail extents.
 Let $R_C$ be Cube FLOP/µs per AIC, $R_R$ shared GM read bytes/µs, and
 $R_V$ vector-add ops/µs per AIV. $\lambda_R$ is the fixed GM-to-L1 step-read
 cost, $\lambda_{\rm sync}$ the per-panel Cube/vector signal, and
-$\lambda_{\rm store}$ the final cast and FP16 store. $\lambda_{\rm partial}$
-is the fixed `MTE2→V`, add, `V→MTE2` cost of each extra partial. The
+$\lambda_{\rm store}$ the fixed final output-store cost. For FP16/BF16,
+the vector path casts its FP32 reduction to the output dtype before
+storing; for FP32 it stores the FP32 reduction directly. The current
+reduced objective charges the same fixed `gm_write` latency for either
+path and does **not** include final-output byte service or a separate
+cast primitive. $\lambda_{\rm partial}$ is the fixed `MTE2→V`, add,
+`V→MTE2` cost of each extra partial. The
 audit profile sets it to 1.28 µs. The reduction probe has not measured
 this value. $L$ is common launch and A ND→NZ conversion time, as defined
 in the [SolveBase objective](SOLVE_BASE_FORMULATION.md#objective).
@@ -133,11 +151,16 @@ per-baseK startup; grouping it degraded family selection on held-out
 device cases. Byte service still covers all K slices. For one panel
 the pipeline collapses to $L+T_{\rm cube}+T_V$. With many panels it is
 the two-buffer schedule, not $N_{\rm panel}$ copies of the whole chain
-stacked with no overlap. Cache reuse, the source's NZ row sharding, and
+stacked with no overlap. For unequal tail panels, the implementation uses
+$T_D=L+T_{\rm cube,1}+
+\sum_{i=2}^{N_{\rm panel}}\max(T_{\rm cube,i},T_{V,i-1})+
+T_{V,N_{\rm panel}}$ instead of the identical-panel shorthand above.
+Cache reuse, the source's NZ row sharding, and
 the choice of MK versus NK order are still outside this expression.
 Fixed Cube latency must remain zero because the Cube term does not count
 Cube calls. The common A-conversion primitive above $K=65535$ stays inside
-$L$. For $(128,256,4096)$ both the solver tuple and the emitted kernel have
+$L$. For the measured FP16 $(128,256,4096)$ case, both the solver tuple
+and the emitted kernel have
 $N_{\rm panel}=1$, so $T_D=L+T_{\rm cube}+T_V$ and the new latency appears
 as $(c-1)\lambda_{\rm partial}$: fifteen extra partials at $c=16$, ten at
 $c=11$. Measured kernel medians for that shape are 15.70 µs for source
@@ -162,12 +185,14 @@ $W_{\max}$, the standalone constraints are
 
 $$
 \begin{aligned}
-&B_M\le C_M,\quad B_N\le C_N,\quad 1\le s\le q,\\
+&B_M\le C_M,\quad B_N\le C_N,\quad
+  1\le s\le\lfloor K/B_K\rfloor,\\
 &2\le c\le\min\{A,P(s)\},\\
-&4B_M(128)\le C_{0A},\quad4B_N(128)\le C_{0B},\\
-&8B_MB_N\le C_{0C},\quad4(B_M+B_N)(128s)\le C_1,\\
-&W_0+8cC_MC_N\le W_{\max},\\
-&W_0=20\,\mathrm{MiB}+\mathbf1_{K>65535}(2MK).
+&2b_AB_MB_K\le C_{0A},\quad2b_BB_NB_K\le C_{0B},\\
+&2b_PB_MB_N\le C_{0C},\quad
+  2B_Ks(b_AB_M+b_BB_N)\le C_1,\\
+&W_0+2b_PcC_MC_N\le W_{\max},\\
+&W_0=20\,\mathrm{MiB}+\mathbf1_{K>65535}(b_AMK).
 \end{aligned}
 $$
 
@@ -175,16 +200,22 @@ The workspace term follows the source's aligned-output/base-fix
 ping-pong partial buffers plus 20 MiB RPC reservation. Other source
 fix modes require another formula. Full host-family gates, dtype/layout
 rules, and CANN legality are not all MILP rows. FinalizePlan cross-checks
-the chosen standalone tuple.
+the chosen standalone tuple. Since $b_P=4$, the L0C and partial-workspace
+terms remain $8B_MB_N$ and $8cC_MC_N$ for all three dtypes. Also
+$b_AB_K=b_BB_K=256$ bytes for both FP16/BF16 and FP32, so the displayed
+L0A/L0B and L1 capacity coefficients are numerically unchanged after
+substitution. The packet count $q$ and the data traffic $D$ do change.
+The current FP32 preflight rejects $K>65535$; its converted-A workspace
+term is shown for algebraic completeness, not as a supported FP32 path.
 
 For fixed $g$, the local bounds are
 
 $$
 \begin{aligned}
-s_{\max,g}&=\min\left\{q,
-\left\lfloor\frac{C_1}{512(B_M+B_N)}\right\rfloor\right\},\\
+s_{\max,g}&=\min\left\{\lfloor K/B_K\rfloor,
+\left\lfloor\frac{C_1}{2B_K(b_AB_M+b_BB_N)}\right\rfloor\right\},\\
 c_{\max,g}&=\min\left\{A,q,
-\left\lfloor\frac{W_{\max}-W_0}{8C_MC_N}\right\rfloor\right\}.
+\left\lfloor\frac{W_{\max}-W_0}{2b_PC_MC_N}\right\rfloor\right\}.
 \end{aligned}
 $$
 
@@ -213,9 +244,33 @@ only when its event and workspace representations fit; it does not choose
 the winner. That graph reduces every partial once, after all Cube slices,
 so its reported score is not $T_D$.
 
+### FP32 source-informed domain and model limit
+
+For the evaluated same-type FP32 NN/ND path (FP32 output, no bias, HF32
+disabled), the source-informed domain follows MatMulV3's MK/NK 3×3
+pattern: $B_M=B_N=128$, $B_K=64$, $s=3$, and hence
+`singleCoreK=192`. One outer output axis begins at 384; the other may
+be partitioned to fit the source's 70% L2 panel budget. The occupied
+AIC count follows the host's K-slice rule, including its small-M/N
+special case, rather than being freely optimized over $2,\ldots,20$.
+The source-informed FP32 solver fixes this geometry, K step, and AIC
+count before scoring. The general finite-domain formulation above can
+still study alternative tuples, but their objective alone does not prove
+the host can emit them. See the
+[FP32 source-domain audit](bench910/fp32_mode2_v1/remote_selector/FP32_SOURCE_DOMAIN.md).
+
+The FP32 profile uses an effective $R_C=3{,}600{,}000$ FLOP/µs per AIC;
+its GM and vector rates and the `split_partial` latency are inherited
+from the earlier FP16/BF16 profile. These are provisional FP32
+coefficients. The current $T_V$ has no $b_CO_{\rm panel}/R_W$ final-store
+term and no dtype-specific cast or reduction throughput. Adding those
+services would change the implementation and require corresponding
+measurements; they must not be silently included when comparing this
+document with the current solver.
+
 ## Worked long-K example and model boundary
 
-For $(M,N,K)=(256,256,65536)$, the
+For FP16 $(M,N,K)=(256,256,65536)$, the
 [source tiling audit](bench910/k_gt_65535_v1/source_audit.jsonl)
 emits $g=(384,256,128,128)$, $s=3$, $c=20$. Its oversized $C_M$
 covers only 256 actual rows. Here $q=512$,
@@ -243,3 +298,44 @@ Source MK/NK 3×3 step/depth patterns, possible L2 splitting, and key
 rules still constrain emittable tuples. A source-emittable optimizer
 needs those constraints and measured Split-K and conversion primitives
 before making a device-performance claim.
+
+### FP32 worked substitution
+
+Take $(M,N,K)=(128,128,32768)$ with the source-informed FP32 tuple
+$g=(384,128,128,128)$, $B_K=64$, $s=3$, and $c=20$. The oversized
+$C_M=384$ covers the 128 real rows. There is one panel and one spatial
+base packet. The K allocation and modeled traffic are
+
+$$
+\begin{aligned}
+q&=32768/64=512,&P&=\lceil512/3\rceil=171,\\
+r&=\lceil171/20\rceil=9,&q_{\rm crit}&=27,\\
+k_{\rm crit}&=27(64)=1728,&D&=4(32768)(128+128)
+ =33{,}554{,}432\ \mathrm{bytes},\\
+Q&=\lceil16384/40\rceil=410,&
+W&=20\ \mathrm{MiB}+8(20)(384)(128)=27.5\ \mathrm{MiB}.
+\end{aligned}
+$$
+
+Using the experimental profile's $R_C=3{,}600{,}000$ FLOP/µs,
+$R_R=3{,}710{,}212$ bytes/µs, $R_V=1{,}000{,}000$ ops/µs,
+$\lambda_R=0.109620$ µs, $\lambda_{\rm partial}=1.28$ µs,
+$\lambda_{\rm sync}=0.1$ µs, $\lambda_{\rm store}=0.162586$ µs, and
+$L=2.68$ µs gives
+
+$$
+\begin{aligned}
+T_{\rm cube}&=\max\left\{
+  \frac{2(16384)(1728)}{3{,}600{,}000},
+  \frac{33{,}554{,}432}{3{,}710{,}212}+2(27)(0.109620)
+  \right\}=15.728640\ \mathrm{\mu s},\\
+T_V&=0.1+19\left(1.28+\frac{410}{1{,}000{,}000}\right)
+ +0.162586=24.590376\ \mathrm{\mu s},\\
+T_D&=2.68+15.728640+24.590376=42.999016\ \mathrm{\mu s}.
+\end{aligned}
+$$
+
+This is a reproducible substitution into the reduced objective, not a
+measured FP32 kernel runtime. In particular, it inherits the uncalibrated
+FP32 vector parameters and omits final-output byte service as noted
+above.

@@ -1,0 +1,5 @@
+{
+  "benchmark_sha256": "f221e4f57daf5416a78d9123ed0dc7e57a373ae4db9093fbca78e1887ff16868",
+  "host_tiling_sha256": "f1485343adcee5ff710c722b23514d38a485769add5ab36ebd9b47300c728018",
+  "package": "/home/xianfei/solvebase_bench_20261025/fp32_mode2_cache_policy_v1/ops_nn_cache_policy_package"
+}

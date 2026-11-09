@@ -1,0 +1,18 @@
+{
+  "durations_us": [
+    32.136,
+    32.256,
+    32.376,
+    32.384,
+    32.264
+  ],
+  "kernel_count": 5,
+  "kernel_names": [
+    "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65536"
+  ],
+  "kind": "msprof_kernel",
+  "max_us": 32.384,
+  "median_us": 32.264,
+  "min_us": 32.136,
+  "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_family_boundary_v1/06_128x128x7616/msprof/PROF_000001_20261106100206999_00951898CLQEQCLK/mindstudio_profiler_output/task_time_20261106100224.csv"
+}

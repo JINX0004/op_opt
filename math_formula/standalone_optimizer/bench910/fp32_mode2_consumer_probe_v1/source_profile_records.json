@@ -1,0 +1,458 @@
+[
+  {
+    "shape": [
+      2816,
+      1024,
+      48384
+    ],
+    "device": 4,
+    "pitch": 48896,
+    "round": 0,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 5111.3071666666665,
+      "aic_mte1_time": 2460.751583333333,
+      "aic_mte2_time": 2101.739138888889,
+      "aic_mac_time": 4013.4806944444445,
+      "aic_fixpipe_time": 1359.9855555555555,
+      "aic_scalar_time": 1709.2875833333333
+    }
+  },
+  {
+    "shape": [
+      2816,
+      1024,
+      48384
+    ],
+    "device": 4,
+    "pitch": 49152,
+    "round": 0,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 5407.274305555556,
+      "aic_mte1_time": 2486.1779166666665,
+      "aic_mte2_time": 2187.3676111111113,
+      "aic_mac_time": 4034.6535277777775,
+      "aic_fixpipe_time": 1396.772888888889,
+      "aic_scalar_time": 1719.7604999999999
+    }
+  },
+  {
+    "shape": [
+      2816,
+      1024,
+      48384
+    ],
+    "device": 4,
+    "pitch": 49408,
+    "round": 0,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 5175.957333333334,
+      "aic_mte1_time": 2486.4574166666666,
+      "aic_mte2_time": 2192.25725,
+      "aic_mac_time": 4055.450444444444,
+      "aic_fixpipe_time": 1383.7383333333337,
+      "aic_scalar_time": 1728.3085277777775
+    }
+  },
+  {
+    "shape": [
+      2816,
+      1024,
+      48384
+    ],
+    "device": 4,
+    "pitch": 49408,
+    "round": 1,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 5167.841166666667,
+      "aic_mte1_time": 2488.0557500000004,
+      "aic_mte2_time": 2129.8910277777777,
+      "aic_mac_time": 4055.494305555556,
+      "aic_fixpipe_time": 1380.3031944444444,
+      "aic_scalar_time": 1727.3672222222224
+    }
+  },
+  {
+    "shape": [
+      2816,
+      1024,
+      48384
+    ],
+    "device": 4,
+    "pitch": 49152,
+    "round": 1,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 5641.466944444444,
+      "aic_mte1_time": 2477.919027777778,
+      "aic_mte2_time": 2603.6969444444444,
+      "aic_mac_time": 4034.634027777778,
+      "aic_fixpipe_time": 1426.4723888888889,
+      "aic_scalar_time": 1717.5066944444443
+    }
+  },
+  {
+    "shape": [
+      2816,
+      1024,
+      48384
+    ],
+    "device": 4,
+    "pitch": 48896,
+    "round": 1,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 5102.583861111111,
+      "aic_mte1_time": 2461.999972222222,
+      "aic_mte2_time": 2035.4621944444443,
+      "aic_mac_time": 4013.4509166666667,
+      "aic_fixpipe_time": 1359.033361111111,
+      "aic_scalar_time": 1710.6330000000003
+    }
+  },
+  {
+    "shape": [
+      3072,
+      1024,
+      48384
+    ],
+    "device": 5,
+    "pitch": 48896,
+    "round": 0,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 5291.338444444445,
+      "aic_mte1_time": 2532.3096944444446,
+      "aic_mte2_time": 2287.1410277777777,
+      "aic_mac_time": 4331.330444444445,
+      "aic_fixpipe_time": 1417.030361111111,
+      "aic_scalar_time": 1710.433888888889
+    }
+  },
+  {
+    "shape": [
+      3072,
+      1024,
+      48384
+    ],
+    "device": 5,
+    "pitch": 49152,
+    "round": 0,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 5907.431305555556,
+      "aic_mte1_time": 2548.223638888889,
+      "aic_mte2_time": 2855.718416666667,
+      "aic_mac_time": 4353.928333333333,
+      "aic_fixpipe_time": 1510.6911666666667,
+      "aic_scalar_time": 1719.796888888889
+    }
+  },
+  {
+    "shape": [
+      3072,
+      1024,
+      48384
+    ],
+    "device": 5,
+    "pitch": 49408,
+    "round": 0,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 5347.676694444444,
+      "aic_mte1_time": 2557.547388888889,
+      "aic_mte2_time": 2317.7037222222225,
+      "aic_mac_time": 4376.654638888888,
+      "aic_fixpipe_time": 1428.8040277777777,
+      "aic_scalar_time": 1728.8980000000001
+    }
+  },
+  {
+    "shape": [
+      3072,
+      1024,
+      48384
+    ],
+    "device": 5,
+    "pitch": 49408,
+    "round": 1,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 5343.997222222222,
+      "aic_mte1_time": 2558.948083333333,
+      "aic_mte2_time": 2297.9615,
+      "aic_mac_time": 4376.649361111111,
+      "aic_fixpipe_time": 1429.785888888889,
+      "aic_scalar_time": 1729.0007222222223
+    }
+  },
+  {
+    "shape": [
+      3072,
+      1024,
+      48384
+    ],
+    "device": 5,
+    "pitch": 49152,
+    "round": 1,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 5809.968416666667,
+      "aic_mte1_time": 2553.7053333333333,
+      "aic_mte2_time": 2645.063888888889,
+      "aic_mac_time": 4353.904166666667,
+      "aic_fixpipe_time": 1479.57425,
+      "aic_scalar_time": 1719.7007500000002
+    }
+  },
+  {
+    "shape": [
+      3072,
+      1024,
+      48384
+    ],
+    "device": 5,
+    "pitch": 48896,
+    "round": 1,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 5284.24225,
+      "aic_mte1_time": 2532.384805555556,
+      "aic_mte2_time": 2252.036555555556,
+      "aic_mac_time": 4331.294194444444,
+      "aic_fixpipe_time": 1413.2726111111112,
+      "aic_scalar_time": 1709.4755555555555
+    }
+  },
+  {
+    "shape": [
+      2048,
+      2048,
+      48384
+    ],
+    "device": 6,
+    "pitch": 48896,
+    "round": 0,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 6168.065222222222,
+      "aic_mte1_time": 2917.843305555555,
+      "aic_mte2_time": 1622.4795277777775,
+      "aic_mac_time": 5580.761277777777,
+      "aic_fixpipe_time": 1676.865638888889,
+      "aic_scalar_time": 1748.2786944444445
+    }
+  },
+  {
+    "shape": [
+      2048,
+      2048,
+      48384
+    ],
+    "device": 6,
+    "pitch": 49152,
+    "round": 0,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 6246.671666666667,
+      "aic_mte1_time": 2932.706527777778,
+      "aic_mte2_time": 1683.9003888888888,
+      "aic_mac_time": 5609.677861111111,
+      "aic_fixpipe_time": 1692.8733055555556,
+      "aic_scalar_time": 1756.770361111111
+    }
+  },
+  {
+    "shape": [
+      2048,
+      2048,
+      48384
+    ],
+    "device": 6,
+    "pitch": 49408,
+    "round": 0,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 6229.926805555556,
+      "aic_mte1_time": 2948.0087777777776,
+      "aic_mte2_time": 1640.0928333333334,
+      "aic_mac_time": 5639.156833333333,
+      "aic_fixpipe_time": 1694.5090277777779,
+      "aic_scalar_time": 1764.6638333333333
+    }
+  },
+  {
+    "shape": [
+      2048,
+      2048,
+      48384
+    ],
+    "device": 6,
+    "pitch": 49408,
+    "round": 1,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 6230.5590555555555,
+      "aic_mte1_time": 2948.273638888889,
+      "aic_mte2_time": 1638.1573333333336,
+      "aic_mac_time": 5639.2077500000005,
+      "aic_fixpipe_time": 1694.2886388888887,
+      "aic_scalar_time": 1765.2309722222221
+    }
+  },
+  {
+    "shape": [
+      2048,
+      2048,
+      48384
+    ],
+    "device": 6,
+    "pitch": 49152,
+    "round": 1,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 6249.217277777778,
+      "aic_mte1_time": 2932.5521944444445,
+      "aic_mte2_time": 1687.2326944444446,
+      "aic_mac_time": 5609.8609166666665,
+      "aic_fixpipe_time": 1689.3582777777779,
+      "aic_scalar_time": 1755.9461944444442
+    }
+  },
+  {
+    "shape": [
+      2048,
+      2048,
+      48384
+    ],
+    "device": 6,
+    "pitch": 48896,
+    "round": 1,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 6169.249194444445,
+      "aic_mte1_time": 2917.489,
+      "aic_mte2_time": 1628.2908611111113,
+      "aic_mac_time": 5580.591055555555,
+      "aic_fixpipe_time": 1677.8299166666668,
+      "aic_scalar_time": 1748.1782500000002
+    }
+  },
+  {
+    "shape": [
+      2816,
+      1536,
+      48384
+    ],
+    "device": 7,
+    "pitch": 48896,
+    "round": 0,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 7399.185972222222,
+      "aic_mte1_time": 3689.3502499999995,
+      "aic_mte2_time": 3216.665694444444,
+      "aic_mac_time": 6021.003527777778,
+      "aic_fixpipe_time": 2059.047416666667,
+      "aic_scalar_time": 2527.736027777778
+    }
+  },
+  {
+    "shape": [
+      2816,
+      1536,
+      48384
+    ],
+    "device": 7,
+    "pitch": 49152,
+    "round": 0,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 7867.078583333333,
+      "aic_mte1_time": 3716.931972222222,
+      "aic_mte2_time": 3495.8545,
+      "aic_mac_time": 6052.501583333334,
+      "aic_fixpipe_time": 2115.0099166666664,
+      "aic_scalar_time": 2541.162861111111
+    }
+  },
+  {
+    "shape": [
+      2816,
+      1536,
+      48384
+    ],
+    "device": 7,
+    "pitch": 49408,
+    "round": 0,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 7463.255999999999,
+      "aic_mte1_time": 3730.280388888889,
+      "aic_mte2_time": 3145.2936111111107,
+      "aic_mac_time": 6083.94925,
+      "aic_fixpipe_time": 2070.27775,
+      "aic_scalar_time": 2553.1335277777775
+    }
+  },
+  {
+    "shape": [
+      2816,
+      1536,
+      48384
+    ],
+    "device": 7,
+    "pitch": 49408,
+    "round": 1,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 7458.439777777778,
+      "aic_mte1_time": 3729.295,
+      "aic_mte2_time": 3126.670638888889,
+      "aic_mac_time": 6083.956611111112,
+      "aic_fixpipe_time": 2065.8061388888887,
+      "aic_scalar_time": 2553.0320833333335
+    }
+  },
+  {
+    "shape": [
+      2816,
+      1536,
+      48384
+    ],
+    "device": 7,
+    "pitch": 49152,
+    "round": 1,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 7808.6476111111115,
+      "aic_mte1_time": 3721.7542499999995,
+      "aic_mte2_time": 3326.0883888888884,
+      "aic_mac_time": 6052.515694444444,
+      "aic_fixpipe_time": 2101.205388888889,
+      "aic_scalar_time": 2539.969027777778
+    }
+  },
+  {
+    "shape": [
+      2816,
+      1536,
+      48384
+    ],
+    "device": 7,
+    "pitch": 48896,
+    "round": 1,
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 7384.915722222222,
+      "aic_mte1_time": 3692.936055555556,
+      "aic_mte2_time": 3093.349777777778,
+      "aic_mac_time": 6020.938749999999,
+      "aic_fixpipe_time": 2047.8974722222222,
+      "aic_scalar_time": 2527.763416666666
+    }
+  }
+]

@@ -1,0 +1,126 @@
+{
+  "all": {
+    "count": 100,
+    "geomean_master_over_selector": 0.9837056692952847,
+    "master_faster": 59,
+    "selector_faster": 41
+  },
+  "bootstrap_95pct": [
+    0.9471740476827535,
+    1.0117877565410958
+  ],
+  "family_changed": {
+    "count": 25,
+    "geomean_master_over_selector": 0.9681293969656576,
+    "master_faster": 10,
+    "selector_faster": 15
+  },
+  "family_unchanged": {
+    "count": 75,
+    "geomean_master_over_selector": 0.9889532527858687,
+    "master_faster": 49,
+    "selector_faster": 26
+  },
+  "new_decisions": [
+    {
+      "family_changed_vs_master": true,
+      "index": 10,
+      "master_mode": 3,
+      "master_us": 2035.79,
+      "measurement_source": "fresh paired run",
+      "model_score_us": 1885.87205,
+      "previous_mode": 0,
+      "ratio": 0.43715167592810905,
+      "selector_mode": 2,
+      "selector_us": 4656.942,
+      "shape": "2560x768x32768"
+    },
+    {
+      "family_changed_vs_master": true,
+      "index": 15,
+      "master_mode": 3,
+      "master_us": 2706.9539999999997,
+      "measurement_source": "fresh paired run",
+      "model_score_us": 2482.39529,
+      "previous_mode": 0,
+      "ratio": 0.809675472248926,
+      "selector_mode": 2,
+      "selector_us": 3343.258,
+      "shape": "2560x1024x32768"
+    },
+    {
+      "family_changed_vs_master": false,
+      "index": 16,
+      "master_mode": 3,
+      "master_us": 3910.508,
+      "measurement_source": "fresh paired run",
+      "model_score_us": 3662.63735,
+      "previous_mode": 0,
+      "ratio": 0.985029496667456,
+      "selector_mode": 3,
+      "selector_us": 3969.9399999999996,
+      "shape": "2560x1024x49152"
+    },
+    {
+      "family_changed_vs_master": false,
+      "index": 20,
+      "master_mode": 2,
+      "master_us": 3274.3,
+      "measurement_source": "fresh paired run",
+      "model_score_us": 3004.35312,
+      "previous_mode": 0,
+      "ratio": 1.0007335187505733,
+      "selector_mode": 2,
+      "selector_us": 3271.8999999999996,
+      "shape": "2048x1536x32768"
+    },
+    {
+      "family_changed_vs_master": false,
+      "index": 42,
+      "master_mode": 2,
+      "master_us": 33932.92,
+      "measurement_source": "fresh paired run",
+      "model_score_us": 31206.32456,
+      "previous_mode": 0,
+      "ratio": 1.000951131475962,
+      "selector_mode": 2,
+      "selector_us": 33900.67600000001,
+      "shape": "8192x4096x32768"
+    },
+    {
+      "family_changed_vs_master": false,
+      "index": 60,
+      "master_mode": 3,
+      "master_us": 1336.46,
+      "measurement_source": "fresh paired run",
+      "model_score_us": 1254.40003,
+      "previous_mode": 0,
+      "ratio": 1.0010111526391083,
+      "selector_mode": 3,
+      "selector_us": 1335.1100000000001,
+      "shape": "1664x768x32768"
+    },
+    {
+      "family_changed_vs_master": false,
+      "index": 63,
+      "master_mode": 3,
+      "master_us": 1914.598,
+      "measurement_source": "fresh paired run",
+      "model_score_us": 1820.77116,
+      "previous_mode": 0,
+      "ratio": 0.9971885358094495,
+      "selector_mode": 3,
+      "selector_us": 1919.996,
+      "shape": "2432x768x32768"
+    }
+  ],
+  "transitions": {
+    "0->0": 56,
+    "2->0": 5,
+    "2->2": 4,
+    "2->3": 2,
+    "3->0": 16,
+    "3->2": 2,
+    "3->3": 15
+  }
+}

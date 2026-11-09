@@ -1,0 +1,1348 @@
+[
+  {
+    "counters": {
+      "Task Duration(us)": 2901.3,
+      "aic_fixpipe_time(us)": 748.082,
+      "aic_mac_time(us)": 2248.259,
+      "aic_mte1_time(us)": 1391.899,
+      "aic_mte2_time(us)": 858.684,
+      "aic_scalar_time(us)": 960.223,
+      "aicore_time(us)": 2826.061
+    },
+    "device": 4,
+    "index": 0,
+    "median_us": 2901.3,
+    "profile_rounds_us": [
+      2901.3
+    ],
+    "shape": [
+      2816,
+      1024,
+      27392
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 32505856
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 3540.02,
+      "aic_fixpipe_time(us)": 905.662,
+      "aic_mac_time(us)": 2689.537,
+      "aic_mte1_time(us)": 1661.324,
+      "aic_mte2_time(us)": 1143.811,
+      "aic_scalar_time(us)": 1148.17,
+      "aicore_time(us)": 3437.297
+    },
+    "device": 4,
+    "index": 1,
+    "median_us": 3540.02,
+    "profile_rounds_us": [
+      3540.02
+    ],
+    "shape": [
+      2816,
+      1024,
+      32768
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 32505856
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 3943.2799999999997,
+      "aic_fixpipe_time(us)": 1017.74,
+      "aic_mac_time(us)": 3025.7200000000003,
+      "aic_mte1_time(us)": 1861.935,
+      "aic_mte2_time(us)": 1435.786,
+      "aic_scalar_time(us)": 1291.0955,
+      "aicore_time(us)": 3847.9065
+    },
+    "device": 4,
+    "index": 2,
+    "median_us": 3943.2799999999997,
+    "profile_rounds_us": [
+      3945.4,
+      3941.16
+    ],
+    "shape": [
+      2816,
+      1024,
+      36864
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 32505856
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 4458.384,
+      "aic_fixpipe_time(us)": 1134.154,
+      "aic_mac_time(us)": 3361.897,
+      "aic_mte1_time(us)": 2068.044,
+      "aic_mte2_time(us)": 1718.618,
+      "aic_scalar_time(us)": 1434.187,
+      "aicore_time(us)": 4348.722
+    },
+    "device": 4,
+    "index": 3,
+    "median_us": 4458.384,
+    "profile_rounds_us": [
+      4458.384
+    ],
+    "shape": [
+      2816,
+      1024,
+      40960
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 32505856
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 4824.98,
+      "aic_fixpipe_time(us)": 1252.653,
+      "aic_mac_time(us)": 3698.062,
+      "aic_mte1_time(us)": 2270.09,
+      "aic_mte2_time(us)": 1911.736,
+      "aic_scalar_time(us)": 1576.227,
+      "aicore_time(us)": 4707.604
+    },
+    "device": 4,
+    "index": 4,
+    "median_us": 4824.98,
+    "profile_rounds_us": [
+      4824.98
+    ],
+    "shape": [
+      2816,
+      1024,
+      45056
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 32505856
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 5048.4,
+      "aic_fixpipe_time(us)": 1313.464,
+      "aic_mac_time(us)": 3866.121,
+      "aic_mte1_time(us)": 2371.973,
+      "aic_mte2_time(us)": 2029.676,
+      "aic_scalar_time(us)": 1646.865,
+      "aicore_time(us)": 4925.307
+    },
+    "device": 4,
+    "index": 5,
+    "median_us": 5048.4,
+    "profile_rounds_us": [
+      5048.4
+    ],
+    "shape": [
+      2816,
+      1024,
+      47104
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 32505856
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 5160.88,
+      "aic_fixpipe_time(us)": 1339.2,
+      "aic_mac_time(us)": 3950.197,
+      "aic_mte1_time(us)": 2422.644,
+      "aic_mte2_time(us)": 2085.249,
+      "aic_scalar_time(us)": 1683.07,
+      "aicore_time(us)": 5035.093
+    },
+    "device": 4,
+    "index": 6,
+    "median_us": 5160.88,
+    "profile_rounds_us": [
+      5160.88
+    ],
+    "shape": [
+      2816,
+      1024,
+      48128
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 32505856
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 5242.26,
+      "aic_fixpipe_time(us)": 1362.72,
+      "aic_mac_time(us)": 4013.241,
+      "aic_mte1_time(us)": 2462.468,
+      "aic_mte2_time(us)": 2111.892,
+      "aic_scalar_time(us)": 1709.215,
+      "aicore_time(us)": 5114.342
+    },
+    "device": 4,
+    "index": 7,
+    "median_us": 5242.26,
+    "profile_rounds_us": [
+      5242.26
+    ],
+    "shape": [
+      2816,
+      1024,
+      48896
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 32505856
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 5679.932,
+      "aic_fixpipe_time(us)": 1419.424,
+      "aic_mac_time(us)": 4034.475,
+      "aic_mte1_time(us)": 2477.817,
+      "aic_mte2_time(us)": 2460.8379999999997,
+      "aic_scalar_time(us)": 1717.73,
+      "aicore_time(us)": 5536.196
+    },
+    "device": 4,
+    "index": 8,
+    "median_us": 5679.932,
+    "profile_rounds_us": [
+      5630.504,
+      5729.36
+    ],
+    "shape": [
+      2816,
+      1024,
+      49152
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 32505856
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 5291.24,
+      "aic_fixpipe_time(us)": 1374.777,
+      "aic_mac_time(us)": 4055.271,
+      "aic_mte1_time(us)": 2488.976,
+      "aic_mte2_time(us)": 2112.791,
+      "aic_scalar_time(us)": 1726.178,
+      "aicore_time(us)": 5162.263
+    },
+    "device": 4,
+    "index": 9,
+    "median_us": 5291.24,
+    "profile_rounds_us": [
+      5291.24
+    ],
+    "shape": [
+      2816,
+      1024,
+      49408
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 32505856
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 6375.64,
+      "aic_fixpipe_time(us)": 1611.151,
+      "aic_mac_time(us)": 4706.8,
+      "aic_mte1_time(us)": 2883.679,
+      "aic_mte2_time(us)": 2817.526,
+      "aic_scalar_time(us)": 2002.172,
+      "aicore_time(us)": 6218.532
+    },
+    "device": 4,
+    "index": 10,
+    "median_us": 6375.64,
+    "profile_rounds_us": [
+      6375.64
+    ],
+    "shape": [
+      2816,
+      1024,
+      57344
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 32505856
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 7043.7,
+      "aic_fixpipe_time(us)": 1839.792,
+      "aic_mac_time(us)": 5368.614,
+      "aic_mte1_time(us)": 3282.937,
+      "aic_mte2_time(us)": 3097.073,
+      "aic_scalar_time(us)": 2285.771,
+      "aicore_time(us)": 6872.818
+    },
+    "device": 4,
+    "index": 11,
+    "median_us": 7043.7,
+    "profile_rounds_us": [
+      7043.7
+    ],
+    "shape": [
+      2816,
+      1024,
+      65408
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 32505856
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 3712.936,
+      "aic_fixpipe_time(us)": 944.588,
+      "aic_mac_time(us)": 2902.628,
+      "aic_mte1_time(us)": 1712.568,
+      "aic_mte2_time(us)": 1195.234,
+      "aic_scalar_time(us)": 1147.822,
+      "aicore_time(us)": 3598.824
+    },
+    "device": 5,
+    "index": 0,
+    "median_us": 3712.936,
+    "profile_rounds_us": [
+      3712.936
+    ],
+    "shape": [
+      3072,
+      1024,
+      32768
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 160,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 33554432
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 4103.96,
+      "aic_fixpipe_time(us)": 1057.845,
+      "aic_mac_time(us)": 3265.469,
+      "aic_mte1_time(us)": 1913.131,
+      "aic_mte2_time(us)": 1620.291,
+      "aic_scalar_time(us)": 1290.271,
+      "aicore_time(us)": 3992.876
+    },
+    "device": 5,
+    "index": 1,
+    "median_us": 4103.96,
+    "profile_rounds_us": [
+      4103.96
+    ],
+    "shape": [
+      3072,
+      1024,
+      36864
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 160,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 33554432
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 5008.0,
+      "aic_fixpipe_time(us)": 1305.86,
+      "aic_mac_time(us)": 3991.107,
+      "aic_mte1_time(us)": 2331.319,
+      "aic_mte2_time(us)": 2093.121,
+      "aic_scalar_time(us)": 1574.595,
+      "aicore_time(us)": 4872.478
+    },
+    "device": 5,
+    "index": 2,
+    "median_us": 5008.0,
+    "profile_rounds_us": [
+      5008.0
+    ],
+    "shape": [
+      3072,
+      1024,
+      45056
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 160,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 33554432
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 5368.628,
+      "aic_fixpipe_time(us)": 1396.525,
+      "aic_mac_time(us)": 4263.234,
+      "aic_mte1_time(us)": 2489.388,
+      "aic_mte2_time(us)": 2322.903,
+      "aic_scalar_time(us)": 1682.366,
+      "aicore_time(us)": 5223.867
+    },
+    "device": 5,
+    "index": 3,
+    "median_us": 5368.628,
+    "profile_rounds_us": [
+      5368.628
+    ],
+    "shape": [
+      3072,
+      1024,
+      48128
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 160,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 33554432
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 6116.944,
+      "aic_fixpipe_time(us)": 1510.842,
+      "aic_mac_time(us)": 4353.897,
+      "aic_mte1_time(us)": 2548.094,
+      "aic_mte2_time(us)": 2903.986,
+      "aic_scalar_time(us)": 1717.671,
+      "aicore_time(us)": 5943.409
+    },
+    "device": 5,
+    "index": 4,
+    "median_us": 6116.944,
+    "profile_rounds_us": [
+      6116.944
+    ],
+    "shape": [
+      3072,
+      1024,
+      49152
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 160,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 33554432
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 5492.508,
+      "aic_fixpipe_time(us)": 1427.107,
+      "aic_mac_time(us)": 4376.641,
+      "aic_mte1_time(us)": 2557.653,
+      "aic_mte2_time(us)": 2292.289,
+      "aic_scalar_time(us)": 1727.909,
+      "aicore_time(us)": 5344.36
+    },
+    "device": 5,
+    "index": 5,
+    "median_us": 5492.508,
+    "profile_rounds_us": [
+      5492.508
+    ],
+    "shape": [
+      3072,
+      1024,
+      49408
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 160,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 33554432
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 3506.648,
+      "aic_fixpipe_time(us)": 937.703,
+      "aic_mac_time(us)": 3126.305,
+      "aic_mte1_time(us)": 1633.971,
+      "aic_mte2_time(us)": 919.602,
+      "aic_scalar_time(us)": 982.185,
+      "aicore_time(us)": 3465.224
+    },
+    "device": 6,
+    "index": 0,
+    "median_us": 3506.648,
+    "profile_rounds_us": [
+      3506.648
+    ],
+    "shape": [
+      2048,
+      2048,
+      27392
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 208,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 37748736
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 4207.564,
+      "aic_fixpipe_time(us)": 1127.347,
+      "aic_mac_time(us)": 3739.997,
+      "aic_mte1_time(us)": 1954.848,
+      "aic_mte2_time(us)": 1102.9,
+      "aic_scalar_time(us)": 1171.931,
+      "aicore_time(us)": 4145.688
+    },
+    "device": 6,
+    "index": 1,
+    "median_us": 4207.564,
+    "profile_rounds_us": [
+      4207.564
+    ],
+    "shape": [
+      2048,
+      2048,
+      32768
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 208,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 37748736
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 4713.236,
+      "aic_fixpipe_time(us)": 1263.325,
+      "aic_mac_time(us)": 4207.672,
+      "aic_mte1_time(us)": 2199.401,
+      "aic_mte2_time(us)": 1229.44,
+      "aic_scalar_time(us)": 1318.27,
+      "aicore_time(us)": 4657.475
+    },
+    "device": 6,
+    "index": 2,
+    "median_us": 4713.236,
+    "profile_rounds_us": [
+      4713.236
+    ],
+    "shape": [
+      2048,
+      2048,
+      36864
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 208,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 37748736
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 6331.188,
+      "aic_fixpipe_time(us)": 1687.082,
+      "aic_mac_time(us)": 5610.138,
+      "aic_mte1_time(us)": 2932.252,
+      "aic_mte2_time(us)": 1687.849,
+      "aic_scalar_time(us)": 1756.291,
+      "aicore_time(us)": 6251.102
+    },
+    "device": 6,
+    "index": 3,
+    "median_us": 6331.188,
+    "profile_rounds_us": [
+      6331.188
+    ],
+    "shape": [
+      2048,
+      2048,
+      49152
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 208,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 37748736
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 6238.824,
+      "aic_fixpipe_time(us)": 1674.307,
+      "aic_mac_time(us)": 5580.826,
+      "aic_mte1_time(us)": 2917.32,
+      "aic_mte2_time(us)": 1626.273,
+      "aic_scalar_time(us)": 1745.041,
+      "aicore_time(us)": 6167.53
+    },
+    "device": 6,
+    "index": 4,
+    "median_us": 6238.824,
+    "profile_rounds_us": [
+      6238.824
+    ],
+    "shape": [
+      2048,
+      2048,
+      48896
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 208,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 37748736
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 6304.424,
+      "aic_fixpipe_time(us)": 1692.59,
+      "aic_mac_time(us)": 5639.281,
+      "aic_mte1_time(us)": 2947.909,
+      "aic_mte2_time(us)": 1639.707,
+      "aic_scalar_time(us)": 1764.646,
+      "aicore_time(us)": 6231.562
+    },
+    "device": 6,
+    "index": 5,
+    "median_us": 6304.424,
+    "profile_rounds_us": [
+      6304.424
+    ],
+    "shape": [
+      2048,
+      2048,
+      49408
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 208,
+      "singleCoreN": 1024,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 37748736
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 4716.612,
+      "aic_fixpipe_time(us)": 1264.253,
+      "aic_mac_time(us)": 3782.78,
+      "aic_mte1_time(us)": 2329.285,
+      "aic_mte2_time(us)": 1552.086,
+      "aic_scalar_time(us)": 1590.117,
+      "aicore_time(us)": 4605.114
+    },
+    "device": 7,
+    "index": 0,
+    "median_us": 4716.612,
+    "profile_rounds_us": [
+      4716.612
+    ],
+    "shape": [
+      2816,
+      1536,
+      30720
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1536,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 38273024
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 4961.46,
+      "aic_fixpipe_time(us)": 1331.836,
+      "aic_mac_time(us)": 3971.921,
+      "aic_mte1_time(us)": 2446.685,
+      "aic_mte2_time(us)": 1702.175,
+      "aic_scalar_time(us)": 1668.277,
+      "aicore_time(us)": 4844.27
+    },
+    "device": 7,
+    "index": 1,
+    "median_us": 4961.46,
+    "profile_rounds_us": [
+      4961.46
+    ],
+    "shape": [
+      2816,
+      1536,
+      32256
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1536,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 38273024
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 5115.064,
+      "aic_fixpipe_time(us)": 1366.722,
+      "aic_mac_time(us)": 4034.988,
+      "aic_mte1_time(us)": 2489.411,
+      "aic_mte2_time(us)": 1713.917,
+      "aic_scalar_time(us)": 1694.607,
+      "aicore_time(us)": 4995.828
+    },
+    "device": 7,
+    "index": 2,
+    "median_us": 5115.064,
+    "profile_rounds_us": [
+      5115.064
+    ],
+    "shape": [
+      2816,
+      1536,
+      32768
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1536,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 38273024
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 5205.844,
+      "aic_fixpipe_time(us)": 1401.268,
+      "aic_mac_time(us)": 4161.03,
+      "aic_mte1_time(us)": 2556.934,
+      "aic_mte2_time(us)": 1902.837,
+      "aic_scalar_time(us)": 1748.184,
+      "aicore_time(us)": 5082.581
+    },
+    "device": 7,
+    "index": 3,
+    "median_us": 5205.844,
+    "profile_rounds_us": [
+      5205.844
+    ],
+    "shape": [
+      2816,
+      1536,
+      33792
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1536,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 38273024
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 5704.296,
+      "aic_fixpipe_time(us)": 1535.989,
+      "aic_mac_time(us)": 4539.351,
+      "aic_mte1_time(us)": 2789.582,
+      "aic_mte2_time(us)": 2230.418,
+      "aic_scalar_time(us)": 1905.535,
+      "aicore_time(us)": 5569.765
+    },
+    "device": 7,
+    "index": 4,
+    "median_us": 5704.296,
+    "profile_rounds_us": [
+      5704.296
+    ],
+    "shape": [
+      2816,
+      1536,
+      36864
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1536,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 38273024
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 8110.02,
+      "aic_fixpipe_time(us)": 2117.488,
+      "aic_mac_time(us)": 6052.546,
+      "aic_mte1_time(us)": 3714.44,
+      "aic_mte2_time(us)": 3568.121,
+      "aic_scalar_time(us)": 2539.482,
+      "aicore_time(us)": 7909.297
+    },
+    "device": 7,
+    "index": 5,
+    "median_us": 8110.02,
+    "profile_rounds_us": [
+      8110.02
+    ],
+    "shape": [
+      2816,
+      1536,
+      49152
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1536,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 38273024
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 7563.072,
+      "aic_fixpipe_time(us)": 2048.161,
+      "aic_mac_time(us)": 6020.935,
+      "aic_mte1_time(us)": 3689.814,
+      "aic_mte2_time(us)": 3114.15,
+      "aic_scalar_time(us)": 2525.939,
+      "aicore_time(us)": 7384.596
+    },
+    "device": 7,
+    "index": 6,
+    "median_us": 7563.072,
+    "profile_rounds_us": [
+      7563.072
+    ],
+    "shape": [
+      2816,
+      1536,
+      48896
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1536,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 38273024
+    }
+  },
+  {
+    "counters": {
+      "Task Duration(us)": 7645.892,
+      "aic_fixpipe_time(us)": 2071.93,
+      "aic_mac_time(us)": 6084.005,
+      "aic_mte1_time(us)": 3728.325,
+      "aic_mte2_time(us)": 3241.791,
+      "aic_scalar_time(us)": 2551.158,
+      "aicore_time(us)": 7465.484
+    },
+    "device": 7,
+    "index": 7,
+    "median_us": 7645.892,
+    "profile_rounds_us": [
+      7645.892
+    ],
+    "shape": [
+      2816,
+      1536,
+      49408
+    ],
+    "tile": {
+      "baseK": 64,
+      "baseM": 128,
+      "baseN": 128,
+      "block_dim": 20,
+      "depthA1": 8,
+      "depthB1": 8,
+      "nd2nzA": 0,
+      "nd2nzB": 0,
+      "singleCoreK": 256,
+      "singleCoreM": 144,
+      "singleCoreN": 1536,
+      "stepKa": 4,
+      "stepKb": 4,
+      "stepM": 2,
+      "stepN": 1,
+      "tilingEnableSplitCore": 2,
+      "tiling_key": 65568,
+      "workspace_bytes": 38273024
+    }
+  }
+]

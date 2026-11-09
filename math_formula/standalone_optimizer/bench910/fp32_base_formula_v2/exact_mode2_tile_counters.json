@@ -1,0 +1,76 @@
+[
+  {
+    "index": 10,
+    "shape": [
+      2560,
+      768,
+      32768
+    ],
+    "arms": {
+      "master": {
+        "Task Duration(us)": 2034.4,
+        "aicore_time(us)": 1894.7465,
+        "aic_mac_time(us)": 1749.4735,
+        "aic_mte1_time(us)": 749.9849999999999,
+        "aic_mte2_time(us)": 939.281,
+        "aic_fixpipe_time(us)": 863.4975,
+        "aic_scalar_time(us)": 573.2940000000001
+      },
+      "research_default": {
+        "Task Duration(us)": 4649.492,
+        "aicore_time(us)": 4648.2775,
+        "aic_mac_time(us)": 1761.067,
+        "aic_mte1_time(us)": 750.8615,
+        "aic_mte2_time(us)": 3651.397,
+        "aic_fixpipe_time(us)": 1074.2255,
+        "aic_scalar_time(us)": 606.358
+      },
+      "proposed": {
+        "Task Duration(us)": 2703.942,
+        "aicore_time(us)": 2702.719,
+        "aic_mac_time(us)": 1752.1305,
+        "aic_mte1_time(us)": 767.1205,
+        "aic_mte2_time(us)": 2076.7605000000003,
+        "aic_fixpipe_time(us)": 730.71,
+        "aic_scalar_time(us)": 522.005
+      }
+    }
+  },
+  {
+    "index": 15,
+    "shape": [
+      2560,
+      1024,
+      32768
+    ],
+    "arms": {
+      "master": {
+        "Task Duration(us)": 2710.8959999999997,
+        "aicore_time(us)": 2636.96,
+        "aic_mac_time(us)": 2332.6875,
+        "aic_mte1_time(us)": 1003.6769999999999,
+        "aic_mte2_time(us)": 1283.966,
+        "aic_fixpipe_time(us)": 1053.7355,
+        "aic_scalar_time(us)": 773.887
+      },
+      "research_default": {
+        "Task Duration(us)": 3350.8360000000002,
+        "aicore_time(us)": 3349.7174999999997,
+        "aic_mac_time(us)": 2334.578,
+        "aic_mte1_time(us)": 995.8315,
+        "aic_mte2_time(us)": 1649.0,
+        "aic_fixpipe_time(us)": 730.0695000000001,
+        "aic_scalar_time(us)": 612.62
+      },
+      "proposed": {
+        "Task Duration(us)": 3277.734,
+        "aicore_time(us)": 3276.3289999999997,
+        "aic_mac_time(us)": 2334.614,
+        "aic_mte1_time(us)": 1026.4389999999999,
+        "aic_mte2_time(us)": 2471.787,
+        "aic_fixpipe_time(us)": 925.7764999999999,
+        "aic_scalar_time(us)": 678.1765
+      }
+    }
+  }
+]

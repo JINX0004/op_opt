@@ -1,0 +1,162 @@
+[
+  {
+    "shape": [
+      3072,
+      1024
+    ],
+    "mode": 0,
+    "pipe_center_excess_us": {
+      "aic_total_time": 1089.627347222222,
+      "aic_mte2_time": 1089.2480972222224,
+      "aic_mte1_time": 4.336808689942018e-19,
+      "aic_mac_time": 0.0,
+      "aic_fixpipe_time": -1.0842021724855044e-19
+    },
+    "traffic_at_192kib": {
+      "aic_GM_to_L1_datas": 4451328.0,
+      "aic_read_main_memory_datas": 4451340.375,
+      "aic_L0C_to_GM_datas": 0.0,
+      "aic_write_main_memory_datas": 7.375
+    }
+  },
+  {
+    "shape": [
+      3072,
+      1024
+    ],
+    "mode": 1,
+    "pipe_center_excess_us": {
+      "aic_total_time": 1001.9259861111113,
+      "aic_mte2_time": 1001.7484166666663,
+      "aic_mte1_time": -2.2737367544323206e-13,
+      "aic_mac_time": 0.0,
+      "aic_fixpipe_time": 0.0
+    },
+    "traffic_at_192kib": {
+      "aic_GM_to_L1_datas": 4451328.0,
+      "aic_read_main_memory_datas": 4451340.375,
+      "aic_L0C_to_GM_datas": 0.0,
+      "aic_write_main_memory_datas": 7.375
+    }
+  },
+  {
+    "shape": [
+      3072,
+      1024
+    ],
+    "mode": 2,
+    "pipe_center_excess_us": {
+      "aic_total_time": 446.1608888888877,
+      "aic_mte2_time": 446.29056944444415,
+      "aic_mte1_time": 0.0,
+      "aic_mac_time": 9.094947017729282e-13,
+      "aic_fixpipe_time": -1.0842021724855044e-19
+    },
+    "traffic_at_192kib": {
+      "aic_GM_to_L1_datas": 4451328.0,
+      "aic_read_main_memory_datas": 4451340.375,
+      "aic_L0C_to_GM_datas": 0.0,
+      "aic_write_main_memory_datas": 7.375
+    }
+  },
+  {
+    "shape": [
+      3072,
+      1024
+    ],
+    "mode": 3,
+    "pipe_center_excess_us": {
+      "aic_total_time": 22.81191666666564,
+      "aic_mte2_time": 26.920138888888687,
+      "aic_mte1_time": 0.0,
+      "aic_mac_time": -9.094947017729282e-13,
+      "aic_fixpipe_time": -4.418611111110977
+    },
+    "traffic_at_192kib": {
+      "aic_GM_to_L1_datas": 4451328.0,
+      "aic_read_main_memory_datas": 4451340.375,
+      "aic_L0C_to_GM_datas": 2322432.0,
+      "aic_write_main_memory_datas": 2322439.375
+    }
+  },
+  {
+    "shape": [
+      2048,
+      2048
+    ],
+    "mode": 0,
+    "pipe_center_excess_us": {
+      "aic_total_time": 663.7074583333333,
+      "aic_mte2_time": 663.7074722222219,
+      "aic_mte1_time": 4.336808689942018e-19,
+      "aic_mac_time": 0.0,
+      "aic_fixpipe_time": 0.0
+    },
+    "traffic_at_192kib": {
+      "aic_GM_to_L1_datas": 4644864.0,
+      "aic_read_main_memory_datas": 4644876.375,
+      "aic_L0C_to_GM_datas": 0.0,
+      "aic_write_main_memory_datas": 7.375
+    }
+  },
+  {
+    "shape": [
+      2048,
+      2048
+    ],
+    "mode": 1,
+    "pipe_center_excess_us": {
+      "aic_total_time": 662.0053472222216,
+      "aic_mte2_time": 662.0141805555554,
+      "aic_mte1_time": -2.2737367544323206e-13,
+      "aic_mac_time": 0.0,
+      "aic_fixpipe_time": 0.0
+    },
+    "traffic_at_192kib": {
+      "aic_GM_to_L1_datas": 4644864.0,
+      "aic_read_main_memory_datas": 4644876.375,
+      "aic_L0C_to_GM_datas": 0.0,
+      "aic_write_main_memory_datas": 7.375
+    }
+  },
+  {
+    "shape": [
+      2048,
+      2048
+    ],
+    "mode": 2,
+    "pipe_center_excess_us": {
+      "aic_total_time": 639.7199027777788,
+      "aic_mte2_time": 639.3804583333335,
+      "aic_mte1_time": 0.0,
+      "aic_mac_time": -9.094947017729282e-13,
+      "aic_fixpipe_time": 0.0
+    },
+    "traffic_at_192kib": {
+      "aic_GM_to_L1_datas": 4644864.0,
+      "aic_read_main_memory_datas": 4644876.375,
+      "aic_L0C_to_GM_datas": 0.0,
+      "aic_write_main_memory_datas": 7.375
+    }
+  },
+  {
+    "shape": [
+      2048,
+      2048
+    ],
+    "mode": 3,
+    "pipe_center_excess_us": {
+      "aic_total_time": 484.9547777777789,
+      "aic_mte2_time": 483.78119444444474,
+      "aic_mte1_time": 2.2737367544323206e-13,
+      "aic_mac_time": 9.094947017729282e-13,
+      "aic_fixpipe_time": 0.8894999999997708
+    },
+    "traffic_at_192kib": {
+      "aic_GM_to_L1_datas": 4644864.0,
+      "aic_read_main_memory_datas": 4644876.375,
+      "aic_L0C_to_GM_datas": 3096576.0,
+      "aic_write_main_memory_datas": 3096583.375
+    }
+  }
+]

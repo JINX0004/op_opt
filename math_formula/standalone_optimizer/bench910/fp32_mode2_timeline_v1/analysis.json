@@ -1,0 +1,74 @@
+[
+  {
+    "shape": "2048x2048x48384",
+    "order": "mn",
+    "observed_center_excess_us": 77.4930000000004,
+    "predicted_center_excess_us": 192.4949949999991,
+    "probe_center_excess_us": 705.8149814999997,
+    "absolute_mae_us": 309.86613233333355,
+    "absolute_mape_percent": 4.916155557357939
+  },
+  {
+    "shape": "2048x2048x48384",
+    "order": "nm",
+    "observed_center_excess_us": 77.4930000000004,
+    "predicted_center_excess_us": 192.49499549999928,
+    "probe_center_excess_us": 705.8149814999997,
+    "absolute_mae_us": 314.79176800000005,
+    "absolute_mape_percent": 4.994353051731648
+  },
+  {
+    "shape": "2816x1024x48384",
+    "order": "mn",
+    "observed_center_excess_us": 416.70500000000084,
+    "predicted_center_excess_us": 229.8795725,
+    "probe_center_excess_us": 987.1299267499999,
+    "absolute_mae_us": 247.89745999999982,
+    "absolute_mape_percent": 4.536111128037868
+  },
+  {
+    "shape": "2816x1024x48384",
+    "order": "nm",
+    "observed_center_excess_us": 416.70500000000084,
+    "predicted_center_excess_us": 229.87957199999983,
+    "probe_center_excess_us": 987.1299267499999,
+    "absolute_mae_us": 79.22316666666696,
+    "absolute_mape_percent": 1.4445657398671816
+  },
+  {
+    "shape": "2816x1536x48384",
+    "order": "mn",
+    "observed_center_excess_us": 414.72100000000137,
+    "predicted_center_excess_us": 156.5748604999999,
+    "probe_center_excess_us": 967.0800209999998,
+    "absolute_mae_us": 447.7853796666668,
+    "absolute_mape_percent": 5.744721862021068
+  },
+  {
+    "shape": "2816x1536x48384",
+    "order": "nm",
+    "observed_center_excess_us": 414.72100000000137,
+    "predicted_center_excess_us": 156.5748605000008,
+    "probe_center_excess_us": 967.0800209999998,
+    "absolute_mae_us": 113.37598700000005,
+    "absolute_mape_percent": 1.4306200540862413
+  },
+  {
+    "shape": "3072x1024x48384",
+    "order": "mn",
+    "observed_center_excess_us": 596.8130000000001,
+    "predicted_center_excess_us": 281.88581950000025,
+    "probe_center_excess_us": 1158.8639264999997,
+    "absolute_mae_us": 449.37464133333316,
+    "absolute_mape_percent": 7.824227784384676
+  },
+  {
+    "shape": "3072x1024x48384",
+    "order": "nm",
+    "observed_center_excess_us": 596.8130000000001,
+    "predicted_center_excess_us": 281.8858199999995,
+    "probe_center_excess_us": 1158.8639264999997,
+    "absolute_mae_us": 258.18552766666653,
+    "absolute_mape_percent": 4.44099675869845
+  }
+]

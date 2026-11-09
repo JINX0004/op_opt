@@ -1,0 +1,821 @@
+[
+  {
+    "shape": [
+      16,
+      16,
+      6144
+    ],
+    "model_mode": 0,
+    "model_winner_us": 5.68563,
+    "arms": {
+      "default": {
+        "mode": 3,
+        "core": [
+          384,
+          16,
+          192
+        ],
+        "base": [
+          128,
+          128,
+          64
+        ],
+        "stepKa": 3,
+        "stepKb": 3,
+        "block_dim": 10,
+        "max_relative_error": 0.0
+      },
+      "base": {
+        "mode": 0,
+        "core": [
+          16,
+          16,
+          6144
+        ],
+        "base": [
+          16,
+          16,
+          32
+        ],
+        "stepKa": 64,
+        "stepKb": 64,
+        "block_dim": 20,
+        "max_relative_error": 0.0,
+        "source_tile_model_us": 45.148826,
+        "model_error": null,
+        "l1_step_diagnostic_us": 3.712466,
+        "l1_step_error": null,
+        "round_medians_us": [
+          18.592,
+          17.53
+        ],
+        "measured_us": 17.68,
+        "kernel_times_us": [
+          18.56,
+          18.6,
+          18.68,
+          18.584,
+          18.624,
+          18.736,
+          17.12,
+          18.4,
+          17.52,
+          17.6,
+          17.5,
+          17.24,
+          17.7,
+          17.66,
+          17.54,
+          17.24
+        ]
+      },
+      "split": {
+        "mode": 3,
+        "core": [
+          384,
+          16,
+          192
+        ],
+        "base": [
+          128,
+          128,
+          64
+        ],
+        "stepKa": 3,
+        "stepKb": 3,
+        "block_dim": 10,
+        "max_relative_error": 0.0,
+        "source_tile_model_us": null,
+        "model_error": "16x16x6144: base M/N tile exceeds single-core output tile",
+        "round_medians_us": [
+          15.71,
+          15.36
+        ],
+        "measured_us": 15.62,
+        "kernel_times_us": [
+          15.62,
+          16.02,
+          16.54,
+          15.8,
+          15.6,
+          15.98,
+          15.62,
+          15.34,
+          14.56,
+          16.14,
+          15.2,
+          16.0,
+          15.18,
+          16.64,
+          14.78,
+          15.52
+        ]
+      }
+    },
+    "faster_mode": 3,
+    "model_regret_pct": 13.188220230473746,
+    "master_regret_pct": 0.0
+  },
+  {
+    "shape": [
+      64,
+      64,
+      6144
+    ],
+    "model_mode": 0,
+    "model_winner_us": 8.86803,
+    "arms": {
+      "default": {
+        "mode": 3,
+        "core": [
+          384,
+          64,
+          192
+        ],
+        "base": [
+          128,
+          128,
+          64
+        ],
+        "stepKa": 3,
+        "stepKb": 3,
+        "block_dim": 16,
+        "max_relative_error": 0.0
+      },
+      "base": {
+        "mode": 0,
+        "core": [
+          16,
+          128,
+          6144
+        ],
+        "base": [
+          16,
+          128,
+          64
+        ],
+        "stepKa": 32,
+        "stepKb": 4,
+        "block_dim": 20,
+        "max_relative_error": 0.0,
+        "source_tile_model_us": null,
+        "model_error": "64x64x6144: spatial single-core output tile exceeds the shape",
+        "l1_step_diagnostic_us": null,
+        "l1_step_error": "64x64x6144: spatial single-core output tile exceeds the shape",
+        "round_medians_us": [
+          17.38,
+          18.04
+        ],
+        "measured_us": 17.72,
+        "kernel_times_us": [
+          17.38,
+          17.38,
+          17.56,
+          17.44,
+          17.32,
+          17.38,
+          17.22,
+          17.48,
+          18.04,
+          18.04,
+          18.08,
+          17.88,
+          18.12,
+          18.02,
+          18.08,
+          17.88
+        ]
+      },
+      "split": {
+        "mode": 3,
+        "core": [
+          384,
+          64,
+          192
+        ],
+        "base": [
+          128,
+          128,
+          64
+        ],
+        "stepKa": 3,
+        "stepKb": 3,
+        "block_dim": 16,
+        "max_relative_error": 0.0,
+        "source_tile_model_us": null,
+        "model_error": "64x64x6144: base M/N tile exceeds single-core output tile",
+        "round_medians_us": [
+          19.22,
+          20.78
+        ],
+        "measured_us": 19.619999999999997,
+        "kernel_times_us": [
+          19.36,
+          19.2,
+          18.92,
+          19.34,
+          19.24,
+          19.38,
+          18.4,
+          18.14,
+          21.66,
+          21.36,
+          19.86,
+          19.94,
+          21.82,
+          21.56,
+          20.2,
+          20.0
+        ]
+      }
+    },
+    "faster_mode": 0,
+    "model_regret_pct": 0.0,
+    "master_regret_pct": 10.722347629796825
+  },
+  {
+    "shape": [
+      128,
+      128,
+      7680
+    ],
+    "model_mode": 0,
+    "model_winner_us": 17.91088,
+    "arms": {
+      "default": {
+        "mode": 3,
+        "core": [
+          384,
+          128,
+          192
+        ],
+        "base": [
+          128,
+          128,
+          64
+        ],
+        "stepKa": 3,
+        "stepKb": 3,
+        "block_dim": 20,
+        "max_relative_error": 0.0
+      },
+      "base": {
+        "mode": 0,
+        "core": [
+          16,
+          128,
+          7680
+        ],
+        "base": [
+          16,
+          128,
+          64
+        ],
+        "stepKa": 32,
+        "stepKb": 4,
+        "block_dim": 20,
+        "max_relative_error": 0.0,
+        "source_tile_model_us": 38.702306,
+        "model_error": null,
+        "l1_step_diagnostic_us": 16.120586,
+        "l1_step_error": null,
+        "round_medians_us": [
+          32.28,
+          32.5
+        ],
+        "measured_us": 32.39,
+        "kernel_times_us": [
+          32.2,
+          32.28,
+          32.24,
+          32.28,
+          32.536,
+          32.28,
+          32.52,
+          32.304,
+          32.76,
+          32.56,
+          32.38,
+          32.12,
+          32.8,
+          32.44,
+          32.4,
+          32.74
+        ]
+      },
+      "split": {
+        "mode": 3,
+        "core": [
+          384,
+          128,
+          192
+        ],
+        "base": [
+          128,
+          128,
+          64
+        ],
+        "stepKa": 3,
+        "stepKb": 3,
+        "block_dim": 20,
+        "max_relative_error": 0.0,
+        "source_tile_model_us": 30.765629,
+        "model_error": null,
+        "round_medians_us": [
+          26.96,
+          27.188
+        ],
+        "measured_us": 27.119999999999997,
+        "kernel_times_us": [
+          26.72,
+          27.2,
+          26.184,
+          25.424,
+          26.76,
+          27.344,
+          27.936,
+          27.16,
+          27.08,
+          27.296,
+          26.92,
+          27.584,
+          26.416,
+          27.64,
+          25.944,
+          27.72
+        ]
+      }
+    },
+    "faster_mode": 3,
+    "model_regret_pct": 19.4321533923304,
+    "master_regret_pct": 0.0
+  },
+  {
+    "shape": [
+      256,
+      256,
+      7680
+    ],
+    "model_mode": 0,
+    "model_winner_us": 33.00425,
+    "arms": {
+      "default": {
+        "mode": 3,
+        "core": [
+          384,
+          256,
+          192
+        ],
+        "base": [
+          128,
+          128,
+          64
+        ],
+        "stepKa": 3,
+        "stepKb": 3,
+        "block_dim": 20,
+        "max_relative_error": 0.0
+      },
+      "base": {
+        "mode": 0,
+        "core": [
+          32,
+          128,
+          7680
+        ],
+        "base": [
+          32,
+          128,
+          64
+        ],
+        "stepKa": 16,
+        "stepKb": 4,
+        "block_dim": 20,
+        "max_relative_error": 0.0,
+        "source_tile_model_us": 50.397931,
+        "model_error": null,
+        "l1_step_diagnostic_us": 28.254691,
+        "l1_step_error": null,
+        "round_medians_us": [
+          34.468,
+          34.93
+        ],
+        "measured_us": 34.7,
+        "kernel_times_us": [
+          34.664,
+          34.04,
+          34.72,
+          34.44,
+          34.36,
+          34.64,
+          34.056,
+          34.496,
+          34.68,
+          35.06,
+          35.08,
+          34.98,
+          34.88,
+          34.86,
+          35.08,
+          34.72
+        ]
+      },
+      "split": {
+        "mode": 3,
+        "core": [
+          384,
+          256,
+          192
+        ],
+        "base": [
+          128,
+          128,
+          64
+        ],
+        "stepKa": 3,
+        "stepKb": 3,
+        "block_dim": 20,
+        "max_relative_error": 0.0,
+        "source_tile_model_us": 41.27474,
+        "model_error": null,
+        "round_medians_us": [
+          38.94,
+          38.75
+        ],
+        "measured_us": 38.76,
+        "kernel_times_us": [
+          38.42,
+          39.34,
+          38.18,
+          39.22,
+          38.66,
+          39.7,
+          38.4,
+          39.24,
+          37.58,
+          39.64,
+          38.36,
+          39.06,
+          38.54,
+          38.64,
+          38.86,
+          38.98
+        ]
+      }
+    },
+    "faster_mode": 0,
+    "model_regret_pct": 0.0,
+    "master_regret_pct": 11.700288184438023
+  },
+  {
+    "shape": [
+      512,
+      512,
+      27328
+    ],
+    "model_mode": 3,
+    "model_winner_us": 232.34859,
+    "arms": {
+      "default": {
+        "mode": 0,
+        "core": [
+          112,
+          128,
+          27328
+        ],
+        "base": [
+          112,
+          128,
+          64
+        ],
+        "stepKa": 4,
+        "stepKb": 4,
+        "block_dim": 20,
+        "max_relative_error": 0.0
+      },
+      "base": {
+        "mode": 0,
+        "core": [
+          112,
+          128,
+          27328
+        ],
+        "base": [
+          112,
+          128,
+          64
+        ],
+        "stepKa": 4,
+        "stepKb": 4,
+        "block_dim": 20,
+        "max_relative_error": 0.0,
+        "source_tile_model_us": 232.421627,
+        "model_error": null,
+        "l1_step_diagnostic_us": 220.332338,
+        "l1_step_error": null,
+        "round_medians_us": [
+          219.76999999999998,
+          220.34
+        ],
+        "measured_us": 220.06,
+        "kernel_times_us": [
+          219.84,
+          219.76,
+          219.72,
+          219.7,
+          219.78,
+          219.78,
+          219.74,
+          219.82,
+          220.28,
+          220.34,
+          220.42,
+          220.32,
+          220.38,
+          220.3,
+          220.34,
+          220.48
+        ]
+      },
+      "split": {
+        "mode": 3,
+        "core": [
+          384,
+          512,
+          192
+        ],
+        "base": [
+          128,
+          128,
+          64
+        ],
+        "stepKa": 3,
+        "stepKb": 3,
+        "block_dim": 20,
+        "max_relative_error": 0.0,
+        "source_tile_model_us": 250.98994,
+        "model_error": null,
+        "round_medians_us": [
+          265.98400000000004,
+          264.988
+        ],
+        "measured_us": 265.588,
+        "kernel_times_us": [
+          264.384,
+          265.704,
+          266.384,
+          265.784,
+          265.48,
+          266.184,
+          266.72,
+          266.504,
+          266.536,
+          264.424,
+          264.976,
+          265.696,
+          264.144,
+          265.04,
+          265.0,
+          264.32
+        ]
+      }
+    },
+    "faster_mode": 0,
+    "model_regret_pct": 20.68890302644735,
+    "master_regret_pct": 0.0
+  },
+  {
+    "shape": [
+      512,
+      512,
+      27392
+    ],
+    "model_mode": 3,
+    "model_winner_us": 232.34859,
+    "arms": {
+      "default": {
+        "mode": 3,
+        "core": [
+          384,
+          512,
+          192
+        ],
+        "base": [
+          128,
+          128,
+          64
+        ],
+        "stepKa": 3,
+        "stepKb": 3,
+        "block_dim": 20,
+        "max_relative_error": 0.0
+      },
+      "base": {
+        "mode": 0,
+        "core": [
+          112,
+          128,
+          27392
+        ],
+        "base": [
+          112,
+          128,
+          64
+        ],
+        "stepKa": 4,
+        "stepKb": 4,
+        "block_dim": 20,
+        "max_relative_error": 0.0,
+        "source_tile_model_us": 232.958814,
+        "model_error": null,
+        "l1_step_diagnostic_us": 220.842062,
+        "l1_step_error": null,
+        "round_medians_us": [
+          220.84,
+          220.3
+        ],
+        "measured_us": 220.572,
+        "kernel_times_us": [
+          220.84,
+          220.86,
+          220.84,
+          220.82,
+          220.84,
+          220.8,
+          220.96,
+          220.9,
+          220.344,
+          220.32,
+          220.28,
+          220.32,
+          220.296,
+          220.24,
+          220.304,
+          220.264
+        ]
+      },
+      "split": {
+        "mode": 3,
+        "core": [
+          384,
+          512,
+          192
+        ],
+        "base": [
+          128,
+          128,
+          64
+        ],
+        "stepKa": 3,
+        "stepKb": 3,
+        "block_dim": 20,
+        "max_relative_error": 0.0,
+        "source_tile_model_us": 250.98994,
+        "model_error": null,
+        "round_medians_us": [
+          265.53,
+          265.53999999999996
+        ],
+        "measured_us": 265.53999999999996,
+        "kernel_times_us": [
+          264.8,
+          264.92,
+          266.34,
+          266.62,
+          264.64,
+          266.0,
+          266.02,
+          265.06,
+          264.304,
+          266.344,
+          266.28,
+          265.64,
+          265.44,
+          265.864,
+          265.24,
+          264.824
+        ]
+      }
+    },
+    "faster_mode": 0,
+    "model_regret_pct": 20.38699381607818,
+    "master_regret_pct": 20.38699381607818
+  },
+  {
+    "shape": [
+      2048,
+      64,
+      27392
+    ],
+    "model_mode": 0,
+    "model_winner_us": 187.49823,
+    "arms": {
+      "default": {
+        "mode": 3,
+        "core": [
+          2048,
+          384,
+          192
+        ],
+        "base": [
+          128,
+          128,
+          64
+        ],
+        "stepKa": 3,
+        "stepKb": 3,
+        "block_dim": 20,
+        "max_relative_error": 0.0
+      },
+      "base": {
+        "mode": 0,
+        "core": [
+          112,
+          128,
+          27392
+        ],
+        "base": [
+          112,
+          128,
+          64
+        ],
+        "stepKa": 4,
+        "stepKb": 4,
+        "block_dim": 20,
+        "max_relative_error": 0.0,
+        "source_tile_model_us": null,
+        "model_error": "2048x64x27392: spatial single-core output tile exceeds the shape",
+        "l1_step_diagnostic_us": null,
+        "l1_step_error": "2048x64x27392: spatial single-core output tile exceeds the shape",
+        "round_medians_us": [
+          201.192,
+          201.25
+        ],
+        "measured_us": 201.25,
+        "kernel_times_us": [
+          200.76,
+          202.376,
+          201.624,
+          200.624,
+          199.096,
+          203.0,
+          201.784,
+          200.6,
+          202.18,
+          199.94,
+          201.14,
+          199.54,
+          202.64,
+          202.76,
+          201.22,
+          201.28
+        ]
+      },
+      "split": {
+        "mode": 3,
+        "core": [
+          2048,
+          384,
+          192
+        ],
+        "base": [
+          128,
+          128,
+          64
+        ],
+        "stepKa": 3,
+        "stepKb": 3,
+        "block_dim": 20,
+        "max_relative_error": 0.0,
+        "source_tile_model_us": 202.233673,
+        "model_error": null,
+        "round_medians_us": [
+          245.628,
+          238.05
+        ],
+        "measured_us": 242.7,
+        "kernel_times_us": [
+          243.816,
+          244.816,
+          246.44,
+          243.2,
+          247.416,
+          244.344,
+          248.12,
+          247.76,
+          242.0,
+          242.2,
+          237.3,
+          239.46,
+          238.1,
+          237.66,
+          237.82,
+          238.0
+        ]
+      }
+    },
+    "faster_mode": 0,
+    "model_regret_pct": 0.0,
+    "master_regret_pct": 20.59627329192546
+  }
+]
