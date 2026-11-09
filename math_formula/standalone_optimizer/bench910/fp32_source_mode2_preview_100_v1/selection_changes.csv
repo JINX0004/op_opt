@@ -1,0 +1,10 @@
+index,shape,master_family,old_online_family,new_online_family,family_changed_vs_master,family_changed_vs_old,tiling_changed,master_core,new_online_core,master_us,old_online_us,online_us,master_over_online,old_online_over_new_online,rounds
+7,4608x64x27520,deterministic split-K,deterministic split-K,SC split-K mode 2,True,True,True,4608x384x192,232x64x256,549.6379999999999,551.888,491.32,1.1186965724985751,1.1232760726206954,2
+14,2048x1024x32512,deterministic split-K,deterministic split-K,SC split-K mode 2,True,True,True,2048x384x192,208x512x256,2110.264,2110.744,2273.626,0.9281491327069623,0.9283602492230472,2
+17,3072x1536x33024,SC split-K mode 2,SC split-K mode 2,deterministic split-K,True,True,True,160x1536x256,1536x384x192,5266.1939999999995,5266.484,4871.696,1.0809775486811983,1.0810370762050836,2
+36,2560x768x32768,deterministic split-K,SC split-K mode 2,deterministic split-K,False,True,False,2560x384x192,2560x384x192,2020.38,4654.32,2027.74,0.9963703433379033,2.295323858088315,1
+37,2304x1024x36864,deterministic split-K,deterministic split-K,SC split-K mode 2,True,True,True,2304x384x192,232x512x256,2631.244,2631.112,2910.6859999999997,0.9039944535411928,0.9039491034072381,2
+44,3072x2048x32768,SC split-K mode 2,SC split-K mode 2,deterministic split-K,True,True,True,160x2048x256,1536x384x192,7094.18,7078.1,6732.752,1.0536820604709634,1.0512937354591405,2
+61,8192x4096x32768,SC split-K mode 2,SC split-K mode 2,deterministic split-K,True,True,True,824x2048x192,2816x384x192,33588.441999999995,33620.852,36406.656,0.9225906933061908,0.9234809151381549,2
+98,4096x64x27392,deterministic split-K,deterministic split-K,SC split-K mode 2,True,True,True,4096x384x192,208x64x256,492.552,495.168,455.078,1.0823463230479171,1.088094788146208,2
+99,4096x64x27456,deterministic split-K,deterministic split-K,SC split-K mode 2,True,True,True,4096x384x192,208x64x256,485.202,485.612,482.47,1.0056625282400977,1.0065123220096586,2

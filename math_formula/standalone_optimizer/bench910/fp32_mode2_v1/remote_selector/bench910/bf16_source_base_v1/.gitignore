@@ -1,0 +1,4 @@
+__pycache__/
+worker_device*.log
+slot0_device*.log
+same_tile_repeat_*.log

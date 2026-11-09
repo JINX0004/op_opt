@@ -1,0 +1,130 @@
+[
+  {
+    "m": 65536,
+    "device": 6,
+    "arm": "large",
+    "round": 0,
+    "tiling": {
+      "singleCoreM": 3280,
+      "singleCoreN": 384,
+      "singleCoreK": 384,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 128,
+      "stepM": 1,
+      "stepN": 3,
+      "stepKa": 3,
+      "stepKb": 3,
+      "block_dim": 20,
+      "tilingEnableSplitCore": 5
+    },
+    "kernel_median_us": 317.80600000000004,
+    "max_relative_error": 0.0,
+    "counters_us": {
+      "Task Duration(us)": 317.80600000000004,
+      "aicore_time(us)": 290.615,
+      "aic_mac_time(us)": 264.52049999999997,
+      "aic_mte1_time(us)": 231.089,
+      "aic_mte2_time(us)": 164.4485,
+      "aic_fixpipe_time(us)": 185.47899999999998,
+      "aic_scalar_time(us)": 156.9715
+    },
+    "summary_csv": "/home/xianfei/solvebase_bench_20261025/cases/bf16_mode5_calib_v1/m65536_d6_r0_large/profile/PROF_000001_20261103161814828_03213313EDPHPGHD/mindstudio_profiler_output/op_summary_20261103161835.csv"
+  },
+  {
+    "m": 65536,
+    "device": 6,
+    "arm": "small",
+    "round": 0,
+    "tiling": {
+      "singleCoreM": 128,
+      "singleCoreN": 128,
+      "singleCoreK": 384,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 128,
+      "stepM": 1,
+      "stepN": 3,
+      "stepKa": 3,
+      "stepKb": 3,
+      "block_dim": 20,
+      "tilingEnableSplitCore": 5
+    },
+    "kernel_median_us": 884.758,
+    "max_relative_error": 0.0,
+    "counters_us": {
+      "Task Duration(us)": 884.758,
+      "aicore_time(us)": 867.5264999999999,
+      "aic_mac_time(us)": 274.0525,
+      "aic_mte1_time(us)": 229.797,
+      "aic_mte2_time(us)": 668.9110000000001,
+      "aic_fixpipe_time(us)": 188.9065,
+      "aic_scalar_time(us)": 696.4590000000001
+    },
+    "summary_csv": "/home/xianfei/solvebase_bench_20261025/cases/bf16_mode5_calib_v1/m65536_d6_r0_small/profile/PROF_000001_20261103161858654_03217569AFROOIRE/mindstudio_profiler_output/op_summary_20261103161920.csv"
+  },
+  {
+    "m": 65536,
+    "device": 6,
+    "arm": "small",
+    "round": 1,
+    "tiling": {
+      "singleCoreM": 128,
+      "singleCoreN": 128,
+      "singleCoreK": 384,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 128,
+      "stepM": 1,
+      "stepN": 3,
+      "stepKa": 3,
+      "stepKb": 3,
+      "block_dim": 20,
+      "tilingEnableSplitCore": 5
+    },
+    "kernel_median_us": 885.248,
+    "max_relative_error": 0.0,
+    "counters_us": {
+      "Task Duration(us)": 885.248,
+      "aicore_time(us)": 867.5015000000001,
+      "aic_mac_time(us)": 274.0415,
+      "aic_mte1_time(us)": 229.749,
+      "aic_mte2_time(us)": 668.737,
+      "aic_fixpipe_time(us)": 188.5445,
+      "aic_scalar_time(us)": 696.0930000000001
+    },
+    "summary_csv": "/home/xianfei/solvebase_bench_20261025/cases/bf16_mode5_calib_v1/m65536_d6_r1_small/profile/PROF_000001_20261103161943014_03222058KHENDCEK/mindstudio_profiler_output/op_summary_20261103162003.csv"
+  },
+  {
+    "m": 65536,
+    "device": 6,
+    "arm": "large",
+    "round": 1,
+    "tiling": {
+      "singleCoreM": 3280,
+      "singleCoreN": 384,
+      "singleCoreK": 384,
+      "baseM": 128,
+      "baseN": 128,
+      "baseK": 128,
+      "stepM": 1,
+      "stepN": 3,
+      "stepKa": 3,
+      "stepKb": 3,
+      "block_dim": 20,
+      "tilingEnableSplitCore": 5
+    },
+    "kernel_median_us": 318.628,
+    "max_relative_error": 0.0,
+    "counters_us": {
+      "Task Duration(us)": 318.628,
+      "aicore_time(us)": 291.349,
+      "aic_mac_time(us)": 264.541,
+      "aic_mte1_time(us)": 231.1255,
+      "aic_mte2_time(us)": 162.84949999999998,
+      "aic_fixpipe_time(us)": 185.6895,
+      "aic_scalar_time(us)": 158.131
+    },
+    "summary_csv": "/home/xianfei/solvebase_bench_20261025/cases/bf16_mode5_calib_v1/m65536_d6_r1_large/profile/PROF_000001_20261103162029150_03226438LQRGNCEM/mindstudio_profiler_output/op_summary_20261103162049.csv"
+  }
+]

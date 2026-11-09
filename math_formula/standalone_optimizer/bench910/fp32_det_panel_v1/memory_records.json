@@ -1,0 +1,176 @@
+[
+  {
+    "shape": [
+      8192,
+      384,
+      32768
+    ],
+    "device": 5,
+    "metric": "MemoryAccess",
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 3240.6344166666668,
+      "aic_total_cycles": 116662839.0,
+      "aic_read_main_memory_datas": 1196464.25,
+      "aic_write_main_memory_datas": 2101905.5,
+      "aic_GM_to_L1_datas": 1196352.0,
+      "aic_L0C_to_L1_datas": 0.0,
+      "aic_L0C_to_GM_datas": 2101248.0,
+      "aic_GM_to_UB_datas": 0.0,
+      "aic_UB_to_GM_datas": 0.0,
+      "aiv_total_time": 0.0,
+      "aiv_total_cycles": 0.0,
+      "aiv_read_main_memory_datas": 0.0,
+      "aiv_write_main_memory_datas": 0.0,
+      "aiv_GM_to_L1_datas": 0.0,
+      "aiv_L0C_to_L1_datas": 0.0,
+      "aiv_L0C_to_GM_datas": 0.0,
+      "aiv_GM_to_UB_datas": 0.0,
+      "aiv_UB_to_GM_datas": 0.0
+    }
+  },
+  {
+    "shape": [
+      8192,
+      3840,
+      32768
+    ],
+    "device": 5,
+    "metric": "MemoryAccess",
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 34134.55888888889,
+      "aic_total_cycles": 1228844120.0,
+      "aic_read_main_memory_datas": 11960750.625,
+      "aic_write_main_memory_datas": 21013272.5,
+      "aic_GM_to_L1_datas": 11960640.0,
+      "aic_L0C_to_L1_datas": 0.0,
+      "aic_L0C_to_GM_datas": 21012480.0,
+      "aic_GM_to_UB_datas": 0.0,
+      "aic_UB_to_GM_datas": 0.0,
+      "aiv_total_time": 0.0,
+      "aiv_total_cycles": 0.0,
+      "aiv_read_main_memory_datas": 0.0,
+      "aiv_write_main_memory_datas": 0.0,
+      "aiv_GM_to_L1_datas": 0.0,
+      "aiv_L0C_to_L1_datas": 0.0,
+      "aiv_L0C_to_GM_datas": 0.0,
+      "aiv_GM_to_UB_datas": 0.0,
+      "aiv_UB_to_GM_datas": 0.0
+    }
+  },
+  {
+    "shape": [
+      8192,
+      4096,
+      32768
+    ],
+    "device": 5,
+    "metric": "MemoryAccess",
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 36344.52475,
+      "aic_total_cycles": 1308402891.0,
+      "aic_read_main_memory_datas": 13107665.0,
+      "aic_write_main_memory_datas": 22414119.5,
+      "aic_GM_to_L1_datas": 13107520.0,
+      "aic_L0C_to_L1_datas": 0.0,
+      "aic_L0C_to_GM_datas": 22413312.0,
+      "aic_GM_to_UB_datas": 0.0,
+      "aic_UB_to_GM_datas": 0.0,
+      "aiv_total_time": 0.0,
+      "aiv_total_cycles": 0.0,
+      "aiv_read_main_memory_datas": 0.0,
+      "aiv_write_main_memory_datas": 0.0,
+      "aiv_GM_to_L1_datas": 0.0,
+      "aiv_L0C_to_L1_datas": 0.0,
+      "aiv_L0C_to_GM_datas": 0.0,
+      "aiv_GM_to_UB_datas": 0.0,
+      "aiv_UB_to_GM_datas": 0.0
+    }
+  },
+  {
+    "shape": [
+      8192,
+      384,
+      32768
+    ],
+    "device": 5,
+    "metric": "L2Cache",
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 3222.6886666666664,
+      "aic_total_cycles": 116016792.0,
+      "aic_write_cache_hit": 138800.0,
+      "aic_write_cache_miss_allocate": 722680.0,
+      "aic_r0_read_cache_hit": 431758.0,
+      "aic_r0_read_cache_miss_allocate": 4354068.0,
+      "aic_r1_read_cache_hit": 431656.0,
+      "aic_r1_read_cache_miss_allocate": 4354533.0,
+      "aiv_total_time": 0.0,
+      "aiv_total_cycles": 0.0,
+      "aiv_write_cache_hit": 0.0,
+      "aiv_write_cache_miss_allocate": 0.0,
+      "aiv_r0_read_cache_hit": 0.0,
+      "aiv_r0_read_cache_miss_allocate": 0.0,
+      "aiv_r1_read_cache_hit": 0.0,
+      "aiv_r1_read_cache_miss_allocate": 0.0
+    }
+  },
+  {
+    "shape": [
+      8192,
+      3840,
+      32768
+    ],
+    "device": 5,
+    "metric": "L2Cache",
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 34091.268027777776,
+      "aic_total_cycles": 1227285649.0,
+      "aic_write_cache_hit": 15.0,
+      "aic_write_cache_miss_allocate": 11506114.0,
+      "aic_r0_read_cache_hit": 4714740.0,
+      "aic_r0_read_cache_miss_allocate": 43127692.0,
+      "aic_r1_read_cache_hit": 4713720.0,
+      "aic_r1_read_cache_miss_allocate": 43129969.0,
+      "aiv_total_time": 0.0,
+      "aiv_total_cycles": 0.0,
+      "aiv_write_cache_hit": 0.0,
+      "aiv_write_cache_miss_allocate": 0.0,
+      "aiv_r0_read_cache_hit": 0.0,
+      "aiv_r0_read_cache_miss_allocate": 0.0,
+      "aiv_r1_read_cache_hit": 0.0,
+      "aiv_r1_read_cache_miss_allocate": 0.0
+    }
+  },
+  {
+    "shape": [
+      8192,
+      4096,
+      32768
+    ],
+    "device": 5,
+    "metric": "L2Cache",
+    "max_relative_error": 0.0,
+    "metrics": {
+      "aic_total_time": 36329.32313888889,
+      "aic_total_cycles": 1307855633.0,
+      "aic_write_cache_hit": 97180.0,
+      "aic_write_cache_miss_allocate": 11701808.0,
+      "aic_r0_read_cache_hit": 5276086.0,
+      "aic_r0_read_cache_miss_allocate": 47154615.0,
+      "aic_r1_read_cache_hit": 5275986.0,
+      "aic_r1_read_cache_miss_allocate": 47154399.0,
+      "aiv_total_time": 0.0,
+      "aiv_total_cycles": 0.0,
+      "aiv_write_cache_hit": 0.0,
+      "aiv_write_cache_miss_allocate": 0.0,
+      "aiv_r0_read_cache_hit": 0.0,
+      "aiv_r0_read_cache_miss_allocate": 0.0,
+      "aiv_r1_read_cache_hit": 0.0,
+      "aiv_r1_read_cache_miss_allocate": 0.0
+    }
+  }
+]

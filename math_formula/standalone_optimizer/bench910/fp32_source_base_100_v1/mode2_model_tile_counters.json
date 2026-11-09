@@ -1,0 +1,74 @@
+{
+  "master": {
+    "pipe_us": {
+      "aic_total_time": 1896.8709444444444,
+      "aic_mte1_time": 749.9763611111111,
+      "aic_mte2_time": 932.9678611111111,
+      "aic_mac_time": 1749.37875,
+      "aic_fixpipe_time": 841.5149166666666,
+      "aic_scalar_time": 573.2356388888888
+    },
+    "traffic_counter": {
+      "aic_GM_to_L1_datas": 753984.0,
+      "aic_read_main_memory_datas": 753988.875,
+      "aic_L0C_to_GM_datas": 1313280.0,
+      "aic_write_main_memory_datas": 1313932.5
+    },
+    "l2_counter": {
+      "aic_r0_read_cache_hit": 343849.0,
+      "aic_r0_read_cache_miss_allocate": 2672026.0,
+      "aic_r1_read_cache_hit": 343395.0,
+      "aic_r1_read_cache_miss_allocate": 2672442.0
+    },
+    "l2_read_hit_fraction": 0.11393846390543845,
+    "max_relative_error": 0.0
+  },
+  "online_source": {
+    "pipe_us": {
+      "aic_total_time": 4663.30075,
+      "aic_mte1_time": 750.9796111111112,
+      "aic_mte2_time": 3661.6973888888892,
+      "aic_mac_time": 1761.0666666666668,
+      "aic_fixpipe_time": 1065.8852222222224,
+      "aic_scalar_time": 607.0556944444445
+    },
+    "traffic_counter": {
+      "aic_GM_to_L1_datas": 2949440.0,
+      "aic_read_main_memory_datas": 2949178.375,
+      "aic_L0C_to_GM_datas": 983040.0,
+      "aic_write_main_memory_datas": 983687.5
+    },
+    "l2_counter": {
+      "aic_r0_read_cache_hit": 6685184.0,
+      "aic_r0_read_cache_miss_allocate": 5111521.0,
+      "aic_r1_read_cache_hit": 6684588.0,
+      "aic_r1_read_cache_miss_allocate": 5112120.0
+    },
+    "l2_read_hit_fraction": 0.5666739271677226,
+    "max_relative_error": 0.0
+  },
+  "online_model_tile": {
+    "pipe_us": {
+      "aic_total_time": 2704.930861111111,
+      "aic_mte1_time": 766.7776666666667,
+      "aic_mte2_time": 2082.306361111111,
+      "aic_mac_time": 1752.1447222222225,
+      "aic_fixpipe_time": 733.6217222222222,
+      "aic_scalar_time": 521.6753055555555
+    },
+    "traffic_counter": {
+      "aic_GM_to_L1_datas": 2294080.0,
+      "aic_read_main_memory_datas": 2293813.625,
+      "aic_L0C_to_GM_datas": 983040.0,
+      "aic_write_main_memory_datas": 983687.5
+    },
+    "l2_counter": {
+      "aic_r0_read_cache_hit": 7471297.0,
+      "aic_r0_read_cache_miss_allocate": 1703979.0,
+      "aic_r1_read_cache_hit": 7471353.0,
+      "aic_r1_read_cache_miss_allocate": 1703921.0
+    },
+    "l2_read_hit_fraction": 0.8142889450179968,
+    "max_relative_error": 0.0
+  }
+}

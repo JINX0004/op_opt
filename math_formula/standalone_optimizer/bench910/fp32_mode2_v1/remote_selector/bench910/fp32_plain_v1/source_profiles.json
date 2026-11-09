@@ -1,0 +1,132 @@
+[
+  {
+    "shape": [
+      256,
+      256,
+      1024
+    ],
+    "mode": 0,
+    "profile": {
+      "durations_us": [
+        11.144,
+        11.184,
+        10.84,
+        11.12,
+        11.04
+      ],
+      "kernel_count": 5,
+      "kernel_names": [
+        "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65536"
+      ],
+      "kind": "msprof_kernel",
+      "max_us": 11.184,
+      "median_us": 11.12,
+      "min_us": 10.84,
+      "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_plain_v1/256x256x1024/profile/PROF_000001_20261105142151336_03772836AABBHBAN/mindstudio_profiler_output/task_time_20261105142211.csv"
+    }
+  },
+  {
+    "shape": [
+      128,
+      128,
+      32768
+    ],
+    "mode": 3,
+    "profile": {
+      "durations_us": [
+        40.8,
+        42.12,
+        42.4,
+        41.904,
+        42.12
+      ],
+      "kernel_count": 5,
+      "kernel_names": [
+        "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65584"
+      ],
+      "kind": "msprof_kernel",
+      "max_us": 42.4,
+      "median_us": 42.12,
+      "min_us": 40.8,
+      "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_plain_v1/128x128x32768/profile/PROF_000001_20261105142215309_03776201CABLJBCJ/mindstudio_profiler_output/task_time_20261105142231.csv"
+    }
+  },
+  {
+    "shape": [
+      2048,
+      2048,
+      4096
+    ],
+    "mode": 0,
+    "profile": {
+      "durations_us": [
+        516.08,
+        515.976,
+        516.056,
+        516.096,
+        516.08
+      ],
+      "kernel_count": 5,
+      "kernel_names": [
+        "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65536"
+      ],
+      "kind": "msprof_kernel",
+      "max_us": 516.096,
+      "median_us": 516.08,
+      "min_us": 515.976,
+      "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_plain_v1/2048x2048x4096/profile/PROF_000001_20261105142234715_03778873BBAFCRQC/mindstudio_profiler_output/task_time_20261105142254.csv"
+    }
+  },
+  {
+    "shape": [
+      512,
+      512,
+      4096
+    ],
+    "mode": 0,
+    "profile": {
+      "durations_us": [
+        39.52,
+        39.54,
+        39.62,
+        39.5,
+        39.36
+      ],
+      "kernel_count": 5,
+      "kernel_names": [
+        "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65536"
+      ],
+      "kind": "msprof_kernel",
+      "max_us": 39.62,
+      "median_us": 39.52,
+      "min_us": 39.36,
+      "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_plain_v1/512x512x4096/profile/PROF_000001_20261105142257925_03781708CHMREBKK/mindstudio_profiler_output/task_time_20261105142317.csv"
+    }
+  },
+  {
+    "shape": [
+      49152,
+      384,
+      1536
+    ],
+    "mode": 0,
+    "profile": {
+      "durations_us": [
+        821.56,
+        824.08,
+        820.04,
+        820.576,
+        823.44
+      ],
+      "kernel_count": 5,
+      "kernel_names": [
+        "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65536"
+      ],
+      "kind": "msprof_kernel",
+      "max_us": 824.08,
+      "median_us": 821.56,
+      "min_us": 820.04,
+      "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_plain_v1/49152x384x1536/profile/PROF_000001_20261105143620080_03879378NQCKKDHR/mindstudio_profiler_output/task_time_20261105143639.csv"
+    }
+  }
+]

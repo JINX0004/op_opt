@@ -339,3 +339,39 @@ This is a reproducible substitution into the reduced objective, not a
 measured FP32 kernel runtime. In particular, it inherits the uncalibrated
 FP32 vector parameters and omits final-output byte service as noted
 above.
+
+## Measured FP32 outer-panel service at a large source tile
+
+The [fixed-tile 910B3 panel sweep](bench910/fp32_det_panel_v1/README.md)
+holds $M=8192$, $K=32768$, and the source deterministic tile
+$(C_M,C_N,C_K)=(2816,384,192)$ fixed while varying $N$ from 384 to
+4096. All eleven source tilings and outputs were audited. For one
+through ten full 384-column outer panels, the two order-reversed
+measurements yield a **3393.7-µs** median-series slope per panel;
+the formula above adds **3019.9 µs** per panel. Its 373.8-µs
+per-panel shortfall accounts for roughly 4.0 ms of the 4.18-ms
+underestimate at the eleven-panel shape. The 11-panel deterministic
+source kernel measures 36.418 ms, versus a 32.241-ms score; the
+source mode-2 alternative measures about 33.588 ms.
+
+The current full-panel terms are 3019.9 µs Cube, 2873.0 µs modeled
+input service, and 26.1 µs vector reduction. The input branch sits
+within 4.9% of Cube, so small service or overlap errors can change
+the critical path. The device counters show additional MTE2 and
+Fixpipe activity as panels accumulate; requested GM→L1 and L0C→GM
+traffic grow approximately linearly. Mode 2 requests more GM→L1
+traffic and the same L0C→GM traffic at $N=4096$ but runs faster.
+This points to schedule and service geometry rather than a correction
+based only on byte counts. Busy-time counters overlap and do not
+identify the exact exposed wait. The next formulation should retain
+the source's two-buffer panel dependencies and explicitly represent
+partial-workspace output, vector reduction, and per-panel
+synchronization before fitting or assigning service times.
+
+## Workspace timeline trial
+
+The workspace timeline trial was retired after its 100-shape FP32
+selector test. It improved the fixed-tile panel sweep and made the
+experimental selector 1.87% slower than the existing online selector
+by geometric mean kernel time. The results remain available in the
+[selector test report](bench910/fp32_det_panel_selector_v1/README.md).

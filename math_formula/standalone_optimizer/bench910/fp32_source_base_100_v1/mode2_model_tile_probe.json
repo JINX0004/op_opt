@@ -1,0 +1,366 @@
+{
+  "audits": {
+    "master": {
+      "arm": "master",
+      "device": 4,
+      "event": {
+        "batch": 0,
+        "device": 4,
+        "dtype": "fp32",
+        "first_host_us": 5374053.201,
+        "first_wall_us": 5376310.843,
+        "host_median_us": 563.486,
+        "input_pattern": "mod4_exact_fp32",
+        "k": 32768,
+        "kind": "matmul_v3_event",
+        "m": 2560,
+        "max_abs_error": 0.0,
+        "max_relative_error": 0.0,
+        "max_us": 2442.719936,
+        "median_us": 2442.719936,
+        "min_us": 2442.719936,
+        "n": 768,
+        "pid": 966747,
+        "repetitions": 1,
+        "run_id": 1794217983884,
+        "tiling_verified": false,
+        "wall_median_us": 2668.456,
+        "warmup": 0,
+        "workspace_bytes": null
+      },
+      "index": 36,
+      "shape": [
+        2560,
+        768,
+        32768
+      ],
+      "tiling": {
+        "baseK": 64,
+        "baseM": 128,
+        "baseN": 128,
+        "block_dim": 20,
+        "depthA1": 6,
+        "depthB1": 9,
+        "estimated_nonidle_aics": 2,
+        "family": "OTHER",
+        "kValue": 32768,
+        "kind": "matmul_v3_tiling",
+        "mValue": 2560,
+        "nValue": 768,
+        "nd2nzA": 0,
+        "nd2nzB": 0,
+        "output_tiles": 2,
+        "plog": "/home/xianfei/ascend/log/debug/plog/plog-966747_20261109175256479.log",
+        "singleCoreK": 192,
+        "singleCoreM": 2560,
+        "singleCoreN": 384,
+        "stepKa": 3,
+        "stepKb": 3,
+        "stepM": 1,
+        "stepN": 3,
+        "tilingEnableFixOpti": 0,
+        "tilingEnableFullLoad": 0,
+        "tilingEnableSplitCore": 3,
+        "tiling_key": 65584,
+        "tiling_source": "/home/xianfei/dev/ops-nn-sribd-master-bf16/matmul/mat_mul_v3/op_host/op_tiling/matmul_v3_l2_cache.cpp",
+        "workspace_bytes": 178257920
+      }
+    },
+    "online": {
+      "arm": "online",
+      "device": 4,
+      "event": {
+        "batch": 0,
+        "device": 4,
+        "dtype": "fp32",
+        "first_host_us": 5755819.531,
+        "first_wall_us": 5758221.354,
+        "host_median_us": 576.535,
+        "input_pattern": "mod4_exact_fp32",
+        "k": 32768,
+        "kind": "matmul_v3_event",
+        "m": 2560,
+        "max_abs_error": 0.0,
+        "max_relative_error": 0.0,
+        "max_us": 3131.740093,
+        "median_us": 3131.740093,
+        "min_us": 3131.740093,
+        "n": 768,
+        "pid": 967466,
+        "repetitions": 1,
+        "run_id": 1794217998208,
+        "tiling_verified": false,
+        "wall_median_us": 3368.103,
+        "warmup": 0,
+        "workspace_bytes": null
+      },
+      "index": 36,
+      "shape": [
+        2560,
+        768,
+        32768
+      ],
+      "tiling": {
+        "baseK": 64,
+        "baseM": 128,
+        "baseN": 128,
+        "block_dim": 20,
+        "depthA1": 8,
+        "depthB1": 8,
+        "estimated_nonidle_aics": 20,
+        "family": "OTHER",
+        "kValue": 32768,
+        "kind": "matmul_v3_tiling",
+        "mValue": 2560,
+        "nValue": 768,
+        "nd2nzA": 0,
+        "nd2nzB": 0,
+        "output_tiles": 20,
+        "plog": "/home/xianfei/ascend/log/debug/plog/plog-967466_20261109175310437.log",
+        "singleCoreK": 256,
+        "singleCoreM": 128,
+        "singleCoreN": 768,
+        "stepKa": 4,
+        "stepKb": 4,
+        "stepM": 2,
+        "stepN": 1,
+        "tilingEnableFixOpti": 0,
+        "tilingEnableFullLoad": 0,
+        "tilingEnableSplitCore": 2,
+        "tiling_key": 65568,
+        "tiling_source": "/home/xianfei/dev/ops-nn-sribd-mip-selector/matmul/mat_mul_v3/op_host/op_tiling/matmul_v3_l2_cache.cpp",
+        "workspace_bytes": 28835840
+      }
+    }
+  },
+  "device": 4,
+  "host_sha256": "fcb430a4353c7389b62051e15f9952f2a0db7ed8e5f7698d015c5cecb91a315d",
+  "index": 36,
+  "measurements": [
+    {
+      "arm": "master",
+      "device": 4,
+      "event": {
+        "batch": 0,
+        "device": 4,
+        "dtype": "fp32",
+        "first_host_us": 5431252.172,
+        "first_wall_us": 5433635.946,
+        "host_median_us": 48.9,
+        "input_pattern": "mod4_exact_fp32",
+        "k": 32768,
+        "kind": "matmul_v3_event",
+        "m": 2560,
+        "max_abs_error": 0.0,
+        "max_relative_error": 0.0,
+        "max_us": 2212.960005,
+        "median_us": 2078.540087,
+        "min_us": 2066.499949,
+        "n": 768,
+        "pid": 968207,
+        "repetitions": 5,
+        "run_id": 1794218012196,
+        "tiling_verified": false,
+        "wall_median_us": 2152.941,
+        "warmup": 5,
+        "workspace_bytes": null
+      },
+      "index": 36,
+      "mode": 3,
+      "profile": {
+        "durations_us": [
+          2036.536,
+          2033.96,
+          2032.744,
+          2033.904,
+          2036.136
+        ],
+        "kernel_count": 5,
+        "kernel_names": [
+          "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65584"
+        ],
+        "kind": "msprof_kernel",
+        "max_us": 2036.536,
+        "median_us": 2033.96,
+        "min_us": 2032.744,
+        "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_mode2_model_tile_2560x768x32768/device4/036_2560x768x32768/round0/master/msprof/PROF_000001_20261109175325957_00968207RAHPELOQ/mindstudio_profiler_output/task_time_20261109175337.csv"
+      },
+      "round": 0,
+      "shape": [
+        2560,
+        768,
+        32768
+      ]
+    },
+    {
+      "arm": "online",
+      "device": 4,
+      "event": {
+        "batch": 0,
+        "device": 4,
+        "dtype": "fp32",
+        "first_host_us": 5820493.334,
+        "first_wall_us": 5823057.009,
+        "host_median_us": 59.471,
+        "input_pattern": "mod4_exact_fp32",
+        "k": 32768,
+        "kind": "matmul_v3_event",
+        "m": 2560,
+        "max_abs_error": 0.0,
+        "max_relative_error": 0.0,
+        "max_us": 2808.340073,
+        "median_us": 2766.160011,
+        "min_us": 2750.780106,
+        "n": 768,
+        "pid": 969191,
+        "repetitions": 5,
+        "run_id": 1794218029146,
+        "tiling_verified": false,
+        "wall_median_us": 2840.478,
+        "warmup": 5,
+        "workspace_bytes": null
+      },
+      "index": 36,
+      "mode": 2,
+      "profile": {
+        "durations_us": [
+          2703.48,
+          2704.98,
+          2702.36,
+          2703.78,
+          2702.96
+        ],
+        "kernel_count": 5,
+        "kernel_names": [
+          "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65568"
+        ],
+        "kind": "msprof_kernel",
+        "max_us": 2704.98,
+        "median_us": 2703.48,
+        "min_us": 2702.36,
+        "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_mode2_model_tile_2560x768x32768/device4/036_2560x768x32768/round0/online/msprof/PROF_000001_20261109175342525_00969191LMICLCEI/mindstudio_profiler_output/task_time_20261109175356.csv"
+      },
+      "round": 0,
+      "shape": [
+        2560,
+        768,
+        32768
+      ]
+    },
+    {
+      "arm": "online",
+      "device": 4,
+      "event": {
+        "batch": 0,
+        "device": 4,
+        "dtype": "fp32",
+        "first_host_us": 5327288.36,
+        "first_wall_us": 5329863.305,
+        "host_median_us": 49.041,
+        "input_pattern": "mod4_exact_fp32",
+        "k": 32768,
+        "kind": "matmul_v3_event",
+        "m": 2560,
+        "max_abs_error": 0.0,
+        "max_relative_error": 0.0,
+        "max_us": 2814.059973,
+        "median_us": 2756.720066,
+        "min_us": 2745.579958,
+        "n": 768,
+        "pid": 970182,
+        "repetitions": 5,
+        "run_id": 1794218048153,
+        "tiling_verified": false,
+        "wall_median_us": 2813.508,
+        "warmup": 5,
+        "workspace_bytes": null
+      },
+      "index": 36,
+      "mode": 2,
+      "profile": {
+        "durations_us": [
+          2699.88,
+          2701.68,
+          2701.88,
+          2700.38,
+          2700.22
+        ],
+        "kernel_count": 5,
+        "kernel_names": [
+          "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65568"
+        ],
+        "kind": "msprof_kernel",
+        "max_us": 2701.88,
+        "median_us": 2700.38,
+        "min_us": 2699.88,
+        "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_mode2_model_tile_2560x768x32768/device4/036_2560x768x32768/round1/online/msprof/PROF_000001_20261109175402017_00970182COHGHMNG/mindstudio_profiler_output/task_time_20261109175413.csv"
+      },
+      "round": 1,
+      "shape": [
+        2560,
+        768,
+        32768
+      ]
+    },
+    {
+      "arm": "master",
+      "device": 4,
+      "event": {
+        "batch": 0,
+        "device": 4,
+        "dtype": "fp32",
+        "first_host_us": 5427954.771,
+        "first_wall_us": 5430344.405,
+        "host_median_us": 165.062,
+        "input_pattern": "mod4_exact_fp32",
+        "k": 32768,
+        "kind": "matmul_v3_event",
+        "m": 2560,
+        "max_abs_error": 0.0,
+        "max_relative_error": 0.0,
+        "max_us": 2213.459969,
+        "median_us": 2177.599907,
+        "min_us": 2076.440096,
+        "n": 768,
+        "pid": 971161,
+        "repetitions": 5,
+        "run_id": 1794218064850,
+        "tiling_verified": false,
+        "wall_median_us": 2279.692,
+        "warmup": 5,
+        "workspace_bytes": null
+      },
+      "index": 36,
+      "mode": 3,
+      "profile": {
+        "durations_us": [
+          2030.5,
+          2030.46,
+          2030.82,
+          2030.24,
+          2031.96
+        ],
+        "kernel_count": 5,
+        "kernel_names": [
+          "MatMulV3_ND_ND_ND_ND_FP32_FP32_FP32_FP32_high_performance_65584"
+        ],
+        "kind": "msprof_kernel",
+        "max_us": 2031.96,
+        "median_us": 2030.5,
+        "min_us": 2030.24,
+        "profile_csv": "/home/xianfei/solvebase_bench_20261025/cases/fp32_mode2_model_tile_2560x768x32768/device4/036_2560x768x32768/round1/master/msprof/PROF_000001_20261109175418648_00971161HAPFQJRQ/mindstudio_profiler_output/task_time_20261109175432.csv"
+      },
+      "round": 1,
+      "shape": [
+        2560,
+        768,
+        32768
+      ]
+    }
+  ],
+  "shape": [
+    2560,
+    768,
+    32768
+  ]
+}

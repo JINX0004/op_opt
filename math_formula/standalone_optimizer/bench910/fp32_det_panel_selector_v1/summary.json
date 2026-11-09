@@ -1,0 +1,32 @@
+{
+  "audits": 100,
+  "rescored_deterministic_candidates": 100,
+  "fresh_cases": 17,
+  "tile_changes_vs_legacy": 15,
+  "family_changes_vs_legacy": 15,
+  "family_differences_vs_master": 32,
+  "legacy_over_new": {
+    "count": 100,
+    "geomean": 0.9816055816215458,
+    "new_faster_5pct": 1,
+    "new_slower_5pct": 6
+  },
+  "master_over_new": {
+    "count": 100,
+    "geomean": 1.0107558447323355,
+    "new_faster_5pct": 20,
+    "new_slower_5pct": 9
+  },
+  "legacy_over_new_family_changes": {
+    "count": 15,
+    "geomean": 0.8835818673140964,
+    "new_faster_5pct": 1,
+    "new_slower_5pct": 6
+  },
+  "master_over_new_family_changes": {
+    "count": 15,
+    "geomean": 0.9204921398794266,
+    "new_faster_5pct": 4,
+    "new_slower_5pct": 3
+  }
+}

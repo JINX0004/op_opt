@@ -1,0 +1,8 @@
+index,shape,device,master_family,online_family,previous_online_family,changed_vs_previous_online,family_changed,tiling_changed,master_core,online_core,master_us,online_us,master_over_online,rounds
+4,1536x96x24448,4,BASE,deterministic split-K,BASE,True,True,True,80x96x24448,1536x384x192,189.13,142.16000000000003,1.3304023635340458,2
+8,4096x96x24576,4,BASE,deterministic split-K,deterministic split-K,False,True,True,128x96x24576,4096x384x192,1018.83,518.418,1.9652674096964227,2
+9,5120x128x24448,5,BASE,deterministic split-K,deterministic split-K,False,True,True,128x128x24448,5120x384x192,644.454,580.142,1.1108556181072908,2
+11,768x512x27520,7,deterministic split-K,BASE,deterministic split-K,True,True,True,768x384x192,80x256x27520,371.698,312.868,1.1880345704897912,2
+15,2816x1024x32896,7,SC split-K mode 2,deterministic split-K,BASE,True,True,True,144x1024x256,2816x384x192,3482.32,2893.536,1.2034825210400009,2
+16,2048x1536x32704,4,SC split-K mode 2,BASE,BASE,False,True,True,208x768x256,128x256x32704,3277.2219999999998,2914.74,1.1243616926381084,2
+18,1024x2304x36736,6,SC split-K mode 2,deterministic split-K,deterministic split-K,False,True,True,256x512x256,384x2304x192,2952.068,2694.5060000000003,1.0955878368799328,2

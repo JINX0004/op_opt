@@ -1,0 +1,130 @@
+[
+  {
+    "shape": [
+      16,
+      16,
+      102400
+    ],
+    "base": 30.053,
+    "deterministic_split_k": 12.36,
+    "mode2": -1.0,
+    "mode5": -1.0,
+    "mode6": -1.0
+  },
+  {
+    "shape": [
+      384,
+      49152,
+      1536
+    ],
+    "base": 416.102,
+    "deterministic_split_k": 516.653,
+    "mode2": 785.417,
+    "mode5": -1.0,
+    "mode6": -1.0
+  },
+  {
+    "shape": [
+      384,
+      65536,
+      1536
+    ],
+    "error": "  what():  preflight requires 256-byte aligned K and direct/on-the-way B transfer"
+  },
+  {
+    "shape": [
+      2048,
+      2048,
+      27392
+    ],
+    "base": 1584.01,
+    "deterministic_split_k": 1612.454,
+    "mode2": 2834.637,
+    "mode5": -1.0,
+    "mode6": 1286.227
+  },
+  {
+    "shape": [
+      2304,
+      768,
+      32768
+    ],
+    "base": 829.45,
+    "deterministic_split_k": 823.581,
+    "mode2": 1449.581,
+    "mode5": -1.0,
+    "mode6": 818.422
+  },
+  {
+    "shape": [
+      2560,
+      1024,
+      32768
+    ],
+    "base": 1177.491,
+    "deterministic_split_k": 1206.942,
+    "mode2": 1931.789,
+    "mode5": -1.0,
+    "mode6": 1167.602
+  },
+  {
+    "shape": [
+      2560,
+      1024,
+      73728
+    ],
+    "base": 3006.169,
+    "deterministic_split_k": 2369.13,
+    "mode2": 4711.736,
+    "mode5": -1.0,
+    "mode6": -1.0
+  },
+  {
+    "shape": [
+      49152,
+      384,
+      1536
+    ],
+    "base": 416.102,
+    "deterministic_split_k": 516.653,
+    "mode2": -1.0,
+    "mode5": 785.417,
+    "mode6": -1.0
+  },
+  {
+    "shape": [
+      65536,
+      256,
+      1536
+    ],
+    "base": 371.408,
+    "deterministic_split_k": 462.42,
+    "mode2": -1.0,
+    "mode5": -1.0,
+    "mode6": -1.0
+  },
+  {
+    "shape": [
+      65536,
+      384,
+      1536
+    ],
+    "base": 552.978,
+    "deterministic_split_k": 683.197,
+    "mode2": -1.0,
+    "mode5": 1041.713,
+    "mode6": -1.0
+  },
+  {
+    "shape": [
+      81920,
+      384,
+      1536
+    ],
+    "base": 689.855,
+    "deterministic_split_k": 849.741,
+    "mode2": -1.0,
+    "mode5": 1298.009,
+    "mode6": -1.0
+  }
+]

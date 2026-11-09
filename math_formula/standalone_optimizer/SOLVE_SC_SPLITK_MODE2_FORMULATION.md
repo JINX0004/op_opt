@@ -749,3 +749,37 @@ logical K or B footprint. The event model must account for the
 using an A/B copy rate on the critical path. A fifth, wide-N,
 three-panel tile faults with the experimental `Ka != Kb` stride path,
 so the fixed-work conclusion has not been validated for that tile.
+
+### Source-emitted mode-2 tile in the online family decision
+
+The online MatMulV3 integration applies a **family** choice and then
+reruns the source tiler. Consequently, an optimized mode-2 geometry
+that the source will never emit is not an executable online alternative.
+For workload $w$, let $H_2(w)$ denote the mode-2 tile emitted by the
+source under the forced mode-2 path. The FP32 online scorer now previews
+$\tilde t_2=H_2(w)$, restores host state, and replaces its hypothetical
+mode-2 candidate with
+
+$$
+S_2(w)=\widehat T_2(w,\tilde t_2),\qquad
+\tilde t_2\in\mathcal F_2(w).
+$$
+
+If the preview or model memory preflight fails, mode 2 is absent from
+the family comparison. The source-emitted flag bypasses only the
+model's ordinary `singleCoreN >= 512` spatial heuristic for FP32 mode 2;
+storage limits still apply. The score-cache key includes the previewed
+tile. The eventual general formulation should score every family at
+its source-emitted tile $H_f(w)$, or provide a mechanism for executing
+the optimizer's chosen tile.
+
+The [100-shape paired 910B3 experiment](bench910/fp32_source_mode2_preview_100_v1/README.md)
+found a 1.0297 geometric-mean master/online kernel-runtime ratio, with
+31 changed-family cases. It corrects `2560×768×32768`: the old selector
+scored a non-emitted `128×768×256` tile but ran `128×256×256`; the new
+selector compares the latter and chooses the same deterministic family
+as master. Three new family decisions are slower than master by 7.7%,
+10.6%, and 8.4%. Their predicted family advantages were only 1.1%,
+0.14%, and 0.17%, respectively. This demonstrates that source-tile
+consistency is necessary for a valid comparison but does not resolve
+the mode-2 service and overlap error described above.

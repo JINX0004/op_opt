@@ -1,0 +1,32 @@
+diff --git a/matmul/mat_mul_v3/op_host/mat_mul_v3_infershape.cpp b/matmul/mat_mul_v3/op_host/mat_mul_v3_infershape.cpp
+--- a/matmul/mat_mul_v3/op_host/mat_mul_v3_infershape.cpp
++++ b/matmul/mat_mul_v3/op_host/mat_mul_v3_infershape.cpp
+@@ -202,7 +202,25 @@
+     return ge::GRAPH_SUCCESS;
+ }
+-
++
++// Benchmark-only registration: direct aclop BF16 dispatch asks GE for an
++// explicit dtype inference callback before it reaches the host tiler. Keep
++// the caller's specified output type (including FP32 mixed output).
++static ge::graphStatus InferDataTypeForMatMulV3(gert::InferDataTypeContext* context)
++{
++    if (context == nullptr) {
++        return ge::GRAPH_FAILED;
++    }
++    if (context->GetOutputDataType(0) == ge::DT_UNDEFINED) {
++        const auto input_type = context->GetInputDataType(0);
++        if (input_type == ge::DT_UNDEFINED) {
++            return ge::GRAPH_FAILED;
++        }
++        context->SetOutputDataType(0, input_type);
++    }
++    return ge::GRAPH_SUCCESS;
++}
++
+ } // namespace
+ namespace ops {
+-    IMPL_OP_INFERSHAPE(MatMulV3).InferShape(InferShapeForMatMulV3);
+-}
++    IMPL_OP_INFERSHAPE(MatMulV3).InferShape(InferShapeForMatMulV3).InferDataType(InferDataTypeForMatMulV3);
++}

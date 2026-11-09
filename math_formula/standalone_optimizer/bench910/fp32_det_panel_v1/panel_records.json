@@ -1,0 +1,618 @@
+[
+  {
+    "shape": [
+      8192,
+      384,
+      32768
+    ],
+    "panels": 1,
+    "device": 5,
+    "round": 0,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 3316.528,
+    "kernel_tasks_us": [
+      3316.528,
+      3320.048,
+      3320.388,
+      3313.748,
+      3312.328
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 3222.06525,
+      "aic_mac_time": 2800.99425,
+      "aic_mte1_time": 1197.9957777777777,
+      "aic_mte2_time": 1640.7089444444441,
+      "aic_fixpipe_time": 1545.6971666666666,
+      "aic_scalar_time": 852.3517222222222
+    }
+  },
+  {
+    "shape": [
+      8192,
+      768,
+      32768
+    ],
+    "panels": 2,
+    "device": 5,
+    "round": 0,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 6822.696,
+    "kernel_tasks_us": [
+      6823.376,
+      6838.136,
+      6822.696,
+      6812.76,
+      6817.376
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 6741.399694444444,
+      "aic_mac_time": 5606.177527777779,
+      "aic_mte1_time": 2393.315111111111,
+      "aic_mte2_time": 3621.860638888889,
+      "aic_fixpipe_time": 3407.838638888889,
+      "aic_scalar_time": 1694.958111111111
+    }
+  },
+  {
+    "shape": [
+      8192,
+      1152,
+      32768
+    ],
+    "panels": 3,
+    "device": 5,
+    "round": 0,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 10578.648,
+    "kernel_tasks_us": [
+      10584.732,
+      10596.952,
+      10578.648,
+      10574.908,
+      10568.172
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 10477.014777777778,
+      "aic_mac_time": 8425.080555555556,
+      "aic_mte1_time": 3579.674722222222,
+      "aic_mte2_time": 6228.039527777778,
+      "aic_fixpipe_time": 6089.249694444446,
+      "aic_scalar_time": 2534.578555555556
+    }
+  },
+  {
+    "shape": [
+      8192,
+      1536,
+      32768
+    ],
+    "panels": 4,
+    "device": 5,
+    "round": 0,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 13632.972,
+    "kernel_tasks_us": [
+      13655.292,
+      13632.972,
+      13631.032,
+      13615.696,
+      13635.252
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 13541.11338888889,
+      "aic_mac_time": 11217.049916666667,
+      "aic_mte1_time": 4782.8708611111115,
+      "aic_mte2_time": 7456.314888888889,
+      "aic_fixpipe_time": 7110.413305555556,
+      "aic_scalar_time": 3378.260333333333
+    }
+  },
+  {
+    "shape": [
+      8192,
+      1920,
+      32768
+    ],
+    "panels": 5,
+    "device": 5,
+    "round": 0,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 16939.676,
+    "kernel_tasks_us": [
+      16919.52,
+      16939.676,
+      16945.856,
+      16931.936,
+      16945.156
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 16851.234666666667,
+      "aic_mac_time": 14020.327416666667,
+      "aic_mte1_time": 5979.404777777778,
+      "aic_mte2_time": 9171.288944444444,
+      "aic_fixpipe_time": 8877.555694444443,
+      "aic_scalar_time": 4219.755583333333
+    }
+  },
+  {
+    "shape": [
+      8192,
+      2304,
+      32768
+    ],
+    "panels": 6,
+    "device": 5,
+    "round": 0,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 20446.264,
+    "kernel_tasks_us": [
+      20454.668,
+      20446.264,
+      20422.148,
+      20447.584,
+      20414.348
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 20354.178444444442,
+      "aic_mac_time": 16826.0795,
+      "aic_mte1_time": 7174.738944444444,
+      "aic_mte2_time": 11261.440722222222,
+      "aic_fixpipe_time": 10739.944638888888,
+      "aic_scalar_time": 5063.250083333333
+    }
+  },
+  {
+    "shape": [
+      8192,
+      2688,
+      32768
+    ],
+    "panels": 7,
+    "device": 5,
+    "round": 0,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 23729.612,
+    "kernel_tasks_us": [
+      23714.116,
+      23729.612,
+      23739.512,
+      23703.096,
+      23736.852
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 23636.573083333333,
+      "aic_mac_time": 19628.56061111111,
+      "aic_mte1_time": 8370.457194444443,
+      "aic_mte2_time": 12963.17836111111,
+      "aic_fixpipe_time": 12455.168166666666,
+      "aic_scalar_time": 5906.91375
+    }
+  },
+  {
+    "shape": [
+      8192,
+      3072,
+      32768
+    ],
+    "panels": 8,
+    "device": 5,
+    "round": 0,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 27176.724,
+    "kernel_tasks_us": [
+      27177.76,
+      27176.724,
+      27172.744,
+      27168.564,
+      27183.144
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 27086.968138888893,
+      "aic_mac_time": 22433.545222222223,
+      "aic_mte1_time": 9568.230222222224,
+      "aic_mte2_time": 14813.80188888889,
+      "aic_fixpipe_time": 14183.595250000002,
+      "aic_scalar_time": 6748.563638888889
+    }
+  },
+  {
+    "shape": [
+      8192,
+      3456,
+      32768
+    ],
+    "panels": 9,
+    "device": 5,
+    "round": 0,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 30375.924,
+    "kernel_tasks_us": [
+      30364.244,
+      30385.588,
+      30375.924,
+      30387.624,
+      30366.128
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 30284.24822222222,
+      "aic_mac_time": 25234.04586111111,
+      "aic_mte1_time": 10764.902583333333,
+      "aic_mte2_time": 16395.501861111108,
+      "aic_fixpipe_time": 15823.956555555556,
+      "aic_scalar_time": 7590.034055555556
+    }
+  },
+  {
+    "shape": [
+      8192,
+      3840,
+      32768
+    ],
+    "panels": 10,
+    "device": 5,
+    "round": 0,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 34173.88,
+    "kernel_tasks_us": [
+      34151.9,
+      34185.944,
+      34188.344,
+      34169.66,
+      34173.88
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 34076.080944444446,
+      "aic_mac_time": 28049.855583333334,
+      "aic_mte1_time": 11953.406888888889,
+      "aic_mte2_time": 19042.13713888889,
+      "aic_fixpipe_time": 18349.4615,
+      "aic_scalar_time": 8432.687861111111
+    }
+  },
+  {
+    "shape": [
+      8192,
+      4096,
+      32768
+    ],
+    "panels": 11,
+    "device": 5,
+    "round": 0,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 36427.748,
+    "kernel_tasks_us": [
+      36470.832,
+      36425.068,
+      36432.088,
+      36427.748,
+      36417.568
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 36344.75602777778,
+      "aic_mac_time": 29917.675138888884,
+      "aic_mte1_time": 12758.882916666664,
+      "aic_mte2_time": 20561.713194444445,
+      "aic_fixpipe_time": 19369.43191666667,
+      "aic_scalar_time": 9029.120916666667
+    }
+  },
+  {
+    "shape": [
+      8192,
+      4096,
+      32768
+    ],
+    "panels": 11,
+    "device": 5,
+    "round": 1,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 36408.848,
+    "kernel_tasks_us": [
+      36430.448,
+      36403.584,
+      36389.548,
+      36414.008,
+      36408.848
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 36328.236777777776,
+      "aic_mac_time": 29917.692555555554,
+      "aic_mte1_time": 12760.773194444444,
+      "aic_mte2_time": 20526.383666666665,
+      "aic_fixpipe_time": 19253.63136111111,
+      "aic_scalar_time": 9029.633277777777
+    }
+  },
+  {
+    "shape": [
+      8192,
+      3840,
+      32768
+    ],
+    "panels": 10,
+    "device": 5,
+    "round": 1,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 34156.78,
+    "kernel_tasks_us": [
+      34111.54,
+      34141.804,
+      34156.78,
+      34157.84,
+      34168.54
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 34061.7205,
+      "aic_mac_time": 28048.956194444443,
+      "aic_mte1_time": 11952.697805555554,
+      "aic_mte2_time": 19027.885027777775,
+      "aic_fixpipe_time": 18393.972666666665,
+      "aic_scalar_time": 8434.527888888888
+    }
+  },
+  {
+    "shape": [
+      8192,
+      3456,
+      32768
+    ],
+    "panels": 9,
+    "device": 5,
+    "round": 1,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 30443.928,
+    "kernel_tasks_us": [
+      30443.928,
+      30419.728,
+      30457.032,
+      30433.268,
+      30449.168
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 30350.11411111111,
+      "aic_mac_time": 25235.767694444447,
+      "aic_mte1_time": 10765.046805555556,
+      "aic_mte2_time": 16516.111444444443,
+      "aic_fixpipe_time": 15880.571388888888,
+      "aic_scalar_time": 7591.488138888888
+    }
+  },
+  {
+    "shape": [
+      8192,
+      3072,
+      32768
+    ],
+    "panels": 8,
+    "device": 5,
+    "round": 1,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 27143.024,
+    "kernel_tasks_us": [
+      27155.064,
+      27131.124,
+      27143.024,
+      27134.324,
+      27149.484
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 27051.811944444442,
+      "aic_mac_time": 22431.79325,
+      "aic_mte1_time": 9567.610499999999,
+      "aic_mte2_time": 14810.473027777778,
+      "aic_fixpipe_time": 14162.545499999998,
+      "aic_scalar_time": 6746.968
+    }
+  },
+  {
+    "shape": [
+      8192,
+      2688,
+      32768
+    ],
+    "panels": 7,
+    "device": 5,
+    "round": 1,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 23834.776,
+    "kernel_tasks_us": [
+      23841.876,
+      23829.456,
+      23853.496,
+      23834.776,
+      23824.496
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 23741.348472222224,
+      "aic_mac_time": 19632.06922222222,
+      "aic_mte1_time": 8369.81925,
+      "aic_mte2_time": 13146.851527777779,
+      "aic_fixpipe_time": 12605.481416666667,
+      "aic_scalar_time": 5906.047111111111
+    }
+  },
+  {
+    "shape": [
+      8192,
+      2304,
+      32768
+    ],
+    "panels": 6,
+    "device": 5,
+    "round": 1,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 20389.728,
+    "kernel_tasks_us": [
+      20391.848,
+      20389.728,
+      20389.088,
+      20386.308,
+      20392.668
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 20296.953944444445,
+      "aic_mac_time": 16824.80138888889,
+      "aic_mte1_time": 7174.236972222221,
+      "aic_mte2_time": 11215.448194444445,
+      "aic_fixpipe_time": 10712.656055555553,
+      "aic_scalar_time": 5062.437888888889
+    }
+  },
+  {
+    "shape": [
+      8192,
+      1920,
+      32768
+    ],
+    "panels": 5,
+    "device": 5,
+    "round": 1,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 16979.06,
+    "kernel_tasks_us": [
+      16979.06,
+      16982.296,
+      16986.86,
+      16978.32,
+      16937.296
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 16890.618083333335,
+      "aic_mac_time": 14021.66388888889,
+      "aic_mte1_time": 5979.618777777778,
+      "aic_mte2_time": 9211.215444444444,
+      "aic_fixpipe_time": 8902.893999999998,
+      "aic_scalar_time": 4220.783722222222
+    }
+  },
+  {
+    "shape": [
+      8192,
+      1536,
+      32768
+    ],
+    "panels": 4,
+    "device": 5,
+    "round": 1,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 13638.792,
+    "kernel_tasks_us": [
+      13638.792,
+      13636.132,
+      13647.432,
+      13629.252,
+      13639.152
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 13543.09638888889,
+      "aic_mac_time": 11216.432277777778,
+      "aic_mte1_time": 4783.039083333333,
+      "aic_mte2_time": 7451.108555555555,
+      "aic_fixpipe_time": 7117.874722222222,
+      "aic_scalar_time": 3379.6860833333335
+    }
+  },
+  {
+    "shape": [
+      8192,
+      1152,
+      32768
+    ],
+    "panels": 3,
+    "device": 5,
+    "round": 1,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 10438.748,
+    "kernel_tasks_us": [
+      10445.008,
+      10438.748,
+      10433.408,
+      10452.208,
+      10436.908
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 10344.680277777778,
+      "aic_mac_time": 8420.375611111112,
+      "aic_mte1_time": 3583.623111111111,
+      "aic_mte2_time": 5907.388944444445,
+      "aic_fixpipe_time": 5769.462333333332,
+      "aic_scalar_time": 2536.6559444444447
+    }
+  },
+  {
+    "shape": [
+      8192,
+      768,
+      32768
+    ],
+    "panels": 2,
+    "device": 5,
+    "round": 1,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 6800.576,
+    "kernel_tasks_us": [
+      6784.736,
+      6810.076,
+      6812.356,
+      6800.576,
+      6772.156
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 6710.274166666667,
+      "aic_mac_time": 5606.966333333333,
+      "aic_mte1_time": 2392.7665277777774,
+      "aic_mte2_time": 3641.623305555556,
+      "aic_fixpipe_time": 3474.8860555555557,
+      "aic_scalar_time": 1693.1388055555558
+    }
+  },
+  {
+    "shape": [
+      8192,
+      384,
+      32768
+    ],
+    "panels": 1,
+    "device": 5,
+    "round": 1,
+    "host_sha": "cd074481e4819bffc4e8d85d1d42e9c889d670dc3ecb213264cecb83ebbe5ad3",
+    "kernel_us": 3320.644,
+    "kernel_tasks_us": [
+      3314.104,
+      3320.644,
+      3331.944,
+      3331.648,
+      3314.724
+    ],
+    "max_relative_error": 0.0,
+    "metrics_us": {
+      "aic_total_time": 3225.2260833333335,
+      "aic_mac_time": 2800.961027777778,
+      "aic_mte1_time": 1198.1478333333334,
+      "aic_mte2_time": 1643.7325277777777,
+      "aic_fixpipe_time": 1546.5706944444444,
+      "aic_scalar_time": 851.5274444444444
+    }
+  }
+]
