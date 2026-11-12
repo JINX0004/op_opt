@@ -191,8 +191,9 @@ GM-read startup and adds a measured in-context exposed service of
 0.06636304 µs per baseK packet. That coefficient was fit from a fixed
 16×16×32 source-tile K sweep; it is not an isolated MTE1 primitive.
 The [FP32 BASE call and packet study](bench910/fp32_base_calls_v1/README.md)
-reports held-out results and wider-tile limits. The FP32 online host gate
-remains closed.
+reports held-out results and wider-tile limits. With
+`MMV3_ONLINE_SELECTOR=1`, the online family selector uses this objective
+to score the source-emitted BASE tile for eligible FP32 workloads.
 
 ### FP32 BASE row-pitch dependence found on 910B3
 
